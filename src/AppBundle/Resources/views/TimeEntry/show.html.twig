@@ -1,0 +1,48 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}timeentry{% endblock class %}
+
+{% block content %}
+    <h1>TimeEntry</h1>
+
+    <table class="record_properties">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Endsat</th>
+            <td>{{ entity.endsAt }}</td>
+        </tr>
+        <tr>
+            <th>Startsat</th>
+            <td>{{ entity.startsAt }}</td>
+        </tr>
+        <tr>
+            <th>Note</th>
+            <td>{{ entity.note }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('timeentry') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock content %}

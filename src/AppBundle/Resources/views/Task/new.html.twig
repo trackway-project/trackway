@@ -1,0 +1,19 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}task{% endblock class %}
+
+{% block content %}
+    <h1>Task creation</h1>
+
+    {{ form(form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('task') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{
+    "name": "trackway",
+    "version": "1.0.0",
+    "authors": [
+        "Mewes Kochheim <kochheim@develop4edu.de>"
+    ],
+    "main": "public/index.php",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "jquery": "~2.1.3",
+        "bootstrap": "~3.3.2",
+        "font-awesome": "~4.3.0"
+    },
+    "overrides": {
+        "bootstrap": {
+            "main": [
+                "fonts/*.*",
+                "js/*.js",
+                "less/**/*.less"
+            ]
+        },
+        "font-awesome": {
+            "main": [
+                "fonts/*.*",
+                "less/**/*.less"
+            ]
+        }
+    }
+}

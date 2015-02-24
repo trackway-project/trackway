@@ -1,0 +1,51 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}timeentry{% endblock class %}
+
+{% block content %}
+    <h1>TimeEntry list</h1>
+
+    <table class="records_list">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Endsat</th>
+            <th>Startsat</th>
+            <th>Note</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('timeentry_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.endsAt }}</td>
+                <td>{{ entity.startsAt }}</td>
+                <td>{{ entity.note }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('timeentry_show', { 'id': entity.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('timeentry_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock content %}
