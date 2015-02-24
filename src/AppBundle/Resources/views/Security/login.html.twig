@@ -9,22 +9,28 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path("fos_user_security_check") }}" method="post" class="form-login">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+    <div class="panel panel-default form-login">
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
 
-        <h2 class="form-login-heading">{{ 'security.login.heading'|trans }}</h2>
-        <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans }}</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="_username"
-               value="{{ last_username }}" required autofocus>
-        <label for="inputPassword" class="sr-only">{{ 'security.login.password'|trans }}</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="_password" required>
+            <h2 class="form-login-heading">{{ 'security.login.heading'|trans }}</h2>
+            <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans }}</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="_username"
+                   value="{{ last_username }}" required autofocus>
+            <label for="inputPassword" class="sr-only">{{ 'security.login.password'|trans }}</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="_password" required>
 
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="_remember_me" value="on"/> {{ 'security.login.remember_me'|trans }}
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit"
-                name="_submit">{{ 'security.login.submit'|trans }}</button>
-    </form>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="_remember_me" value="on"/> {{ 'security.login.remember_me'|trans }}
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"
+                    name="_submit">{{ 'security.login.submit'|trans }}</button>
+        </form>
+        <ul class="list-actions">
+            <li><a href="{{ path("fos_user_resetting_request") }}">Forgot password?</a></li>
+            <li><a href="{{ path("fos_user_registration_register") }}">New to Trackway? Sign up!</a></li>
+        </ul>
+    </div>
 {% endblock content %}
