@@ -18,6 +18,8 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            remember_me:
+                key:      "%secret%"
 
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|fonts|images|js)/
