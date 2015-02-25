@@ -1,13 +1,13 @@
 {% extends "AppBundle::layout.html.twig" %}
-
 {% trans_default_domain 'AppBundle' %}
+{% form_theme delete_form 'bootstrap_3_layout.html.twig' %}
 
 {% block class %}task{% endblock class %}
 
 {% block content %}
     <h1>Task</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
         <tr>
             <th>Id</th>

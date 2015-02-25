@@ -1,13 +1,13 @@
 {% extends "AppBundle::layout.html.twig" %}
-
 {% trans_default_domain 'AppBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block class %}project{% endblock class %}
 
 {% block content %}
     <h1>Project</h1>
 
-    <table class="record_properties">
+    <table class="table">
         <tbody>
         <tr>
             <th>Id</th>
