@@ -1,95 +1,47 @@
-# Group
-group:
-    edit:
-        submit: Update group
-    show:
-        name: Group name
-    new:
-        submit: Create group
-    flash:
-        updated: The group has been updated
-        created: The group has been created
-        deleted: The group has been deleted
-
-# Security
-security:
-    login:
-        heading: Login
-        username: "Username:"
-        password: "Password:"
-        remember_me: Remember me
-        submit: Login
-
-# Profile
-profile:
-    show:
-        username: Username
-        email: Email
-    edit:
-        submit: Update
-    flash:
-        updated: The profile has been updated
-
-# Password change
-change_password:
-    submit: Change password
-    flash:
-        success: The password has been changed
-
-# Registration
-registration:
-    check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
-    confirmed: Congrats %username%, your account is now activated.
-    back: Back to the originating page.
-    submit: Register
-    flash:
-        user_created: The user has been created successfully
-    email:
-        subject: Welcome %username%!
-        message: |
-            Hello %username%!
-
-            To finish activating your account - please visit %confirmationUrl%
-
-            Regards,
-            the Team.
-
-# Password resetting
-resetting:
-    password_already_requested: The password for this user has already been requested within the last 24 hours.
-    check_email: An email has been sent to %email%. It contains a link you must click to reset your password.
-    request:
-        invalid_username: The username or email address "%username%" does not exist.
-        username: "Username or email address:"
-        submit: Reset password
-    reset:
-        submit: Change password
-    flash:
-        success: The password has been reset successfully
-    email:
-        subject: Reset Password
-        message: |
-            Hello %username%!
-
-            To reset your password - please visit %confirmationUrl%
-
-            Regards,
-            the Team.
-
-# Global strings
-layout:
-    logout: Logout
-    login: Login
-    register: Register
-    logged_in_as: Logged in as %username%
-
-# Form field labels
-form:
-    group_name: "Group name:"
-    username: "Username:"
-    email: "Email:"
-    current_password: "Current password:"
-    password: "Password:"
-    password_confirmation: "Repeat password:"
-    new_password: "New password:"
-    new_password_confirmation: "Repeat new password:"
+group.edit.submit: 'Update group'
+group.show.name: 'Group name'
+group.new.submit: 'Create group'
+group.flash.updated: 'The group has been updated'
+group.flash.created: 'The group has been created'
+group.flash.deleted: 'The group has been deleted'
+security.login.heading: Login
+security.login.username: 'Username:'
+security.login.password: 'Password:'
+security.login.remember_me: 'Remember me'
+security.login.submit: Login
+profile.show.username: Username
+profile.show.email: Email
+profile.edit.submit: Update
+profile.flash.updated: 'The profile has been updated'
+change_password.submit: 'Change password'
+change_password.flash.success: 'The password has been changed'
+registration.check_email: 'An email has been sent to %email%. It contains an activation link you must click to activate your account.'
+registration.confirmed: 'Congrats %username%, your account is now activated.'
+registration.back: 'Back to the originating page.'
+registration.submit: Register
+registration.flash.user_created: 'The user has been created successfully'
+registration.email.subject: 'Welcome %username%!'
+registration.email.message: "Hello %username%!\n\nTo finish activating your account - please visit %confirmationUrl%\n\nRegards,\nthe Team.\n"
+resetting.password_already_requested: 'The password for this user has already been requested within the last 24 hours.'
+resetting.check_email: 'An email has been sent to %email%. It contains a link you must click to reset your password.'
+resetting.request.invalid_username: 'The username or email address "%username%" does not exist.'
+resetting.request.username: 'Username or email address:'
+resetting.request.submit: 'Reset password'
+resetting.reset.submit: 'Change password'
+resetting.flash.success: 'The password has been reset successfully'
+resetting.email.subject: 'Reset Password'
+resetting.email.message: "Hello %username%!\n\nTo reset your password - please visit %confirmationUrl%\n\nRegards,\nthe Team.\n"
+layout.logout: Logout
+layout.login: Login
+layout.register: Register
+layout.logged_in_as: 'Logged in as %username%'
+form.group_name: 'Group name:'
+form.username: 'Username:'
+form.email: 'Email:'
+form.current_password: 'Current password:'
+form.password: 'Password:'
+form.password_confirmation: 'Repeat password:'
+form.new_password: 'New password:'
+form.new_password_confirmation: 'Repeat new password:'
+security.login.resetting: 'Forgot password?'
+security.login.registration: 'New to Trackway? Sign up!'
