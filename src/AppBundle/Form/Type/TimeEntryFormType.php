@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProjectType extends AbstractType
+class TimeEntryFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,20 +14,15 @@ class ProjectType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name')
-            ->add('team')
-        ;
+        $builder->add('date')->add('endsAt')->add('startsAt')->add('note')->add('project')->add('task')->add('team')->add('user');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Project'
-        ));
+        $resolver->setDefaults(array('data_class' => 'AppBundle\Entity\TimeEntry'));
     }
 
     /**
@@ -35,6 +30,6 @@ class ProjectType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_project';
+        return 'appbundle_timeentry';
     }
 }

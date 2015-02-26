@@ -50,7 +50,7 @@ class Membership
      */
     public function __toString()
     {
-        return $this->user . ' (' . $this->group . ')';
+        return $this->team . ' ' . $this->user . ' (' . $this->group . ')';
     }
 
     /**

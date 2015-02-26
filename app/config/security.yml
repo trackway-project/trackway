@@ -29,5 +29,5 @@ security:
         - { path: ^(/[a-z]+)?/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^(/[a-z]+)?/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^(/[a-z]+)?/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^(/[a-z]+)?/admin/, role: ROLE_ADMIN }
+        - { path: ^(/[a-z]+)?/admin/, role: ROLE_SUPER_ADMIN }
         - { path: ^/, role: ROLE_USER }

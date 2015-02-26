@@ -2,13 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\TimeEntry;
+use AppBundle\Form\Type\TimeEntryFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\TimeEntry;
-use AppBundle\Form\TimeEntryType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * TimeEntry controller.
@@ -17,64 +18,64 @@ use AppBundle\Form\TimeEntryType;
  */
 class TimeEntryController extends Controller
 {
-
     /**
      * Lists all TimeEntry entities.
+     *
+     * @return array
      *
      * @Route("/", name="timeentry")
      * @Method("GET")
      * @Template()
+     * @Security("is_granted('VIEW', user.getActiveTeam())")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:TimeEntry')->findAll();
+        $timeEntries = $em->getRepository('AppBundle:TimeEntry')->findAllByTeam($this->getUser()->getActiveTeam());
 
-        return array(
-            'entities' => $entities,
-        );
+        return array('entities' => $timeEntries,);
     }
+
     /**
      * Creates a new TimeEntry entity.
+     *
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Route("/", name="timeentry_create")
      * @Method("POST")
      * @Template("AppBundle:TimeEntry:new.html.twig")
+     * @Security("is_granted('VIEW', user.getActiveTeam())")
      */
     public function createAction(Request $request)
     {
-        $entity = new TimeEntry();
-        $form = $this->createCreateForm($entity);
+        $timeEntry = new TimeEntry();
+        $form = $this->createCreateForm($timeEntry);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($timeEntry);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('timeentry_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('timeentry_show', array('id' => $timeEntry->getId())));
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return array('entity' => $timeEntry, 'form' => $form->createView(),);
     }
 
     /**
      * Creates a form to create a TimeEntry entity.
      *
-     * @param TimeEntry $entity The entity
+     * @param TimeEntry $timeEntry
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\Form
      */
-    private function createCreateForm(TimeEntry $entity)
+    private function createCreateForm(TimeEntry $timeEntry)
     {
-        $form = $this->createForm(new TimeEntryType(), $entity, array(
-            'action' => $this->generateUrl('timeentry_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(new TimeEntryFormType(), $timeEntry, array('action' => $this->generateUrl('timeentry_create'), 'method' => 'POST',));
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -84,144 +85,126 @@ class TimeEntryController extends Controller
     /**
      * Displays a form to create a new TimeEntry entity.
      *
+     * @return array
+     *
      * @Route("/new", name="timeentry_new")
      * @Method("GET")
      * @Template()
+     * @Security("is_granted('VIEW', user.getActiveTeam())")
      */
     public function newAction()
     {
-        $entity = new TimeEntry();
-        $form   = $this->createCreateForm($entity);
+        $timeEntry = new TimeEntry();
+        $form = $this->createCreateForm($timeEntry);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+        return array('entity' => $timeEntry, 'form' => $form->createView(),);
     }
 
     /**
      * Finds and displays a TimeEntry entity.
      *
+     * @param TimeEntry $timeEntry
+     *
+     * @return array
+     *
      * @Route("/{id}", name="timeentry_show")
      * @Method("GET")
      * @Template()
+     * @Security("is_granted('VIEW', timeEntry)")
      */
-    public function showAction($id)
+    public function showAction(TimeEntry $timeEntry)
     {
-        $em = $this->getDoctrine()->getManager();
+        $deleteForm = $this->createDeleteForm($timeEntry);
 
-        $entity = $em->getRepository('AppBundle:TimeEntry')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find TimeEntry entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $timeEntry, 'delete_form' => $deleteForm->createView(),);
     }
 
     /**
      * Displays a form to edit an existing TimeEntry entity.
      *
+     * @param TimeEntry $timeEntry
+     *
+     * @return array
+     *
      * @Route("/{id}/edit", name="timeentry_edit")
      * @Method("GET")
      * @Template()
+     * @Security("is_granted('EDIT', timeEntry)")
      */
-    public function editAction($id)
+    public function editAction(TimeEntry $timeEntry)
     {
-        $em = $this->getDoctrine()->getManager();
+        $editForm = $this->createEditForm($timeEntry);
+        $deleteForm = $this->createDeleteForm($timeEntry);
 
-        $entity = $em->getRepository('AppBundle:TimeEntry')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find TimeEntry entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $timeEntry, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
     }
 
     /**
-    * Creates a form to edit a TimeEntry entity.
-    *
-    * @param TimeEntry $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(TimeEntry $entity)
+     * Creates a form to edit a TimeEntry entity.
+     *
+     * @param TimeEntry $timeEntry
+     *
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createEditForm(TimeEntry $timeEntry)
     {
-        $form = $this->createForm(new TimeEntryType(), $entity, array(
-            'action' => $this->generateUrl('timeentry_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(new TimeEntryFormType(), $timeEntry, array('action' => $this->generateUrl('timeentry_update', array('id' => $timeEntry->getId())), 'method' => 'PUT',));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing TimeEntry entity.
+     *
+     * @param Request $request
+     * @param TimeEntry $timeEntry
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Route("/{id}", name="timeentry_update")
      * @Method("PUT")
      * @Template("AppBundle:TimeEntry:edit.html.twig")
+     * @Security("is_granted('EDIT', timeEntry)")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, TimeEntry $timeEntry)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:TimeEntry')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find TimeEntry entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($timeEntry);
+        $editForm = $this->createEditForm($timeEntry);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('timeentry_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('timeentry_edit', array('id' => $timeEntry->getId())));
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return array('entity' => $timeEntry, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
     }
+
     /**
      * Deletes a TimeEntry entity.
      *
+     * @param Request $request
+     * @param TimeEntry $timeEntry
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @Route("/{id}", name="timeentry_delete")
      * @Method("DELETE")
+     * @Security("is_granted('EDIT', timeEntry)")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($timeEntry);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:TimeEntry')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find TimeEntry entity.');
-            }
-
-            $em->remove($entity);
+            $em->remove($timeEntry);
             $em->flush();
         }
 
@@ -231,17 +214,12 @@ class TimeEntryController extends Controller
     /**
      * Creates a form to delete a TimeEntry entity by id.
      *
-     * @param mixed $id The entity id
+     * @param TimeEntry $timeEntry
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\Form
      */
-    private function createDeleteForm($id)
+    private function createDeleteForm(TimeEntry $timeEntry)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('timeentry_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+        return $this->createFormBuilder()->setAction($this->generateUrl('timeentry_delete', array('id' => $timeEntry->getId())))->setMethod('DELETE')->add('submit', 'submit', array('label' => 'Delete'))->getForm();
     }
 }

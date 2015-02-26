@@ -24,9 +24,11 @@
                         <li>
                             <a href="{{ path('team_show', { 'id': entity.id }) }}">show</a>
                         </li>
-                        <li>
-                            <a href="{{ path('team_edit', { 'id': entity.id }) }}">edit</a>
-                        </li>
+                        {% if is_granted('EDIT', entity) %}
+                            <li>
+                                <a href="{{ path('team_edit', { 'id': entity.id }) }}">edit</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>

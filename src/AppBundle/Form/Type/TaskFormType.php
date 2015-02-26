@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TaskType extends AbstractType
+class TaskFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,20 +14,15 @@ class TaskType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name')
-            ->add('team')
-        ;
+        $builder->add('name')->add('team');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Task'
-        ));
+        $resolver->setDefaults(array('data_class' => 'AppBundle\Entity\Task'));
     }
 
     /**

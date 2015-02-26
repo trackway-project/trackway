@@ -24,9 +24,11 @@
                         <li>
                             <a href="{{ path('project_show', { 'id': entity.id }) }}">show</a>
                         </li>
-                        <li>
-                            <a href="{{ path('project_edit', { 'id': entity.id }) }}">edit</a>
-                        </li>
+                        {% if is_granted('EDIT', entity) %}
+                            <li>
+                                <a href="{{ path('project_edit', { 'id': entity.id }) }}">edit</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
@@ -35,10 +37,12 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('project_new') }}">
-                Create a new entry
-            </a>
-        </li>
+        {% if is_granted('EDIT', app.user.activeTeam) %}
+            <li>
+                <a href="{{ path('project_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        {% endif %}
     </ul>
 {% endblock content %}

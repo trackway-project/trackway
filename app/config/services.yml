@@ -4,6 +4,32 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.registration.form.type:
+        class: AppBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: appbundle_profile }
+
+    security.access.project_voter:
+        class:      AppBundle\Security\Authorization\Voter\ProjectVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    security.access.task_voter:
+        class:      AppBundle\Security\Authorization\Voter\TaskVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    security.access.team_voter:
+        class:      AppBundle\Security\Authorization\Voter\TeamVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    security.access.timeentry_voter:
+        class:      AppBundle\Security\Authorization\Voter\TimeEntryVoter
+        public:     false
+        tags:
+           - { name: security.voter }

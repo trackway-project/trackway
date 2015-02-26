@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TeamType extends AbstractType
+class ProjectFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,19 +14,15 @@ class TeamType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name')
-        ;
+        $builder->add('name')->add('team');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Team'
-        ));
+        $resolver->setDefaults(array('data_class' => 'AppBundle\Entity\Project'));
     }
 
     /**
@@ -34,6 +30,6 @@ class TeamType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_team';
+        return 'appbundle_project';
     }
 }

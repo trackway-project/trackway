@@ -1,12 +1,12 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TimeEntryType extends AbstractType
+class TeamFormType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,26 +14,15 @@ class TimeEntryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('date')
-            ->add('endsAt')
-            ->add('startsAt')
-            ->add('note')
-            ->add('project')
-            ->add('task')
-            ->add('team')
-            ->add('user')
-        ;
+        $builder->add('name')->add('memberships');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\TimeEntry'
-        ));
+        $resolver->setDefaults(array('data_class' => 'AppBundle\Entity\Team'));
     }
 
     /**
@@ -41,6 +30,6 @@ class TimeEntryType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_timeentry';
+        return 'appbundle_team';
     }
 }

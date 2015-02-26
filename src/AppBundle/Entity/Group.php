@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity;
 
-use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\Group as BaseGroup;
 
 /**
  * Group

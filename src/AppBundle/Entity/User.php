@@ -3,8 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -29,6 +29,14 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Membership", mappedBy="user")
      */
     protected $memberships;
+
+    /**
+     * @var Team
+     *
+     * @ORM\ManyToOne(targetEntity="Team")
+     * @ORM\JoinColumn(name="activeTeam_id", referencedColumnName="id")
+     */
+    protected $activeTeam;
 
     public function __construct()
     {
@@ -74,5 +82,21 @@ class User extends BaseUser
     public function setMemberships(ArrayCollection $memberships)
     {
         $this->memberships = $memberships;
+    }
+
+    /**
+     * @return Team
+     */
+    public function getActiveTeam()
+    {
+        return $this->activeTeam;
+    }
+
+    /**
+     * @param Team $activeTeam
+     */
+    public function setActiveTeam(Team $activeTeam)
+    {
+        $this->activeTeam = $activeTeam;
     }
 }
