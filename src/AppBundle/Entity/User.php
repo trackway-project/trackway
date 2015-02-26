@@ -20,14 +20,18 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Team", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="Membership")
+     * @ORM\JoinTable(name="users_memberships",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="membership_id", referencedColumnName="id")}
+     * )
      */
-    private $teams;
+    protected $memberships;
 
     public function __construct()
     {
         parent::__construct();
-        $this->teams = new ArrayCollection();
+        $this->memberships = new ArrayCollection();
     }
 
     /**
@@ -47,18 +51,18 @@ class User extends BaseUser
     }
 
     /**
-     * @param mixed $teams
+     * @return mixed
      */
-    public function setTeams($teams)
+    public function getMemberships()
     {
-        $this->teams = $teams;
+        return $this->memberships;
     }
 
     /**
-     * @return mixed
+     * @param mixed $memberships
      */
-    public function getTeams()
+    public function setMemberships($memberships)
     {
-        return $this->teams;
+        $this->memberships = $memberships;
     }
 }

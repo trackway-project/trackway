@@ -19,7 +19,7 @@ class Task
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var Team
@@ -27,14 +27,14 @@ class Task
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="tasks")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      */
-    private $team;
+    protected $team;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @param int $id
