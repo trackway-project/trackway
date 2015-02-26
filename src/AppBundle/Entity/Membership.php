@@ -24,10 +24,18 @@ class Membership
     /**
      * @var Team
      *
-     * @ORM\ManyToOne(targetEntity="Team")
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="memberships")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      */
     protected $team;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="memberships")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
 
     /**
      * @var Group
@@ -36,6 +44,14 @@ class Membership
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
      */
     protected $group;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->user . ' (' . $this->group . ')';
+    }
 
     /**
      * @return integer
@@ -67,6 +83,22 @@ class Membership
     public function setTeam(Team $team)
     {
         $this->team = $team;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
     }
 
     /**

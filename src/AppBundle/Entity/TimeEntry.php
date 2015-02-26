@@ -82,6 +82,19 @@ class TimeEntry
     private $note;
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->date->format('Y-m-d') . ' ' .
+            $this->startsAt->format('H:i') . ' ' .
+            $this->endsAt->format('H:i') . ' ' .
+            $this->project . ' ' .
+            $this->task . ' ' .
+            $this->note;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getDate()

@@ -2,6 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Group;
+use AppBundle\Entity\Membership;
+use AppBundle\Entity\User;
+use FOS\UserBundle\Model\GroupManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -49,8 +53,17 @@ class TeamController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            /** @var GroupManager $groupManager */
+            $groupManager = $this->get('fos_user.group_manager');
+
+            $membership = new Membership();
+            $membership->setTeam($entity);
+            $membership->setUser($this->getUser());
+            $membership->setGroup($groupManager->findGroupByName('Owner'));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            $em->persist($membership);
             $em->flush();
 
             return $this->redirect($this->generateUrl('team_show', array('id' => $entity->getId())));

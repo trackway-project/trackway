@@ -23,33 +23,46 @@ class Team
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="teams")
-     * @ORM\JoinTable(name="teams_users")
-     */
-    private $users;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="team")
-     */
-    private $projects;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="team")
-     */
-    private $tasks;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Membership", mappedBy="team")
+     */
+    private $memberships;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="team")
+     */
+    private $projects;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="team")
+     */
+    private $tasks;
+
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->memberships = new ArrayCollection();
         $this->projects = new ArrayCollection();
         $this->tasks = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**
@@ -87,6 +100,22 @@ class Team
     /**
      * @return ArrayCollection
      */
+    public function getMemberships()
+    {
+        return $this->memberships;
+    }
+
+    /**
+     * @param ArrayCollection $memberships
+     */
+    public function setMemberships(ArrayCollection $memberships)
+    {
+        $this->memberships = $memberships;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
     public function getProjects()
     {
         return $this->projects;
@@ -114,21 +143,5 @@ class Team
     public function setTasks(ArrayCollection $tasks)
     {
         $this->tasks = $tasks;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    /**
-     * @param ArrayCollection $users
-     */
-    public function setUsers(ArrayCollection $users)
-    {
-        $this->users = $users;
     }
 }

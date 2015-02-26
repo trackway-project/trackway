@@ -15,15 +15,15 @@
         </tr>
         <tr>
             <th>Date</th>
-            <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+            <td>{{ entity.date|date('Y-m-d') }}</td>
         </tr>
         <tr>
             <th>Endsat</th>
-            <td>{{ entity.endsAt }}</td>
+            <td>{{ entity.endsAt|date('H:i') }}</td>
         </tr>
         <tr>
             <th>Startsat</th>
-            <td>{{ entity.startsAt }}</td>
+            <td>{{ entity.startsAt|date('H:i') }}</td>
         </tr>
         <tr>
             <th>Note</th>

@@ -26,11 +26,7 @@ class User extends BaseUser
     /**
      * @var Membership
      *
-     * @ORM\ManyToMany(targetEntity="Membership")
-     * @ORM\JoinTable(name="users_memberships",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="membership_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(targetEntity="Membership", mappedBy="user")
      */
     protected $memberships;
 
@@ -38,6 +34,14 @@ class User extends BaseUser
     {
         parent::__construct();
         $this->memberships = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->username;
     }
 
     /**
