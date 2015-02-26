@@ -31,10 +31,10 @@ class TimeEntryController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $timeEntries = $em->getRepository('AppBundle:TimeEntry')->findAllByTeamAndUser($user->getActiveTeam(), $user);
 
-        $timeEntries = $em->getRepository('AppBundle:TimeEntry')->findAllByTeam($this->getUser()->getActiveTeam());
-
-        return array('entities' => $timeEntries,);
+        return ['entities' => $timeEntries,];
     }
 
     /**
@@ -60,10 +60,10 @@ class TimeEntryController extends Controller
             $em->persist($timeEntry);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('timeentry_show', array('id' => $timeEntry->getId())));
+            return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
 
-        return array('entity' => $timeEntry, 'form' => $form->createView(),);
+        return ['entity' => $timeEntry, 'form' => $form->createView(),];
     }
 
     /**
@@ -75,9 +75,8 @@ class TimeEntryController extends Controller
      */
     private function createCreateForm(TimeEntry $timeEntry)
     {
-        $form = $this->createForm(new TimeEntryFormType(), $timeEntry, array('action' => $this->generateUrl('timeentry_create'), 'method' => 'POST',));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form = $this->createForm(new TimeEntryFormType(), $timeEntry, ['action' => $this->generateUrl('timeentry_create'), 'method' => 'POST',]);
+        $form->add('submit', 'submit', ['label' => 'Create']);
 
         return $form;
     }
@@ -97,7 +96,7 @@ class TimeEntryController extends Controller
         $timeEntry = new TimeEntry();
         $form = $this->createCreateForm($timeEntry);
 
-        return array('entity' => $timeEntry, 'form' => $form->createView(),);
+        return ['entity' => $timeEntry, 'form' => $form->createView(),];
     }
 
     /**
@@ -116,7 +115,7 @@ class TimeEntryController extends Controller
     {
         $deleteForm = $this->createDeleteForm($timeEntry);
 
-        return array('entity' => $timeEntry, 'delete_form' => $deleteForm->createView(),);
+        return ['entity' => $timeEntry, 'delete_form' => $deleteForm->createView(),];
     }
 
     /**
@@ -136,7 +135,7 @@ class TimeEntryController extends Controller
         $editForm = $this->createEditForm($timeEntry);
         $deleteForm = $this->createDeleteForm($timeEntry);
 
-        return array('entity' => $timeEntry, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
+        return ['entity' => $timeEntry, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),];
     }
 
     /**
@@ -148,9 +147,8 @@ class TimeEntryController extends Controller
      */
     private function createEditForm(TimeEntry $timeEntry)
     {
-        $form = $this->createForm(new TimeEntryFormType(), $timeEntry, array('action' => $this->generateUrl('timeentry_update', array('id' => $timeEntry->getId())), 'method' => 'PUT',));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form = $this->createForm(new TimeEntryFormType(), $timeEntry, ['action' => $this->generateUrl('timeentry_update', ['id' => $timeEntry->getId()]), 'method' => 'PUT',]);
+        $form->add('submit', 'submit', ['label' => 'Update']);
 
         return $form;
     }
@@ -171,7 +169,6 @@ class TimeEntryController extends Controller
     public function updateAction(Request $request, TimeEntry $timeEntry)
     {
         $em = $this->getDoctrine()->getManager();
-
         $deleteForm = $this->createDeleteForm($timeEntry);
         $editForm = $this->createEditForm($timeEntry);
         $editForm->handleRequest($request);
@@ -179,10 +176,10 @@ class TimeEntryController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('timeentry_edit', array('id' => $timeEntry->getId())));
+            return $this->redirect($this->generateUrl('timeentry_edit', ['id' => $timeEntry->getId()]));
         }
 
-        return array('entity' => $timeEntry, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
+        return ['entity' => $timeEntry, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),];
     }
 
     /**
@@ -220,6 +217,6 @@ class TimeEntryController extends Controller
      */
     private function createDeleteForm(TimeEntry $timeEntry)
     {
-        return $this->createFormBuilder()->setAction($this->generateUrl('timeentry_delete', array('id' => $timeEntry->getId())))->setMethod('DELETE')->add('submit', 'submit', array('label' => 'Delete'))->getForm();
+        return $this->createFormBuilder()->setAction($this->generateUrl('timeentry_delete', ['id' => $timeEntry->getId()]))->setMethod('DELETE')->add('submit', 'submit', ['label' => 'Delete'])->getForm();
     }
 }

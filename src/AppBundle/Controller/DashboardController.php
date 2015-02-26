@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DashboardController extends Controller
 {
     /**
+     * @return array
+     *
      * @Route("/", name="dashboard")
      * @Template()
      */

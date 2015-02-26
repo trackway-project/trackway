@@ -12,6 +12,6 @@ class TaskRepository extends EntityRepository
 {
     public function findAllByTeam(Team $team)
     {
-        return $this->findBy(array('team' => $team->getId()));
+        return $this->findBy(['team' => $team->getId()]);
     }
 }

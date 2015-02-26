@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\Repository;
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -9,4 +10,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class TeamRepository extends EntityRepository
 {
+    public function findAllByUser(User $user)
+    {
+        return $this->findBy(['user' => $user->getId()]);
+    }
 }

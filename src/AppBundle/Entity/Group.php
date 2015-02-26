@@ -45,20 +45,4 @@ class Group extends BaseGroup
     {
         $this->id = $id;
     }
-
-    /**
-     * @return Team
-     */
-    public function getTeam()
-    {
-        return $this->team;
-    }
-
-    /**
-     * @param Team $team
-     */
-    public function setTeam(Team $team)
-    {
-        $this->team = $team;
-    }
 }

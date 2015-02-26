@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Repository;
 
 use AppBundle\Entity\Team;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -10,8 +11,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class TimeEntryRepository extends EntityRepository
 {
-    public function findAllByTeam(Team $team)
+    public function findAllByTeamAndUser(Team $team, User $user)
     {
-        return $this->findBy(array('team' => $team->getId()));
+        return $this->findBy([
+            'team' => $team->getId(),
+            'user' => $user->getId()
+        ]);
     }
 }

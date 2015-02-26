@@ -16,7 +16,7 @@ class TimeEntryVoter implements VoterInterface
 
     public function supportsAttribute($attribute)
     {
-        return in_array($attribute, array(self::VIEW, self::EDIT,));
+        return in_array($attribute, [self::VIEW, self::EDIT,]);
     }
 
     public function supportsClass($class)

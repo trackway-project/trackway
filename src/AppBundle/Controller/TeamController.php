@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Group;
 use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
 use AppBundle\Form\Type\TeamFormType;
@@ -32,10 +33,9 @@ class TeamController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $teams = $em->getRepository('AppBundle:Team')->findAllByUser($this->getUser());
 
-        $teams = $em->getRepository('AppBundle:Team')->findAll();
-
-        return array('entities' => $teams,);
+        return ['entities' => $teams,];
     }
 
     /**
@@ -58,6 +58,7 @@ class TeamController extends Controller
         if ($form->isValid()) {
             /** @var GroupManager $groupManager */
             $groupManager = $this->get('fos_user.group_manager');
+            /** @var Group $group */
             $group = $groupManager->findGroupByName('Owner');
 
             if (!$group) {
@@ -67,17 +68,17 @@ class TeamController extends Controller
             $membership = new Membership();
             $membership->setTeam($team);
             $membership->setUser($this->getUser());
-            $membership->setGroup($groupManager->findGroupByName('Owner'));
+            $membership->setGroup($group);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($team);
             $em->persist($membership);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('team_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('team_show', ['id' => $team->getId()]));
         }
 
-        return array('entity' => $team, 'form' => $form->createView(),);
+        return ['entity' => $team, 'form' => $form->createView(),];
     }
 
     /**
@@ -89,10 +90,9 @@ class TeamController extends Controller
      */
     private function createCreateForm(Team $team)
     {
-        $form = $this->createForm(new TeamFormType(), $team, array('action' => $this->generateUrl('team_create'), 'method' => 'POST',));
-
+        $form = $this->createForm(new TeamFormType(), $team, ['action' => $this->generateUrl('team_create'), 'method' => 'POST',]);
         $form->remove('memberships');
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', ['label' => 'Create']);
 
         return $form;
     }
@@ -111,7 +111,7 @@ class TeamController extends Controller
         $team = new Team();
         $form = $this->createCreateForm($team);
 
-        return array('entity' => $team, 'form' => $form->createView(),);
+        return ['entity' => $team, 'form' => $form->createView(),];
     }
 
     /**
@@ -128,9 +128,9 @@ class TeamController extends Controller
      */
     public function showAction(Team $team)
     {
-        $deleteForm = $this->createDeleteForm($team->getId());
+        $deleteForm = $this->createDeleteForm($team);
 
-        return array('entity' => $team, 'delete_form' => $deleteForm->createView(),);
+        return ['entity' => $team, 'delete_form' => $deleteForm->createView(),];
     }
 
     /**
@@ -150,7 +150,7 @@ class TeamController extends Controller
         $editForm = $this->createEditForm($team);
         $deleteForm = $this->createDeleteForm($team);
 
-        return array('entity' => $team, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
+        return ['entity' => $team, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),];
     }
 
     /**
@@ -162,9 +162,8 @@ class TeamController extends Controller
      */
     private function createEditForm(Team $team)
     {
-        $form = $this->createForm(new TeamFormType(), $team, array('action' => $this->generateUrl('team_update', array('id' => $team->getId())), 'method' => 'PUT',));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form = $this->createForm(new TeamFormType(), $team, ['action' => $this->generateUrl('team_update', ['id' => $team->getId()]), 'method' => 'PUT',]);
+        $form->add('submit', 'submit', ['label' => 'Update']);
 
         return $form;
     }
@@ -185,7 +184,6 @@ class TeamController extends Controller
     public function updateAction(Request $request, Team $team)
     {
         $em = $this->getDoctrine()->getManager();
-
         $deleteForm = $this->createDeleteForm($team);
         $editForm = $this->createEditForm($team);
         $editForm->handleRequest($request);
@@ -193,10 +191,10 @@ class TeamController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('team_edit', array('id' => $team->getId())));
+            return $this->redirect($this->generateUrl('team_edit', ['id' => $team->getId()]));
         }
 
-        return array('entity' => $team, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),);
+        return ['entity' => $team, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),];
     }
 
     /**
@@ -234,6 +232,6 @@ class TeamController extends Controller
      */
     private function createDeleteForm(Team $team)
     {
-        return $this->createFormBuilder()->setAction($this->generateUrl('team_delete', array('id' => $team->getId())))->setMethod('DELETE')->add('submit', 'submit', array('label' => 'Delete'))->getForm();
+        return $this->createFormBuilder()->setAction($this->generateUrl('team_delete', ['id' => $team->getId()]))->setMethod('DELETE')->add('submit', 'submit', ['label' => 'Delete'])->getForm();
     }
 }
