@@ -5,12 +5,16 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Membership
+ *
  * @ORM\Entity
  * @ORM\Table(name="memberships")
  */
 class Membership
 {
     /**
+     * @var integer
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -34,7 +38,7 @@ class Membership
     protected $group;
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getId()
     {
@@ -42,7 +46,7 @@ class Membership
     }
 
     /**
-     * @param mixed $id
+     * @param integer $id
      */
     public function setId($id)
     {
@@ -50,7 +54,7 @@ class Membership
     }
 
     /**
-     * @return mixed
+     * @return Team
      */
     public function getTeam()
     {
@@ -58,15 +62,15 @@ class Membership
     }
 
     /**
-     * @param mixed $team
+     * @param Team $team
      */
-    public function setTeam($team)
+    public function setTeam(Team $team)
     {
         $this->team = $team;
     }
 
     /**
-     * @return mixed
+     * @return Group
      */
     public function getGroup()
     {
@@ -74,9 +78,9 @@ class Membership
     }
 
     /**
-     * @param mixed $group
+     * @param Group $group
      */
-    public function setGroup($group)
+    public function setGroup(Group $group)
     {
         $this->group = $group;
     }

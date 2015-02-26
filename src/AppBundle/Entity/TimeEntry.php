@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TimeEntry
  *
  * @ORM\Table(name="timeentries")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\TimeEntryRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\TimeEntryRepository")
  */
 class TimeEntry
 {
@@ -82,14 +82,6 @@ class TimeEntry
     private $note;
 
     /**
-     * @param \DateTime $date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getDate()
@@ -98,11 +90,11 @@ class TimeEntry
     }
 
     /**
-     * @param \DateTime $endsAt
+     * @param \DateTime $date
      */
-    public function setEndsAt($endsAt)
+    public function setDate(\DateTime $date)
     {
-        $this->endsAt = $endsAt;
+        $this->date = $date;
     }
 
     /**
@@ -114,15 +106,15 @@ class TimeEntry
     }
 
     /**
-     * @param int $id
+     * @param \DateTime $endsAt
      */
-    public function setId($id)
+    public function setEndsAt(\DateTime $endsAt)
     {
-        $this->id = $id;
+        $this->endsAt = $endsAt;
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -130,11 +122,11 @@ class TimeEntry
     }
 
     /**
-     * @param string $note
+     * @param integer $id
      */
-    public function setNote($note)
+    public function setId($id)
     {
-        $this->note = $note;
+        $this->id = $id;
     }
 
     /**
@@ -146,15 +138,15 @@ class TimeEntry
     }
 
     /**
-     * @param \AppBundle\Entity\Project $project
+     * @param string $note
      */
-    public function setProject($project)
+    public function setNote($note)
     {
-        $this->project = $project;
+        $this->note = $note;
     }
 
     /**
-     * @return \AppBundle\Entity\Project
+     * @return Project
      */
     public function getProject()
     {
@@ -162,11 +154,11 @@ class TimeEntry
     }
 
     /**
-     * @param \DateTime $startsAt
+     * @param Project $project
      */
-    public function setStartsAt($startsAt)
+    public function setProject(Project $project)
     {
-        $this->startsAt = $startsAt;
+        $this->project = $project;
     }
 
     /**
@@ -178,15 +170,15 @@ class TimeEntry
     }
 
     /**
-     * @param \AppBundle\Entity\Task $task
+     * @param \DateTime $startsAt
      */
-    public function setTask($task)
+    public function setStartsAt(\DateTime $startsAt)
     {
-        $this->task = $task;
+        $this->startsAt = $startsAt;
     }
 
     /**
-     * @return \AppBundle\Entity\Task
+     * @return Task
      */
     public function getTask()
     {
@@ -194,15 +186,15 @@ class TimeEntry
     }
 
     /**
-     * @param \AppBundle\Entity\Team $team
+     * @param Task $task
      */
-    public function setTeam($team)
+    public function setTask(Task $task)
     {
-        $this->team = $team;
+        $this->task = $task;
     }
 
     /**
-     * @return \AppBundle\Entity\Team
+     * @return Team
      */
     public function getTeam()
     {
@@ -210,18 +202,26 @@ class TimeEntry
     }
 
     /**
-     * @param \AppBundle\Entity\User $user
+     * @param Team $team
      */
-    public function setUser($user)
+    public function setTeam(Team $team)
     {
-        $this->user = $user;
+        $this->team = $team;
     }
 
     /**
-     * @return \AppBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
     }
 }

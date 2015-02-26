@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Task
  *
  * @ORM\Table(name="tasks")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\TaskRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\TaskRepository")
  */
 class Task
 {
@@ -37,15 +37,7 @@ class Task
     protected $name;
 
     /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -53,11 +45,11 @@ class Task
     }
 
     /**
-     * @param string $name
+     * @param integer $id
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
+        $this->id = $id;
     }
 
     /**
@@ -69,18 +61,26 @@ class Task
     }
 
     /**
-     * @param mixed $team
+     * @param string $name
      */
-    public function setTeam($team)
+    public function setName($name)
     {
-        $this->team = $team;
+        $this->name = $name;
     }
 
     /**
-     * @return mixed
+     * @return Team
      */
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * @param Team $team
+     */
+    public function setTeam(Team $team)
+    {
+        $this->team = $team;
     }
 }

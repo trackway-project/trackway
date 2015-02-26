@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Team
  *
  * @ORM\Table(name="teams")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\TeamRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\TeamRepository")
  */
 class Team
 {
@@ -53,15 +53,7 @@ class Team
     }
 
     /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -69,11 +61,11 @@ class Team
     }
 
     /**
-     * @param string $name
+     * @param integer $id
      */
-    public function setName($name)
+    public function setId($id)
     {
-        $this->name = $name;
+        $this->id = $id;
     }
 
     /**
@@ -85,15 +77,15 @@ class Team
     }
 
     /**
-     * @param mixed $projects
+     * @param string $name
      */
-    public function setProjects($projects)
+    public function setName($name)
     {
-        $this->projects = $projects;
+        $this->name = $name;
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getProjects()
     {
@@ -101,15 +93,15 @@ class Team
     }
 
     /**
-     * @param mixed $tasks
+     * @param ArrayCollection $projects
      */
-    public function setTasks($tasks)
+    public function setProjects(ArrayCollection $projects)
     {
-        $this->tasks = $tasks;
+        $this->projects = $projects;
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getTasks()
     {
@@ -117,18 +109,26 @@ class Team
     }
 
     /**
-     * @param mixed $users
+     * @param ArrayCollection $tasks
      */
-    public function setUsers($users)
+    public function setTasks(ArrayCollection $tasks)
     {
-        $this->users = $users;
+        $this->tasks = $tasks;
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * @param ArrayCollection $users
+     */
+    public function setUsers(ArrayCollection $users)
+    {
+        $this->users = $users;
     }
 }

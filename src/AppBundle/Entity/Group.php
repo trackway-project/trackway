@@ -6,12 +6,16 @@ use FOS\UserBundle\Model\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Group
+ *
  * @ORM\Entity
  * @ORM\Table(name="groups")
  */
 class Group extends BaseGroup
 {
     /**
+     * @var integer
+     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -19,7 +23,7 @@ class Group extends BaseGroup
     protected $id;
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getId()
     {
@@ -27,7 +31,7 @@ class Group extends BaseGroup
     }
 
     /**
-     * @param mixed $id
+     * @param integer $id
      */
     public function setId($id)
     {
@@ -45,7 +49,7 @@ class Group extends BaseGroup
     /**
      * @param Team $team
      */
-    public function setTeam($team)
+    public function setTeam(Team $team)
     {
         $this->team = $team;
     }
