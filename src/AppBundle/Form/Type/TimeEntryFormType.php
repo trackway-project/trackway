@@ -14,7 +14,7 @@ class TimeEntryFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('date')->add('endsAt')->add('startsAt')->add('note')->add('project')->add('task')->add('team')->add('user');
+        $builder->add('date')->add('endsAt')->add('startsAt')->add('note')->add('project')->add('task');
     }
 
     /**

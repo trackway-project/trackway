@@ -30,10 +30,9 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $projects = $em->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam());
-
-        return ['entities' => $projects];
+        return [
+            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam())
+        ];
     }
 
     /**
@@ -55,6 +54,7 @@ class ProjectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $project->setTeam($this->getUser()->getActiveTeam());
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
@@ -62,7 +62,10 @@ class ProjectController extends Controller
             return $this->redirect($this->generateUrl('project_show', ['id' => $project->getId()]));
         }
 
-        return ['entity' => $project, 'form' => $form->createView(),];
+        return [
+            'entity' => $project,
+            'form' => $form->createView()
+        ];
     }
 
     /**
@@ -74,10 +77,10 @@ class ProjectController extends Controller
      */
     private function createCreateForm(Project $project)
     {
-        $form = $this->createForm(new ProjectFormType(), $project, ['action' => $this->generateUrl('project_create'), 'method' => 'POST',]);
-        $form->add('submit', 'submit', ['label' => 'Create']);
-
-        return $form;
+        return $this->createForm(new ProjectFormType(), $project, [
+            'action' => $this->generateUrl('project_create'),
+            'method' => 'POST'
+        ])->add('submit', 'submit', ['label' => 'Create']);
     }
 
     /**
@@ -93,9 +96,11 @@ class ProjectController extends Controller
     public function newAction()
     {
         $project = new Project();
-        $form = $this->createCreateForm($project);
 
-        return ['entity' => $project, 'form' => $form->createView(),];
+        return [
+            'entity' => $project,
+            'form' => $this->createCreateForm($project)->createView()
+        ];
     }
 
     /**
@@ -112,9 +117,10 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project)
     {
-        $deleteForm = $this->createDeleteForm($project);
-
-        return ['entity' => $project, 'delete_form' => $deleteForm->createView(),];
+        return [
+            'entity' => $project,
+            'delete_form' => $this->createDeleteForm($project)->createView()
+        ];
     }
 
     /**
@@ -131,10 +137,11 @@ class ProjectController extends Controller
      */
     public function editAction(Project $project)
     {
-        $editForm = $this->createEditForm($project);
-        $deleteForm = $this->createDeleteForm($project);
-
-        return ['entity' => $project, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),];
+        return [
+            'entity' => $project,
+            'edit_form' => $this->createEditForm($project)->createView(),
+            'delete_form' => $this->createDeleteForm($project)->createView()
+        ];
     }
 
     /**
@@ -146,10 +153,10 @@ class ProjectController extends Controller
      */
     private function createEditForm(Project $project)
     {
-        $form = $this->createForm(new ProjectFormType(), $project, ['action' => $this->generateUrl('project_update', ['id' => $project->getId()]), 'method' => 'PUT',]);
-        $form->add('submit', 'submit', ['label' => 'Update']);
-
-        return $form;
+        return $this->createForm(new ProjectFormType(), $project, [
+            'action' => $this->generateUrl('project_update', ['id' => $project->getId()]),
+            'method' => 'PUT'
+        ])->add('submit', 'submit', ['label' => 'Update']);
     }
 
     /**
@@ -167,18 +174,21 @@ class ProjectController extends Controller
      */
     public function updateAction(Request $request, Project $project)
     {
-        $em = $this->getDoctrine()->getManager();
-        $deleteForm = $this->createDeleteForm($project);
-        $editForm = $this->createEditForm($project);
-        $editForm->handleRequest($request);
+        $form = $this->createEditForm($project);
+        $form->handleRequest($request);
 
-        if ($editForm->isValid()) {
-            $em->flush();
+        if ($form->isValid()) {
+            $project->setTeam($this->getUser()->getActiveTeam());
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirect($this->generateUrl('project_edit', ['id' => $project->getId()]));
         }
 
-        return ['entity' => $project, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),];
+        return [
+            'entity' => $project,
+            'edit_form' => $form->createView(),
+            'delete_form' => $this->createDeleteForm($project)->createView()
+        ];
     }
 
     /**
@@ -216,6 +226,9 @@ class ProjectController extends Controller
      */
     private function createDeleteForm(Project $project)
     {
-        return $this->createFormBuilder()->setAction($this->generateUrl('project_delete', ['id' => $project->getId()]))->setMethod('DELETE')->add('submit', 'submit', ['label' => 'Delete'])->getForm();
+        return $this->createFormBuilder()->setAction($this->generateUrl('project_delete', ['id' => $project->getId()]))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', ['label' => 'Delete'])
+            ->getForm();
     }
 }

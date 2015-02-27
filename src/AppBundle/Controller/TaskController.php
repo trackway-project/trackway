@@ -30,10 +30,9 @@ class TaskController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $tasks = $em->getRepository('AppBundle:Task')->findAllByTeam($this->getUser()->getActiveTeam());
-
-        return ['entities' => $tasks,];
+        return [
+            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findAllByTeam($this->getUser()->getActiveTeam())
+        ];
     }
 
     /**
@@ -55,6 +54,7 @@ class TaskController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $task->setTeam($this->getUser()->getActiveTeam());
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
@@ -62,7 +62,10 @@ class TaskController extends Controller
             return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
         }
 
-        return ['entity' => $task, 'form' => $form->createView(),];
+        return [
+            'entity' => $task,
+            'form' => $form->createView()
+        ];
     }
 
     /**
@@ -74,10 +77,10 @@ class TaskController extends Controller
      */
     private function createCreateForm(Task $task)
     {
-        $form = $this->createForm(new TaskFormType(), $task, ['action' => $this->generateUrl('task_create'), 'method' => 'POST',]);
-        $form->add('submit', 'submit', ['label' => 'Create']);
-
-        return $form;
+        return $this->createForm(new TaskFormType(), $task, [
+            'action' => $this->generateUrl('task_create'),
+            'method' => 'POST'
+        ])->add('submit', 'submit', ['label' => 'Create']);
     }
 
     /**
@@ -93,9 +96,11 @@ class TaskController extends Controller
     public function newAction()
     {
         $task = new Task();
-        $form = $this->createCreateForm($task);
 
-        return ['entity' => $task, 'form' => $form->createView(),];
+        return [
+            'entity' => $task,
+            'form' => $this->createCreateForm($task)->createView()
+        ];
     }
 
     /**
@@ -112,9 +117,10 @@ class TaskController extends Controller
      */
     public function showAction(Task $task)
     {
-        $deleteForm = $this->createDeleteForm($task);
-
-        return ['entity' => $task, 'delete_form' => $deleteForm->createView(),];
+        return [
+            'entity' => $task,
+            'delete_form' => $this->createDeleteForm($task)->createView()
+        ];
     }
 
     /**
@@ -131,10 +137,11 @@ class TaskController extends Controller
      */
     public function editAction(Task $task)
     {
-        $editForm = $this->createEditForm($task);
-        $deleteForm = $this->createDeleteForm($task);
-
-        return ['entity' => $task, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),];
+        return [
+            'entity' => $task,
+            'edit_form' => $this->createEditForm($task)->createView(),
+            'delete_form' => $this->createDeleteForm($task)->createView()
+        ];
     }
 
     /**
@@ -146,10 +153,10 @@ class TaskController extends Controller
      */
     private function createEditForm(Task $task)
     {
-        $form = $this->createForm(new TaskFormType(), $task, ['action' => $this->generateUrl('task_update', ['id' => $task->getId()]), 'method' => 'PUT',]);
-        $form->add('submit', 'submit', ['label' => 'Update']);
-
-        return $form;
+        return $this->createForm(new TaskFormType(), $task, [
+            'action' => $this->generateUrl('task_update', ['id' => $task->getId()]),
+            'method' => 'PUT'
+        ])->add('submit', 'submit', ['label' => 'Update']);
     }
 
     /**
@@ -167,18 +174,21 @@ class TaskController extends Controller
      */
     public function updateAction(Request $request, Task $task)
     {
-        $em = $this->getDoctrine()->getManager();
-        $deleteForm = $this->createDeleteForm($task);
-        $editForm = $this->createEditForm($task);
-        $editForm->handleRequest($request);
+        $form = $this->createEditForm($task);
+        $form->handleRequest($request);
 
-        if ($editForm->isValid()) {
-            $em->flush();
+        if ($form->isValid()) {
+            $task->setTeam($this->getUser()->getActiveTeam());
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirect($this->generateUrl('task_edit', ['id' => $task->getId()]));
         }
 
-        return ['entity' => $task, 'edit_form' => $editForm->createView(), 'delete_form' => $deleteForm->createView(),];
+        return [
+            'entity' => $task,
+            'edit_form' => $form->createView(),
+            'delete_form' => $this->createDeleteForm($task)->createView()
+        ];
     }
 
     /**
@@ -216,6 +226,9 @@ class TaskController extends Controller
      */
     private function createDeleteForm(Task $task)
     {
-        return $this->createFormBuilder()->setAction($this->generateUrl('task_delete', ['id' => $task->getId()]))->setMethod('DELETE')->add('submit', 'submit', ['label' => 'Delete'])->getForm();
+        return $this->createFormBuilder()->setAction($this->generateUrl('task_delete', ['id' => $task->getId()]))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', ['label' => 'Delete'])
+            ->getForm();
     }
 }
