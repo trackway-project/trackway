@@ -1,25 +1,32 @@
 {% extends "AppBundle::layout.html.twig" %}
 {% trans_default_domain 'AppBundle' %}
-{% form_theme delete_form 'bootstrap_3_layout.html.twig' %}
 
 {% block class %}timeentry{% endblock class %}
 
 {% block content %}
-    <h1>TimeEntry</h1>
+    <h1>Time Entry</h1>
 
     <table class="table">
         <tbody>
         <tr>
             <th>Date</th>
-            <td>{{ entity.date|date('Y-m-d') }}</td>
-        </tr>
-        <tr>
-            <th>Ends At</th>
-            <td>{{ entity.endsAt|date('H:i') }}</td>
+            <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
         </tr>
         <tr>
             <th>Starts At</th>
-            <td>{{ entity.startsAt|date('H:i') }}</td>
+            <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Ends At</th>
+            <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Project</th>
+            <td>{{ entity.project }}</td>
+        </tr>
+        <tr>
+            <th>Task</th>
+            <td>{{ entity.task }}</td>
         </tr>
         <tr>
             <th>Note</th>
@@ -28,17 +35,9 @@
         </tbody>
     </table>
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('timeentry') }}">
-                Back to the list
-            </a>
-        </li>
-        <li>
-            <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}">
-                Edit
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+    <div class="btn-group">
+        <a href="{{ path('timeentry_index') }}" class="btn btn-default">Index</a>
+        <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}" class="btn btn-default">Edit</a>
+        <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
+    </div>
 {% endblock content %}

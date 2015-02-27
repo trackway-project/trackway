@@ -11,21 +11,20 @@ class Builder extends ContainerAware
 {
     public function mainMenu(FactoryInterface $factory)
     {
+        $menu = $factory->createItem('root')
+            ->setChildrenAttribute('class', 'nav navbar-nav');
+
         /** @var SecurityContext $securityContext */
         $securityContext = $this->container->get('security.context');
-
-        $menu = $factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav navbar-nav');
-
-        if ($securityContext->isGranted(['IS_AUTHENTICATED_REMEMBERED'])) {
-            $menu->addChild('Teams', ['route' => 'team']);
+        if ($securityContext && $securityContext->isGranted(['IS_AUTHENTICATED_REMEMBERED'])) {
+            $menu->addChild('Teams', ['route' => 'team_index']);
 
             /** @var User $user */
             $user = $securityContext->getToken()->getUser();
             if ($user->getMemberships()->count() > 0) {
-                $menu->addChild('Projects', ['route' => 'project']);
-                $menu->addChild('Tasks', ['route' => 'task']);
-                $menu->addChild('Time Entries', ['route' => 'timeentry']);
+                $menu->addChild('Projects', ['route' => 'project_index']);
+                $menu->addChild('Tasks', ['route' => 'task_index']);
+                $menu->addChild('Time Entries', ['route' => 'timeentry_index']);
             }
         }
 
@@ -34,13 +33,12 @@ class Builder extends ContainerAware
 
     public function userMenu(FactoryInterface $factory)
     {
+        $menu = $factory->createItem('root')
+            ->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
+
         /** @var SecurityContext $securityContext */
         $securityContext = $this->container->get('security.context');
-
-        $menu = $factory->createItem('root');
-        $menu->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
-
-        if ($securityContext->isGranted(['IS_AUTHENTICATED_REMEMBERED'])) {
+        if ($securityContext && $securityContext->isGranted(['IS_AUTHENTICATED_REMEMBERED'])) {
             $username = $securityContext->getToken()->getUser()->getUsername();
             $menu->addChild($username, ['route' => 'fos_user_profile_edit']);
             $menu->addChild('Logout', ['route' => 'fos_user_security_logout']);

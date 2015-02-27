@@ -12,6 +12,10 @@ class TeamRepository extends EntityRepository
 {
     public function findAllByUser(User $user)
     {
-        return $this->findBy(['user' => $user->getId()]);
+        return $this->createQueryBuilder('t')
+            ->join('t.memberships', 'm')
+            ->where('m.user = ' . $user->getId())
+            ->getQuery()
+            ->getResult();
     }
 }

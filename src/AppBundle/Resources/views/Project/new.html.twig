@@ -5,15 +5,11 @@
 {% block class %}project{% endblock class %}
 
 {% block content %}
-    <h1>Project creation</h1>
+    <h1>Project new</h1>
 
     {{ form(form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('project') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
+    <div class="btn-group">
+        <a href="{{ path('project_index') }}" class="btn btn-default">Index</a>
+    </div>
 {% endblock content %}

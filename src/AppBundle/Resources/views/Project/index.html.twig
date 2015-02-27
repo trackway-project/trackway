@@ -4,12 +4,11 @@
 {% block class %}project{% endblock class %}
 
 {% block content %}
-    <h1>Project list</h1>
+    <h1>Projects</h1>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Actions</th>
         </tr>
@@ -17,32 +16,24 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('project_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('project_show', { 'id': entity.id }) }}">show</a>
-                        </li>
+                    <div class="btn-group">
+                        <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn btn-default">Show</a>
                         {% if is_granted('EDIT', entity) %}
-                            <li>
-                                <a href="{{ path('project_edit', { 'id': entity.id }) }}">edit</a>
-                            </li>
+                            <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-default">Edit</a>
+                            <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
                         {% endif %}
-                    </ul>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
+    <div class="btn-group">
         {% if is_granted('EDIT', app.user.activeTeam) %}
-            <li>
-                <a href="{{ path('project_new') }}">
-                    Create a new entry
-                </a>
-            </li>
+            <a href="{{ path('project_new') }}" class="btn btn-default">New</a>
         {% endif %}
-    </ul>
+    </div>
 {% endblock content %}

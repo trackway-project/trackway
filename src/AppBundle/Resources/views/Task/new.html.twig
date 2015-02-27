@@ -5,15 +5,11 @@
 {% block class %}task{% endblock class %}
 
 {% block content %}
-    <h1>Task creation</h1>
+    <h1>Task new</h1>
 
     {{ form(form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('task') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
+    <div class="btn-group">
+        <a href="{{ path('task_index') }}" class="btn btn-default">Index</a>
+    </div>
 {% endblock content %}

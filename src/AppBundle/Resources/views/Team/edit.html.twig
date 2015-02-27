@@ -1,21 +1,16 @@
 {% extends "AppBundle::layout.html.twig" %}
 {% trans_default_domain 'AppBundle' %}
-{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
-{% form_theme delete_form 'bootstrap_3_layout.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block class %}team{% endblock class %}
 
 {% block content %}
     <h1>Team edit</h1>
 
-    {{ form(edit_form) }}
+    {{ form(form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('team') }}">
-                Back to the list
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+    <div class="btn-group">
+        <a href="{{ path('team_index') }}" class="btn btn-default">Index</a>
+        <a href="{{ path('team_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
+    </div>
 {% endblock content %}

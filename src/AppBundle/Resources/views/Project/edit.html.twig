@@ -7,14 +7,10 @@
 {% block content %}
     <h1>Project edit</h1>
 
-    {{ form(edit_form) }}
+    {{ form(form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('project') }}">
-                Back to the list
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+    <div class="btn-group">
+        <a href="{{ path('project_index') }}" class="btn btn-default">Index</a>
+        <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
+    </div>
 {% endblock content %}

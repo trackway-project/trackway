@@ -6,7 +6,6 @@ use AppBundle\Entity\Group;
 use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
 use AppBundle\Form\Type\TeamFormType;
-use FOS\UserBundle\Model\GroupManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -22,12 +21,12 @@ use Symfony\Component\HttpFoundation\Request;
 class TeamController extends Controller
 {
     /**
-     * Lists all Team entities.
+     * Lists all existing Team entities.
      *
      * @return array
      *
-     * @Route("/", name="team")
      * @Method("GET")
+     * @Route("/", name="team_index")
      * @Template()
      */
     public function indexAction()
@@ -38,21 +37,43 @@ class TeamController extends Controller
     }
 
     /**
+     * Shows an existing Team entity.
+     *
+     * @param Team $team
+     *
+     * @return array
+     *
+     * @Method("GET")
+     * @Route("/{id}", name="team_show")
+     * @Security("is_granted('VIEW', team)")
+     * @Template()
+     */
+    public function showAction(Team $team)
+    {
+        return [
+            'entity' => $team
+        ];
+    }
+
+    /**
      * Creates a new Team entity.
      *
      * @param Request $request
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/", name="team_create")
-     * @Method("POST")
-     * @Template("AppBundle:Team:new.html.twig")
+     * @Method("GET|POST")
+     * @Route("/new", name="team_new")
+     * @Template()
      */
-    public function createAction(Request $request)
+    public function newAction(Request $request)
     {
         $team = new Team();
-        $form = $this->createCreateForm($team);
-        $form->handleRequest($request);
+
+        $form = $this->createForm(new TeamFormType(), $team)
+            ->remove('memberships')
+            ->add('submit', 'submit', ['label' => 'Create'])
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var Group $group */
@@ -82,98 +103,6 @@ class TeamController extends Controller
     }
 
     /**
-     * Creates a form to create a Team entity.
-     *
-     * @param Team $team
-     *
-     * @return \Symfony\Component\Form\Form
-     */
-    private function createCreateForm(Team $team)
-    {
-        return $this->createForm(new TeamFormType(), $team, [
-            'action' => $this->generateUrl('team_create'),
-            'method' => 'POST'
-        ])
-            ->remove('memberships')
-            ->add('submit', 'submit', ['label' => 'Create']);
-    }
-
-    /**
-     * Displays a form to create a new Team entity.
-     *
-     * @return array
-     *
-     * @Route("/new", name="team_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $team = new Team();
-
-        return [
-            'entity' => $team,
-            'form' => $this->createCreateForm($team)->createView()
-        ];
-    }
-
-    /**
-     * Finds and displays a Team entity.
-     *
-     * @param Team $team
-     *
-     * @return array
-     *
-     * @Route("/{id}", name="team_show")
-     * @Method("GET")
-     * @Template()
-     * @Security("is_granted('VIEW', team)")
-     */
-    public function showAction(Team $team)
-    {
-        return [
-            'entity' => $team,
-            'delete_form' => $this->createDeleteForm($team)->createView()
-        ];
-    }
-
-    /**
-     * Displays a form to edit an existing Team entity.
-     *
-     * @param Team $team
-     *
-     * @return array
-     *
-     * @Route("/{id}/edit", name="team_edit")
-     * @Method("GET")
-     * @Template()
-     * @Security("is_granted('EDIT', team)")
-     */
-    public function editAction(Team $team)
-    {
-        return [
-            'entity' => $team,
-            'edit_form' => $this->createEditForm($team)->createView(),
-            'delete_form' => $this->createDeleteForm($team)->createView()
-        ];
-    }
-
-    /**
-     * Creates a form to edit a Team entity.
-     *
-     * @param Team $team
-     *
-     * @return \Symfony\Component\Form\Form
-     */
-    private function createEditForm(Team $team)
-    {
-        return $this->createForm(new TeamFormType(), $team, [
-            'action' => $this->generateUrl('team_update', ['id' => $team->getId()]),
-            'method' => 'PUT'
-        ])->add('submit', 'submit', ['label' => 'Update']);
-    }
-
-    /**
      * Edits an existing Team entity.
      *
      * @param Request $request
@@ -181,67 +110,46 @@ class TeamController extends Controller
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/{id}", name="team_update")
-     * @Method("PUT")
-     * @Template("AppBundle:Team:edit.html.twig")
+     * @Method("GET|POST")
+     * @Route("/{id}/edit", name="team_edit")
      * @Security("is_granted('EDIT', team)")
+     * @Template()
      */
-    public function updateAction(Request $request, Team $team)
+    public function editAction(Request $request, Team $team)
     {
-        $form = $this->createEditForm($team);
-        $form->handleRequest($request);
+        $form = $this->createForm(new TeamFormType(), $team)
+            ->add('submit', 'submit', ['label' => 'Update'])
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirect($this->generateUrl('team_edit', ['id' => $team->getId()]));
+            return $this->redirect($this->generateUrl('team_show', ['id' => $team->getId()]));
         }
 
         return [
             'entity' => $team,
-            'edit_form' => $form->createView(),
-            'delete_form' => $this->createDeleteForm($team)->createView()
+            'form' => $form->createView()
         ];
     }
 
     /**
-     * Deletes a Team entity.
+     * Deletes an existing Team entity.
      *
-     * @param Request $request
      * @param Team $team
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/{id}", name="team_delete")
-     * @Method("DELETE")
+     * @Method("GET")
+     * @Route("/{id}/delete", name="team_delete")
      * @Security("is_granted('EDIT', team)")
      */
-    public function deleteAction(Request $request, Team $team)
+    public function deleteAction(Team $team)
     {
-        $form = $this->createDeleteForm($team);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($team);
+        $em->flush();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($team);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('team'));
-    }
-
-    /**
-     * Creates a form to delete a Team entity by id.
-     *
-     * @param Team $team
-     *
-     * @return \Symfony\Component\Form\Form
-     */
-    private function createDeleteForm(Team $team)
-    {
-        return $this->createFormBuilder()->setAction($this->generateUrl('team_delete', ['id' => $team->getId()]))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', ['label' => 'Delete'])
-            ->getForm();
+        return $this->redirect($this->generateUrl('team_index'));
     }
 }

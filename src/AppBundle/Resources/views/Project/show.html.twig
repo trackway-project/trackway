@@ -1,6 +1,5 @@
 {% extends "AppBundle::layout.html.twig" %}
 {% trans_default_domain 'AppBundle' %}
-{% form_theme delete_form 'bootstrap_3_layout.html.twig' %}
 
 {% block class %}project{% endblock class %}
 
@@ -16,19 +15,11 @@
         </tbody>
     </table>
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('project') }}">
-                Back to the list
-            </a>
-        </li>
+    <div class="btn-group">
+        <a href="{{ path('project_index') }}" class="btn btn-default">Index</a>
         {% if is_granted('EDIT', entity) %}
-            <li>
-                <a href="{{ path('project_edit', { 'id': entity.id }) }}">
-                    Edit
-                </a>
-            </li>
-            <li>{{ form(delete_form) }}</li>
+            <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-default">Edit</a>
+            <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
         {% endif %}
-    </ul>
+    </div>
 {% endblock content %}

@@ -5,15 +5,11 @@
 {% block class %}timeentry{% endblock class %}
 
 {% block content %}
-    <h1>TimeEntry creation</h1>
+    <h1>Time Entry new</h1>
 
     {{ form(form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('timeentry') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
+    <div class="btn-group">
+        <a href="{{ path('timeentry_index') }}" class="btn btn-default">Index</a>
+    </div>
 {% endblock content %}
