@@ -149,6 +149,6 @@ class TimeEntryController extends Controller
         $em->remove($timeEntry);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('timeentry'));
+        return $this->redirect($this->generateUrl('timeentry_index'));
     }
 }
