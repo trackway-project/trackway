@@ -37,6 +37,13 @@ class Team
     private $memberships;
 
     /**
+     * @var Invitation
+     *
+     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="team")
+     */
+    protected $invitations;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Project", mappedBy="team")
@@ -111,6 +118,22 @@ class Team
     public function setMemberships(ArrayCollection $memberships)
     {
         $this->memberships = $memberships;
+    }
+
+    /**
+     * @return Invitation
+     */
+    public function getInvitations()
+    {
+        return $this->invitations;
+    }
+
+    /**
+     * @param Invitation $invitations
+     */
+    public function setInvitations($invitations)
+    {
+        $this->invitations = $invitations;
     }
 
     /**

@@ -31,6 +31,13 @@ class User extends BaseUser
     protected $memberships;
 
     /**
+     * @var Invitation
+     *
+     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="user")
+     */
+    protected $invitations;
+
+    /**
      * @var Team
      *
      * @ORM\ManyToOne(targetEntity="Team")
@@ -82,6 +89,22 @@ class User extends BaseUser
     public function setMemberships(ArrayCollection $memberships)
     {
         $this->memberships = $memberships;
+    }
+
+    /**
+     * @return Invitation
+     */
+    public function getInvitations()
+    {
+        return $this->invitations;
+    }
+
+    /**
+     * @param Invitation $invitations
+     */
+    public function setInvitations($invitations)
+    {
+        $this->invitations = $invitations;
     }
 
     /**
