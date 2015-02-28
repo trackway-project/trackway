@@ -44,7 +44,7 @@ class TeamController extends Controller
      * @return array
      *
      * @Method("GET")
-     * @Route("/{id}", name="team_show")
+     * @Route("/{id}", requirements={"id": "\d+"}, name="team_show")
      * @Security("is_granted('VIEW', team)")
      * @Template()
      */
@@ -111,7 +111,7 @@ class TeamController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/{id}/edit", name="team_edit")
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="team_edit")
      * @Security("is_granted('EDIT', team)")
      * @Template()
      */
@@ -141,7 +141,7 @@ class TeamController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/delete", name="team_delete")
+     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="team_delete")
      * @Security("is_granted('EDIT', team)")
      */
     public function deleteAction(Team $team)

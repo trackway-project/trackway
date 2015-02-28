@@ -43,7 +43,7 @@ class TaskController extends Controller
      * @return array
      *
      * @Method("GET")
-     * @Route("/{id}", name="task_show")
+     * @Route("/{id}", requirements={"id": "\d+"}, name="task_show")
      * @Security("is_granted('VIEW', task)")
      * @Template()
      */
@@ -98,7 +98,7 @@ class TaskController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/{id}/edit", name="task_edit")
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="task_edit")
      * @Security("is_granted('EDIT', task)")
      * @Template()
      */
@@ -129,7 +129,7 @@ class TaskController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/delete", name="task_delete")
+     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="task_delete")
      * @Security("is_granted('EDIT', task)")
      */
     public function deleteAction(Task $task)

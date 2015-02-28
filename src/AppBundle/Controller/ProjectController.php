@@ -43,7 +43,7 @@ class ProjectController extends Controller
      * @return array
      *
      * @Method("GET")
-     * @Route("/{id}", name="project_show")
+     * @Route("/{id}", requirements={"id": "\d+"}, name="project_show")
      * @Security("is_granted('VIEW', project)")
      * @Template()
      */
@@ -98,7 +98,7 @@ class ProjectController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/{id}/edit", name="project_edit")
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="project_edit")
      * @Security("is_granted('EDIT', project)")
      * @Template()
      */
@@ -129,7 +129,7 @@ class ProjectController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/delete", name="project_delete")
+     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="project_delete")
      * @Security("is_granted('EDIT', project)")
      */
     public function deleteAction(Project $project)

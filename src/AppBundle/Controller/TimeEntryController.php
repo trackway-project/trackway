@@ -73,6 +73,9 @@ class TimeEntryController extends Controller
     public function newAction(Request $request)
     {
         $timeEntry = new TimeEntry();
+        $timeEntry->setDate(new \DateTime());
+        $timeEntry->setStartsAt(new \DateTime());
+        $timeEntry->setEndsAt(new \DateTime());
 
         $form = $this->createForm(new TimeEntryFormType(), $timeEntry)
             ->add('submit', 'submit', ['label' => 'Create'])
