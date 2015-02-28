@@ -46,8 +46,7 @@ doctrine:
             absenceReasonEnum: AppBundle\Type\AbsenceReasonEnumType
             invitationStatusEnum: AppBundle\Type\InvitationStatusEnumType
         mapping_types:
-            absenceReasonEnum: string
-            invitationStatusEnum: string
+            enum: string
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
