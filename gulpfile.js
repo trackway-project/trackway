@@ -21,7 +21,7 @@ var browserSync = require('browser-sync'),
 // Configuration
 
 var buildDirectory = 'web',
-    sourceDirectory = 'src/AppBundle/Resources/public',
+    sourceDirectory = 'src/AppBundle/Resources/private',
     bowerDirectory = 'bower_components',
     nodeDirectory = 'node_modules',
     asyncDirectory = 'async';
