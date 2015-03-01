@@ -43,7 +43,6 @@ doctrine:
         password: "%database_password%"
         charset:  UTF8
         types:
-            absenceReasonEnum: AppBundle\Type\AbsenceReasonEnumType
             invitationStatusEnum: AppBundle\Type\InvitationStatusEnumType
         mapping_types:
             enum: string

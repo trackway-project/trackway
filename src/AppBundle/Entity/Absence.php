@@ -13,9 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Absence extends BaseTimeEntry
 {
     /**
-     * @var string
+     * @var AbsenceReason
      *
-     * @ORM\Column(name="reason", type="absenceReasonEnum")
+     * @ORM\ManyToOne(targetEntity="AbsenceReason")
+     * @ORM\JoinColumn(name="reason_id", referencedColumnName="id")
      */
     protected $reason;
 
@@ -28,7 +29,7 @@ class Absence extends BaseTimeEntry
     }
 
     /**
-     * @return string
+     * @return AbsenceReason
      */
     public function getReason()
     {
@@ -36,9 +37,9 @@ class Absence extends BaseTimeEntry
     }
 
     /**
-     * @param string $reason
+     * @param AbsenceReason $reason
      */
-    public function setReason($reason)
+    public function setReason(AbsenceReason $reason)
     {
         $this->reason = $reason;
     }
