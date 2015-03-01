@@ -1,0 +1,16 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% trans_default_domain 'AppBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block class %}absence{% endblock class %}
+
+{% block content %}
+    <h1>Absence edit</h1>
+
+    {{ form(form) }}
+
+    <div class="btn-group">
+        <a href="{{ path('absence_index') }}" class="btn btn-default">Index</a>
+        <a href="{{ path('absence_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
+    </div>
+{% endblock content %}

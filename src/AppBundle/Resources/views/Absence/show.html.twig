@@ -1,0 +1,39 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}absence{% endblock class %}
+
+{% block content %}
+    <h1>Absence</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Date</th>
+            <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Starts At</th>
+            <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Ends At</th>
+            <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Reason</th>
+            <td>{{ entity.reason }}</td>
+        </tr>
+        <tr>
+            <th>Note</th>
+            <td>{{ entity.note }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-group">
+        <a href="{{ path('absence_index') }}" class="btn btn-default">Index</a>
+        <a href="{{ path('absence_edit', { 'id': entity.id }) }}" class="btn btn-default">Edit</a>
+        <a href="{{ path('absence_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
+    </div>
+{% endblock content %}

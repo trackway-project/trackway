@@ -1,0 +1,43 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}absence{% endblock class %}
+
+{% block content %}
+    <h1>Absences</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Starts At</th>
+            <th>Ends At</th>
+            <th>Reason</th>
+            <th>Note</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
+                <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
+                <td>{{ entity.reason }}</td>
+                <td>{{ entity.note }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{{ path('absence_show', { 'id': entity.id }) }}" class="btn btn-default">Show</a>
+                        <a href="{{ path('absence_edit', { 'id': entity.id }) }}" class="btn btn-default">Edit</a>
+                        <a href="{{ path('absence_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="btn-group">
+        <a href="{{ path('absence_new') }}" class="btn btn-default">New</a>
+    </div>
+{% endblock content %}
