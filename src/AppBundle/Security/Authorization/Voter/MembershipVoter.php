@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class TimeEntryVoter implements VoterInterface
+class MembershipVoter implements VoterInterface
 {
     const VIEW = 'VIEW';
     const EDIT = 'EDIT';
@@ -21,22 +21,22 @@ class TimeEntryVoter implements VoterInterface
 
     public function supportsClass($class)
     {
-        $supportedClass = 'AppBundle\Entity\TimeEntry';
+        $supportedClass = 'AppBundle\Entity\Membership';
 
         return $supportedClass === $class || is_subclass_of($class, $supportedClass);
     }
 
     /**
      * @param TokenInterface $token
-     * @param TimeEntry $timeEntry
+     * @param Membership $membership
      * @param array $attributes
      *
      * @return int
      */
-    public function vote(TokenInterface $token, $timeEntry, array $attributes)
+    public function vote(TokenInterface $token, $membership, array $attributes)
     {
         // check if class of this object is supported by this voter
-        if (!$this->supportsClass(get_class($timeEntry))) {
+        if (!$this->supportsClass(get_class($membership))) {
             return VoterInterface::ACCESS_ABSTAIN;
         }
 
@@ -66,9 +66,9 @@ class TimeEntryVoter implements VoterInterface
         switch ($attribute) {
             case self::VIEW:
             case self::EDIT:
-                /** @var Membership $membership */
-                foreach ($user->getMemberships() as $membership) {
-                    if ($timeEntry->getTeam() == $membership->getTeam() && ($user == $membership->getUser() || in_array('ROLE_ADMIN', $membership->getGroup()->getRoles()))) {
+                /** @var Membership $_membership */
+                foreach ($user->getMemberships() as $_membership) {
+                    if ($membership == $_membership || in_array('ROLE_ADMIN', $membership->getGroup()->getRoles())) {
                         return VoterInterface::ACCESS_GRANTED;
                     }
                 }

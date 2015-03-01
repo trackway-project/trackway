@@ -10,6 +10,18 @@ services:
         tags:
             - { name: form.type, alias: appbundle_profile }
 
+    security.access.basetimeentry_voter:
+        class:      AppBundle\Security\Authorization\Voter\BaseTimeEntryVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    security.access.membership_voter:
+        class:      AppBundle\Security\Authorization\Voter\MembershipVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
     security.access.project_voter:
         class:      AppBundle\Security\Authorization\Voter\ProjectVoter
         public:     false
@@ -24,12 +36,6 @@ services:
 
     security.access.team_voter:
         class:      AppBundle\Security\Authorization\Voter\TeamVoter
-        public:     false
-        tags:
-           - { name: security.voter }
-
-    security.access.timeentry_voter:
-        class:      AppBundle\Security\Authorization\Voter\TimeEntryVoter
         public:     false
         tags:
            - { name: security.voter }
