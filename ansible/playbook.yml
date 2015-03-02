@@ -1,0 +1,20 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    web_server: apachephp
+    servername: trackway.vagrant 192.168.33.99
+    timezone: Europe/Berlin
+  vars_files:
+    - vars/mariadb.yml
+    - vars/common.yml
+    - [ "vars/apachephp.yml", "vars/ws_defaults.yml" ]
+  roles:
+    - init
+    - php5-cli
+    - apache
+    - php5
+    - mariadb
+    - phpcommon
+    - nodejs
+    - app
