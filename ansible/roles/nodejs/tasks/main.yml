@@ -1,0 +1,17 @@
+---
+- name: Install node.js
+  sudo: yes
+  apt: pkg=nodejs state=latest
+
+- name: symlink node.js
+  file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
+
+- name: Install NPM
+  sudo: yes
+  apt: pkg=npm state=latest
+
+- name: Install "bower" and "gulp" node.js package globally.
+  npm: name={{ item }} global=yes
+  with_items:
+    - bower
+    - gulp

@@ -20,3 +20,5 @@
 /trackway.key
 /trackway.crt
 .DS_Store
+.idea
+.vagrant
