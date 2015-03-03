@@ -24,7 +24,7 @@ class Invitation
     /**
      * @var Team
      *
-     * @ORM\ManyToOne(targetEntity="Team", inversedBy="memberships")
+     * @ORM\ManyToOne(targetEntity="Team", inversedBy="invitations")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      */
     protected $team;
@@ -39,7 +39,7 @@ class Invitation
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="memberships")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="invitations")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
