@@ -1,6 +1,7 @@
 ---
     php_ppa: php5-5.6
     doc_root: /data/trackway/web
+    app_root: /data/trackway
     sys_packages: ["git","vim","htop"]
     dist: precise
     php_packages: ["php5-cli","php5-curl","php5-common","php-pear","php5-intl","php5-mcrypt","php5-mysql","php5-sqlite","php5-tidy","php5-xdebug","php5-memcache"]
