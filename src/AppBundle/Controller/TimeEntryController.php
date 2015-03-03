@@ -47,7 +47,7 @@ class TimeEntryController extends Controller
      * @return array
      *
      * @Method("GET")
-     * @Route("/{id}", name="timeentry_show")
+     * @Route("/{id}", requirements={"id": "\d+"}, name="timeentry_show")
      * @Security("is_granted('VIEW', timeEntry)")
      * @Template()
      */
@@ -109,7 +109,7 @@ class TimeEntryController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/{id}/edit", name="timeentry_edit")
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="timeentry_edit")
      * @Security("is_granted('EDIT', timeEntry)")
      * @Template()
      */
@@ -143,7 +143,7 @@ class TimeEntryController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/delete", name="timeentry_delete")
+     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="timeentry_delete")
      * @Security("is_granted('EDIT', timeEntry)")
      */
     public function deleteAction(TimeEntry $timeEntry)

@@ -47,7 +47,7 @@ class AbsenceController extends Controller
      * @return array
      *
      * @Method("GET")
-     * @Route("/{id}", name="absence_show")
+     * @Route("/{id}", requirements={"id": "\d+"}, name="absence_show")
      * @Security("is_granted('VIEW', absence)")
      * @Template()
      */
@@ -109,7 +109,7 @@ class AbsenceController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/{id}/edit", name="absence_edit")
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="absence_edit")
      * @Security("is_granted('EDIT', absence)")
      * @Template()
      */
@@ -143,7 +143,7 @@ class AbsenceController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/delete", name="absence_delete")
+     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="absence_delete")
      * @Security("is_granted('EDIT', absence)")
      */
     public function deleteAction(Absence $absence)

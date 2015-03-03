@@ -51,6 +51,7 @@ gulp.task('bootstrap:prepare', ['bower'], function () {
         .pipe(insert.append('\n// Custom'))
         .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/main.less";'))
         .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/login.less";'))
+        .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/offCanvas.less";'))
         .pipe(gulp.dest(buildDirectory + '/lib/bootstrap/less/'));
 });
 

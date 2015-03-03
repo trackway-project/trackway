@@ -25,6 +25,7 @@ class Builder extends ContainerAware
                 $menu->addChild('Projects', ['route' => 'project_index']);
                 $menu->addChild('Tasks', ['route' => 'task_index']);
                 $menu->addChild('Time Entries', ['route' => 'timeentry_index']);
+                $menu->addChild('Absences', ['route' => 'absence_index']);
             }
         }
 
