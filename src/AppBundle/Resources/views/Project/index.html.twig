@@ -4,36 +4,48 @@
 {% block class %}project{% endblock class %}
 
 {% block content %}
-    <h1>Projects</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td>{{ entity.name }}</td>
-                <td>
-                    <div class="btn-group">
-                        <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn btn-default">Show</a>
-                        {% if is_granted('EDIT', entity) %}
-                            <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-default">Edit</a>
-                            <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
-                        {% endif %}
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="row row-offcanvas row-offcanvas-left">
+        <div class="col-xs-6  col-sm-3 sidebar-offcanvas" id="sitebar" style="padding-top: 20px;" >
+            <div class="list-group">
+                <a href="#" class="list-group-item visible-xs" data-toggle="offcanvas"><i class="fa fa-arrow-circle-left fa-fw"></i>&nbsp; Close</a>
+                <a href="#" class="list-group-item active"><i class="fa fa-list fa-fw"></i>&nbsp; Overwiew</a>
+                {% if is_granted('EDIT', app.user.activeTeam) %}
+                    <a  href="{{ path('project_new') }}"  class="list-group-item"><i class="fa fa-plus fa-fw"></i>&nbsp; Create</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            <div data-toggle="offcanvas">
+                <p class="pull-right visible-xs">
+                    <span class="btn btn-default btn-sm"><i class="fa fa-align-justify"></i></span>
+                </p>
+                <h1>Projects</h1>
+            </div>
 
-    <div class="btn-group">
-        {% if is_granted('EDIT', app.user.activeTeam) %}
-            <a href="{{ path('project_new') }}" class="btn btn-default">New</a>
-        {% endif %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th class="text-right"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.name }}</td>
+                        <td class="text-right">
+                                <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn btn-default btn-sm"><i class="fa fa-eye"></i></a>
+                                {% if is_granted('EDIT', entity) %}
+                                    <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-default  btn-sm"><i
+                                                class="fa fa-pencil-square-o"></i></a>
+                                    <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-danger  btn-sm"><i class="fa fa-times"></i></a>
+                                {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock content %}

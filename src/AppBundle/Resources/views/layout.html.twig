@@ -16,8 +16,8 @@
     <![endif]-->
 </head>
 <body class="{% block class %}{% endblock class %}">
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
@@ -36,21 +36,26 @@
     </div>
 </nav>
 
-{% for type, messages in app.session.flashBag.all %}
-    {% for message in messages %}
-        <div class="alert alert-{{ type }}" role="alert">
-            {{ message|trans({}, 'FOSUserBundle') }}
-        </div>
-    {% endfor %}
-{% endfor %}
+<div class="container" id="wrapper">
 
-<div class="container">
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}" role="alert">
+                {{ message|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     {% block content %}
         {% block fos_user_content %}
         {% endblock fos_user_content %}
     {% endblock content %}
 </div>
-
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted pull-left">Fork it on Github: <a href="https://github.com/MewesK/trackway">https://github.com/MewesK/trackway</a></p>
+    </div>
+</footer>
 <script src="/js/combined.js"></script>
 </body>
 </html>

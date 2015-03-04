@@ -26,3 +26,11 @@ The simple on-premise open source time tracker.
 * After changes to src/AppBundle/Entity: php app/console doctrine:schema:update
 
 Enjoy!
+
+## Thanks
+
+http://bootswatch.com
+
+## Copyright and License
+
+Code released under the MIT License.
