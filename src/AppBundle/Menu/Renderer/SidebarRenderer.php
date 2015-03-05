@@ -12,12 +12,13 @@ class SidebarRenderer extends AdvancedRenderer
     {
         // Manipulate default options
         $defaultOptions = array_merge([
-            'depth' => 1,
+            'ancestorClass' => 'active',
             'currentClass' => 'active',
-            'listAttributes' => ['class' => 'list-group'],
-            'listElement' => 'div',
+            'depth' => 1,
             'itemAttributes' => ['class' => 'list-group-item'],
-            'itemElement' => false
+            'itemElement' => false,
+            'listAttributes' => ['class' => 'list-group'],
+            'listElement' => 'div'
         ], $defaultOptions);
 
         parent::__construct($matcher, $defaultOptions, $charset);

@@ -12,8 +12,9 @@ class NavbarRenderer extends AdvancedRenderer
     {
         // Manipulate default options
         $defaultOptions = array_merge([
-            'depth' => 1,
+            'ancestorClass' => 'active',
             'currentClass' => 'active',
+            'depth' => 1,
             'listAttributes' => ['class' => 'nav navbar-nav']
         ], $defaultOptions);
 

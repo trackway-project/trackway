@@ -12,10 +12,10 @@ class AdvancedRenderer extends ListRenderer
     {
         // Initialize default options
         $defaultOptions = array_merge([
-            'listAttributes' => [],
-            'listElement' => 'ul',
             'itemAttributes' => [],
-            'itemElement' => 'li'
+            'itemElement' => 'li',
+            'listAttributes' => [],
+            'listElement' => 'ul'
         ], $defaultOptions);
 
         parent::__construct($matcher, $defaultOptions, $charset);

@@ -1,0 +1,41 @@
+{% extends "AppBundle::layoutOffCanvas.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block class %}profile{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Profile</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>{{ 'profile.show.username'|trans }}</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'profile.show.email'|trans }}</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'profile.show.memberships'|trans }}</th>
+            <td>
+                <ul>
+                    {% for memberhsip in user.memberships %}
+                        <li>{{ memberhsip }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>{{ 'profile.show.active_team'|trans }}</th>
+            <td>{{ user.activeTeam }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'Profile'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

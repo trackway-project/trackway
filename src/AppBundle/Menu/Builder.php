@@ -99,11 +99,14 @@ class Builder extends ContainerAware
         if ($authorizationChecker->isGranted('ROLE_USER')) {
             $username = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
 
-            $menu->addChild($username, ['route' => 'fos_user_profile_edit', 'currentClass' => 'active']);
+            $menu->addChild('Profile', ['label' => $username, 'route' => 'fos_user_profile_show']);
+            $menu['Profile']->addChild('Profile', ['route' => 'fos_user_profile_show']);
+            $menu['Profile']->addChild('Settings', ['route' => 'fos_user_profile_edit']);
+
             $menu->addChild('Logout', ['route' => 'fos_user_security_logout']);
         } else {
-            $menu->addChild('Login', ['route' => 'fos_user_security_login', 'currentClass' => 'active']);
-            $menu->addChild('Register', ['route' => 'fos_user_registration_register', 'currentClass' => 'active']);
+            $menu->addChild('Login', ['route' => 'fos_user_security_login']);
+            $menu->addChild('Register', ['route' => 'fos_user_registration_register']);
         }
 
         return $menu;
