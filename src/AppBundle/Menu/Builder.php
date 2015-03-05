@@ -19,7 +19,6 @@ class Builder extends ContainerAware
         $authorizationChecker = $this->container->get('security.authorization_checker');
         if ($authorizationChecker->isGranted(['IS_AUTHENTICATED_REMEMBERED'])) {
             $menu->addChild('Teams', ['route' => 'team_index']);
-
             $menu['Teams']->addChild('Overview', ['route' => 'team_index']);
             $menu['Teams']->addChild('Create', ['route' => 'team_new']);
             $menu['Teams']->addChild('Show', ['route' => 'team_show', 'routeParameters' => ['id' => 0]]);
@@ -32,9 +31,32 @@ class Builder extends ContainerAware
             $user = $tokenStorage->getToken()->getUser();
             if ($user->getMemberships()->count() > 0) {
                 $menu->addChild('Projects', ['route' => 'project_index']);
+                $menu['Projects']->addChild('Overview', ['route' => 'project_index']);
+                $menu['Projects']->addChild('Create', ['route' => 'project_new']);
+                $menu['Projects']->addChild('Show', ['route' => 'project_show', 'routeParameters' => ['id' => 0]]);
+                $menu['Projects']->addChild('Edit', ['route' => 'project_edit', 'routeParameters' => ['id' => 0]]);
+                $menu['Projects']->addChild('Delete', ['route' => 'project_delete', 'routeParameters' => ['id' => 0]]);
+
                 $menu->addChild('Tasks', ['route' => 'task_index']);
+                $menu['Tasks']->addChild('Overview', ['route' => 'task_index']);
+                $menu['Tasks']->addChild('Create', ['route' => 'task_new']);
+                $menu['Tasks']->addChild('Show', ['route' => 'task_show', 'routeParameters' => ['id' => 0]]);
+                $menu['Tasks']->addChild('Edit', ['route' => 'task_edit', 'routeParameters' => ['id' => 0]]);
+                $menu['Tasks']->addChild('Delete', ['route' => 'task_delete', 'routeParameters' => ['id' => 0]]);
+
                 $menu->addChild('Time Entries', ['route' => 'timeentry_index']);
+                $menu['Time Entries']->addChild('Overview', ['route' => 'timeentry_index']);
+                $menu['Time Entries']->addChild('Create', ['route' => 'timeentry_new']);
+                $menu['Time Entries']->addChild('Show', ['route' => 'timeentry_show', 'routeParameters' => ['id' => 0]]);
+                $menu['Time Entries']->addChild('Edit', ['route' => 'timeentry_edit', 'routeParameters' => ['id' => 0]]);
+                $menu['Time Entries']->addChild('Delete', ['route' => 'timeentry_delete', 'routeParameters' => ['id' => 0]]);
+
                 $menu->addChild('Absences', ['route' => 'absence_index']);
+                $menu['Absences']->addChild('Overview', ['route' => 'absence_index']);
+                $menu['Absences']->addChild('Create', ['route' => 'absence_new']);
+                $menu['Absences']->addChild('Show', ['route' => 'absence_show', 'routeParameters' => ['id' => 0]]);
+                $menu['Absences']->addChild('Edit', ['route' => 'absence_edit', 'routeParameters' => ['id' => 0]]);
+                $menu['Absences']->addChild('Delete', ['route' => 'absence_delete', 'routeParameters' => ['id' => 0]]);
             }
         }
 
