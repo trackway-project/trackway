@@ -30,8 +30,8 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            {{ knp_menu_render('AppBundle:Builder:mainMenu', {'depth': 1, 'currentClass': 'active'}) }}
-            {{ knp_menu_render('AppBundle:Builder:userMenu', {'depth': 1, 'currentClass': 'active'}) }}
+            {{ knp_menu_render('AppBundle:Builder:mainMenu', {}, 'appbundle_navbar_renderer') }}
+            {{ knp_menu_render('AppBundle:Builder:userMenu', {'rootAttributes': {'class': 'navbar-right'}}, 'appbundle_navbar_renderer') }}
         </div>
     </div>
 </nav>

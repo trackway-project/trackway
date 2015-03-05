@@ -13,13 +13,13 @@ class Builder extends ContainerAware
 {
     public function mainMenu(FactoryInterface $factory)
     {
-        $menu = $factory->createItem('root')
-            ->setChildrenAttribute('class', 'nav navbar-nav');
+        $menu = $factory->createItem('root');
 
         /** @var AuthorizationChecker $authorizationChecker */
         $authorizationChecker = $this->container->get('security.authorization_checker');
         if ($authorizationChecker->isGranted(['IS_AUTHENTICATED_REMEMBERED'])) {
             $menu->addChild('Teams', ['route' => 'team_index']);
+
             $menu['Teams']->addChild('Overview', ['route' => 'team_index']);
             $menu['Teams']->addChild('Create', ['route' => 'team_new']);
             $menu['Teams']->addChild('Show', ['route' => 'team_show', 'routeParameters' => ['id' => 0]]);
@@ -43,8 +43,7 @@ class Builder extends ContainerAware
 
     public function userMenu(FactoryInterface $factory)
     {
-        $menu = $factory->createItem('root')
-            ->setChildrenAttribute('class', 'nav navbar-nav navbar-right');
+        $menu = $factory->createItem('root');
 
         /** @var AuthorizationChecker $authorizationChecker */
         $authorizationChecker = $this->container->get('security.authorization_checker');

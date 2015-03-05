@@ -29,5 +29,8 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('security.access.team_voter');
         // forms.xml
         $this->assertContainerBuilderHasService('app.registration.form.type');
+        // menu.xml
+        $this->assertContainerBuilderHasService('app.menu.navbar_renderer');
+        $this->assertContainerBuilderHasService('app.menu.sidebar_renderer');
     }
 }

@@ -49,5 +49,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {'template': 'AppBundle:Menu:sidebar.html.twig'}) }}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}
