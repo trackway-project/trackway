@@ -9,10 +9,7 @@
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-primary"/>
-    </div>
+    {{ form(form) }}
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
