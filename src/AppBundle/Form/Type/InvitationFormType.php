@@ -30,6 +30,6 @@ class InvitationFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_invitation';
+        return 'appbundle_invitation_form_type';
     }
 }

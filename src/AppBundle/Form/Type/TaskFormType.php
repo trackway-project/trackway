@@ -30,6 +30,6 @@ class TaskFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_task';
+        return 'appbundle_task_form_type';
     }
 }

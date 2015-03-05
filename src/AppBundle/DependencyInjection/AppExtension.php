@@ -23,6 +23,7 @@ class AppExtension extends Extension
     {
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('forms.xml');
+        $loader->load('listeners.xml');
         $loader->load('menu.xml');
         $loader->load('security.xml');
     }

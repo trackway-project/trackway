@@ -19,6 +19,6 @@ class ProfileFormType extends AbstractType
 
     public function getName()
     {
-        return 'appbundle_profile';
+        return 'appbundle_profile_form_type';
     }
 }

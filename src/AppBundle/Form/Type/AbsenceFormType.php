@@ -30,6 +30,6 @@ class AbsenceFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_absence';
+        return 'appbundle_absence_form_type';
     }
 }

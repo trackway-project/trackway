@@ -30,6 +30,6 @@ class ProjectFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_project';
+        return 'appbundle_project_form_type';
     }
 }

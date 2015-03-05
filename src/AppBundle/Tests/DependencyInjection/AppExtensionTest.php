@@ -25,12 +25,22 @@ class AppExtensionTest extends AbstractExtensionTestCase
     public function testIsLoadableAndIncludeAllFiles()
     {
         $this->load();
-        // security.xml
-        $this->assertContainerBuilderHasService('security.access.team_voter');
+
         // forms.xml
-        $this->assertContainerBuilderHasService('app.registration.form.type');
+        $this->assertContainerBuilderHasService('app.form.type.profile');
+
+        // listeners.xml
+        $this->assertContainerBuilderHasService('app.event_listener.routing');
+
         // menu.xml
         $this->assertContainerBuilderHasService('app.menu.navbar_renderer');
         $this->assertContainerBuilderHasService('app.menu.sidebar_renderer');
+
+        // security.xml
+        $this->assertContainerBuilderHasService('app.security.authorization.voter.basetimeentry');
+        $this->assertContainerBuilderHasService('app.security.authorization.voter.membership');
+        $this->assertContainerBuilderHasService('app.security.authorization.voter.project');
+        $this->assertContainerBuilderHasService('app.security.authorization.voter.task');
+        $this->assertContainerBuilderHasService('app.security.authorization.voter.team');
     }
 }

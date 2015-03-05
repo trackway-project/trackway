@@ -30,6 +30,6 @@ class TeamFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_team';
+        return 'appbundle_team_form_type';
     }
 }

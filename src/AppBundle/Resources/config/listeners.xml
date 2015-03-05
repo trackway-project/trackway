@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="app.form.type.profile" class="AppBundle\Form\Type\ProfileFormType">
-            <tag name="form.type" alias="appbundle_profile_form_type"/>
-            <argument>%fos_user.model.user.class%</argument>
+        <service id="app.event_listener.routing" class="AppBundle\EventListener\RoutingListener">
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
         </service>
     </services>
 </container>

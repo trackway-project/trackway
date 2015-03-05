@@ -30,6 +30,6 @@ class MembershipFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_membership';
+        return 'appbundle_membership_form_type';
     }
 }

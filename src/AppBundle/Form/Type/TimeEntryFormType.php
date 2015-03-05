@@ -30,6 +30,6 @@ class TimeEntryFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_timeentry';
+        return 'appbundle_timeentry_form_type';
     }
 }

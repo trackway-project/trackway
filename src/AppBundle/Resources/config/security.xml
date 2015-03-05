@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="security.access.basetimeentry_voter" class="AppBundle\Security\Authorization\Voter\BaseTimeEntryVoter" public="false">
+        <service id="app.security.authorization.voter.basetimeentry" class="AppBundle\Security\Authorization\Voter\BaseTimeEntryVoter" public="false">
             <tag name="security.voter"/>
         </service>
-        <service id="security.access.membership_voter" class="AppBundle\Security\Authorization\Voter\MembershipVoter" public="false">
+        <service id="app.security.authorization.voter.membership" class="AppBundle\Security\Authorization\Voter\MembershipVoter" public="false">
             <tag name="security.voter"/>
         </service>
-        <service id="security.access.project_voter" class="AppBundle\Security\Authorization\Voter\ProjectVoter" public="false">
+        <service id="app.security.authorization.voter.project" class="AppBundle\Security\Authorization\Voter\ProjectVoter" public="false">
             <tag name="security.voter"/>
         </service>
-        <service id="security.access.task_voter" class="AppBundle\Security\Authorization\Voter\TaskVoter" public="false">
+        <service id="app.security.authorization.voter.task" class="AppBundle\Security\Authorization\Voter\TaskVoter" public="false">
             <tag name="security.voter"/>
         </service>
-        <service id="security.access.team_voter" class="AppBundle\Security\Authorization\Voter\TeamVoter" public="false">
+        <service id="app.security.authorization.voter.team" class="AppBundle\Security\Authorization\Voter\TeamVoter" public="false">
             <tag name="security.voter"/>
         </service>
     </services>
