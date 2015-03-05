@@ -6,8 +6,6 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\MatcherInterface;
 use Knp\Menu\Renderer\ListRenderer;
 
-//<a href="#" class="list-group-item visible-xs" data-toggle="offcanvas"><i class="fa fa-arrow-circle-left fa-fw"></i>&nbsp; Close</a>
-
 class SidebarRenderer extends ListRenderer
 {
     public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null)
@@ -22,7 +20,15 @@ class SidebarRenderer extends ListRenderer
 
     public function render(ItemInterface $item, array $options = array())
     {
-        //$item->addChild();
+        $order = ['Close'];
+        $order = array_merge($order, array_keys($item->getChildren()));
+
+        $item->addChild('Close', ['uri' => '#'])->setAttributes([
+            'class' => 'visible-xs',
+            'data-toggle' => 'offcanvas'
+        ]);
+
+        $item->reorderChildren($order);
 
         return parent::render($item, $options);
     }

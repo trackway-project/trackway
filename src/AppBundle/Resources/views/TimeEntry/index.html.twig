@@ -1,12 +1,14 @@
-{% extends "AppBundle::layout.html.twig" %}
+{% extends "AppBundle::layoutOffCanvas.html.twig" %}
 {% trans_default_domain 'AppBundle' %}
 
 {% block class %}timeentry{% endblock class %}
 
-{% block content %}
+{% block titleOffCanvas %}
     <h1>Time Entries</h1>
+{% endblock titleOffCanvas %}
 
-    <table class="table">
+{% block contentOffCanvas %}
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Date</th>
@@ -15,7 +17,7 @@
             <th>Project</th>
             <th>Task</th>
             <th>Note</th>
-            <th>Actions</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -27,19 +29,17 @@
                 <td>{{ entity.project }}</td>
                 <td>{{ entity.task }}</td>
                 <td>{{ entity.note }}</td>
-                <td>
-                    <div class="btn-group">
-                        <a href="{{ path('timeentry_show', { 'id': entity.id }) }}" class="btn btn-default">Show</a>
-                        <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}" class="btn btn-default">Edit</a>
-                        <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
-                    </div>
+                <td class="text-right">
+                    <a href="{{ path('timeentry_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endblock contentOffCanvas %}
 
-    <div class="btn-group">
-        <a href="{{ path('timeentry_new') }}" class="btn btn-default">New</a>
-    </div>
-{% endblock content %}
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Time Entries'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}
