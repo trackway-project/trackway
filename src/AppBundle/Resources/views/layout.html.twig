@@ -30,8 +30,8 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
-            {{ knp_menu_render('AppBundle:Builder:userMenu') }}
+            {{ knp_menu_render('AppBundle:Builder:mainMenu', {'depth': 1, 'currentClass': 'active'}) }}
+            {{ knp_menu_render('AppBundle:Builder:userMenu', {'depth': 1, 'currentClass': 'active'}) }}
         </div>
     </div>
 </nav>
@@ -51,11 +51,13 @@
         {% endblock fos_user_content %}
     {% endblock content %}
 </div>
+
 <footer class="footer">
     <div class="container">
         <p class="text-muted pull-left">Fork it on Github: <a href="https://github.com/MewesK/trackway">https://github.com/MewesK/trackway</a></p>
     </div>
 </footer>
+
 <script src="/js/combined.js"></script>
 </body>
 </html>

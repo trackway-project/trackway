@@ -1,18 +1,18 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block content %}
-<div class="row row-offcanvas row-offcanvas-right">
-    <div class="col-xs-12 col-sm-9">
-        <p class="pull-right visible-xs">
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle actions</button>
-        </p>
-        {% block contentOffCanvas %}{% endblock contentOffCanvas %}
+<div class="row row-offcanvas row-offcanvas-left">
+    <div class="col-xs-6  col-sm-3 sidebar-offcanvas" id="sitebar" style="padding-top: 20px;" >
+        {% block sidebarOffCanvas %}{% endblock sidebarOffCanvas %}
     </div>
-
-    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-        <div class="list-group">
-            {% block sidebarOffCanvas %}{% endblock sidebarOffCanvas %}
+    <div class="col-xs-12 col-sm-9">
+        <div data-toggle="offcanvas">
+            <p class="pull-right visible-xs">
+                <span class="btn btn-default btn-sm"><i class="fa fa-align-justify"></i></span>
+            </p>
+            {% block titleOffCanvas %}{% endblock titleOffCanvas %}
         </div>
+        {% block contentOffCanvas %}{% endblock contentOffCanvas %}
     </div>
 </div>
 {% endblock content %}

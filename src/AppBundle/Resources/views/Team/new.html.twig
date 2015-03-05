@@ -4,12 +4,14 @@
 
 {% block class %}team{% endblock class %}
 
-{% block contentOffCanvas %}
+{% block titleOffCanvas %}
     <h1>Team new</h1>
+{% endblock titleOffCanvas %}
 
+{% block contentOffCanvas %}
     {{ form(form) }}
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    <a href="{{ path('team_index') }}" class="list-group-item">Index</a>
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {'template': 'AppBundle:Menu:sidebar.html.twig'}) }}
 {% endblock sidebarOffCanvas %}

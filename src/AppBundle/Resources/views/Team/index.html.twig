@@ -3,9 +3,11 @@
 
 {% block class %}team{% endblock class %}
 
-{% block contentOffCanvas %}
+{% block titleOffCanvas %}
     <h1>Teams</h1>
+{% endblock titleOffCanvas %}
 
+{% block contentOffCanvas %}
     <table class="table">
         <thead>
         <tr>
@@ -33,5 +35,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    <a href="{{ path('team_new') }}" class="list-group-item">New</a>
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {'template': 'AppBundle:Menu:sidebar.html.twig'}) }}
 {% endblock sidebarOffCanvas %}
