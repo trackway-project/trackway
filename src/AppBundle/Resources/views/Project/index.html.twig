@@ -1,50 +1,37 @@
-{% extends "AppBundle::layout.html.twig" %}
+{% extends "AppBundle::layoutOffCanvas.html.twig" %}
 {% trans_default_domain 'AppBundle' %}
 
 {% block class %}project{% endblock class %}
 
-{% block content %}
+{% block titleOffCanvas %}
+    <h1>Projects</h1>
+{% endblock titleOffCanvas %}
 
-    <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-xs-6  col-sm-3 sidebar-offcanvas" id="sitebar" style="padding-top: 20px;" >
-            <div class="list-group">
-                <a href="#" class="list-group-item visible-xs" data-toggle="offcanvas"><i class="fa fa-arrow-circle-left fa-fw"></i>&nbsp; Close</a>
-                <a href="#" class="list-group-item active"><i class="fa fa-list fa-fw"></i>&nbsp; Overwiew</a>
-                {% if is_granted('EDIT', app.user.activeTeam) %}
-                    <a  href="{{ path('project_new') }}"  class="list-group-item"><i class="fa fa-plus fa-fw"></i>&nbsp; Create</a>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-9">
-            <div data-toggle="offcanvas">
-                <p class="pull-right visible-xs">
-                    <span class="btn btn-default btn-sm"><i class="fa fa-align-justify"></i></span>
-                </p>
-                <h1>Projects</h1>
-            </div>
+{% block contentOffCanvas %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.name }}</td>
+                <td class="text-right">
+                    <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-eye"></i></a>
+                    {% if is_granted('EDIT', entity) %}
+                        <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
 
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for entity in entities %}
-                    <tr>
-                        <td>{{ entity.name }}</td>
-                        <td class="text-right">
-                            <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-eye"></i></a>
-                            {% if is_granted('EDIT', entity) %}
-                                <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil-square-o"></i></a>
-                                <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-{% endblock content %}
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Projects'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

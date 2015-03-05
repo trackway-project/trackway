@@ -4,13 +4,14 @@
 
 {% block class %}project{% endblock class %}
 
-{% block content %}
+{% block titleOffCanvas %}
     <h1>Project edit</h1>
+{% endblock titleOffCanvas %}
 
+{% block contentOffCanvas %}
     {{ form(form) }}
+{% endblock contentOffCanvas %}
 
-    <div class="btn-group">
-        <a href="{{ path('project_index') }}" class="btn btn-default">Index</a>
-        <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
-    </div>
-{% endblock content %}
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Projects'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}
