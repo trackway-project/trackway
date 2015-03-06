@@ -32,8 +32,10 @@ class TeamController extends Controller
     public function indexAction()
     {
         return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($this->getUser())
-        ];
+            'entities' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Team')
+                ->findAllByUser($this->getUser())];
     }
 
     /**
@@ -50,9 +52,7 @@ class TeamController extends Controller
      */
     public function showAction(Team $team)
     {
-        return [
-            'entity' => $team
-        ];
+        return ['entity' => $team];
     }
 
     /**
@@ -96,10 +96,7 @@ class TeamController extends Controller
             return $this->redirect($this->generateUrl('team_show', ['id' => $team->getId()]));
         }
 
-        return [
-            'entity' => $team,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $team, 'form' => $form->createView()];
     }
 
     /**
@@ -127,10 +124,7 @@ class TeamController extends Controller
             return $this->redirect($this->generateUrl('team_show', ['id' => $team->getId()]));
         }
 
-        return [
-            'entity' => $team,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $team, 'form' => $form->createView()];
     }
 
     /**

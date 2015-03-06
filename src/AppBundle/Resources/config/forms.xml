@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="fos_user.change_password.form.factory" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory" />
+            <argument type="service" id="form.factory"/>
             <argument>%fos_user.change_password.form.name%</argument>
             <argument>%fos_user.change_password.form.type%</argument>
             <argument>%fos_user.change_password.form.validation_groups%</argument>
@@ -10,7 +11,7 @@
         </service>
 
         <service id="fos_user.group.form.factory" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory" />
+            <argument type="service" id="form.factory"/>
             <argument>%fos_user.group.form.name%</argument>
             <argument>%fos_user.group.form.type%</argument>
             <argument>%fos_user.group.form.validation_groups%</argument>
@@ -18,7 +19,7 @@
         </service>
 
         <service id="fos_user.profile.form.factory" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory" />
+            <argument type="service" id="form.factory"/>
             <argument>%fos_user.profile.form.name%</argument>
             <argument>%fos_user.profile.form.type%</argument>
             <argument>%fos_user.profile.form.validation_groups%</argument>
@@ -26,7 +27,7 @@
         </service>
 
         <service id="fos_user.registration.form.factory" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory" />
+            <argument type="service" id="form.factory"/>
             <argument>%fos_user.registration.form.name%</argument>
             <argument>%fos_user.registration.form.type%</argument>
             <argument>%fos_user.registration.form.validation_groups%</argument>
@@ -34,7 +35,7 @@
         </service>
 
         <service id="fos_user.resetting.form.factory" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory" />
+            <argument type="service" id="form.factory"/>
             <argument>%fos_user.resetting.form.name%</argument>
             <argument>%fos_user.resetting.form.type%</argument>
             <argument>%fos_user.resetting.form.validation_groups%</argument>

@@ -16,7 +16,7 @@ class TeamVoter implements VoterInterface
 
     public function supportsAttribute($attribute)
     {
-        return in_array($attribute, [self::VIEW, self::EDIT,]);
+        return in_array($attribute, [self::VIEW, self::EDIT], false);
     }
 
     public function supportsClass($class)
@@ -67,7 +67,7 @@ class TeamVoter implements VoterInterface
             case self::VIEW:
                 /** @var Membership $membership */
                 foreach ($user->getMemberships() as $membership) {
-                    if ($team == $membership->getTeam()) {
+                    if ($team === $membership->getTeam()) {
                         return VoterInterface::ACCESS_GRANTED;
                     }
                 }
@@ -76,7 +76,9 @@ class TeamVoter implements VoterInterface
             case self::EDIT:
                 /** @var Membership $membership */
                 foreach ($user->getMemberships() as $membership) {
-                    if ($team == $membership->getTeam() && in_array('ROLE_ADMIN', $membership->getGroup()->getRoles())) {
+                    if ($team === $membership->getTeam() &&
+                        in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)
+                    ) {
                         return VoterInterface::ACCESS_GRANTED;
                     }
                 }

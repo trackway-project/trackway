@@ -13,9 +13,6 @@ class AbsenceRepository extends EntityRepository
 {
     public function findAllByTeamAndUser(Team $team, User $user)
     {
-        return $this->findBy([
-            'team' => $team->getId(),
-            'user' => $user->getId()
-        ]);
+        return $this->findBy(['team' => $team->getId(), 'user' => $user->getId()]);
     }
 }

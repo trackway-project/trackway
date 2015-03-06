@@ -35,8 +35,10 @@ class TimeEntryController extends Controller
         $user = $this->getUser();
 
         return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findAllByTeamAndUser($user->getActiveTeam(), $user)
-        ];
+            'entities' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:TimeEntry')
+                ->findAllByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**
@@ -53,9 +55,7 @@ class TimeEntryController extends Controller
      */
     public function showAction(TimeEntry $timeEntry)
     {
-        return [
-            'entity' => $timeEntry
-        ];
+        return ['entity' => $timeEntry];
     }
 
     /**
@@ -94,10 +94,7 @@ class TimeEntryController extends Controller
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
 
-        return [
-            'entity' => $timeEntry,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $timeEntry, 'form' => $form->createView()];
     }
 
     /**
@@ -129,10 +126,7 @@ class TimeEntryController extends Controller
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
 
-        return [
-            'entity' => $timeEntry,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $timeEntry, 'form' => $form->createView()];
     }
 
     /**

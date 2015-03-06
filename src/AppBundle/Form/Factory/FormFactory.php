@@ -13,7 +13,12 @@ class FormFactory implements FactoryInterface
     private $validationGroups;
     private $submitButtonLabel;
 
-    public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = null, $submitButtonLabel = 'Submit')
+    public function __construct(
+        FormFactoryInterface $formFactory,
+        $name,
+        $type,
+        array $validationGroups = null,
+        $submitButtonLabel = 'Submit')
     {
         $this->formFactory = $formFactory;
         $this->name = $name;
@@ -24,14 +29,23 @@ class FormFactory implements FactoryInterface
 
     public function createForm()
     {
-        return $this
-            ->formFactory
-            ->createNamed($this->name, $this->type, null, array('validation_groups' => $this->validationGroups))
-            ->add('submit', 'submit', ['label' => $this->submitButtonLabel, 'translation_domain' => 'FOSUserBundle']);
+        return $this->formFactory->createNamed(
+            $this->name,
+            $this->type,
+            null,
+            ['validation_groups' => $this->validationGroups])
+            ->add(
+                'submit',
+                'submit',
+                ['label' => $this->submitButtonLabel, 'translation_domain' => 'FOSUserBundle']);
     }
 
     public function createFormWithoutSubmit()
     {
-        return $this->formFactory->createNamed($this->name, $this->type, null, array('validation_groups' => $this->validationGroups));
+        return $this->formFactory->createNamed(
+            $this->name,
+            $this->type,
+            null,
+            ['validation_groups' => $this->validationGroups]);
     }
 }

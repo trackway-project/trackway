@@ -16,7 +16,7 @@ class AppExtensionTest extends AbstractExtensionTestCase
      */
     protected function getContainerExtensions()
     {
-        return array(new AppExtension());
+        return [new AppExtension()];
     }
 
     /**

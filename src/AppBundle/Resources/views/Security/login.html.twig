@@ -17,7 +17,8 @@
             <input type="text" id="inputEmail" class="form-control" placeholder="Email address" name="_username"
                    value="{{ last_username }}" required autofocus>
             <label for="inputPassword" class="sr-only">{{ 'security.login.password'|trans }}</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="_password" required>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="_password"
+                   required>
 
             <div class="checkbox">
                 <label>
@@ -29,7 +30,8 @@
         </form>
         <ul class="list-actions">
             <li><a href="{{ path("fos_user_resetting_request") }}">{{ 'security.login.resetting'|trans }}</a></li>
-            <li><a href="{{ path("fos_user_registration_register") }}">{{ 'security.login.registration'|trans }}</a></li>
+            <li><a href="{{ path("fos_user_registration_register") }}">{{ 'security.login.registration'|trans }}</a>
+            </li>
         </ul>
     </div>
 {% endblock content %}

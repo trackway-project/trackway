@@ -31,8 +31,10 @@ class ProjectController extends Controller
     public function indexAction()
     {
         return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam())
-        ];
+            'entities' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Project')
+                ->findAllByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -49,9 +51,7 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project)
     {
-        return [
-            'entity' => $project
-        ];
+        return ['entity' => $project];
     }
 
     /**
@@ -83,10 +83,7 @@ class ProjectController extends Controller
             return $this->redirect($this->generateUrl('project_show', ['id' => $project->getId()]));
         }
 
-        return [
-            'entity' => $project,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $project, 'form' => $form->createView()];
     }
 
     /**
@@ -115,10 +112,7 @@ class ProjectController extends Controller
             return $this->redirect($this->generateUrl('project_show', ['id' => $project->getId()]));
         }
 
-        return [
-            'entity' => $project,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $project, 'form' => $form->createView()];
     }
 
     /**

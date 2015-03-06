@@ -20,10 +20,13 @@
             <tr>
                 <td>{{ entity.name }}</td>
                 <td class="text-right">
-                    <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-eye"></i></a>
                     {% if is_granted('EDIT', entity) %}
-                        <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                        <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                    class="fa fa-pencil-square-o"></i></a>
+                        <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
+                                    class="fa fa-times"></i></a>
                     {% endif %}
                 </td>
             </tr>

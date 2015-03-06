@@ -31,8 +31,10 @@ class TaskController extends Controller
     public function indexAction()
     {
         return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findAllByTeam($this->getUser()->getActiveTeam())
-        ];
+            'entities' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Task')
+                ->findAllByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -49,9 +51,7 @@ class TaskController extends Controller
      */
     public function showAction(Task $task)
     {
-        return [
-            'entity' => $task
-        ];
+        return ['entity' => $task];
     }
 
     /**
@@ -83,10 +83,7 @@ class TaskController extends Controller
             return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
         }
 
-        return [
-            'entity' => $task,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $task, 'form' => $form->createView()];
     }
 
     /**
@@ -115,10 +112,7 @@ class TaskController extends Controller
             return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
         }
 
-        return [
-            'entity' => $task,
-            'form' => $form->createView(),
-        ];
+        return ['entity' => $task, 'form' => $form->createView()];
     }
 
     /**

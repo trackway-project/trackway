@@ -28,9 +28,12 @@
                 <td>{{ entity.reason }}</td>
                 <td>{{ entity.note }}</td>
                 <td class="text-right">
-                    <a href="{{ path('absence_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('absence_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('absence_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                    <a href="{{ path('absence_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-eye"></i></a>
+                    <a href="{{ path('absence_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('absence_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
+                                class="fa fa-times"></i></a>
                 </td>
             </tr>
         {% endfor %}

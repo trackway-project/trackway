@@ -35,8 +35,10 @@ class AbsenceController extends Controller
         $user = $this->getUser();
 
         return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findAllByTeamAndUser($user->getActiveTeam(), $user)
-        ];
+            'entities' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Absence')
+                ->findAllByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**
@@ -53,9 +55,7 @@ class AbsenceController extends Controller
      */
     public function showAction(Absence $absence)
     {
-        return [
-            'entity' => $absence
-        ];
+        return ['entity' => $absence];
     }
 
     /**
@@ -94,10 +94,7 @@ class AbsenceController extends Controller
             return $this->redirect($this->generateUrl('absence_show', ['id' => $absence->getId()]));
         }
 
-        return [
-            'entity' => $absence,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $absence, 'form' => $form->createView()];
     }
 
     /**
@@ -129,10 +126,7 @@ class AbsenceController extends Controller
             return $this->redirect($this->generateUrl('absence_show', ['id' => $absence->getId()]));
         }
 
-        return [
-            'entity' => $absence,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $absence, 'form' => $form->createView()];
     }
 
     /**

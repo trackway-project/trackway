@@ -30,9 +30,12 @@
                 <td>{{ entity.task }}</td>
                 <td>{{ entity.note }}</td>
                 <td class="text-right">
-                    <a href="{{ path('timeentry_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
+                    <a href="{{ path('timeentry_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-eye"></i></a>
+                    <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
+                                class="fa fa-times"></i></a>
                 </td>
             </tr>
         {% endfor %}

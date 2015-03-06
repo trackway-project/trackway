@@ -16,7 +16,7 @@ class BaseTimeEntryVoter implements VoterInterface
 
     public function supportsAttribute($attribute)
     {
-        return in_array($attribute, [self::VIEW, self::EDIT,]);
+        return in_array($attribute, [self::VIEW, self::EDIT], false);
     }
 
     public function supportsClass($class)
@@ -68,7 +68,10 @@ class BaseTimeEntryVoter implements VoterInterface
             case self::EDIT:
                 /** @var Membership $membership */
                 foreach ($user->getMemberships() as $membership) {
-                    if ($timeEntry->getTeam() == $membership->getTeam() && ($user == $membership->getUser() || in_array('ROLE_ADMIN', $membership->getGroup()->getRoles()))) {
+                    if ($timeEntry->getTeam() === $membership->getTeam() &&
+                        ($user === $membership->getUser() ||
+                            in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false))
+                    ) {
                         return VoterInterface::ACCESS_GRANTED;
                     }
                 }
