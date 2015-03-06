@@ -5,6 +5,7 @@
         <service id="app.event_listener.routing" class="AppBundle\EventListener\RoutingListener">
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
             <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="security.token_storage"/>
             <argument type="service" id="router"/>
         </service>
     </services>
