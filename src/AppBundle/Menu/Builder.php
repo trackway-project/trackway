@@ -42,16 +42,10 @@ class Builder extends ContainerAware
                     $menu['Projects']->addChild('Create', ['route' => 'project_new']);
                 }
                 if ($id && strpos($route, 'project_') === 0) {
-                    $menu['Projects']->addChild(
-                        'Show',
-                        ['route' => 'project_show', 'routeParameters' => ['id' => $id]]);
+                    $menu['Projects']->addChild('Show', ['route' => 'project_show', 'routeParameters' => ['id' => $id]]);
                     if ($isTeamAdmin) {
-                        $menu['Projects']->addChild(
-                            'Edit',
-                            ['route' => 'project_edit', 'routeParameters' => ['id' => $id]]);
-                        $menu['Projects']->addChild(
-                            'Delete',
-                            ['route' => 'project_delete', 'routeParameters' => ['id' => $id]]);
+                        $menu['Projects']->addChild('Edit', ['route' => 'project_edit', 'routeParameters' => ['id' => $id]]);
+                        $menu['Projects']->addChild('Delete', ['route' => 'project_delete', 'routeParameters' => ['id' => $id]]);
                     }
                 }
 
@@ -64,9 +58,7 @@ class Builder extends ContainerAware
                     $menu['Tasks']->addChild('Show', ['route' => 'task_show', 'routeParameters' => ['id' => $id]]);
                     if ($isTeamAdmin) {
                         $menu['Tasks']->addChild('Edit', ['route' => 'task_edit', 'routeParameters' => ['id' => $id]]);
-                        $menu['Tasks']->addChild(
-                            'Delete',
-                            ['route' => 'task_delete', 'routeParameters' => ['id' => $id]]);
+                        $menu['Tasks']->addChild('Delete', ['route' => 'task_delete', 'routeParameters' => ['id' => $id]]);
                     }
                 }
 
@@ -74,32 +66,18 @@ class Builder extends ContainerAware
                 $menu['Time Entries']->addChild('Overview', ['route' => 'timeentry_index']);
                 $menu['Time Entries']->addChild('Create', ['route' => 'timeentry_new']);
                 if ($id && strpos($route, 'timeentry_') === 0) {
-                    $menu['Time Entries']->addChild(
-                        'Show',
-                        ['route' => 'timeentry_show', 'routeParameters' => ['id' => $id]]);
-                    $menu['Time Entries']->addChild(
-                        'Edit',
-                        ['route' => 'timeentry_edit', 'routeParameters' => ['id' => $id]]);
-                    $menu['Time Entries']->addChild(
-                        'Delete',
-                        [
-                            'route'           => 'timeentry_delete',
-                            'routeParameters' => ['id' => $id]]);
+                    $menu['Time Entries']->addChild('Show', ['route' => 'timeentry_show', 'routeParameters' => ['id' => $id]]);
+                    $menu['Time Entries']->addChild('Edit', ['route' => 'timeentry_edit', 'routeParameters' => ['id' => $id]]);
+                    $menu['Time Entries']->addChild('Delete', ['route' => 'timeentry_delete', 'routeParameters' => ['id' => $id]]);
                 }
 
                 $menu->addChild('Absences', ['route' => 'absence_index']);
                 $menu['Absences']->addChild('Overview', ['route' => 'absence_index']);
                 $menu['Absences']->addChild('Create', ['route' => 'absence_new']);
                 if ($id && strpos($route, 'absence_') === 0) {
-                    $menu['Absences']->addChild(
-                        'Show',
-                        ['route' => 'absence_show', 'routeParameters' => ['id' => $id]]);
-                    $menu['Absences']->addChild(
-                        'Edit',
-                        ['route' => 'absence_edit', 'routeParameters' => ['id' => $id]]);
-                    $menu['Absences']->addChild(
-                        'Delete',
-                        ['route' => 'absence_delete', 'routeParameters' => ['id' => $id]]);
+                    $menu['Absences']->addChild('Show', ['route' => 'absence_show', 'routeParameters' => ['id' => $id]]);
+                    $menu['Absences']->addChild('Edit', ['route' => 'absence_edit', 'routeParameters' => ['id' => $id]]);
+                    $menu['Absences']->addChild('Delete', ['route' => 'absence_delete', 'routeParameters' => ['id' => $id]]);
                 }
             }
         }
@@ -122,8 +100,7 @@ class Builder extends ContainerAware
             $menu['Profile']->addChild('Settings', ['route' => 'fos_user_profile_edit']);
 
             $menu->addChild('Logout', ['route' => 'fos_user_security_logout']);
-        }
-        else {
+        } else {
             $menu->addChild('Login', ['route' => 'fos_user_security_login']);
             $menu->addChild('Register', ['route' => 'fos_user_registration_register']);
         }

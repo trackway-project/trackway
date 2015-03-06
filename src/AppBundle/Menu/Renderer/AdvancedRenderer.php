@@ -11,13 +11,7 @@ class AdvancedRenderer extends ListRenderer
     public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null)
     {
         // Initialize default options
-        $defaultOptions = array_merge(
-            [
-                'itemAttributes' => [],
-                'itemElement'    => 'li',
-                'listAttributes' => [],
-                'listElement'    => 'ul'],
-            $defaultOptions);
+        $defaultOptions = array_merge(['itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
 
         parent::__construct($matcher, $defaultOptions, $charset);
     }
@@ -48,11 +42,7 @@ class AdvancedRenderer extends ListRenderer
         // Render list
         $html = '';
         if ($listElement) {
-            $html = $this->format(
-                '<' . $listElement . $this->renderHtmlAttributes($attributes) . '>',
-                $listElement,
-                $item->getLevel(),
-                $options);
+            $html = $this->format('<' . $listElement . $this->renderHtmlAttributes($attributes) . '>', $listElement, $item->getLevel(), $options);
         }
 
         $html .= $this->renderChildren($item, $options);
@@ -91,8 +81,7 @@ class AdvancedRenderer extends ListRenderer
 
         if ($this->matcher->isCurrent($item)) {
             $class[] = $options['currentClass'];
-        }
-        elseif ($this->matcher->isAncestor($item, $options['matchingDepth'])) {
+        } elseif ($this->matcher->isAncestor($item, $options['matchingDepth'])) {
             $class[] = $options['ancestorClass'];
         }
         if ($item->actsLikeFirst()) {
@@ -105,8 +94,7 @@ class AdvancedRenderer extends ListRenderer
             if (null !== $options['branch_class'] && $item->getDisplayChildren()) {
                 $class[] = $options['branch_class'];
             }
-        }
-        elseif (null !== $options['leaf_class']) {
+        } elseif (null !== $options['leaf_class']) {
             $class[] = $options['leaf_class'];
         }
 
@@ -118,29 +106,16 @@ class AdvancedRenderer extends ListRenderer
         // Render item
         if ($itemElement) {
             // Render the text/link with wrapper tag
-            $html = $this->format(
-                '<li' . $this->renderHtmlAttributes($attributes) . '>',
-                'li',
-                $item->getLevel(),
-                $options);
+            $html = $this->format('<li' . $this->renderHtmlAttributes($attributes) . '>', 'li', $item->getLevel(), $options);
             $html .= $this->renderLink($item, $options);
-        }
-        else {
+        } else {
             // Render the text/link without wrapper tag
             if ($item->getUri() && (!$item->isCurrent() || $options['currentAsLink'])) {
                 $attributes = array_merge($item->getLinkAttributes(), $attributes);
-                $text = sprintf(
-                    '<a href="%s"%s>%s</a>',
-                    $this->escape($item->getUri()),
-                    $this->renderHtmlAttributes($attributes),
-                    $this->renderLabel($item, $options));
-            }
-            else {
+                $text = sprintf('<a href="%s"%s>%s</a>', $this->escape($item->getUri()), $this->renderHtmlAttributes($attributes), $this->renderLabel($item, $options));
+            } else {
                 $attributes = array_merge($item->getLabelAttributes(), $attributes);
-                $text = sprintf(
-                    '<span%s>%s</span>',
-                    $this->renderHtmlAttributes($attributes),
-                    $this->renderLabel($item, $options));
+                $text = sprintf('<span%s>%s</span>', $this->renderHtmlAttributes($attributes), $this->renderLabel($item, $options));
             }
 
             $html = $this->format($text, 'link', $item->getLevel(), $options);
@@ -179,9 +154,7 @@ class AdvancedRenderer extends ListRenderer
     {
         foreach ($attributes2 as $attributeName => $attributeValue) {
             // Append value in case of 'class'
-            if ($attributeName === 'class' &&
-                array_key_exists($attributeName, $attributes1) &&
-                is_string($attributes1[$attributeName])
+            if ($attributeName === 'class' && array_key_exists($attributeName, $attributes1) && is_string($attributes1[$attributeName])
             ) {
                 $attributes1[$attributeName] .= ' ' . $attributeValue;
             } // Override for everything else

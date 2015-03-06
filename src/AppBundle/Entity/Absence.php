@@ -25,16 +25,7 @@ class Absence extends BaseTimeEntry
      */
     public function __toString()
     {
-        return
-            $this->date->format('Y-m-d') .
-            ' ' .
-            $this->startsAt->format('H:i') .
-            ' ' .
-            $this->endsAt->format('H:i') .
-            ' ' .
-            $this->reason .
-            ' ' .
-            $this->note;
+        return $this->date->format('Y-m-d') . ' ' . $this->startsAt->format('H:i') . ' ' . $this->endsAt->format('H:i') . ' ' . $this->reason . ' ' . $this->note;
     }
 
     /**

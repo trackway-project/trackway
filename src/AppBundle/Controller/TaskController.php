@@ -30,11 +30,7 @@ class TaskController extends Controller
      */
     public function indexAction()
     {
-        return [
-            'entities' => $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppBundle:Task')
-                ->findAllByTeam($this->getUser()->getActiveTeam())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findAllByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -70,9 +66,7 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $form = $this->createForm(new TaskFormType(), $task)
-            ->add('submit', 'submit', ['label' => 'Create'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TaskFormType(), $task)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
@@ -101,9 +95,7 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $form = $this->createForm(new TaskFormType(), $task)
-            ->add('submit', 'submit', ['label' => 'Update'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TaskFormType(), $task)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());

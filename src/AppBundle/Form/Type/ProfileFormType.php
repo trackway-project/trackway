@@ -10,17 +10,7 @@ class ProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->remove('current_password')
-            ->add('memberships')
-            ->add('activeTeam')
-            ->add(
-                'current_password',
-                'password',
-                [
-                    'label'              => 'form.current_password',
-                    'translation_domain' => 'FOSUserBundle',
-                    'mapped'             => false,
-                    'constraints'        => new UserPassword()]);
+        $builder->remove('current_password')->add('memberships')->add('activeTeam')->add('current_password', 'password', ['label' => 'form.current_password', 'translation_domain' => 'FOSUserBundle', 'mapped' => false, 'constraints' => new UserPassword()]);
     }
 
     public function getParent()

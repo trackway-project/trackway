@@ -68,9 +68,7 @@ class BaseTimeEntryVoter implements VoterInterface
             case self::EDIT:
                 /** @var Membership $membership */
                 foreach ($user->getMemberships() as $membership) {
-                    if ($timeEntry->getTeam() === $membership->getTeam() &&
-                        ($user === $membership->getUser() ||
-                            in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false))
+                    if ($timeEntry->getTeam() === $membership->getTeam() && ($user === $membership->getUser() || in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false))
                     ) {
                         return VoterInterface::ACCESS_GRANTED;
                     }

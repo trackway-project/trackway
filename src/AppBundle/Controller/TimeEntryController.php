@@ -34,11 +34,7 @@ class TimeEntryController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        return [
-            'entities' => $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppBundle:TimeEntry')
-                ->findAllByTeamAndUser($user->getActiveTeam(), $user)];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findAllByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**
@@ -77,9 +73,7 @@ class TimeEntryController extends Controller
         $timeEntry->setStartsAt(new \DateTime());
         $timeEntry->setEndsAt(new \DateTime());
 
-        $form = $this->createForm(new TimeEntryFormType(), $timeEntry)
-            ->add('submit', 'submit', ['label' => 'Create'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TimeEntryFormType(), $timeEntry)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -112,9 +106,7 @@ class TimeEntryController extends Controller
      */
     public function editAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this->createForm(new TimeEntryFormType(), $timeEntry)
-            ->add('submit', 'submit', ['label' => 'Update'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TimeEntryFormType(), $timeEntry)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */

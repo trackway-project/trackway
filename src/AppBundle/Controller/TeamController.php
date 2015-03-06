@@ -31,11 +31,7 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        return [
-            'entities' => $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppBundle:Team')
-                ->findAllByUser($this->getUser())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($this->getUser())];
     }
 
     /**
@@ -70,10 +66,7 @@ class TeamController extends Controller
     {
         $team = new Team();
 
-        $form = $this->createForm(new TeamFormType(), $team)
-            ->remove('memberships')
-            ->add('submit', 'submit', ['label' => 'Create'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TeamFormType(), $team)->remove('memberships')->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var Group $group */
@@ -114,9 +107,7 @@ class TeamController extends Controller
      */
     public function editAction(Request $request, Team $team)
     {
-        $form = $this->createForm(new TeamFormType(), $team)
-            ->add('submit', 'submit', ['label' => 'Update'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TeamFormType(), $team)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

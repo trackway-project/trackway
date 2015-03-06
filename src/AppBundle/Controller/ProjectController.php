@@ -30,11 +30,7 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        return [
-            'entities' => $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppBundle:Project')
-                ->findAllByTeam($this->getUser()->getActiveTeam())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -70,9 +66,7 @@ class ProjectController extends Controller
     {
         $project = new Project();
 
-        $form = $this->createForm(new ProjectFormType(), $project)
-            ->add('submit', 'submit', ['label' => 'Create'])
-            ->handleRequest($request);
+        $form = $this->createForm(new ProjectFormType(), $project)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
@@ -101,9 +95,7 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
-        $form = $this->createForm(new ProjectFormType(), $project)
-            ->add('submit', 'submit', ['label' => 'Update'])
-            ->handleRequest($request);
+        $form = $this->createForm(new ProjectFormType(), $project)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());

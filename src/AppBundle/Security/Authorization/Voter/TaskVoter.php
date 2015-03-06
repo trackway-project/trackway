@@ -76,8 +76,7 @@ class TaskVoter implements VoterInterface
             case self::EDIT:
                 /** @var Membership $membership */
                 foreach ($user->getMemberships() as $membership) {
-                    if ($task->getTeam() === $membership->getTeam() &&
-                        in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)
+                    if ($task->getTeam() === $membership->getTeam() && in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)
                     ) {
                         return VoterInterface::ACCESS_GRANTED;
                     }
