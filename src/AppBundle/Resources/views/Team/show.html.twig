@@ -3,9 +3,11 @@
 
 {% block class %}team{% endblock class %}
 
-{% block contentOffCanvas %}
+{% block titleOffCanvas %}
     <h1>Team</h1>
+{% endblock titleOffCanvas %}
 
+{% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
@@ -47,9 +49,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    <a href="{{ path('team_index') }}" class="list-group-item">Index</a>
-    {% if is_granted('EDIT', entity) %}
-        <a href="{{ path('team_edit', { 'id': entity.id }) }}" class="list-group-item">Edit</a>
-        <a href="{{ path('team_delete', { 'id': entity.id }) }}" class="list-group-item">Delete</a>
-    {% endif %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

@@ -1,3 +1,7 @@
+.sidebar-offcanvas > :first-child {
+  padding-top: 20px;
+}
+
 @media screen and (max-width: 767px) {
   .row-offcanvas {
     position: relative;
@@ -20,17 +24,17 @@
   .row-offcanvas-left {
     left: 0;
     .sidebar-offcanvas {
-      left: -50%; /* 6 columns */
+      left: -75%; /* 6 columns */
     }
 
     &.active {
-      left: 50%; /* 6 columns */
+      left: 75%; /* 6 columns */
     }
   }
 
   .sidebar-offcanvas {
     position: absolute;
     top: 0;
-    width: 50%; /* 6 columns */
+    width: 75%; /* 6 columns */
   }
 }

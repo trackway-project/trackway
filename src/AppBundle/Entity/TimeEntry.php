@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * TimeEntry
@@ -17,6 +18,8 @@ class TimeEntry extends BaseTimeEntry
      *
      * @ORM\ManyToOne(targetEntity="Project")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     *
+     * @Assert\Type(type="Project")
      */
     protected $project;
 
@@ -25,6 +28,8 @@ class TimeEntry extends BaseTimeEntry
      *
      * @ORM\ManyToOne(targetEntity="Task")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
+     *
+     * @Assert\Type(type="Task")
      */
     protected $task;
 

@@ -4,15 +4,14 @@
 
 {% block class %}team{% endblock class %}
 
-{% block contentOffCanvas %}
+{% block titleOffCanvas %}
     <h1>Team edit</h1>
+{% endblock titleOffCanvas %}
 
+{% block contentOffCanvas %}
     {{ form(form) }}
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    <a href="{{ path('team_index') }}" class="list-group-item">Index</a>
-    <a href="{{ path('team_delete', { 'id': entity.id }) }}" class="list-group-item">Delete</a>
-    <!--<a href="#" class="list-group-item active">Link</a>
-    <a href="#" class="list-group-item">Link</a>-->
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

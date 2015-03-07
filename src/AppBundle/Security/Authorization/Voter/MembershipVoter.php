@@ -3,7 +3,6 @@
 namespace AppBundle\Security\Authorization\Voter;
 
 use AppBundle\Entity\Membership;
-use AppBundle\Entity\TimeEntry;
 use AppBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
@@ -16,7 +15,7 @@ class MembershipVoter implements VoterInterface
 
     public function supportsAttribute($attribute)
     {
-        return in_array($attribute, [self::VIEW, self::EDIT,]);
+        return in_array($attribute, [self::VIEW, self::EDIT], false);
     }
 
     public function supportsClass($class)
@@ -68,7 +67,8 @@ class MembershipVoter implements VoterInterface
             case self::EDIT:
                 /** @var Membership $_membership */
                 foreach ($user->getMemberships() as $_membership) {
-                    if ($membership == $_membership || in_array('ROLE_ADMIN', $membership->getGroup()->getRoles())) {
+                    if ($membership === $_membership || in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)
+                    ) {
                         return VoterInterface::ACCESS_GRANTED;
                     }
                 }

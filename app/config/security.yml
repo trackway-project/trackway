@@ -11,6 +11,10 @@ security:
             id: fos_user.user_provider.username_email
 
     firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|fonts|images|js)/
+            security: false
+
         main:
             pattern: ^/
             form_login:
@@ -20,10 +24,6 @@ security:
             anonymous:    true
             remember_me:
                 key:      "%secret%"
-
-        dev:
-            pattern: ^/(_(profiler|wdt|error)|css|fonts|images|js)/
-            security: false
 
     access_control:
         - { path: ^(/[a-z]+)?/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

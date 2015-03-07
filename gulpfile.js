@@ -16,7 +16,8 @@ var browserSync = require('browser-sync'),
     replace = require('gulp-replace'),
     uglify = require('gulp-uglify'),
     watch = require('gulp-watch'),
-    wrap = require('gulp-wrap');
+    wrap = require('gulp-wrap'),
+    livereload = require('gulp-livereload');
 
 // Configuration
 
@@ -51,7 +52,8 @@ gulp.task('bootstrap:prepare', ['bower'], function () {
         .pipe(insert.append('\n// Custom'))
         .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/main.less";'))
         .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/login.less";'))
-        .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/offCanvas.less";'))
+        .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/offcanvas.less";'))
+        .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/variables.less";'))
         .pipe(gulp.dest(buildDirectory + '/lib/bootstrap/less/'));
 });
 
@@ -80,7 +82,8 @@ gulp.task('css:compress', ['bootstrap:build'], function () {
     return gulp.src(buildDirectory + '/css/*.css')
         .pipe(minifyCSS())
         .pipe(concat('combined.css'))
-        .pipe(gulp.dest(buildDirectory + '/css/'));
+        .pipe(gulp.dest(buildDirectory + '/css/'))
+        .pipe(livereload());
 });
 
 gulp.task('finish', function () {
@@ -166,6 +169,7 @@ gulp.task('js:compressAsync', ['js:copyAsync'], function () {
 // Watchers
 
 gulp.task('watch', function () {
+    livereload.listen();
     gulp.watch([
         sourceDirectory + '/fonts/*',
         sourceDirectory + '/images/*',

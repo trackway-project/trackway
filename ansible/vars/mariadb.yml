@@ -1,5 +1,0 @@
-mariadb:
-    root_password: root
-    user: trackway
-    password: passw0rd!
-    database: trackway

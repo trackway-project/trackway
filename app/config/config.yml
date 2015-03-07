@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: services.yml }
 
 framework:
     translator:      { fallbacks: ["%locale%"] }
@@ -73,7 +72,7 @@ fos_user:
         group_class: AppBundle\Entity\Group
     profile:
         form:
-            type: appbundle_profile
+            type: appbundle_profile_form_type
 
 # KnpMenuBundle Configuration
 knp_menu:

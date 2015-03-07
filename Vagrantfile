@@ -8,6 +8,8 @@
 #to use the Vagrant Cloud and other newer Vagrant features.
 Vagrant.require_version ">= 1.5"
 
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+
 Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v|
@@ -25,6 +27,7 @@ Vagrant.configure("2") do |config|
     
     config.vm.network :private_network, ip: "192.168.33.99"
     config.ssh.forward_agent = true
+    config.vm.hostname  = "trackway.vagrant"
 
     #############################################################
     # Ansible provisioning (you need to have ansible installed)
@@ -41,5 +44,5 @@ Vagrant.configure("2") do |config|
         }
     end
     
-    config.vm.synced_folder "./", "/vagrant", type: "nfs"
+    config.vm.synced_folder "./", "/data/trackway", type: "nfs"
 end

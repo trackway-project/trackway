@@ -14,7 +14,7 @@ class AbsenceReasonFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
+        $builder->add('name', null, ['trim' => true]);
     }
 
     /**
@@ -30,6 +30,6 @@ class AbsenceReasonFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_absencereason';
+        return 'appbundle_absencereason_form_type';
     }
 }

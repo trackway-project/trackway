@@ -14,7 +14,12 @@ class TimeEntryFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('date')->add('endsAt')->add('startsAt')->add('note')->add('project')->add('task');
+        $builder->add('date', 'date')
+            ->add('endsAt', 'time', ['required' => false])
+            ->add('startsAt', 'time', ['required' => false])
+            ->add('note', null, ['required' => false, 'trim' => true])
+            ->add('project', null, ['required' => false])
+            ->add('task', null, ['required' => false]);
     }
 
     /**
@@ -30,6 +35,6 @@ class TimeEntryFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_timeentry';
+        return 'appbundle_timeentry_form_type';
     }
 }

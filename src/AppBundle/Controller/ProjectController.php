@@ -30,9 +30,7 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam())
-        ];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -49,9 +47,7 @@ class ProjectController extends Controller
      */
     public function showAction(Project $project)
     {
-        return [
-            'entity' => $project
-        ];
+        return ['entity' => $project];
     }
 
     /**
@@ -70,9 +66,7 @@ class ProjectController extends Controller
     {
         $project = new Project();
 
-        $form = $this->createForm(new ProjectFormType(), $project)
-            ->add('submit', 'submit', ['label' => 'Create'])
-            ->handleRequest($request);
+        $form = $this->createForm(new ProjectFormType(), $project)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
@@ -80,13 +74,12 @@ class ProjectController extends Controller
             $em->persist($project);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'project.flash.created');
+
             return $this->redirect($this->generateUrl('project_show', ['id' => $project->getId()]));
         }
 
-        return [
-            'entity' => $project,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $project, 'form' => $form->createView()];
     }
 
     /**
@@ -104,21 +97,18 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
-        $form = $this->createForm(new ProjectFormType(), $project)
-            ->add('submit', 'submit', ['label' => 'Update'])
-            ->handleRequest($request);
+        $form = $this->createForm(new ProjectFormType(), $project)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
             $this->getDoctrine()->getManager()->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'project.flash.updated');
+
             return $this->redirect($this->generateUrl('project_show', ['id' => $project->getId()]));
         }
 
-        return [
-            'entity' => $project,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $project, 'form' => $form->createView()];
     }
 
     /**
@@ -137,6 +127,8 @@ class ProjectController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($project);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'project.flash.deleted');
 
         return $this->redirect($this->generateUrl('project_index'));
     }

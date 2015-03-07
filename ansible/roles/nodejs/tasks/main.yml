@@ -12,6 +12,4 @@
 
 - name: Install "bower" and "gulp" node.js package globally.
   npm: name={{ item }} global=yes
-  with_items:
-    - bower
-    - gulp
+  with_items: npm.npm_packages

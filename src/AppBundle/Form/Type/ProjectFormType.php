@@ -14,7 +14,7 @@ class ProjectFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
+        $builder->add('name', null, ['trim' => true]);
     }
 
     /**
@@ -30,6 +30,6 @@ class ProjectFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_project';
+        return 'appbundle_project_form_type';
     }
 }

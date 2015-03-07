@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="app.menu.extension.icon" class="AppBundle\Menu\Extension\IconExtension">
+            <tag name="knp_menu.factory_extension"/>
+        </service>
+
+        <service id="app.menu.renderer.navbar" class="AppBundle\Menu\Renderer\NavbarRenderer">
+            <tag name="knp_menu.renderer" alias="appbundle_navbar_renderer"/>
+            <argument type="service" id="knp_menu.matcher"/>
+            <argument>%knp_menu.renderer.list.options%</argument>
+            <argument>%kernel.charset%</argument>
+        </service>
+
+        <service id="app.menu.renderer.sidebar" class="AppBundle\Menu\Renderer\SidebarRenderer">
+            <tag name="knp_menu.renderer" alias="appbundle_sidebar_renderer"/>
+            <argument type="service" id="knp_menu.matcher"/>
+            <argument>%knp_menu.renderer.list.options%</argument>
+            <argument>%kernel.charset%</argument>
+        </service>
+    </services>
+</container>

@@ -1,9 +1,50 @@
-@brand-blue: #00628f;
-@brand-blue-light: #c5dbe8;
-@brand-orange: #ff6600;
-@brand-orange-light: #ff9900;
-@brand-red: #ff0000;
+html,
+body {
+  height: 100%;
+}
 
 body {
-  overflow-x: hidden; /* Prevent scroll on narrow devices */
+  // Prevent scroll on narrow devices
+  overflow-x: hidden;
+  padding-top: 60px;
+
+  > #wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;
+  }
+
+  > #wrapper > #push,
+  > #footer {
+    height: 60px;
+  }
+
+  > #footer {
+    background-color: #f5f5f5;
+
+    > .container :first-child {
+      margin: 20px 0 0 0;
+    }
+  }
+}
+
+// Responsive CSS fixes
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -30px;
+    margin-right: -30px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+h1 {
+  font-size: 22px;
+  border-bottom: 1px solid #ccc;
+  padding: 9px 0;
+}
+
+.table > tbody > tr > td {
+  vertical-align: middle;
 }

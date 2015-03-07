@@ -1,39 +1,40 @@
-{% extends "AppBundle::layout.html.twig" %}
+{% extends "AppBundle::layoutOffCanvas.html.twig" %}
 {% trans_default_domain 'AppBundle' %}
 
 {% block class %}task{% endblock class %}
 
-{% block content %}
+{% block titleOffCanvas %}
     <h1>Tasks</h1>
+{% endblock titleOffCanvas %}
 
-    <table class="table">
+{% block contentOffCanvas %}
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Name</th>
-            <th>Actions</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.name }}</td>
-                <td>
-                    <div class="btn-group">
-                        <a href="{{ path('task_show', { 'id': entity.id }) }}" class="btn btn-default">Show</a>
-                        {% if is_granted('EDIT', entity) %}
-                            <a href="{{ path('task_edit', { 'id': entity.id }) }}" class="btn btn-default">Edit</a>
-                            <a href="{{ path('task_delete', { 'id': entity.id }) }}" class="btn btn-danger">Delete</a>
-                        {% endif %}
-                    </div>
+                <td class="text-right">
+                    <a href="{{ path('task_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-eye"></i></a>
+                    {% if is_granted('EDIT', entity) %}
+                        <a href="{{ path('task_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                    class="fa fa-pencil-square-o"></i></a>
+                        <a href="{{ path('task_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
+                                    class="fa fa-times"></i></a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% endblock contentOffCanvas %}
 
-    <div class="btn-group">
-        {% if is_granted('EDIT', app.user.activeTeam) %}
-            <a href="{{ path('task_new') }}" class="btn btn-default">New</a>
-        {% endif %}
-    </div>
-{% endblock content %}
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Tasks'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

@@ -31,9 +31,7 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($this->getUser())
-        ];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($this->getUser())];
     }
 
     /**
@@ -50,9 +48,7 @@ class TeamController extends Controller
      */
     public function showAction(Team $team)
     {
-        return [
-            'entity' => $team
-        ];
+        return ['entity' => $team];
     }
 
     /**
@@ -70,10 +66,7 @@ class TeamController extends Controller
     {
         $team = new Team();
 
-        $form = $this->createForm(new TeamFormType(), $team)
-            ->remove('memberships')
-            ->add('submit', 'submit', ['label' => 'Create'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TeamFormType(), $team)->remove('memberships')->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var Group $group */
@@ -93,13 +86,12 @@ class TeamController extends Controller
             $em->persist($membership);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'team.flash.created');
+
             return $this->redirect($this->generateUrl('team_show', ['id' => $team->getId()]));
         }
 
-        return [
-            'entity' => $team,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $team, 'form' => $form->createView()];
     }
 
     /**
@@ -117,20 +109,17 @@ class TeamController extends Controller
      */
     public function editAction(Request $request, Team $team)
     {
-        $form = $this->createForm(new TeamFormType(), $team)
-            ->add('submit', 'submit', ['label' => 'Update'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TeamFormType(), $team)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'team.flash.updated');
+
             return $this->redirect($this->generateUrl('team_show', ['id' => $team->getId()]));
         }
 
-        return [
-            'entity' => $team,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $team, 'form' => $form->createView()];
     }
 
     /**
@@ -149,6 +138,8 @@ class TeamController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($team);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'team.flash.deleted');
 
         return $this->redirect($this->generateUrl('team_index'));
     }

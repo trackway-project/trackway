@@ -34,9 +34,7 @@ class AbsenceController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findAllByTeamAndUser($user->getActiveTeam(), $user)
-        ];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findAllByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**
@@ -53,9 +51,7 @@ class AbsenceController extends Controller
      */
     public function showAction(Absence $absence)
     {
-        return [
-            'entity' => $absence
-        ];
+        return ['entity' => $absence];
     }
 
     /**
@@ -77,9 +73,7 @@ class AbsenceController extends Controller
         $absence->setStartsAt(new \DateTime());
         $absence->setEndsAt(new \DateTime());
 
-        $form = $this->createForm(new AbsenceFormType(), $absence)
-            ->add('submit', 'submit', ['label' => 'Create'])
-            ->handleRequest($request);
+        $form = $this->createForm(new AbsenceFormType(), $absence)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -91,13 +85,12 @@ class AbsenceController extends Controller
             $em->persist($absence);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'absence.flash.created');
+
             return $this->redirect($this->generateUrl('absence_show', ['id' => $absence->getId()]));
         }
 
-        return [
-            'entity' => $absence,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $absence, 'form' => $form->createView()];
     }
 
     /**
@@ -115,9 +108,7 @@ class AbsenceController extends Controller
      */
     public function editAction(Request $request, Absence $absence)
     {
-        $form = $this->createForm(new AbsenceFormType(), $absence)
-            ->add('submit', 'submit', ['label' => 'Update'])
-            ->handleRequest($request);
+        $form = $this->createForm(new AbsenceFormType(), $absence)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -126,13 +117,12 @@ class AbsenceController extends Controller
             $absence->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'absence.flash.updated');
+
             return $this->redirect($this->generateUrl('absence_show', ['id' => $absence->getId()]));
         }
 
-        return [
-            'entity' => $absence,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $absence, 'form' => $form->createView()];
     }
 
     /**
@@ -151,6 +141,8 @@ class AbsenceController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($absence);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'absence.flash.deleted');
 
         return $this->redirect($this->generateUrl('absence_index'));
     }

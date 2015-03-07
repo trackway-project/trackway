@@ -30,9 +30,7 @@ class TaskController extends Controller
      */
     public function indexAction()
     {
-        return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findAllByTeam($this->getUser()->getActiveTeam())
-        ];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findAllByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -49,9 +47,7 @@ class TaskController extends Controller
      */
     public function showAction(Task $task)
     {
-        return [
-            'entity' => $task
-        ];
+        return ['entity' => $task];
     }
 
     /**
@@ -70,9 +66,7 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $form = $this->createForm(new TaskFormType(), $task)
-            ->add('submit', 'submit', ['label' => 'Create'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TaskFormType(), $task)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
@@ -80,13 +74,12 @@ class TaskController extends Controller
             $em->persist($task);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'task.flash.created');
+
             return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
         }
 
-        return [
-            'entity' => $task,
-            'form' => $form->createView()
-        ];
+        return ['entity' => $task, 'form' => $form->createView()];
     }
 
     /**
@@ -104,21 +97,18 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $form = $this->createForm(new TaskFormType(), $task)
-            ->add('submit', 'submit', ['label' => 'Update'])
-            ->handleRequest($request);
+        $form = $this->createForm(new TaskFormType(), $task)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
             $this->getDoctrine()->getManager()->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'task.flash.updated');
+
             return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
         }
 
-        return [
-            'entity' => $task,
-            'form' => $form->createView(),
-        ];
+        return ['entity' => $task, 'form' => $form->createView()];
     }
 
     /**
@@ -137,6 +127,8 @@ class TaskController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'task.flash.deleted');
 
         return $this->redirect($this->generateUrl('task_index'));
     }
