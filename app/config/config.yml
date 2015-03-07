@@ -70,9 +70,6 @@ fos_user:
     user_class: AppBundle\Entity\User
     group:
         group_class: AppBundle\Entity\Group
-    profile:
-        form:
-            type: appbundle_profile_form_type
 
 # KnpMenuBundle Configuration
 knp_menu:

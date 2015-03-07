@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\TimeEntry;
 use AppBundle\Entity\User;
-use AppBundle\Form\Type\TimeEntryFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -36,7 +35,7 @@ class TimeEntryController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findAllByTeamAndUser($user->getActiveTeam(), $user)];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**
@@ -75,11 +74,21 @@ class TimeEntryController extends Controller
         $timeEntry->setStartsAt(new \DateTime());
         $timeEntry->setEndsAt(new \DateTime());
 
-        $form = $this->createForm('appbundle_timeentry_form_type', $timeEntry)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        /** @var User $user */
+        $user = $this->getUser();
+        $activeTeam = $user->getActiveTeam();
+
+        $form = $this
+            ->get('app.form.factory.time_entry')
+            ->createForm([
+                'project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)],
+                'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($timeEntry)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
-            /** @var User $user */
-            $user = $this->getUser();
             $timeEntry->setTeam($user->getActiveTeam());
             $timeEntry->setUser($user);
 
@@ -110,7 +119,13 @@ class TimeEntryController extends Controller
      */
     public function editAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this->createForm('appbundle_timeentry_form_type', $timeEntry)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.time_entry')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($timeEntry)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */

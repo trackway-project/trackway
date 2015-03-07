@@ -2,15 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use FOS\UserBundle\FOSUserEvents;
-use FOS\UserBundle\Event\FormEvent;
-use FOS\UserBundle\Event\FilterUserResponseEvent;
-use FOS\UserBundle\Event\GetResponseUserEvent;
-use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -42,15 +41,15 @@ class ProfileController extends BaseController
             return $event->getResponse();
         }
 
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->get('fos_user.profile.form.factory');
-        $form = $formFactory->createForm([
-                'memberships' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findAllByUser($user)],
-                'activeTeam' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($user)]
-        ]);
-        $form->setData($user);
-
-        $form->handleRequest($request);
+        $form = $this
+            ->get('fos_user.profile.form.factory')
+            ->createForm([
+                'memberships' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findByUser($user)],
+                'activeTeam' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUser($user)],
+                'submit' => ['label' => 'profile.edit.submit', 'translation_domain' => 'FOSUserBundle']
+            ])
+            ->setData($user)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */

@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Project;
-use AppBundle\Form\Type\ProjectFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -32,7 +31,7 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -68,7 +67,13 @@ class ProjectController extends Controller
     {
         $project = new Project();
 
-        $form = $this->createForm('appbundle_project_form_type', $project)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.project')
+            ->createForm([
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($project)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
@@ -99,7 +104,13 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
-        $form = $this->createForm('appbundle_project_form_type', $project)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.project')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($project)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());

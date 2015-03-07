@@ -20,7 +20,7 @@ class Absence extends BaseTimeEntry
      * @ORM\JoinColumn(name="reason_id", referencedColumnName="id")
      *
      * @Assert\NotNull()
-     * @Assert\Type(type="AbsenceReason")
+     * @Assert\Type(type="AppBundle\Entity\AbsenceReason")
      */
     protected $reason;
 

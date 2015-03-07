@@ -2,18 +2,16 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Entity\Repository\MembershipRepository;
-use AppBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseFormType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProfileFormType extends BaseFormType
+/**
+ * Class ProfileFormType
+ *
+ * @package AppBundle\Form\Type
+ */
+class ProfileFormType extends BaseFormType implements OverridableFormType
 {
     /**
      * @var string
@@ -47,35 +45,43 @@ class ProfileFormType extends BaseFormType
      */
     protected function buildUserForm(FormBuilderInterface $builder, array $options)
     {
-        $overrideOptions = array_key_exists('override', $options) && is_array($options['override']) ? $options['override'] : [];
-
         $builder
-            ->add('username', null, array_merge([
+            ->add('username', null, $this->overrideOptions('username', [
                 'label' => 'form.username',
                 'translation_domain' => 'FOSUserBundle'
-            ], array_key_exists('username', $overrideOptions) ? $overrideOptions['username'] : []))
-            ->add('email', 'email', array_merge([
+            ], $options))
+            ->add('email', 'email', $this->overrideOptions('email', [
                 'label' => 'form.email',
                 'translation_domain' => 'FOSUserBundle'
-            ], array_key_exists('email', $overrideOptions) ? $overrideOptions['email'] : []))
-            ->add('memberships', 'entity', array_merge([
+            ], $options))
+            ->add('memberships', 'entity', $this->overrideOptions('memberships', [
                 'label' => 'form.memberships',
                 'translation_domain' => 'FOSUserBundle',
                 'expanded'  => true,
                 'multiple'  => true,
-                'class' => 'AppBundle\Entity\Membership',
-                //'choices' => $user->getMemberships()
-            ], array_key_exists('memberships', $overrideOptions) ? $overrideOptions['memberships'] : []))
-            ->add('activeTeam', 'entity', array_merge([
+                'class' => 'AppBundle\Entity\Membership'
+            ], $options))
+            ->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', [
                 'label' => 'form.activeTeam',
                 'translation_domain' => 'FOSUserBundle',
-                'class' => 'AppBundle\Entity\Team',
-                //'choices' => $membershipRepository->findAllByUser($user)
-            ], array_key_exists('activeTeam', $overrideOptions) ? $overrideOptions['activeTeam'] : []));
+                'class' => 'AppBundle\Entity\Team'
+            ], $options));
     }
 
-    public function getName()
+    /**
+     * @param $name
+     * @param array $childOptions
+     * @param array $parentOptions
+     *
+     * @return array
+     */
+    protected function overrideOptions($name, array $childOptions = [], array $parentOptions = [])
     {
-        return 'appbundle_profile_form_type';
+        $overrideOptions = array_key_exists('override', $parentOptions) && is_array($parentOptions['override']) ? $parentOptions['override'] : [];
+
+        return array_merge(
+            $childOptions,
+            array_key_exists($name, $overrideOptions) ? $overrideOptions[$name] : []
+        );
     }
 }

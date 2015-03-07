@@ -11,7 +11,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class TimeEntryRepository extends EntityRepository
 {
-    public function findAllByTeamAndUser(Team $team, User $user)
+    /**
+     * @param Team $team
+     *
+     * @return array
+     */
+    public function removeByTeam(Team $team)
+    {
+        $this->getEntityManager()->createQuery('UPDATE AppBundle\Entity\User u SET u.activeTeam = null WHERE u.activeTeam = ?1')->setParameter(1, $team->getId())->execute();
+        $this->getEntityManager()->createQuery('DELETE FROM AppBundle\Entity\TimeEntry t WHERE t.team = ?1')->setParameter(1, $team->getId())->execute();
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param Team $team
+     * @param User $user
+     *
+     * @return array
+     */
+    public function findByTeamAndUser(Team $team, User $user)
     {
         return $this->findBy(['team' => $team->getId(), 'user' => $user->getId()]);
     }

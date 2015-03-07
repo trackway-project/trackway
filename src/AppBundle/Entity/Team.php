@@ -37,28 +37,28 @@ class Team
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Membership", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="Membership", mappedBy="team", cascade={"remove"})
      */
     private $memberships;
 
     /**
      * @var Invitation
      *
-     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="Invitation", mappedBy="team", cascade={"remove"})
      */
     protected $invitations;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Project", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="team", cascade={"remove"})
      */
     private $projects;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="team", cascade={"remove"})
      */
     private $tasks;
 
