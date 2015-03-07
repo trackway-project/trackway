@@ -8,6 +8,8 @@
 #to use the Vagrant Cloud and other newer Vagrant features.
 Vagrant.require_version ">= 1.5"
 
+ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
+
 Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v|
