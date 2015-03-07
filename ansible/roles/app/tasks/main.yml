@@ -16,27 +16,27 @@
 - name: Set application parameters
   template:
     src: parameters.yml
-    dest: "{{ app_root }}/app/config/parameters.yml"
+    dest: "{{ app.app_root }}/app/config/parameters.yml"
 
 - name: install composer dependencies
   command: composer install
   args:
-    chdir: "{{ app_root }}"
+    chdir: "{{ app.app_root }}"
   sudo: false
 
 - command: npm install
   args:
-    chdir: "{{ app_root }}"
+    chdir: "{{ app.app_root }}"
   sudo: false
 
 - name: install assets via bower
   command: bower install
   args:
-    chdir: "{{ app_root }}"
+    chdir: "{{ app.app_root }}"
   sudo: false
 
 - name: build assets via gulp
   command: gulp
   args:
-    chdir: "{{ app_root }}"
+    chdir: "{{ app.app_root }}"
   sudo: false

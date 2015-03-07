@@ -1,0 +1,68 @@
+---
+common:
+  sys_packages:
+    - git
+    - vim
+    - htop
+    - curl
+    - mc
+    - wget
+  dist: precise
+
+npm:
+  npm_packages:
+    - bower
+    - gulp
+
+apache:
+  vhost_path: /etc/apache2/sites-available
+  #we must find a sane way to overwrite this value so its compatible with apache 2.2 and 2.4
+  vhost_file: 000-default.conf
+  template: vhost.conf.tpl
+
+nginx:
+  vhost_path: /etc/nginx/sites-available
+  vhost_file: default
+  template: default.tpl
+
+app:
+  doc_root: /data/trackway/web
+  app_root: /data/trackway
+
+php:
+  ppa: php5-5.6
+  php_packages:
+    - php5
+    - php5-cli
+    - php5-curl
+    - php5-common
+    - php-pear
+    - php5-intl
+    - php5-mcrypt
+    - php5-mysql
+    - php5-sqlite
+    - php5-tidy
+    - php5-xdebug
+    - php5-memcache
+    - php5-apcu
+  pecl_packages: []
+
+mariadb:
+    root_password: root
+    user: trackway
+    password: passw0rd!
+    database: trackway
+
+composer:
+    database_driver: "pdo_mysql"
+    database_host: "127.0.0.1"
+    database_port: "3306"
+    database_name: "{{ mariadb.database }}"
+    database_user: "{{ mariadb.user }}"
+    database_password: "{{ mariadb.password }}"
+    mailer_transport: "smtp"
+    mailer_host: "127.0.0.1"
+    mailer_user: "null"
+    mailer_password: "null"
+    locale: "en"
+    secret: "sdkjfhasdoz8mvczs89dz,p(Z)(O889msdzf98gz,8zO(;zs89ozdfoz8,89zihkhjkh"

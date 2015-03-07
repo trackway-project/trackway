@@ -23,13 +23,14 @@ Need a local dev box? Use vagrant and ansible!
 Ansible is used for provisioning.
 You need to have virtualbox, vagrant and ansible installed.
 
-### The easiest way to get it is homebrew:
+### The easiest way to get up and runnning is homebrew:
 * ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 * brew update
 * brew install caskroom/cask/brew-cask 
 * brew cask install virtualbox vagrant
 * brew install ansible
 * vagrant up
+* Open your browser with http://trackway.vagrant/ and have fun
 
 ## Development
 * After changes to composer.json: composer update
