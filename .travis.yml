@@ -8,8 +8,10 @@ php:
   - hhvm
 
 before_script:
-  - composer install
+  - composer self-update
+  - composer install --prefer-source --dev
   - php app/console doctrine:schema:create --force
   - mysql trackway < groups.sql
 
-phpunit
+script:
+  - phpunit
