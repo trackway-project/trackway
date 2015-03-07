@@ -85,6 +85,8 @@ class AbsenceController extends Controller
             $em->persist($absence);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'absence.flash.created');
+
             return $this->redirect($this->generateUrl('absence_show', ['id' => $absence->getId()]));
         }
 
@@ -115,6 +117,8 @@ class AbsenceController extends Controller
             $absence->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'absence.flash.updated');
+
             return $this->redirect($this->generateUrl('absence_show', ['id' => $absence->getId()]));
         }
 
@@ -137,6 +141,8 @@ class AbsenceController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($absence);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'absence.flash.deleted');
 
         return $this->redirect($this->generateUrl('absence_index'));
     }

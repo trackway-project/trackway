@@ -85,6 +85,8 @@ class TimeEntryController extends Controller
             $em->persist($timeEntry);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.created');
+
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
 
@@ -115,6 +117,8 @@ class TimeEntryController extends Controller
             $timeEntry->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.updated');
+
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
 
@@ -137,6 +141,8 @@ class TimeEntryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($timeEntry);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.deleted');
 
         return $this->redirect($this->generateUrl('timeentry_index'));
     }

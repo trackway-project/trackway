@@ -74,6 +74,8 @@ class TaskController extends Controller
             $em->persist($task);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'task.flash.created');
+
             return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
         }
 
@@ -101,6 +103,8 @@ class TaskController extends Controller
             $task->setTeam($this->getUser()->getActiveTeam());
             $this->getDoctrine()->getManager()->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'task.flash.updated');
+
             return $this->redirect($this->generateUrl('task_show', ['id' => $task->getId()]));
         }
 
@@ -123,6 +127,8 @@ class TaskController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'task.flash.deleted');
 
         return $this->redirect($this->generateUrl('task_index'));
     }

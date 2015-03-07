@@ -38,9 +38,10 @@
     </nav>
 
     <div class="container">
+        {% set messageTypeClasses = { 'success': 'alert-success', 'info': 'alert-info', 'warning': 'alert-warning', 'error': 'alert-danger'} %}
         {% for type, messages in app.session.flashBag.all %}
             {% for message in messages %}
-                <div class="alert alert-{{ type }}" role="alert">
+                <div class="alert{% if messageTypeClasses[type] is defined %} {{ messageTypeClasses[type] }}{% endif %}" role="alert">
                     {{ message|trans({}, 'FOSUserBundle') }}
                 </div>
             {% endfor %}

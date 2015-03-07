@@ -74,6 +74,8 @@ class ProjectController extends Controller
             $em->persist($project);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'project.flash.created');
+
             return $this->redirect($this->generateUrl('project_show', ['id' => $project->getId()]));
         }
 
@@ -101,6 +103,8 @@ class ProjectController extends Controller
             $project->setTeam($this->getUser()->getActiveTeam());
             $this->getDoctrine()->getManager()->flush();
 
+            $this->get('session')->getFlashBag()->add('success', 'project.flash.updated');
+
             return $this->redirect($this->generateUrl('project_show', ['id' => $project->getId()]));
         }
 
@@ -123,6 +127,8 @@ class ProjectController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($project);
         $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'project.flash.deleted');
 
         return $this->redirect($this->generateUrl('project_index'));
     }
