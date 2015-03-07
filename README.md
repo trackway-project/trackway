@@ -18,6 +18,19 @@ The simple on-premise open source time tracker.
 * bower install
 * gulp
 
+## Vagrant and provisioning
+Need a local dev box? Use vagrant and ansible!
+Ansible is used for provisioning.
+You need to have virtualbox, vagrant and ansible installed.
+
+### The easiest way to get it is homebrew:
+* ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+* brew update
+* brew install caskroom/cask/brew-cask 
+* brew cask install virtualbox vagrant
+* brew install ansible
+* vagrant up
+
 ## Development
 * After changes to composer.json: composer update
 * After changes to package.json: npm update
