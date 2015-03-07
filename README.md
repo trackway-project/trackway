@@ -39,11 +39,25 @@ You need to have virtualbox, vagrant and ansible installed.
 * After changes to src/AppBundle/Resources/public: gulp
 * After changes to src/AppBundle/Entity: php app/console doctrine:schema:update
 
+## Capistrano deployment
+* customize your capistrano environment file: config/deploy/prodcution.rb
+* gem install bundler
+* bundle install
+* bundle exec cap production deploy branch=master
+
 Enjoy!
 
 ## Thanks
 
 http://bootswatch.com
+http://getbootstrap.com/
+http://bower.io/
+http://gulpjs.com/
+https://www.vagrantup.com/
+http://www.ansible.com/home
+https://nodejs.org/
+http://capistranorb.com/
+http://symfony.com/
 
 ## Copyright and License
 
