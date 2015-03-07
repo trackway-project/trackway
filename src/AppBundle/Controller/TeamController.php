@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Group;
 use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
+use AppBundle\Form\Factory\FormFactory;
 use AppBundle\Form\Type\TeamFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -68,7 +69,13 @@ class TeamController extends Controller
     {
         $team = new Team();
 
-        $form = $this->createForm('appbundle_team_form_type', $team)->remove('memberships')->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.team')
+            ->createForm([
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($team)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var Group $group */
@@ -111,7 +118,13 @@ class TeamController extends Controller
      */
     public function editAction(Request $request, Team $team)
     {
-        $form = $this->createForm('appbundle_team_form_type', $team)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.team')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($team)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

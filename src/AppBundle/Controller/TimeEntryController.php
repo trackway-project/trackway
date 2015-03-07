@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\TimeEntry;
 use AppBundle\Entity\User;
+use AppBundle\Form\Factory\FormFactory;
 use AppBundle\Form\Type\TimeEntryFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -75,7 +76,13 @@ class TimeEntryController extends Controller
         $timeEntry->setStartsAt(new \DateTime());
         $timeEntry->setEndsAt(new \DateTime());
 
-        $form = $this->createForm('appbundle_timeentry_form_type', $timeEntry)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.time_entry')
+            ->createForm([
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($timeEntry)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -110,7 +117,13 @@ class TimeEntryController extends Controller
      */
     public function editAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this->createForm('appbundle_timeentry_form_type', $timeEntry)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.time_entry')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($timeEntry)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */

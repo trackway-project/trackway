@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\Factory\FormFactory;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -42,15 +43,15 @@ class ProfileController extends BaseController
             return $event->getResponse();
         }
 
-        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
-        $formFactory = $this->get('fos_user.profile.form.factory');
-        $form = $formFactory->createForm([
+        $form = $this
+            ->get('fos_user.profile.form.factory')
+            ->createForm([
                 'memberships' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findAllByUser($user)],
-                'activeTeam' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($user)]
-        ]);
-        $form->setData($user);
-
-        $form->handleRequest($request);
+                'activeTeam' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($user)],
+                'submit' => ['label' => 'profile.edit.submit', 'translation_domain' => 'FOSUserBundle']
+            ])
+            ->setData($user)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */

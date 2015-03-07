@@ -73,9 +73,4 @@ class ProfileFormType extends BaseFormType
                 //'choices' => $membershipRepository->findAllByUser($user)
             ], array_key_exists('activeTeam', $overrideOptions) ? $overrideOptions['activeTeam'] : []));
     }
-
-    public function getName()
-    {
-        return 'appbundle_profile_form_type';
-    }
 }

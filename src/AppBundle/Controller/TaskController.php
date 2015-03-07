@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
+use AppBundle\Form\Factory\FormFactory;
 use AppBundle\Form\Type\TaskFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -68,7 +69,13 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $form = $this->createForm('appbundle_task_form_type', $task)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.task')
+            ->createForm([
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($task)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
@@ -99,7 +106,13 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $form = $this->createForm('appbundle_task_form_type', $task)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.task')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($task)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());

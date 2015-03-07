@@ -28,24 +28,17 @@ class FormFactory implements FactoryInterface
     private $validationGroups;
 
     /**
-     * @var string
-     */
-    private $submitButtonLabel;
-
-    /**
      * @param FormFactoryInterface $formFactory
      * @param $name
      * @param $type
      * @param array $validationGroups
-     * @param string $submitButtonLabel
      */
-    public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = null, $submitButtonLabel = 'Submit')
+    public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = null)
     {
         $this->formFactory = $formFactory;
         $this->name = $name;
         $this->type = $type;
         $this->validationGroups = $validationGroups;
-        $this->submitButtonLabel = $submitButtonLabel;
     }
 
     /**
@@ -56,7 +49,7 @@ class FormFactory implements FactoryInterface
     public function createForm(array $options = [])
     {
         $submitOptions = array_merge(
-            ['label' => $this->submitButtonLabel, 'translation_domain' => 'FOSUserBundle'],
+            ['label' => 'Submit'],
             array_key_exists('submit', $options) ? $options['submit'] : []
         );
 

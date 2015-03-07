@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Absence;
 use AppBundle\Entity\User;
+use AppBundle\Form\Factory\FormFactory;
 use AppBundle\Form\Type\AbsenceFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -75,7 +76,13 @@ class AbsenceController extends Controller
         $absence->setStartsAt(new \DateTime());
         $absence->setEndsAt(new \DateTime());
 
-        $form = $this->createForm('appbundle_absence_form_type', $absence)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.absence')
+            ->createForm([
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($absence)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -110,7 +117,13 @@ class AbsenceController extends Controller
      */
     public function editAction(Request $request, Absence $absence)
     {
-        $form = $this->createForm('appbundle_absence_form_type', $absence)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.absence')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($absence)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
