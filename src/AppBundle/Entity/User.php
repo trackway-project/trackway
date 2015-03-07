@@ -28,8 +28,6 @@ class User extends BaseUser
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Membership", mappedBy="user")
-     *
-     * @Assert\Type(type="ArrayCollection")
      */
     protected $memberships;
 
@@ -45,8 +43,6 @@ class User extends BaseUser
      *
      * @ORM\ManyToOne(targetEntity="Team")
      * @ORM\JoinColumn(name="activeTeam_id", referencedColumnName="id")
-     *
-     * @Assert\Type(type="Team")
      */
     protected $activeTeam;
 

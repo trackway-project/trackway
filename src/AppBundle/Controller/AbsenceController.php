@@ -13,7 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Absence controller.
+ * Class AbsenceController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/absence")
  */
@@ -73,7 +75,7 @@ class AbsenceController extends Controller
         $absence->setStartsAt(new \DateTime());
         $absence->setEndsAt(new \DateTime());
 
-        $form = $this->createForm(new AbsenceFormType(), $absence)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this->createForm('appbundle_absence_form_type', $absence)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -108,7 +110,7 @@ class AbsenceController extends Controller
      */
     public function editAction(Request $request, Absence $absence)
     {
-        $form = $this->createForm(new AbsenceFormType(), $absence)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this->createForm('appbundle_absence_form_type', $absence)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */

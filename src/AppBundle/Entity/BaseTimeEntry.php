@@ -51,8 +51,6 @@ class BaseTimeEntry
      * @var \DateTime
      *
      * @ORM\Column(name="endsAt", type="time")
-     *
-     * @Assert\Type(type="\DateTime")
      */
     protected $endsAt;
 
@@ -60,8 +58,6 @@ class BaseTimeEntry
      * @var \DateTime
      *
      * @ORM\Column(name="startsAt", type="time")
-     *
-     * @Assert\Type(type="\DateTime")
      */
     protected $startsAt;
 

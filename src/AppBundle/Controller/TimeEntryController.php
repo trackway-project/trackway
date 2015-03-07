@@ -13,7 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * TimeEntry controller.
+ * Class TimeEntryController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/timeentry")
  */
@@ -73,7 +75,7 @@ class TimeEntryController extends Controller
         $timeEntry->setStartsAt(new \DateTime());
         $timeEntry->setEndsAt(new \DateTime());
 
-        $form = $this->createForm(new TimeEntryFormType(), $timeEntry)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this->createForm('appbundle_timeentry_form_type', $timeEntry)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -108,7 +110,7 @@ class TimeEntryController extends Controller
      */
     public function editAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this->createForm(new TimeEntryFormType(), $timeEntry)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this->createForm('appbundle_timeentry_form_type', $timeEntry)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */

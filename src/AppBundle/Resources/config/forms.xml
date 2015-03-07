@@ -42,9 +42,41 @@
             <argument>resetting.reset.submit</argument>
         </service>
 
+        <service id="app.form.type.absence" class="AppBundle\Form\Type\AbsenceFormType">
+            <tag name="form.type" alias="appbundle_absence_form_type" />
+        </service>
+
+        <service id="app.form.type.absence_reason" class="AppBundle\Form\Type\AbsenceReasonFormType">
+            <tag name="form.type" alias="appbundle_absence_reason_form_type" />
+        </service>
+
+        <service id="app.form.type.invitation" class="AppBundle\Form\Type\InvitationFormType">
+            <tag name="form.type" alias="appbundle_invitation_form_type" />
+        </service>
+
+        <service id="app.form.type.membership" class="AppBundle\Form\Type\MembershipFormType">
+            <tag name="form.type" alias="appbundle_membership_form_type" />
+        </service>
+
         <service id="app.form.type.profile" class="AppBundle\Form\Type\ProfileFormType">
             <tag name="form.type" alias="appbundle_profile_form_type"/>
             <argument>%fos_user.model.user.class%</argument>
+        </service>
+
+        <service id="app.form.type.project" class="AppBundle\Form\Type\ProjectFormType">
+            <tag name="form.type" alias="appbundle_project_form_type" />
+        </service>
+
+        <service id="app.form.type.task" class="AppBundle\Form\Type\TaskFormType">
+            <tag name="form.type" alias="appbundle_task_form_type" />
+        </service>
+
+        <service id="app.form.type.team" class="AppBundle\Form\Type\TeamFormType">
+            <tag name="form.type" alias="appbundle_team_form_type" />
+        </service>
+
+        <service id="app.form.type.time_entry" class="AppBundle\Form\Type\TimeEntryFormType">
+            <tag name="form.type" alias="appbundle_time_entry_form_type" />
         </service>
     </services>
 </container>

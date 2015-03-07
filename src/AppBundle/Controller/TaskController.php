@@ -12,7 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Task controller.
+ * Class TaskController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/task")
  */
@@ -66,7 +68,7 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $form = $this->createForm(new TaskFormType(), $task)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this->createForm('appbundle_task_form_type', $task)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
@@ -97,7 +99,7 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $form = $this->createForm(new TaskFormType(), $task)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this->createForm('appbundle_task_form_type', $task)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());

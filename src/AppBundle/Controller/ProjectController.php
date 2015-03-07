@@ -12,7 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Project controller.
+ * Class ProjectController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/project")
  */
@@ -66,7 +68,7 @@ class ProjectController extends Controller
     {
         $project = new Project();
 
-        $form = $this->createForm(new ProjectFormType(), $project)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this->createForm('appbundle_project_form_type', $project)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
@@ -97,7 +99,7 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
-        $form = $this->createForm(new ProjectFormType(), $project)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this->createForm('appbundle_project_form_type', $project)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
