@@ -49,6 +49,8 @@ You need to have virtualbox, vagrant and ansible installed.
 Enjoy!
 
 ## Thanks
+
+### trackway foundation
 * http://bootswatch.com
 * http://getbootstrap.com/
 * http://bower.io/
@@ -58,6 +60,11 @@ Enjoy!
 * https://nodejs.org/
 * http://capistranorb.com/
 * http://symfony.com/
+
+### Contributors
+* Mewes Kochheim
+* Markus Wanjura
+* Felix Peters
 
 ## Copyright and License
 
