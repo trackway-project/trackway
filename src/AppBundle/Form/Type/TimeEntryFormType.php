@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TimeEntryFormType extends AbstractType
+class TimeEntryFormType extends AbstractOverrideType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,6 +14,8 @@ class TimeEntryFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $overrideOptions = array_key_exists('override', $options) && is_array($options['override']) ? $options['override'] : [];
+
         $builder->add('date', 'date')
             ->add('endsAt', 'time', ['required' => false])
             ->add('startsAt', 'time', ['required' => false])
@@ -27,7 +29,7 @@ class TimeEntryFormType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\TimeEntry']);
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\TimeEntry', 'override' => false]);
     }
 
     /**
