@@ -42,6 +42,7 @@ You need to have virtualbox, vagrant and ansible installed.
 ## Capistrano deployment
 * customize your capistrano environment file: config/deploy/prodcution.rb
 * gem install bundler
+* Create a parameters.yml on your host under: /web_directory/shared/parameters.yml
 * bundle install
 * bundle exec cap production deploy branch=master
 
