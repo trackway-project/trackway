@@ -13,6 +13,11 @@
   file: path=/usr/local/bin/composer mode=a+x state=file
   tags: composer
 
+- name: Set application parameters
+  template:
+    src: parameters.yml
+    dest: "{{ app_root }}/app/config/parameters.yml"
+
 - name: install composer dependencies
   command: composer install
   args:
