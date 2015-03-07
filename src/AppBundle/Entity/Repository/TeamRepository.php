@@ -5,7 +5,6 @@ namespace AppBundle\Entity\Repository;
 use AppBundle\Entity\Team;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * TeamRepository

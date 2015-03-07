@@ -6,8 +6,6 @@ use AppBundle\Entity\Group;
 use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
 use AppBundle\Entity\User;
-use AppBundle\Form\Factory\FormFactory;
-use AppBundle\Form\Type\TeamFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -131,6 +129,7 @@ class TeamController extends Controller
         $form = $this
             ->get('app.form.factory.team')
             ->createForm([
+                'memberships' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findByTeam($team)],
                 'submit' => ['label' => 'Update']
             ])
             ->setData($team)

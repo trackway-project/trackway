@@ -4,8 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\TimeEntry;
 use AppBundle\Entity\User;
-use AppBundle\Form\Factory\FormFactory;
-use AppBundle\Form\Type\TimeEntryFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
