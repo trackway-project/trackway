@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * BaseTimeEntry
@@ -40,6 +41,9 @@ class BaseTimeEntry
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="\DateTime")
      */
     protected $date;
 
@@ -47,6 +51,8 @@ class BaseTimeEntry
      * @var \DateTime
      *
      * @ORM\Column(name="endsAt", type="time")
+     *
+     * @Assert\Type(type="\DateTime")
      */
     protected $endsAt;
 
@@ -54,6 +60,8 @@ class BaseTimeEntry
      * @var \DateTime
      *
      * @ORM\Column(name="startsAt", type="time")
+     *
+     * @Assert\Type(type="\DateTime")
      */
     protected $startsAt;
 
@@ -61,6 +69,9 @@ class BaseTimeEntry
      * @var string
      *
      * @ORM\Column(name="note", type="string", length=255)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\Length(max = 255)
      */
     protected $note;
 

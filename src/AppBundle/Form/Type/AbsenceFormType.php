@@ -14,7 +14,11 @@ class AbsenceFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('date')->add('endsAt')->add('startsAt')->add('note')->add('reason');
+        $builder->add('date', 'date')
+            ->add('endsAt', 'time', ['required' => false])
+            ->add('startsAt', 'time', ['required' => false])
+            ->add('note', null, ['required' => false, 'trim' => true])
+            ->add('reason');
     }
 
     /**

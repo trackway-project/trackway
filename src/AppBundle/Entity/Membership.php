@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Membership
@@ -26,6 +27,9 @@ class Membership
      *
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="memberships")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="Team")
      */
     protected $team;
 
@@ -34,6 +38,9 @@ class Membership
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="memberships")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="User")
      */
     protected $user;
 
@@ -42,6 +49,9 @@ class Membership
      *
      * @ORM\ManyToOne(targetEntity="Group")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="Group")
      */
     protected $group;
 

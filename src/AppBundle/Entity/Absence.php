@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Absence
@@ -17,6 +18,9 @@ class Absence extends BaseTimeEntry
      *
      * @ORM\ManyToOne(targetEntity="AbsenceReason")
      * @ORM\JoinColumn(name="reason_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="AbsenceReason")
      */
     protected $reason;
 

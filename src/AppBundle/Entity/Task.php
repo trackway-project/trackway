@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Task
@@ -26,6 +27,9 @@ class Task
      *
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="tasks")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="Team")
      */
     protected $team;
 
@@ -33,6 +37,10 @@ class Task
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(min = 1, max = 255)
      */
     protected $name;
 

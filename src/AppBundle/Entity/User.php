@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -24,14 +25,16 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var Membership
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Membership", mappedBy="user")
+     *
+     * @Assert\Type(type="ArrayCollection")
      */
     protected $memberships;
 
     /**
-     * @var Invitation
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="user")
      */
@@ -42,6 +45,8 @@ class User extends BaseUser
      *
      * @ORM\ManyToOne(targetEntity="Team")
      * @ORM\JoinColumn(name="activeTeam_id", referencedColumnName="id")
+     *
+     * @Assert\Type(type="Team")
      */
     protected $activeTeam;
 

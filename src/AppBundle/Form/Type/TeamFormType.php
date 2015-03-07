@@ -14,7 +14,7 @@ class TeamFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('memberships');
+        $builder->add('name', null, ['trim' => true])->add('memberships');
     }
 
     /**

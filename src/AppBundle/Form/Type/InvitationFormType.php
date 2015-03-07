@@ -14,7 +14,7 @@ class InvitationFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('team')->add('email');
+        $builder->add('team')->add('email', 'email', ['trim' => true]);
     }
 
     /**

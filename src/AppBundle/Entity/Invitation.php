@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Invitation
@@ -26,13 +27,21 @@ class Invitation
      *
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="invitations")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="Team")
      */
     protected $team;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="integer")
+     * @ORM\Column(name="email", type="string")
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Email()
+     * @Assert\Length(max = 255)
      */
     protected $email;
 
@@ -47,7 +56,7 @@ class Invitation
     /**
      * @var string
      *
-     * @ORM\Column(name="key", type="string")
+     * @ORM\Column(name="key", type="string", length=32)
      */
     protected $key;
 
@@ -55,6 +64,9 @@ class Invitation
      * @var string
      *
      * @ORM\Column(name="status", type="invitationStatusEnum")
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
      */
     protected $status;
 

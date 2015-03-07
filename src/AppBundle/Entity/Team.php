@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Team
@@ -26,6 +27,10 @@ class Team
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(min = 1, max = 255)
      */
     private $name;
 
@@ -60,6 +65,7 @@ class Team
     public function __construct()
     {
         $this->memberships = new ArrayCollection();
+        $this->invitations = new ArrayCollection();
         $this->projects = new ArrayCollection();
         $this->tasks = new ArrayCollection();
     }
