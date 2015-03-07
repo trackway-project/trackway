@@ -8,14 +8,26 @@ use Knp\Menu\Renderer\ListRenderer;
 
 class AdvancedRenderer extends ListRenderer
 {
+    /**
+     * @param MatcherInterface $matcher
+     * @param array $defaultOptions
+     * @param null|string $charset
+     */
     public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null)
     {
         // Initialize default options
-        $defaultOptions = array_merge(['itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
+        $defaultOptions = array_merge(['icon' => false, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
 
         parent::__construct($matcher, $defaultOptions, $charset);
     }
 
+    /**
+     * @param ItemInterface $item
+     * @param array $attributes
+     * @param array $options
+     *
+     * @return string
+     */
     protected function renderList(ItemInterface $item, array $attributes, array $options)
     {
         /**
@@ -54,6 +66,12 @@ class AdvancedRenderer extends ListRenderer
         return $html;
     }
 
+    /**
+     * @param ItemInterface $item
+     * @param array $options
+     *
+     * @return string
+     */
     protected function renderItem(ItemInterface $item, array $options)
     {
         /**
@@ -137,6 +155,39 @@ class AdvancedRenderer extends ListRenderer
         return $html;
     }
 
+    /**
+     * @param ItemInterface $item
+     * @param array $options
+     *
+     * @return string
+     */
+    protected function renderLabel(ItemInterface $item, array $options)
+    {
+        // Option: icon
+        $icon = $this->defaultOptions['icon'];
+        if (array_key_exists('icon', $options)) {
+            $icon = $options['icon'];
+        }
+        $icon = $item->getExtra('icon', $icon);
+        $icon = $icon ? sprintf('<i class="%s"></i>', $icon) : false;
+
+        $label = $options['allow_safe_labels'] && $item->getExtra('safe_label', false) ? $item->getLabel() : $this->escape($item->getLabel());
+
+        if (!empty($icon)) {
+            return !empty($label) ? $icon . '&nbsp;'. $label : $icon;
+        }
+
+        return $label;
+    }
+
+    /**
+     * @param string $html
+     * @param string $type
+     * @param int $level
+     * @param array $options
+     *
+     * @return string
+     */
     protected function format($html, $type, $level, array $options)
     {
         return $options['compressed'] ? $html : str_repeat(' ', $level * 4) . $html . "\n";

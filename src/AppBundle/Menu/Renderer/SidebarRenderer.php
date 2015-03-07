@@ -21,7 +21,7 @@ class SidebarRenderer extends AdvancedRenderer
         $order = ['Close'];
         $order = array_merge($order, array_keys($item->getChildren()));
 
-        $item->addChild('Close', ['uri' => '#'])->setAttributes(['class' => 'visible-xs', 'data-toggle' => 'offcanvas']);
+        $item->addChild('Close', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'uri' => '#'])->setAttributes(['class' => 'visible-xs', 'data-toggle' => 'offcanvas']);
 
         $item->reorderChildren($order);
 
