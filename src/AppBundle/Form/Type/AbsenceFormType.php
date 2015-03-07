@@ -6,6 +6,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class AbsenceFormType
+ *
+ * @package AppBundle\Form\Type
+ */
 class AbsenceFormType extends AbstractOverrideType
 {
     /**

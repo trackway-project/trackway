@@ -74,6 +74,7 @@ class TeamController extends Controller
             ->createForm([
                 'submit' => ['label' => 'Create']
             ])
+            ->remove('memberships')
             ->setData($team)
             ->handleRequest($request);
 

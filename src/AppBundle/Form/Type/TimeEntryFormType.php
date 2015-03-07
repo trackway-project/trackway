@@ -6,6 +6,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class TimeEntryFormType
+ *
+ * @package AppBundle\Form\Type
+ */
 class TimeEntryFormType extends AbstractOverrideType
 {
     /**
@@ -14,14 +19,28 @@ class TimeEntryFormType extends AbstractOverrideType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $overrideOptions = array_key_exists('override', $options) && is_array($options['override']) ? $options['override'] : [];
-
-        $builder->add('date', 'date')
-            ->add('endsAt', 'time', ['required' => false])
-            ->add('startsAt', 'time', ['required' => false])
-            ->add('note', null, ['required' => false, 'trim' => true])
-            ->add('project', null, ['required' => false])
-            ->add('task', null, ['required' => false]);
+        $builder
+            ->add('date', 'date', $this->overrideOptions('date', [
+                'required' => true
+            ], $options))
+            ->add('endsAt', 'time', $this->overrideOptions('date', [
+                'required' => false
+            ], $options))
+            ->add('startsAt', 'time', $this->overrideOptions('date', [
+                'required' => false
+            ], $options))
+            ->add('note', null, $this->overrideOptions('date', [
+                'required' => false,
+                'trim' => true
+            ], $options))
+            ->add('project', 'entity', $this->overrideOptions('date', [
+                'class' => 'AppBundle\Entity\Project',
+                'required' => false
+            ], $options))
+            ->add('task', 'entity', $this->overrideOptions('date', [
+                'class' => 'AppBundle\Entity\Task',
+                'required' => false
+            ], $options));
     }
 
     /**
@@ -29,7 +48,10 @@ class TimeEntryFormType extends AbstractOverrideType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\TimeEntry', 'override' => false]);
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\TimeEntry',
+            'override' => false
+        ]);
     }
 
     /**

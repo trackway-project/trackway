@@ -6,6 +6,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class InvitationFormType
+ *
+ * @package AppBundle\Form\Type
+ */
 class InvitationFormType extends AbstractOverrideType
 {
     /**
@@ -18,7 +23,7 @@ class InvitationFormType extends AbstractOverrideType
             ->add('team', 'entity', $this->overrideOptions('team', [
                 'class' => 'AppBundle\Entity\Team',
                 'expanded'  => true,
-                'require' => true
+                'required' => true
             ], $options))
             ->add('email', 'email', $this->overrideOptions('email', [
                 'trim' => true

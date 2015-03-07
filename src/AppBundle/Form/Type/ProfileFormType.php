@@ -13,7 +13,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseFormType;
 
-class ProfileFormType extends BaseFormType
+/**
+ * Class ProfileFormType
+ *
+ * @package AppBundle\Form\Type
+ */
+class ProfileFormType extends BaseFormType implements OverridableFormType
 {
     /**
      * @var string

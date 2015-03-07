@@ -6,6 +6,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class AbsenceReasonFormType
+ *
+ * @package AppBundle\Form\Type
+ */
 class AbsenceReasonFormType extends AbstractOverrideType
 {
     /**
@@ -16,7 +21,7 @@ class AbsenceReasonFormType extends AbstractOverrideType
     {
         $builder
             ->add('name', null, $this->overrideOptions('name', [
-                'require' => true,
+                'required' => true,
                 'trim' => true
             ], $options));
     }
