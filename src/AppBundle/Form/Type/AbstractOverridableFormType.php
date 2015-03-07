@@ -5,11 +5,11 @@ namespace AppBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * Class AbstractOverrideType
+ * Class AbstractOverridableFormType
  *
  * @package AppBundle\Form\Type
  */
-abstract class AbstractOverrideType extends AbstractType implements OverridableFormType
+abstract class AbstractOverridableFormType extends AbstractType implements OverridableFormType
 {
     /**
      * @param $name

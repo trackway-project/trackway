@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @package AppBundle\Form\Type
  */
-class AbsenceReasonFormType extends AbstractOverrideType
+class AbsenceReasonFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder

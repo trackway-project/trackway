@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * Class MembershipFormType
  * @package AppBundle\Form\Type
  */
-class MembershipFormType extends AbstractOverrideType
+class MembershipFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder

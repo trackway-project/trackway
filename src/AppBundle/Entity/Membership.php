@@ -29,7 +29,7 @@ class Membership
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      *
      * @Assert\NotNull()
-     * @Assert\Type(type="Team")
+     * @Assert\Type(type="AppBundle\Entity\Team")
      */
     protected $team;
 
@@ -40,7 +40,7 @@ class Membership
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *
      * @Assert\NotNull()
-     * @Assert\Type(type="User")
+     * @Assert\Type(type="AppBundle\Entity\User")
      */
     protected $user;
 
@@ -51,7 +51,7 @@ class Membership
      * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
      *
      * @Assert\NotNull()
-     * @Assert\Type(type="Group")
+     * @Assert\Type(type="AppBundle\Entity\Group")
      */
     protected $group;
 

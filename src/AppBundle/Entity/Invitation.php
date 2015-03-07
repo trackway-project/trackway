@@ -29,7 +29,7 @@ class Invitation
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      *
      * @Assert\NotNull()
-     * @Assert\Type(type="Team")
+     * @Assert\Type(type="AppBundle\Entity\Team")
      */
     protected $team;
 

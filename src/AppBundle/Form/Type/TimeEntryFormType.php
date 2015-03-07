@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @package AppBundle\Form\Type
  */
-class TimeEntryFormType extends AbstractOverrideType
+class TimeEntryFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -22,21 +22,21 @@ class TimeEntryFormType extends AbstractOverrideType
             ->add('date', 'date', $this->overrideOptions('date', [
                 'required' => true
             ], $options))
-            ->add('endsAt', 'time', $this->overrideOptions('date', [
+            ->add('endsAt', 'time', $this->overrideOptions('endsAt', [
                 'required' => false
             ], $options))
-            ->add('startsAt', 'time', $this->overrideOptions('date', [
+            ->add('startsAt', 'time', $this->overrideOptions('startsAt', [
                 'required' => false
             ], $options))
-            ->add('note', null, $this->overrideOptions('date', [
+            ->add('note', null, $this->overrideOptions('note', [
                 'required' => false,
                 'trim' => true
             ], $options))
-            ->add('project', 'entity', $this->overrideOptions('date', [
+            ->add('project', 'entity', $this->overrideOptions('project', [
                 'class' => 'AppBundle\Entity\Project',
                 'required' => false
             ], $options))
-            ->add('task', 'entity', $this->overrideOptions('date', [
+            ->add('task', 'entity', $this->overrideOptions('task', [
                 'class' => 'AppBundle\Entity\Task',
                 'required' => false
             ], $options));
@@ -58,6 +58,6 @@ class TimeEntryFormType extends AbstractOverrideType
      */
     public function getName()
     {
-        return 'appbundle_timeentry_form_type';
+        return 'appbundle_time_entry_form_type';
     }
 }

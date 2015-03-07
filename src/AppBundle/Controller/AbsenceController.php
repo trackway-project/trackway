@@ -77,6 +77,7 @@ class AbsenceController extends Controller
         $form = $this
             ->get('app.form.factory.absence')
             ->createForm([
+                'reason' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:AbsenceReason')->findAll()],
                 'submit' => ['label' => 'Create']
             ])
             ->setData($absence)
@@ -118,6 +119,7 @@ class AbsenceController extends Controller
         $form = $this
             ->get('app.form.factory.absence')
             ->createForm([
+                'reason' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:AbsenceReason')->findAll()],
                 'submit' => ['label' => 'Update']
             ])
             ->setData($absence)

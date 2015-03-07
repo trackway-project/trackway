@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @package AppBundle\Form\Type
  */
-class TeamFormType extends AbstractOverrideType
+class TeamFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder

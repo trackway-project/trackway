@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @package AppBundle\Form\Type
  */
-class AbsenceFormType extends AbstractOverrideType
+class AbsenceFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -34,7 +34,6 @@ class AbsenceFormType extends AbstractOverrideType
             ], $options))
             ->add('reason', 'entity', $this->overrideOptions('reason', [
                 'class' => 'AppBundle\Entity\AbsenceReason',
-                'expanded'  => true,
                 'required' => true
             ], $options));
     }

@@ -74,17 +74,21 @@ class TimeEntryController extends Controller
         $timeEntry->setStartsAt(new \DateTime());
         $timeEntry->setEndsAt(new \DateTime());
 
+        /** @var User $user */
+        $user = $this->getUser();
+        $activeTeam = $user->getActiveTeam();
+
         $form = $this
             ->get('app.form.factory.time_entry')
             ->createForm([
+                'project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)],
+                'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
                 'submit' => ['label' => 'Create']
             ])
             ->setData($timeEntry)
             ->handleRequest($request);
 
         if ($form->isValid()) {
-            /** @var User $user */
-            $user = $this->getUser();
             $timeEntry->setTeam($user->getActiveTeam());
             $timeEntry->setUser($user);
 
