@@ -46,8 +46,8 @@ class ProfileController extends BaseController
         $form = $this
             ->get('fos_user.profile.form.factory')
             ->createForm([
-                'memberships' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findAllByUser($user)],
-                'activeTeam' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($user)],
+                'memberships' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findByUser($user)],
+                'activeTeam' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUser($user)],
                 'submit' => ['label' => 'profile.edit.submit', 'translation_domain' => 'FOSUserBundle']
             ])
             ->setData($user)

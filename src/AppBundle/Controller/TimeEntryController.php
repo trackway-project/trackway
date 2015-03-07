@@ -37,7 +37,7 @@ class TimeEntryController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findAllByTeamAndUser($user->getActiveTeam(), $user)];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**

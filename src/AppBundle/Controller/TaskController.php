@@ -33,7 +33,7 @@ class TaskController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findAllByTeam($this->getUser()->getActiveTeam())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**

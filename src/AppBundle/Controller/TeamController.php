@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Group;
 use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
+use AppBundle\Entity\User;
 use AppBundle\Form\Factory\FormFactory;
 use AppBundle\Form\Type\TeamFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -34,7 +35,7 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($this->getUser())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUser($this->getUser())];
     }
 
     /**
@@ -94,6 +95,14 @@ class TeamController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($team);
             $em->persist($membership);
+
+            /** @var $user User */
+            $user = $this->getUser();
+            if (!$user->getActiveTeam()) {
+                $user->setActiveTeam($team);
+                $em->persist($user);
+            }
+
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'team.flash.created');
@@ -151,9 +160,7 @@ class TeamController extends Controller
      */
     public function deleteAction(Team $team)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($team);
-        $em->flush();
+        $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->remove($team);
 
         $this->get('session')->getFlashBag()->add('success', 'team.flash.deleted');
 

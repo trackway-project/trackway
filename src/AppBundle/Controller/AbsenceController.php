@@ -37,7 +37,7 @@ class AbsenceController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findAllByTeamAndUser($user->getActiveTeam(), $user)];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**

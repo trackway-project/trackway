@@ -33,7 +33,7 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**

@@ -35,7 +35,7 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.form.factory.task');
         $this->assertContainerBuilderHasService('app.form.factory.team');
         $this->assertContainerBuilderHasService('app.form.factory.time_entry');
-        
+
         $this->assertContainerBuilderHasService('fos_user.change_password.form.factory');
         $this->assertContainerBuilderHasService('fos_user.group.form.factory');
         $this->assertContainerBuilderHasService('fos_user.profile.form.factory');

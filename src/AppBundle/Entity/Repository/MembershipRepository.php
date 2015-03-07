@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class MembershipRepository extends EntityRepository
 {
-    public function findAllByUser(User $user)
+    public function findByUser(User $user)
     {
         return $this->findBy(['user' => $user->getId()]);
     }

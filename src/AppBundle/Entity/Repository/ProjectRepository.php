@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectRepository extends EntityRepository
 {
-    public function findAllByTeam(Team $team)
+    public function findByTeam(Team $team)
     {
         return $this->findBy(['team' => $team->getId()]);
     }
