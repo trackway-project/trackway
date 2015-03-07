@@ -24,6 +24,11 @@
     chdir: "{{ app_root }}"
   sudo: false
 
+- command: npm install
+  args:
+    chdir: "{{ app_root }}"
+  sudo: false
+
 - name: install assets via bower
   command: bower install
   args:
