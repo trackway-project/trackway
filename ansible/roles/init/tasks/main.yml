@@ -13,7 +13,7 @@
 
 - name: Add ppa Repository
   sudo: yes
-  apt_repository: repo=ppa:ondrej/{{ php_ppa }}
+  apt_repository: repo=ppa:ondrej/{{ php.ppa }}
 
 - name: Update apt
   sudo: yes
@@ -22,7 +22,7 @@
 - name: Install Extra Packages
   sudo: yes
   apt: pkg={{ item }} state=latest
-  with_items: sys_packages
+  with_items: common.sys_packages
 
 - name: Configure the timezone
   sudo: yes
