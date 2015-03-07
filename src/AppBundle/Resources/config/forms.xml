@@ -8,48 +8,48 @@
         <service id="app.form.factory.absence" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_absence_form</argument>
-            <argument>app.form.type.absence</argument>
+            <argument>appbundle_absence_form_type</argument>
         </service>
 
         <service id="app.form.factory.absence_reason" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_absence_reason_form</argument>
-            <argument>app.form.type.absence_reason</argument>
+            <argument>appbundle_absence_reason_form_type</argument>
         </service>
         <service id="app.form.factory.invitation" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_invitation_form</argument>
-            <argument>app.form.type.invitation</argument>
+            <argument>appbundle_invitation_form_type</argument>
         </service>
 
         <service id="app.form.factory.membership" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_membership_form</argument>
-            <argument>app.form.type.membership</argument>
+            <argument>appbundle_membership_form_type</argument>
         </service>
 
         <service id="app.form.factory.project" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_project_form</argument>
-            <argument>app.form.type.project</argument>
+            <argument>appbundle_project_form_type</argument>
         </service>
 
         <service id="app.form.factory.task" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_task_form</argument>
-            <argument>app.form.type.task</argument>
+            <argument>appbundle_task_form_type</argument>
         </service>
 
         <service id="app.form.factory.team" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_team_form</argument>
-            <argument>app.form.type.team</argument>
+            <argument>appbundle_team_form_type</argument>
         </service>
 
         <service id="app.form.factory.time_entry" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_time_entry_form</argument>
-            <argument>app.form.type.time_entry</argument>
+            <argument>appbundle_time_entry_form_type</argument>
         </service>
 
         <!-- FosUserBundle Form Factories  -->
