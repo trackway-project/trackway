@@ -10,11 +10,11 @@
     - vars/common.yml
     - [ "vars/apachephp.yml", "vars/ws_defaults.yml" ]
   roles:
-    - init
-    - php5-cli
-    - apache
-    - php5
-    - mariadb
-    - phpcommon
-    - nodejs
-    - app
+    - { role: init, tags: init }
+    - { role: php5-cli, tags: php5-cli }
+    - { role: apache, tags: apache }
+    - { role: php5, tags: php5 }
+    - { role: mariadb, tags: mariadb }
+    - { role: phpcommon, tags: phpcommon }
+    - { role: nodejs, tags: nodejs }
+    - { role: app, tags: app }
