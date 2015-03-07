@@ -44,6 +44,14 @@ Enjoy!
 ## Thanks
 
 http://bootswatch.com
+http://getbootstrap.com/
+http://bower.io/
+http://gulpjs.com/
+https://www.vagrantup.com/
+http://www.ansible.com/home
+https://nodejs.org/
+http://capistranorb.com/
+http://symfony.com/
 
 ## Copyright and License
 
