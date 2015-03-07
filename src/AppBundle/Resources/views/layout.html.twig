@@ -16,48 +16,50 @@
     <![endif]-->
 </head>
 <body class="{% block class %}{% endblock class %}">
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ path('dashboard_index') }}">Trackway</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            {{ knp_menu_render('AppBundle:Builder:mainMenu', {}, 'appbundle_navbar_renderer') }}
-            {{ knp_menu_render('AppBundle:Builder:userMenu', {'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
-        </div>
-    </div>
-</nav>
-
-<div class="container" id="wrapper">
-
-    {% for type, messages in app.session.flashBag.all %}
-        {% for message in messages %}
-            <div class="alert alert-{{ type }}" role="alert">
-                {{ message|trans({}, 'FOSUserBundle') }}
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('dashboard_index') }}">Trackway</a>
             </div>
-        {% endfor %}
-    {% endfor %}
 
-    {% block content %}
-        {% block fos_user_content %}
-        {% endblock fos_user_content %}
-    {% endblock content %}
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {{ knp_menu_render('AppBundle:Builder:mainMenu', {}, 'appbundle_navbar_renderer') }}
+                {{ knp_menu_render('AppBundle:Builder:userMenu', {'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}" role="alert">
+                    {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block content %}
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        {% endblock content %}
+    </div>
+
+    <div id="push"></div>
 </div>
 
-<footer class="footer">
+<div id="footer">
     <div class="container">
-        <p class="text-muted pull-left">Fork it on Github: <a href="https://github.com/MewesK/trackway">https://github.com/MewesK/trackway</a>
-        </p>
+        <p class="text-muted">Fork it on <a href="https://github.com/MewesK/trackway">Github</a></p>
     </div>
-</footer>
+</div>
 
 <script src="/js/combined.js"></script>
 </body>

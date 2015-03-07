@@ -50,7 +50,7 @@ class RoutingListener
     public function onKernelRequest(GetResponseEvent $event)
     {
         // Do nothing if it is not the master request or user not authenticated
-        
+
         if (!$event->isMasterRequest() || !$this->tokenStorage->getToken()) {
             return;
         }
