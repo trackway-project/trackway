@@ -27,14 +27,20 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         // forms.xml
+        $this->assertContainerBuilderHasService('fos_user.change_password.form.factory');
+        $this->assertContainerBuilderHasService('fos_user.group.form.factory');
+        $this->assertContainerBuilderHasService('fos_user.profile.form.factory');
+        $this->assertContainerBuilderHasService('fos_user.registration.form.factory');
+        $this->assertContainerBuilderHasService('fos_user.resetting.form.factory');
         $this->assertContainerBuilderHasService('app.form.type.profile');
 
         // listeners.xml
         $this->assertContainerBuilderHasService('app.event_listener.routing');
 
         // menu.xml
-        $this->assertContainerBuilderHasService('app.menu.navbar_renderer');
-        $this->assertContainerBuilderHasService('app.menu.sidebar_renderer');
+        $this->assertContainerBuilderHasService('app.menu.extension.icon');
+        $this->assertContainerBuilderHasService('app.menu.renderer.navbar');
+        $this->assertContainerBuilderHasService('app.menu.renderer.sidebar');
 
         // security.xml
         $this->assertContainerBuilderHasService('app.security.authorization.voter.basetimeentry');
