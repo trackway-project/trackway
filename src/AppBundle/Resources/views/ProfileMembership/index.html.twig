@@ -25,9 +25,9 @@
                     <a href="{{ path('profile_membership_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
                                 class="fa fa-eye"></i></a>
                     {% if is_granted('EDIT', entity) %}
-                        <a href="" class="btn btn-sm btn-default"><i
+                        <a href="{{ path('profile_membership_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
                                     class="fa fa-pencil-square-o"></i></a>
-                        <a href="" class="btn btn-sm btn-danger"><i
+                        <a href="{{ path('profile_membership_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
                                     class="fa fa-times"></i></a>
                     {% endif %}
                 </td>

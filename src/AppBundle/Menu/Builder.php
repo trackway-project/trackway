@@ -35,6 +35,8 @@ class Builder extends ContainerAware
                 if ($membershipId && $route !== 'team_membership_index' && strpos($route, 'team_membership_') === 0) {
                     $menu['Teams']['Memberships']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
                     $menu['Teams']['Memberships']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_membership_show', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                    $menu['Teams']['Memberships']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_membership_edit', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                    $menu['Teams']['Memberships']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_membership_delete', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                 }
             }
 
@@ -103,9 +105,9 @@ class Builder extends ContainerAware
             $username = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
 
             $menu->addChild('Profile', ['label' => $username, 'route' => 'fos_user_profile_show']);
-            $menu['Profile']->addChild('Profile', ['route' => 'fos_user_profile_show']);
+            $menu['Profile']->addChild('Profile', ['icon' => 'fa fa-fw fa-user', 'route' => 'fos_user_profile_show']);
             $menu['Profile']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'profile_membership_index']);
-            $menu['Profile']->addChild('Settings', ['route' => 'fos_user_profile_edit']);
+            $menu['Profile']->addChild('Settings', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'fos_user_profile_edit']);
 
             $menu->addChild('Logout', ['route' => 'fos_user_security_logout']);
 
@@ -116,6 +118,8 @@ class Builder extends ContainerAware
             if ($id && strpos($route, 'profile_membership_') === 0) {
                 $menu['Profile']['Memberships']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'profile_membership_index']);
                 $menu['Profile']['Memberships']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'profile_membership_show', 'routeParameters' => ['id' => $id]]);
+                $menu['Profile']['Memberships']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'profile_membership_edit', 'routeParameters' => ['id' => $id]]);
+                $menu['Profile']['Memberships']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'profile_membership_delete', 'routeParameters' => ['id' => $id]]);
             }
         } else {
             $menu->addChild('Login', ['route' => 'fos_user_security_login']);

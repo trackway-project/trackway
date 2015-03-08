@@ -129,9 +129,9 @@ class TeamController extends Controller
         $form = $this
             ->get('app.form.factory.team')
             ->createForm([
-                'memberships' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findByTeam($team)],
                 'submit' => ['label' => 'Update']
             ])
+            ->remove('memberships')
             ->setData($team)
             ->handleRequest($request);
 

@@ -60,4 +60,68 @@ class TeamMembershipController extends Controller
         dump($team, $membership);
         return ['team' => $team, 'entity' => $membership];
     }
+
+    /**
+     * Edits an existing Membership entity.
+     *
+     * @param Request $request
+     * @param Team $team
+     * @param Membership $membership
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Method("GET|POST")
+     * @ParamConverter("team", class="AppBundle:Team", options={"id" = "id"})
+     * @ParamConverter("membership", class="AppBundle:Membership", options={"id" = "membershipId"})
+     * @Route("/{id}/membership/{membershipId}/edit", requirements={"id": "\d+", "membershipId": "\d+"}, name="team_membership_edit")
+     * @Security("is_granted('EDIT', membership)")
+     * @Template()
+     */
+    public function editAction(Request $request, Team $team, Membership $membership)
+    {
+        $form = $this
+            ->get('app.form.factory.membership')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->remove('team')
+            ->remove('user')
+            ->setData($membership)
+            ->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'team_membership.flash.updated');
+
+            return $this->redirect($this->generateUrl('team_membership_show', ['id' => $team->getId(), 'membershipId' => $membership->getId()]));
+        }
+
+        return ['team' => $team, 'entity' => $membership, 'form' => $form->createView()];
+    }
+
+    /**
+     * Deletes an existing Membership entity.
+     *
+     * @param Team $team
+     * @param Membership $membership
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Method("GET")
+     * @ParamConverter("team", class="AppBundle:Team", options={"id" = "id"})
+     * @ParamConverter("membership", class="AppBundle:Membership", options={"id" = "membershipId"})
+     * @Route("/{id}/membership/{membershipId}/delete", requirements={"id": "\d+", "membershipId": "\d+"}, name="team_membership_delete")
+     * @Security("is_granted('EDIT', membership)")
+     */
+    public function deleteAction(Team $team, Membership $membership)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($membership);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'team_membership.flash.deleted');
+
+        return $this->redirect($this->generateUrl('team_membership_index'));
+    }
 }

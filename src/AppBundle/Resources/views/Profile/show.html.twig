@@ -19,16 +19,6 @@
             <td>{{ user.email }}</td>
         </tr>
         <tr>
-            <th>{{ 'profile.show.memberships'|trans }}</th>
-            <td>
-                <ul>
-                    {% for memberhsip in user.memberships %}
-                        <li>{{ memberhsip }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        <tr>
             <th>{{ 'profile.show.active_team'|trans }}</th>
             <td>{{ user.activeTeam }}</td>
         </tr>
