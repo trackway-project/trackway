@@ -12,5 +12,5 @@ parameters:
     mailer_password:   ~
 
     locale:            en
-
     secret:            ThisTokenIsNotSoSecretChangeIt
+    session_name:      trackway_session

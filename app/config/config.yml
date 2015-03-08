@@ -18,6 +18,7 @@ framework:
     trusted_proxies: ~
     session:
         handler_id:  ~
+        name:        "%session_name%"
     fragments:       ~
     http_method_override: true
 
@@ -55,14 +56,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-# JMSI18nRoutingBundle Configuration
-jms_i18n_routing:
-    default_locale: "%locale%"
-    locales: [en, de]
-    strategy: prefix_except_default
-    cookie:
-        name: locale
 
 # FOSUserBundle Configuration
 fos_user:

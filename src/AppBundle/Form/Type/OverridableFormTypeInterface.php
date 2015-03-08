@@ -3,10 +3,10 @@
 namespace AppBundle\Form\Type;
 
 /**
- * Interface OverridableFormType
+ * Interface OverridableFormTypeInterface
  *
  * @package AppBundle\Form\Type
  */
-interface OverridableFormType
+interface OverridableFormTypeInterface
 {
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\Event\FormEvent;
@@ -26,6 +27,7 @@ class ProfileController extends BaseController
      */
     public function editAction(Request $request)
     {
+        /** @var User */
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
@@ -52,6 +54,7 @@ class ProfileController extends BaseController
             ->handleRequest($request);
 
         if ($form->isValid()) {
+            dump(123);
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
             $userManager = $this->get('fos_user.user_manager');
 
@@ -63,6 +66,11 @@ class ProfileController extends BaseController
             if (null === $response = $event->getResponse()) {
                 $url = $this->generateUrl('fos_user_profile_show');
                 $response = new RedirectResponse($url);
+            }
+
+            // TODO: Maybe putting it in a event listener?
+            if (!empty($user->getLocale())) {
+                $request->getSession()->set('_locale', $user->getLocale());
             }
 
             $dispatcher->dispatch(FOSUserEvents::PROFILE_EDIT_COMPLETED, new FilterUserResponseEvent($user, $request, $response));

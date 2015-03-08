@@ -2,7 +2,6 @@
 
 namespace AppBundle\Menu\Renderer;
 
-use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\MatcherInterface;
 
 class SidebarRenderer extends AdvancedRenderer

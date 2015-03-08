@@ -9,7 +9,7 @@ use Symfony\Component\Form\AbstractType;
  *
  * @package AppBundle\Form\Type
  */
-abstract class AbstractOverridableFormType extends AbstractType implements OverridableFormType
+abstract class AbstractOverridableFormType extends AbstractType implements OverridableFormTypeInterface
 {
     /**
      * @param $name

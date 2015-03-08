@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  *
  * @package AppBundle\Form\Type
  */
-class ProfileFormType extends BaseFormType implements OverridableFormType
+class ProfileFormType extends BaseFormType implements OverridableFormTypeInterface
 {
     /**
      * @var string
