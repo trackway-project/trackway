@@ -68,6 +68,8 @@ class TeamInvitationController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
+            // TODO: check if email is already member of the team
+
             $invitation->setTeam($team);
             $invitation->setStatus('open');
             $invitation->setConfirmationToken($this->get('fos_user.util.token_generator')->generateToken());
@@ -76,6 +78,7 @@ class TeamInvitationController extends Controller
             $em->persist($invitation);
             $em->flush();
 
+            // TODO: send mail
             $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.invited');
 
             return $this->redirect($this->generateUrl('team_invitation_show', ['id' => $team->getId(), 'invitationId' => $invitation->getId()]));
@@ -122,6 +125,9 @@ class TeamInvitationController extends Controller
      */
     public function editAction(Request $request, Team $team, Invitation $invitation)
     {
+        $oldEmail = $invitation->getEmail();
+        $oldStatus = $invitation->getStatus();
+
         $form = $this
             ->get('app.form.factory.invitation')
             ->createForm([
@@ -132,9 +138,20 @@ class TeamInvitationController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
+            // TODO: check if email is already member of the team
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.updated');
+
+            // Reinvite
+            if (
+                ($oldStatus !== $invitation->getStatus() && $oldStatus !== 'open') ||
+                ($oldEmail !== $invitation->getEmail() && $invitation->getStatus() === 'open')
+            ) {
+                // TODO: send mail
+                $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.reinvited');
+            }
 
             return $this->redirect($this->generateUrl('team_invitation_show', ['id' => $team->getId(), 'invitationId' => $invitation->getId()]));
         }

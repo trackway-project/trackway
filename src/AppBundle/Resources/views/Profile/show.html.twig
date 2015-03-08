@@ -22,6 +22,10 @@
             <th>{{ 'profile.show.active_team'|trans }}</th>
             <td>{{ user.activeTeam }}</td>
         </tr>
+        <tr>
+            <th>{{ 'profile.show.locale'|trans }}</th>
+            <td>{% if user.locale %}{{ ('locale.' ~ user.locale)|trans }}{% endif %}</td>
+        </tr>
         </tbody>
     </table>
 {% endblock contentOffCanvas %}

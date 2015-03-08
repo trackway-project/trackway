@@ -28,7 +28,12 @@ class InvitationFormType extends AbstractOverridableFormType
                 'trim' => true
             ], $options))
             ->add('status', 'choice', $this->overrideOptions('status', [
-                'choices' => ['open', 'cancelled', 'accepted', 'rejected'],
+                'choices' => [
+                    'open' => 'Open',
+                    'cancelled' => 'Cancelled',
+                    'accepted' => 'Accepted',
+                    'rejected' => 'Rejected'
+                ],
                 'required' => true
             ], $options));
     }
