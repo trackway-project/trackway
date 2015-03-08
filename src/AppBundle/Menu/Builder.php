@@ -27,8 +27,15 @@ class Builder extends ContainerAware
             $menu['Teams']->addChild('Create', ['icon' => 'fa fa-fw fa-plus', 'route' => 'team_new']);
             if ($id && strpos($route, 'team_') === 0) {
                 $menu['Teams']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_show', 'routeParameters' => ['id' => $id]]);
+                $menu['Teams']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
                 $menu['Teams']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_edit', 'routeParameters' => ['id' => $id]]);
                 $menu['Teams']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_delete', 'routeParameters' => ['id' => $id]]);
+
+                $membershipId = $request->get('membershipId');
+                if ($membershipId && $route !== 'team_membership_index' && strpos($route, 'team_membership_') === 0) {
+                    $menu['Teams']['Memberships']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
+                    $menu['Teams']['Memberships']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_membership_show', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                }
             }
 
             $activeTeam = $this->container->get('security.token_storage')->getToken()->getUser()->getActiveTeam();
@@ -97,9 +104,19 @@ class Builder extends ContainerAware
 
             $menu->addChild('Profile', ['label' => $username, 'route' => 'fos_user_profile_show']);
             $menu['Profile']->addChild('Profile', ['route' => 'fos_user_profile_show']);
+            $menu['Profile']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'profile_membership_index']);
             $menu['Profile']->addChild('Settings', ['route' => 'fos_user_profile_edit']);
 
             $menu->addChild('Logout', ['route' => 'fos_user_security_logout']);
+
+            /** @var Request $request */
+            $request = $this->container->get('request');
+            $route = $request->get('_route');
+            $id = $request->get('id');
+            if ($id && strpos($route, 'profile_membership_') === 0) {
+                $menu['Profile']['Memberships']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'profile_membership_index']);
+                $menu['Profile']['Memberships']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'profile_membership_show', 'routeParameters' => ['id' => $id]]);
+            }
         } else {
             $menu->addChild('Login', ['route' => 'fos_user_security_login']);
             $menu->addChild('Register', ['route' => 'fos_user_registration_register']);

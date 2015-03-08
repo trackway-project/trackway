@@ -1,0 +1,42 @@
+{% extends "AppBundle::layoutOffCanvas.html.twig" %}
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}team_membership{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Team Membership</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Group</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.user }}</td>
+                <td>{{ entity.group }}</td>
+                <td class="text-right">
+                    <a href="{{ path('team_membership_show', { 'id': team.id, 'membershipId': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-eye"></i></a>
+                    {% if is_granted('EDIT', entity) %}
+                        <a href="" class="btn btn-sm btn-default"><i
+                                    class="fa fa-pencil-square-o"></i></a>
+                        <a href="" class="btn btn-sm btn-danger"><i
+                                    class="fa fa-times"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

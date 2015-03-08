@@ -12,10 +12,11 @@ class MembershipVoter implements VoterInterface
 {
     const VIEW = 'VIEW';
     const EDIT = 'EDIT';
+    const DELETE = 'EDIT';
 
     public function supportsAttribute($attribute)
     {
-        return in_array($attribute, [self::VIEW, self::EDIT], false);
+        return in_array($attribute, [self::VIEW, self::EDIT, self::DELETE], false);
     }
 
     public function supportsClass($class)
@@ -63,8 +64,17 @@ class MembershipVoter implements VoterInterface
         }
 
         switch ($attribute) {
-            case self::VIEW:
             case self::EDIT:
+                /** @var Membership $_membership */
+                foreach ($user->getMemberships() as $_membership) {
+                    if (in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)
+                    ) {
+                        return VoterInterface::ACCESS_GRANTED;
+                    }
+                }
+                break;
+            case self::VIEW:
+            case self::DELETE:
                 /** @var Membership $_membership */
                 foreach ($user->getMemberships() as $_membership) {
                     if ($membership === $_membership || in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)

@@ -1,0 +1,42 @@
+{% extends "AppBundle::layoutOffCanvas.html.twig" %}
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}profile_membership{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Profile Membership</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Team</th>
+            <th>Group</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.team }}</td>
+                <td>{{ entity.group }}</td>
+                <td class="text-right">
+                    <a href="{{ path('profile_membership_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-eye"></i></a>
+                    {% if is_granted('EDIT', entity) %}
+                        <a href="" class="btn btn-sm btn-default"><i
+                                    class="fa fa-pencil-square-o"></i></a>
+                        <a href="" class="btn btn-sm btn-danger"><i
+                                    class="fa fa-times"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'Profile'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

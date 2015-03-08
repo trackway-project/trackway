@@ -14,17 +14,4 @@ class SidebarRenderer extends AdvancedRenderer
 
         parent::__construct($matcher, $defaultOptions, $charset);
     }
-
-    public function render(ItemInterface $item, array $options = [])
-    {
-        // Manipulate items
-        $order = ['Close'];
-        $order = array_merge($order, array_keys($item->getChildren()));
-
-        $item->addChild('Close', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'uri' => '#'])->setAttributes(['class' => 'visible-xs', 'data-toggle' => 'offcanvas']);
-
-        $item->reorderChildren($order);
-
-        return parent::render($item, $options);
-    }
 } 
