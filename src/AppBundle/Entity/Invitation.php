@@ -27,9 +27,6 @@ class Invitation
      *
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="invitations")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
-     *
-     * @Assert\NotNull()
-     * @Assert\Type(type="AppBundle\Entity\Team")
      */
     protected $team;
 
@@ -56,17 +53,14 @@ class Invitation
     /**
      * @var string
      *
-     * @ORM\Column(name="key", type="string", length=32)
+     * @ORM\Column(name="confirmation_token", type="string", length=255)
      */
-    protected $key;
+    protected $confirmationToken;
 
     /**
      * @var string
      *
      * @ORM\Column(name="status", type="invitationStatusEnum")
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $status;
 
@@ -145,17 +139,17 @@ class Invitation
     /**
      * @return string
      */
-    public function getKey()
+    public function getConfirmationToken()
     {
-        return $this->key;
+        return $this->confirmationToken;
     }
 
     /**
-     * @param string $key
+     * @param string $confirmationToken
      */
-    public function setKey($key)
+    public function setConfirmationToken($confirmationToken)
     {
-        $this->key = $key;
+        $this->confirmationToken = $confirmationToken;
     }
 
     /**

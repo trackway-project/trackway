@@ -130,8 +130,10 @@ class TimeEntryController extends Controller
         if ($form->isValid()) {
             /** @var User $user */
             $user = $this->getUser();
+
             $timeEntry->setTeam($user->getActiveTeam());
             $timeEntry->setUser($user);
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.updated');
