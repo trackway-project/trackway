@@ -77,6 +77,7 @@ class TaskController extends Controller
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
@@ -114,6 +115,7 @@ class TaskController extends Controller
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'task.flash.updated');

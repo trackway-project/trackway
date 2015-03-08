@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Group;
+use AppBundle\Entity\Invitation;
 use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
 use AppBundle\Entity\User;

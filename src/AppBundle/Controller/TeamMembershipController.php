@@ -57,7 +57,6 @@ class TeamMembershipController extends Controller
      */
     public function showAction(Team $team, Membership $membership)
     {
-        dump($team, $membership);
         return ['team' => $team, 'entity' => $membership];
     }
 

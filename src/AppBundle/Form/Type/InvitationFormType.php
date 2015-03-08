@@ -26,6 +26,15 @@ class InvitationFormType extends AbstractOverridableFormType
             ], $options))
             ->add('email', 'email', $this->overrideOptions('email', [
                 'trim' => true
+            ], $options))
+            ->add('status', 'choice', $this->overrideOptions('status', [
+                'choices' => [
+                    'open' => 'Open',
+                    'cancelled' => 'Cancelled',
+                    'accepted' => 'Accepted',
+                    'rejected' => 'Rejected'
+                ],
+                'required' => true
             ], $options));
     }
 

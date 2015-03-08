@@ -16,6 +16,7 @@
             <argument>appbundle_absence_reason_form</argument>
             <argument>appbundle_absence_reason_form_type</argument>
         </service>
+
         <service id="app.form.factory.invitation" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>appbundle_invitation_form</argument>

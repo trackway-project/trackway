@@ -18,7 +18,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.name }}</td>
+                <td>{% if entity == app.user.activeTeam %}<i class="fa fa-star" title="Active Team"></i>&nbsp;{% endif %}{{ entity.name }}</td>
                 <td class="text-right">
                     <a href="{{ path('team_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
                                 class="fa fa-eye"></i></a>

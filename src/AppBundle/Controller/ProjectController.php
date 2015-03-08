@@ -77,6 +77,7 @@ class ProjectController extends Controller
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
@@ -114,6 +115,7 @@ class ProjectController extends Controller
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'project.flash.updated');

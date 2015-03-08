@@ -128,8 +128,10 @@ class AbsenceController extends Controller
         if ($form->isValid()) {
             /** @var User $user */
             $user = $this->getUser();
+
             $absence->setTeam($user->getActiveTeam());
             $absence->setUser($user);
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'absence.flash.updated');

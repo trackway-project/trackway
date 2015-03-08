@@ -54,6 +54,16 @@ class ProfileFormType extends BaseFormType implements OverridableFormType
                 'label' => 'form.email',
                 'translation_domain' => 'FOSUserBundle'
             ], $options))
+            ->add('locale', 'choice', $this->overrideOptions('locale', [
+                'label' => 'form.locale',
+                'translation_domain' => 'FOSUserBundle',
+                'choices' => [
+                    null => 'locale.default',
+                    'de' => 'locale.de',
+                    'en' => 'locale.en'
+                ],
+                'required' => false
+            ], $options))
             ->add('memberships', 'entity', $this->overrideOptions('memberships', [
                 'label' => 'form.memberships',
                 'translation_domain' => 'FOSUserBundle',

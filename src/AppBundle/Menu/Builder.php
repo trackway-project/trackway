@@ -27,6 +27,8 @@ class Builder extends ContainerAware
             $menu['Teams']->addChild('Create', ['icon' => 'fa fa-fw fa-plus', 'route' => 'team_new']);
             if ($id && strpos($route, 'team_') === 0) {
                 $menu['Teams']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_show', 'routeParameters' => ['id' => $id]]);
+                $menu['Teams']->addChild('Invite', ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_invite', 'routeParameters' => ['id' => $id]]);
+                $menu['Teams']->addChild('Invitations', ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
                 $menu['Teams']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
                 $menu['Teams']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_edit', 'routeParameters' => ['id' => $id]]);
                 $menu['Teams']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_delete', 'routeParameters' => ['id' => $id]]);
@@ -37,6 +39,14 @@ class Builder extends ContainerAware
                     $menu['Teams']['Memberships']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_membership_show', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                     $menu['Teams']['Memberships']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_membership_edit', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                     $menu['Teams']['Memberships']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_membership_delete', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                }
+                
+                $invitationId = $request->get('invitationId');
+                if ($invitationId && $route !== 'team_invitation_index' && strpos($route, 'team_invitation_') === 0) {
+                    $menu['Teams']['Invitations']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
+                    $menu['Teams']['Invitations']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_invitation_show', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
+                    $menu['Teams']['Invitations']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_invitation_edit', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
+                    $menu['Teams']['Invitations']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_invitation_delete', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
                 }
             }
 
