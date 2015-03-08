@@ -9,7 +9,7 @@ Gemfile.lock    export-ignore
 .gitignore      export-ignore
 .capistrano     export-ignore
 README.md       export-ignore
-config          export-ignore
+config/deploy*  export-ignore
 .travis.yml     export-ignore
 .idea           export-ignore
 ansible         export-ignore
