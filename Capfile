@@ -4,6 +4,7 @@
 # Load capistrano dependencies
 require 'capistrano/setup'
 require 'capistrano/deploy'
+require 'capistrano/rsync'
 require 'capistrano/symfony'
 require 'capistrano/copy_files'
 
