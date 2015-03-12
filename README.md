@@ -13,7 +13,7 @@ The simple on-premise open source time tracker.
 * composer install
 * php app/console doctrine:database:create
 * php app/console doctrine:schema:create
-* mysql {database} < groups.sql
+* php app/console doctrine:fixtures:load
 * sudo npm install
 * bower install
 * gulp
