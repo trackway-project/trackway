@@ -2,8 +2,10 @@
 
 namespace AppBundle\Form\Factory;
 
+use AppBundle\Form\Type\OverridableFormTypeInterface;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 class FormFactory implements FactoryInterface
 {
@@ -13,14 +15,14 @@ class FormFactory implements FactoryInterface
     private $formFactory;
 
     /**
-     * @var string
+     * @var FormTypeInterface
      */
-    private $name;
+    private $formType;
 
     /**
      * @var string
      */
-    private $type;
+    private $name;
 
     /**
      * @var array
@@ -30,14 +32,14 @@ class FormFactory implements FactoryInterface
     /**
      * @param FormFactoryInterface $formFactory
      * @param $name
-     * @param $type
+     * @param $formType
      * @param array $validationGroups
      */
-    public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = null)
+    public function __construct(FormFactoryInterface $formFactory, FormTypeInterface $formType, $name, array $validationGroups = null)
     {
         $this->formFactory = $formFactory;
+        $this->formType = $formType;
         $this->name = $name;
-        $this->type = $type;
         $this->validationGroups = $validationGroups;
     }
 
@@ -64,10 +66,15 @@ class FormFactory implements FactoryInterface
     public function createFormWithoutSubmit(array $options = [])
     {
         $formOptions = [
-            'override' => count($options) ? $options : false,
             'validation_groups' => $this->validationGroups
         ];
 
-        return $this->formFactory->createNamed($this->name, $this->type, null, $formOptions);
+        dump(false);
+
+        if ($this->formType instanceof OverridableFormTypeInterface) {
+            $formOptions['override'] = count($options) ? $options : false;
+        }
+
+        return $this->formFactory->createNamed($this->name, $this->formType, null, $formOptions);
     }
 }
