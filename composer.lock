@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "951b99ecdcbe836d2e0dde6350fa2194",
+    "hash": "bb80df08ae838752703ae8cdece717c1",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1132,33 +1132,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-<<<<<<< HEAD
-                "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
-=======
                 "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac"
->>>>>>> feature/breadcrumbs
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
                 "reference": "c31a2c4e8db5da8b46c74cf275d7f109c0f249ac",
-<<<<<<< HEAD
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://toran.d4e.local/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
-=======
                 "shasum": ""
->>>>>>> feature/breadcrumbs
             },
             "require": {
                 "php": ">=5.3.0",
@@ -1818,25 +1798,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "b4a135c7db56ecc4602b54a2184368f440cac33e",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "b4a135c7db56ecc4602b54a2184368f440cac33e"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/b4a135c7db56ecc4602b54a2184368f440cac33e",
                 "reference": "b4a135c7db56ecc4602b54a2184368f440cac33e",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://toran.d4e.local/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/common": ">=2.2,<2.5-dev",
@@ -1887,25 +1855,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "c811f96f0cf83b997e3a3ed037cac729bbe3e803",
-                "mirrors": [
-                    {
-                        "url": "/%package%/%normalizedUrl%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "reference": "c811f96f0cf83b997e3a3ed037cac729bbe3e803"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/c811f96f0cf83b997e3a3ed037cac729bbe3e803",
                 "reference": "c811f96f0cf83b997e3a3ed037cac729bbe3e803",
-                "shasum": "",
-                "mirrors": [
-                    {
-                        "url": "http://toran.d4e.local/repo/packagist/dists/%package%/%version%/%reference%.%type%",
-                        "preferred": true
-                    }
-                ]
+                "shasum": ""
             },
             "require": {
                 "doctrine/data-fixtures": "~1.0",
