@@ -55,9 +55,9 @@ Enjoy!
 * http://getbootstrap.com/
 * http://bower.io/
 * http://gulpjs.com/
-* https://www.vagrantup.com/
-* http://www.ansible.com/home
-* https://nodejs.org/
+* http://www.vagrantup.com/
+* http://www.ansible.com/
+* http://nodejs.org/
 * http://capistranorb.com/
 * http://symfony.com/
 
