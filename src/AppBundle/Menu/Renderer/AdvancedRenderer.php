@@ -130,7 +130,6 @@ class AdvancedRenderer extends ListRenderer
 
         // Render item
         if ($itemElement) {
-            dump([$item->getUri(), $isCurrent,  $currentAsLink, !$isCurrent || $currentAsLink]);
             // Render the text/link with wrapper tag
             $html = $this->format('<' . $itemElement . $this->renderHtmlAttributes($attributes) . '>', $itemElement, $item->getLevel(), $options);
             $html .= $this->renderLink($item, $options);

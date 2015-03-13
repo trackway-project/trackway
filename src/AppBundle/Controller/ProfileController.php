@@ -54,7 +54,6 @@ class ProfileController extends BaseController
             ->handleRequest($request);
 
         if ($form->isValid()) {
-            dump(123);
             /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
             $userManager = $this->get('fos_user.user_manager');
 

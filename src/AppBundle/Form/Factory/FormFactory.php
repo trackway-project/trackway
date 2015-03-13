@@ -69,8 +69,6 @@ class FormFactory implements FactoryInterface
             'validation_groups' => $this->validationGroups
         ];
 
-        dump(false);
-
         if ($this->formType instanceof OverridableFormTypeInterface) {
             $formOptions['override'] = count($options) ? $options : false;
         }
