@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/trackway-project/trackway.svg?branch=develop)](https://travis-ci.org/trackway-project/trackway)
+
 Trackway
 ========================
 
