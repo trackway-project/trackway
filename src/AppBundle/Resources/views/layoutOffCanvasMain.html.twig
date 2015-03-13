@@ -1,0 +1,13 @@
+{% extends "AppBundle::layoutOffCanvas.html.twig" %}
+
+{% block subtitle %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu'], {'icon': false, 'raw': ' / '}, 'appbundle_breadcrumb_renderer') }} ·
+{% endblock subtitle %}
+
+{% block content %}
+    {% block breadcrumb %}
+        {{ knp_menu_render(['AppBundle:Builder:mainMenu'], {'icon': false}, 'appbundle_breadcrumb_renderer') }}
+    {% endblock breadcrumb %}
+
+    {{ parent() }}
+{% endblock content %}
