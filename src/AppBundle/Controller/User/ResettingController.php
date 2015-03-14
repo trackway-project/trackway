@@ -70,6 +70,7 @@ class ResettingController extends Controller
 
     /**
      * @param Request $request
+     * @param $token
      *
      * @return array|RedirectResponse
      *
@@ -98,7 +99,7 @@ class ResettingController extends Controller
 
         if ($form->isValid()) {
             $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
-            
+
             $this->getDoctrine()->getManager()->flush();
 
             // Login

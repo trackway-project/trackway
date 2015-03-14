@@ -29,10 +29,9 @@ class ChangePasswordCommand extends ContainerAwareCommand
         $this
             ->setName('fos:user:change-password')
             ->setDescription('Change the password of a user.')
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('username', InputArgument::REQUIRED, 'The username'),
-                new InputArgument('password', InputArgument::REQUIRED, 'The password'),
-            ))
+                new InputArgument('password', InputArgument::REQUIRED, 'The password')])
             ->setHelp(<<<EOT
 The <info>fos:user:change-password</info> command changes the password of a user:
 
@@ -49,7 +48,10 @@ EOT
     }
 
     /**
-     * @see Command
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -63,7 +65,8 @@ EOT
     }
 
     /**
-     * @see Command
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {

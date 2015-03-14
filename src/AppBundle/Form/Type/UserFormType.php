@@ -4,14 +4,13 @@ namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 /**
- * Class ProfileFormType
+ * Class UserFormType
  *
  * @package AppBundle\Form\Type
  */
-class ProfileFormType extends AbstractOverridableFormType
+class UserFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -38,10 +37,7 @@ class ProfileFormType extends AbstractOverridableFormType
             ->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', [
                 'class' => 'AppBundle\Entity\Team'
             ], $options))
-            ->add('current_password', 'password', $this->overrideOptions('current_password', [
-                'mapped' => false,
-                'constraints' => new UserPassword()
-            ], $options));
+            ->add('enabled', 'checkbox', $this->overrideOptions('enabled', [], $options));
     }
 
     /**
@@ -60,6 +56,6 @@ class ProfileFormType extends AbstractOverridableFormType
      */
     public function getName()
     {
-        return 'appbundle_profile_form_type';
+        return 'appbundle_user_form_type';
     }
 }

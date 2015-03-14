@@ -5,12 +5,10 @@ namespace AppBundle\Controller\User;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Class ProfileController
@@ -75,6 +73,10 @@ class ProfileController extends Controller
     }
 
     /**
+     * @param Request $request
+     *
+     * @return array|RedirectResponse
+     *
      * @Method("GET|POST")
      * @Route("/change-password", name="profile_change_password")
      * @Template()

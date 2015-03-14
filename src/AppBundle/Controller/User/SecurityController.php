@@ -7,8 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Class SecurityController
@@ -26,7 +24,7 @@ class SecurityController extends Controller
      * @Route("/login", name="security_login")
      * @Template()
      */
-    public function loginAction(Request $request)
+    public function loginAction()
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
@@ -37,10 +35,7 @@ class SecurityController extends Controller
             $this->get('session')->getFlashBag()->add('error', $error->getMessage());
         }
 
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return ['last_username' => $lastUsername];
+        return ['last_username' => $authenticationUtils->getLastUsername()];
     }
 
     /**

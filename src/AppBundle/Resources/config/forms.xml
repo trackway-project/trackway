@@ -71,6 +71,12 @@
             <argument>appbundle_profile_form</argument>
         </service>
 
+        <service id="app.form.factory.user" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.user" />
+            <argument>appbundle_user_form</argument>
+        </service>
+
         <service id="app.form.factory.registration" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="app.form.type.registration" />
@@ -133,6 +139,10 @@
 
         <service id="app.form.type.profile" class="AppBundle\Form\Type\ProfileFormType">
             <tag name="form.type" alias="appbundle_profile_form_type"/>
+        </service>
+
+        <service id="app.form.type.user" class="AppBundle\Form\Type\UserFormType">
+            <tag name="form.type" alias="appbundle_user_form_type"/>
         </service>
 
         <service id="app.form.type.registration" class="AppBundle\Form\Type\RegistrationFormType">

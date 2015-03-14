@@ -21,11 +21,11 @@
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.roles }}</td>
                 <td class="text-right">
-                    <a href="{{ path('group_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                    <a href="{{ path('admin_group_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
                                 class="fa fa-eye"></i></a>
-                    <a href="{{ path('group_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                    <a href="{{ path('admin_group_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
                                 class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('group_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
+                    <a href="{{ path('admin_group_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
                                 class="fa fa-times"></i></a>
                 </td>
             </tr>

@@ -32,13 +32,12 @@ class CreateUserCommand extends ContainerAwareCommand
         $this
             ->setName('fos:user:create')
             ->setDescription('Create a user.')
-            ->setDefinition(array(
+            ->setDefinition([
                 new InputArgument('username', InputArgument::REQUIRED, 'The username'),
                 new InputArgument('email', InputArgument::REQUIRED, 'The email'),
                 new InputArgument('password', InputArgument::REQUIRED, 'The password'),
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as super admin'),
-                new InputOption('inactive', null, InputOption::VALUE_NONE, 'Set the user as inactive'),
-            ))
+                new InputOption('inactive', null, InputOption::VALUE_NONE, 'Set the user as inactive')])
             ->setHelp(<<<EOT
 The <info>fos:user:create</info> command creates a user:
 
@@ -63,7 +62,10 @@ EOT
     }
 
     /**
-     * @see Command
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -80,7 +82,8 @@ EOT
     }
 
     /**
-     * @see Command
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {

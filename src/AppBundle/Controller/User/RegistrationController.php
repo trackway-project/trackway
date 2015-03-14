@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Class RegistrationController
@@ -42,6 +41,7 @@ class RegistrationController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
+            // TODO: Maybe putting it in a manager?
             $user->setConfirmationToken(md5(uniqid(mt_rand(), true)));
             $user->setEnabled(false);
             $user->setLocale($this->container->getParameter('locale'));
@@ -76,13 +76,14 @@ class RegistrationController extends Controller
 
     /**
      * @param Request $request
+     * @param $token
      *
-     * @return array|RedirectResponse
+     * @return RedirectResponse
      *
      * @Method("GET")
      * @Route("/register/{token}", requirements={"token": "[a-zA-Z0-9]+"}, name="registration_confirm")
      */
-    public function confirmAction(Request $request, $token)
+    public function confirmAction($token)
     {
         $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findByConfirmationToken($token);
 

@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity\Repository;
 
-use AppBundle\Entity\Team;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
@@ -67,6 +66,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
         }
 
+        /** @var User $user */
         return $this->find($user->getId());
     }
 

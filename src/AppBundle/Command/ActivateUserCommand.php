@@ -29,9 +29,8 @@ class ActivateUserCommand extends ContainerAwareCommand
         $this
             ->setName('fos:user:activate')
             ->setDescription('Activate a user')
-            ->setDefinition(array(
-                new InputArgument('username', InputArgument::REQUIRED, 'The username'),
-            ))
+            ->setDefinition([
+                new InputArgument('username', InputArgument::REQUIRED, 'The username')])
             ->setHelp(<<<EOT
 The <info>fos:user:activate</info> command activates a user (so they will be able to log in):
 
@@ -41,7 +40,10 @@ EOT
     }
 
     /**
-     * @see Command
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -54,7 +56,8 @@ EOT
     }
 
     /**
-     * @see Command
+     * @param InputInterface $input
+     * @param OutputInterface $output
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {

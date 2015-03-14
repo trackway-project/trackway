@@ -4,7 +4,6 @@ namespace AppBundle\Menu\Renderer;
 
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\MatcherInterface;
-use Knp\Menu\Renderer\ListRenderer;
 
 /**
  * Class BreadcrumbRenderer
