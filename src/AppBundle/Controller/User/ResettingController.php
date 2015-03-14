@@ -97,6 +97,8 @@ class ResettingController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
+            $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
+            
             $this->getDoctrine()->getManager()->flush();
 
             // Login

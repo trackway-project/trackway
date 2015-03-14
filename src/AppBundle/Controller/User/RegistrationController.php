@@ -45,6 +45,7 @@ class RegistrationController extends Controller
             $user->setConfirmationToken(md5(uniqid(mt_rand(), true)));
             $user->setEnabled(false);
             $user->setLocale($this->container->getParameter('locale'));
+            $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
             $user->setRegistrationRequestedAt(new \DateTime());
             $user->setRoles(['ROLE_USER']);
             $user->setSalt(md5(uniqid(mt_rand(), true)));

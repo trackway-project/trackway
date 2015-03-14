@@ -44,7 +44,7 @@ class ProfileController extends Controller
      */
     public function editAction(Request $request)
     {
-        /** @var User */
+        /** @var User $user */
         $user = $this->getUser();
 
         $form = $this
@@ -57,6 +57,8 @@ class ProfileController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
+            $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
+
             $this->getDoctrine()->getManager()->flush();
 
             // TODO: Maybe putting it in a event listener?
