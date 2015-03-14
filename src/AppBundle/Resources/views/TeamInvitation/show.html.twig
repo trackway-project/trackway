@@ -1,0 +1,33 @@
+{% extends 'AppBundle::layoutOffCanvasMain.html.twig' %}
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}team_invitation{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Team Invitation</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Email</th>
+            <td>{{ entity.email }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ entity.status }}</td>
+        </tr>
+        {% if entity.user %}
+        <tr>
+            <th>User</th>
+            <td>{{ entity.user }}</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams', 'Invitations'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

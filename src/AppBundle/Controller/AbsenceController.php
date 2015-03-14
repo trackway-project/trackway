@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Absence;
 use AppBundle\Entity\User;
-use AppBundle\Form\Type\AbsenceFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -13,7 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Absence controller.
+ * Class AbsenceController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/absence")
  */
@@ -34,7 +35,7 @@ class AbsenceController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findAllByTeamAndUser($user->getActiveTeam(), $user)];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**
@@ -73,7 +74,14 @@ class AbsenceController extends Controller
         $absence->setStartsAt(new \DateTime());
         $absence->setEndsAt(new \DateTime());
 
-        $form = $this->createForm(new AbsenceFormType(), $absence)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.absence')
+            ->createForm([
+                'reason' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:AbsenceReason')->findAll()],
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($absence)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -108,13 +116,22 @@ class AbsenceController extends Controller
      */
     public function editAction(Request $request, Absence $absence)
     {
-        $form = $this->createForm(new AbsenceFormType(), $absence)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.absence')
+            ->createForm([
+                'reason' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:AbsenceReason')->findAll()],
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($absence)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
             $user = $this->getUser();
+
             $absence->setTeam($user->getActiveTeam());
             $absence->setUser($user);
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'absence.flash.updated');

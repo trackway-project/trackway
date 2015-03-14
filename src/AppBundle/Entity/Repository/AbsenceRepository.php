@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class AbsenceRepository extends EntityRepository
 {
-    public function findAllByTeamAndUser(Team $team, User $user)
+    public function findByTeamAndUser(Team $team, User $user)
     {
         return $this->findBy(['team' => $team->getId(), 'user' => $user->getId()]);
     }

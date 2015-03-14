@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Group;
 use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
-use AppBundle\Form\Type\TeamFormType;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -14,7 +14,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Team controller.
+ * Class TeamController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/team")
  */
@@ -31,7 +33,7 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAllByUser($this->getUser())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUser($this->getUser())];
     }
 
     /**
@@ -66,7 +68,14 @@ class TeamController extends Controller
     {
         $team = new Team();
 
-        $form = $this->createForm(new TeamFormType(), $team)->remove('memberships')->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.team')
+            ->createForm([
+                'submit' => ['label' => 'Create']
+            ])
+            ->remove('memberships')
+            ->setData($team)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var Group $group */
@@ -84,6 +93,14 @@ class TeamController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($team);
             $em->persist($membership);
+
+            /** @var $user User */
+            $user = $this->getUser();
+            if (!$user->getActiveTeam()) {
+                $user->setActiveTeam($team);
+                $em->persist($user);
+            }
+
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'team.flash.created');
@@ -109,7 +126,14 @@ class TeamController extends Controller
      */
     public function editAction(Request $request, Team $team)
     {
-        $form = $this->createForm(new TeamFormType(), $team)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.team')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->remove('memberships')
+            ->setData($team)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -135,9 +159,7 @@ class TeamController extends Controller
      */
     public function deleteAction(Team $team)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($team);
-        $em->flush();
+        $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->remove($team);
 
         $this->get('session')->getFlashBag()->add('success', 'team.flash.deleted');
 

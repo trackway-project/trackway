@@ -16,7 +16,7 @@ class AdvancedRenderer extends ListRenderer
     public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null)
     {
         // Initialize default options
-        $defaultOptions = array_merge(['icon' => false, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
+        $defaultOptions = array_merge(['icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
 
         parent::__construct($matcher, $defaultOptions, $charset);
     }
@@ -82,6 +82,12 @@ class AdvancedRenderer extends ListRenderer
             return '';
         }
 
+        // Option: currentAsLink
+        $currentAsLink = $this->defaultOptions['currentAsLink'];
+        if (array_key_exists('currentAsLink', $options)) {
+            $currentAsLink = $options['currentAsLink'];
+        }
+
         // Option: itemAttributes
         $attributes = $item->getAttributes();
         if (array_key_exists('itemAttributes', $options) && is_array($options['itemAttributes'])) {
@@ -97,7 +103,8 @@ class AdvancedRenderer extends ListRenderer
         // Create and populate class array
         $class = array_key_exists('class', $attributes) ? explode(' ', $attributes['class']) : [];
 
-        if ($this->matcher->isCurrent($item)) {
+        $isCurrent = $this->matcher->isCurrent($item);
+        if ($isCurrent) {
             $class[] = $options['currentClass'];
         } elseif ($this->matcher->isAncestor($item, $options['matchingDepth'])) {
             $class[] = $options['ancestorClass'];
@@ -124,11 +131,11 @@ class AdvancedRenderer extends ListRenderer
         // Render item
         if ($itemElement) {
             // Render the text/link with wrapper tag
-            $html = $this->format('<li' . $this->renderHtmlAttributes($attributes) . '>', 'li', $item->getLevel(), $options);
+            $html = $this->format('<' . $itemElement . $this->renderHtmlAttributes($attributes) . '>', $itemElement, $item->getLevel(), $options);
             $html .= $this->renderLink($item, $options);
         } else {
             // Render the text/link without wrapper tag
-            if ($item->getUri() && (!$item->isCurrent() || $options['currentAsLink'])) {
+            if ($item->getUri() && (!$isCurrent || $currentAsLink)) {
                 $attributes = array_merge($item->getLinkAttributes(), $attributes);
                 $text = sprintf('<a href="%s"%s>%s</a>', $this->escape($item->getUri()), $this->renderHtmlAttributes($attributes), $this->renderLabel($item, $options));
             } else {
@@ -161,6 +168,29 @@ class AdvancedRenderer extends ListRenderer
      *
      * @return string
      */
+    protected function renderLink(ItemInterface $item, array $options = array())
+    {
+        // Option: currentAsLink
+        $currentAsLink = $this->defaultOptions['currentAsLink'];
+        if (array_key_exists('currentAsLink', $options)) {
+            $currentAsLink = $options['currentAsLink'];
+        }
+
+        if ($item->getUri() && (!$this->matcher->isCurrent($item) || $currentAsLink)) {
+            $text = $this->renderLinkElement($item, $options);
+        } else {
+            $text = $this->renderSpanElement($item, $options);
+        }
+
+        return $this->format($text, 'link', $item->getLevel(), $options);
+    }
+
+    /**
+     * @param ItemInterface $item
+     * @param array $options
+     *
+     * @return string
+     */
     protected function renderLabel(ItemInterface $item, array $options)
     {
         // Option: icon
@@ -168,7 +198,7 @@ class AdvancedRenderer extends ListRenderer
         if (array_key_exists('icon', $options)) {
             $icon = $options['icon'];
         }
-        $icon = $item->getExtra('icon', $icon);
+        $icon = $icon ? $item->getExtra('icon', $icon) : false;
         $icon = $icon ? sprintf('<i class="%s"></i>', $icon) : false;
 
         $label = $options['allow_safe_labels'] && $item->getExtra('safe_label', false) ? $item->getLabel() : $this->escape($item->getLabel());

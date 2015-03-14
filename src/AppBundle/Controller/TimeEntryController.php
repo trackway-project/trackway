@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\TimeEntry;
 use AppBundle\Entity\User;
-use AppBundle\Form\Type\TimeEntryFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -13,7 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * TimeEntry controller.
+ * Class TimeEntryController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/timeentry")
  */
@@ -34,7 +35,7 @@ class TimeEntryController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findAllByTeamAndUser($user->getActiveTeam(), $user)];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findByTeamAndUser($user->getActiveTeam(), $user)];
     }
 
     /**
@@ -73,11 +74,21 @@ class TimeEntryController extends Controller
         $timeEntry->setStartsAt(new \DateTime());
         $timeEntry->setEndsAt(new \DateTime());
 
-        $form = $this->createForm(new TimeEntryFormType(), $timeEntry)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        /** @var User $user */
+        $user = $this->getUser();
+        $activeTeam = $user->getActiveTeam();
+
+        $form = $this
+            ->get('app.form.factory.time_entry')
+            ->createForm([
+                'project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)],
+                'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($timeEntry)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
-            /** @var User $user */
-            $user = $this->getUser();
             $timeEntry->setTeam($user->getActiveTeam());
             $timeEntry->setUser($user);
 
@@ -85,7 +96,7 @@ class TimeEntryController extends Controller
             $em->persist($timeEntry);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.created');
+            $this->get('session')->getFlashBag()->add('success', 'time_entry.flash.created');
 
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
@@ -108,16 +119,24 @@ class TimeEntryController extends Controller
      */
     public function editAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this->createForm(new TimeEntryFormType(), $timeEntry)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.time_entry')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($timeEntry)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
             $user = $this->getUser();
+
             $timeEntry->setTeam($user->getActiveTeam());
             $timeEntry->setUser($user);
+
             $this->getDoctrine()->getManager()->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.updated');
+            $this->get('session')->getFlashBag()->add('success', 'time_entry.flash.updated');
 
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
@@ -142,7 +161,7 @@ class TimeEntryController extends Controller
         $em->remove($timeEntry);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.deleted');
+        $this->get('session')->getFlashBag()->add('success', 'time_entry.flash.deleted');
 
         return $this->redirect($this->generateUrl('timeentry_index'));
     }

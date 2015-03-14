@@ -1,0 +1,27 @@
+{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% trans_default_domain 'AppBundle' %}
+
+{% block class %}team_membership{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Team Membership</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>User</th>
+            <td>{{ entity.user }}</td>
+        </tr>
+        <tr>
+            <th>Group</th>
+            <td>{{ entity.group }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams', 'Memberships'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

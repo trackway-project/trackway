@@ -2,11 +2,15 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TaskFormType extends AbstractType
+/**
+ * Class TaskFormType
+ *
+ * @package AppBundle\Form\Type
+ */
+class TaskFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,7 +18,11 @@ class TaskFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', null, ['trim' => true]);
+        $builder
+            ->add('name', null, $this->overrideOptions('name', [
+                'required' => true,
+                'trim' => true
+            ], $options));
     }
 
     /**
@@ -22,7 +30,10 @@ class TaskFormType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Task']);
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\Task',
+            'override' => false
+        ]);
     }
 
     /**

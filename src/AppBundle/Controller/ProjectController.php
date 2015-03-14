@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Project;
-use AppBundle\Form\Type\ProjectFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -12,7 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Project controller.
+ * Class ProjectController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/project")
  */
@@ -30,7 +31,7 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findAllByTeam($this->getUser()->getActiveTeam())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -66,10 +67,17 @@ class ProjectController extends Controller
     {
         $project = new Project();
 
-        $form = $this->createForm(new ProjectFormType(), $project)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.project')
+            ->createForm([
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($project)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
@@ -97,10 +105,17 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
-        $form = $this->createForm(new ProjectFormType(), $project)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.project')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($project)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'project.flash.updated');

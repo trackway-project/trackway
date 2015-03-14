@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/trackway-project/trackway.svg?branch=develop)](https://travis-ci.org/trackway-project/trackway)
+
 Trackway
 ========================
 
@@ -13,7 +15,7 @@ The simple on-premise open source time tracker.
 * composer install
 * php app/console doctrine:database:create
 * php app/console doctrine:schema:create
-* mysql {database} < groups.sql
+* php app/console doctrine:fixtures:load
 * sudo npm install
 * bower install
 * gulp
@@ -49,15 +51,22 @@ You need to have virtualbox, vagrant and ansible installed.
 Enjoy!
 
 ## Thanks
+
+### trackway foundation
 * http://bootswatch.com
 * http://getbootstrap.com/
 * http://bower.io/
 * http://gulpjs.com/
-* https://www.vagrantup.com/
-* http://www.ansible.com/home
-* https://nodejs.org/
+* http://www.vagrantup.com/
+* http://www.ansible.com/
+* http://nodejs.org/
 * http://capistranorb.com/
 * http://symfony.com/
+
+### Contributors
+* Mewes Kochheim
+* Markus Wanjura
+* Felix Peters
 
 ## Copyright and License
 

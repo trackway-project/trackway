@@ -1,0 +1,17 @@
+{% extends 'AppBundle::layoutOffCanvasMain.html.twig' %}
+{% trans_default_domain 'AppBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block class %}team_membership{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Team Membership edit</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    {{ form(form) }}
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams', 'Memberships'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

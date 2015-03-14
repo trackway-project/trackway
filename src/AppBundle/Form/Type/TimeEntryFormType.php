@@ -2,11 +2,15 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TimeEntryFormType extends AbstractType
+/**
+ * Class TimeEntryFormType
+ *
+ * @package AppBundle\Form\Type
+ */
+class TimeEntryFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,12 +18,28 @@ class TimeEntryFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('date', 'date')
-            ->add('endsAt', 'time', ['required' => false])
-            ->add('startsAt', 'time', ['required' => false])
-            ->add('note', null, ['required' => false, 'trim' => true])
-            ->add('project', null, ['required' => false])
-            ->add('task', null, ['required' => false]);
+        $builder
+            ->add('date', 'date', $this->overrideOptions('date', [
+                'required' => true
+            ], $options))
+            ->add('endsAt', 'time', $this->overrideOptions('endsAt', [
+                'required' => false
+            ], $options))
+            ->add('startsAt', 'time', $this->overrideOptions('startsAt', [
+                'required' => false
+            ], $options))
+            ->add('note', null, $this->overrideOptions('note', [
+                'required' => false,
+                'trim' => true
+            ], $options))
+            ->add('project', 'entity', $this->overrideOptions('project', [
+                'class' => 'AppBundle\Entity\Project',
+                'required' => false
+            ], $options))
+            ->add('task', 'entity', $this->overrideOptions('task', [
+                'class' => 'AppBundle\Entity\Task',
+                'required' => false
+            ], $options));
     }
 
     /**
@@ -27,7 +47,10 @@ class TimeEntryFormType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\TimeEntry']);
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\TimeEntry',
+            'override' => false
+        ]);
     }
 
     /**
@@ -35,6 +58,6 @@ class TimeEntryFormType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_timeentry_form_type';
+        return 'appbundle_time_entry_form_type';
     }
 }

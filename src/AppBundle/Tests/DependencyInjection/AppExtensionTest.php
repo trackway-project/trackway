@@ -27,12 +27,31 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->load();
 
         // forms.xml
+        $this->assertContainerBuilderHasService('app.form.factory.absence');
+        $this->assertContainerBuilderHasService('app.form.factory.absence_reason');
+        $this->assertContainerBuilderHasService('app.form.factory.invitation');
+        $this->assertContainerBuilderHasService('app.form.factory.membership');
+        $this->assertContainerBuilderHasService('app.form.factory.project');
+        $this->assertContainerBuilderHasService('app.form.factory.task');
+        $this->assertContainerBuilderHasService('app.form.factory.team');
+        $this->assertContainerBuilderHasService('app.form.factory.time_entry');
+
         $this->assertContainerBuilderHasService('fos_user.change_password.form.factory');
         $this->assertContainerBuilderHasService('fos_user.group.form.factory');
         $this->assertContainerBuilderHasService('fos_user.profile.form.factory');
         $this->assertContainerBuilderHasService('fos_user.registration.form.factory');
         $this->assertContainerBuilderHasService('fos_user.resetting.form.factory');
-        $this->assertContainerBuilderHasService('app.form.type.profile');
+
+        $this->assertContainerBuilderHasService('app.form.type.absence');
+        $this->assertContainerBuilderHasService('app.form.type.absence_reason');
+        $this->assertContainerBuilderHasService('app.form.type.invitation');
+        $this->assertContainerBuilderHasService('app.form.type.membership');
+        $this->assertContainerBuilderHasService('app.form.type.project');
+        $this->assertContainerBuilderHasService('app.form.type.task');
+        $this->assertContainerBuilderHasService('app.form.type.team');
+        $this->assertContainerBuilderHasService('app.form.type.time_entry');
+
+        $this->assertContainerBuilderHasService('fos_user.profile.form.type');
 
         // listeners.xml
         $this->assertContainerBuilderHasService('app.event_listener.routing');

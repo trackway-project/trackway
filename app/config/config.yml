@@ -18,6 +18,7 @@ framework:
     trusted_proxies: ~
     session:
         handler_id:  ~
+        name:        "%session_name%"
     fragments:       ~
     http_method_override: true
 
@@ -40,6 +41,7 @@ doctrine:
         charset:  UTF8
         types:
             invitationStatusEnum: AppBundle\Type\InvitationStatusEnumType
+            localeEnum: AppBundle\Type\LocaleEnumType
         mapping_types:
             enum: string
 
@@ -55,14 +57,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# JMSI18nRoutingBundle Configuration
-jms_i18n_routing:
-    default_locale: "%locale%"
-    locales: [en, de]
-    strategy: prefix_except_default
-    cookie:
-        name: locale
-
 # FOSUserBundle Configuration
 fos_user:
     db_driver: orm
@@ -70,9 +64,6 @@ fos_user:
     user_class: AppBundle\Entity\User
     group:
         group_class: AppBundle\Entity\Group
-    profile:
-        form:
-            type: appbundle_profile_form_type
 
 # KnpMenuBundle Configuration
 knp_menu:

@@ -2,48 +2,132 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+
+        <!-- AppBundle Form Factories  -->
+
+        <service id="app.form.factory.absence" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.absence"/>
+            <argument>appbundle_absence_form</argument>
+        </service>
+
+        <service id="app.form.factory.absence_reason" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.absence_reason"/>
+            <argument>appbundle_absence_reason_form</argument>
+        </service>
+
+        <service id="app.form.factory.invitation" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.invitation"/>
+            <argument>appbundle_invitation_form_type</argument>
+        </service>
+
+        <service id="app.form.factory.membership" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.membership"/>
+            <argument>appbundle_membership_form</argument>
+        </service>
+
+        <service id="app.form.factory.project" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.project"/>
+            <argument>appbundle_project_form</argument>
+        </service>
+
+        <service id="app.form.factory.task" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.task"/>
+            <argument>appbundle_task_form</argument>
+        </service>
+
+        <service id="app.form.factory.team" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.team"/>
+            <argument>appbundle_team_form</argument>
+        </service>
+
+        <service id="app.form.factory.time_entry" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.time_entry"/>
+            <argument>appbundle_time_entry_form</argument>
+        </service>
+
+        <!-- FosUserBundle Form Factories  -->
+
         <service id="fos_user.change_password.form.factory" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
+            <argument type="service" id="fos_user.change_password.form.type" />
             <argument>%fos_user.change_password.form.name%</argument>
-            <argument>%fos_user.change_password.form.type%</argument>
             <argument>%fos_user.change_password.form.validation_groups%</argument>
-            <argument>change_password.submit</argument>
         </service>
 
         <service id="fos_user.group.form.factory" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
+            <argument type="service" id="fos_user.group.form.type" />
             <argument>%fos_user.group.form.name%</argument>
-            <argument>%fos_user.group.form.type%</argument>
             <argument>%fos_user.group.form.validation_groups%</argument>
-            <argument>group.edit.submit</argument>
         </service>
 
         <service id="fos_user.profile.form.factory" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
+            <argument type="service" id="fos_user.profile.form.type" />
             <argument>%fos_user.profile.form.name%</argument>
-            <argument>%fos_user.profile.form.type%</argument>
             <argument>%fos_user.profile.form.validation_groups%</argument>
-            <argument>profile.edit.submit</argument>
         </service>
 
         <service id="fos_user.registration.form.factory" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
+            <argument type="service" id="fos_user.registration.form.type" />
             <argument>%fos_user.registration.form.name%</argument>
-            <argument>%fos_user.registration.form.type%</argument>
             <argument>%fos_user.registration.form.validation_groups%</argument>
-            <argument>registration.submit</argument>
         </service>
 
         <service id="fos_user.resetting.form.factory" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
+            <argument type="service" id="fos_user.resetting.form.type" />
             <argument>%fos_user.resetting.form.name%</argument>
-            <argument>%fos_user.resetting.form.type%</argument>
             <argument>%fos_user.resetting.form.validation_groups%</argument>
-            <argument>resetting.reset.submit</argument>
         </service>
 
-        <service id="app.form.type.profile" class="AppBundle\Form\Type\ProfileFormType">
-            <tag name="form.type" alias="appbundle_profile_form_type"/>
+        <!-- AppBundle Form Types  -->
+
+        <service id="app.form.type.absence" class="AppBundle\Form\Type\AbsenceFormType">
+            <tag name="form.type" alias="appbundle_absence_form_type" />
+        </service>
+
+        <service id="app.form.type.absence_reason" class="AppBundle\Form\Type\AbsenceReasonFormType">
+            <tag name="form.type" alias="appbundle_absence_reason_form_type" />
+        </service>
+
+        <service id="app.form.type.invitation" class="AppBundle\Form\Type\InvitationFormType">
+            <tag name="form.type" alias="appbundle_invitation_form_type" />
+        </service>
+
+        <service id="app.form.type.membership" class="AppBundle\Form\Type\MembershipFormType">
+            <tag name="form.type" alias="appbundle_membership_form_type" />
+        </service>
+
+        <service id="app.form.type.project" class="AppBundle\Form\Type\ProjectFormType">
+            <tag name="form.type" alias="appbundle_project_form_type" />
+        </service>
+
+        <service id="app.form.type.task" class="AppBundle\Form\Type\TaskFormType">
+            <tag name="form.type" alias="appbundle_task_form_type" />
+        </service>
+
+        <service id="app.form.type.team" class="AppBundle\Form\Type\TeamFormType">
+            <tag name="form.type" alias="appbundle_team_form_type" />
+        </service>
+
+        <service id="app.form.type.time_entry" class="AppBundle\Form\Type\TimeEntryFormType">
+            <tag name="form.type" alias="appbundle_time_entry_form_type" />
+        </service>
+
+        <!-- FosUserBundle Form Types  -->
+
+        <service id="fos_user.profile.form.type" class="AppBundle\Form\Type\ProfileFormType">
+            <tag name="form.type" alias="fos_user_profile"/>
             <argument>%fos_user.model.user.class%</argument>
         </service>
     </services>

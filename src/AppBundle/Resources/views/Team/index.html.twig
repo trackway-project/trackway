@@ -1,4 +1,4 @@
-{% extends "AppBundle::layoutOffCanvas.html.twig" %}
+{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
 {% trans_default_domain 'AppBundle' %}
 
 {% block class %}team{% endblock class %}
@@ -18,11 +18,13 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.name }}</td>
+                <td>{% if entity == app.user.activeTeam %}<i class="fa fa-star" title="Active Team"></i>&nbsp;{% endif %}{{ entity.name }}</td>
                 <td class="text-right">
                     <a href="{{ path('team_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
                                 class="fa fa-eye"></i></a>
                     {% if is_granted('EDIT', entity) %}
+                        <a href="{{ path('team_membership_index', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                    class="fa fa-users"></i></a>
                         <a href="{{ path('team_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
                                     class="fa fa-pencil-square-o"></i></a>
                         <a href="{{ path('team_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i

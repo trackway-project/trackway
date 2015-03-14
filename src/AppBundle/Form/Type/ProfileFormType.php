@@ -2,27 +2,96 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
+use FOS\UserBundle\Form\Type\ProfileFormType as BaseFormType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProfileFormType extends AbstractType
+/**
+ * Class ProfileFormType
+ *
+ * @package AppBundle\Form\Type
+ */
+class ProfileFormType extends BaseFormType implements OverridableFormTypeInterface
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @var string
+     */
+    protected $class;
+
+    /**
+     * @param string $class The User class name
+     */
+    public function __construct($class)
     {
-        $builder->remove('current_password')
-            ->add('memberships')
-            ->add('activeTeam')
-            ->add('current_password', 'password', ['label' => 'form.current_password', 'translation_domain' => 'FOSUserBundle', 'mapped' => false, 'constraints' => new UserPassword()]);
+        parent::__construct($class);
+        $this->class = $class;
     }
 
-    public function getParent()
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return 'fos_user_profile';
+        $resolver->setDefaults([
+            'data_class' => $this->class,
+            'intention'  => 'profile',
+            'override' => false
+        ]);
     }
 
-    public function getName()
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
+    protected function buildUserForm(FormBuilderInterface $builder, array $options)
     {
-        return 'appbundle_profile_form_type';
+        $builder
+            ->add('username', null, $this->overrideOptions('username', [
+                'label' => 'form.username',
+                'translation_domain' => 'FOSUserBundle'
+            ], $options))
+            ->add('email', 'email', $this->overrideOptions('email', [
+                'label' => 'form.email',
+                'translation_domain' => 'FOSUserBundle'
+            ], $options))
+            ->add('locale', 'choice', $this->overrideOptions('locale', [
+                'label' => 'form.locale',
+                'translation_domain' => 'FOSUserBundle',
+                'choices' => [
+                    null => 'locale.default',
+                    'de' => 'locale.de',
+                    'en' => 'locale.en'
+                ],
+                'required' => false
+            ], $options))
+            ->add('memberships', 'entity', $this->overrideOptions('memberships', [
+                'label' => 'form.memberships',
+                'translation_domain' => 'FOSUserBundle',
+                'expanded'  => true,
+                'multiple'  => true,
+                'class' => 'AppBundle\Entity\Membership'
+            ], $options))
+            ->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', [
+                'label' => 'form.activeTeam',
+                'translation_domain' => 'FOSUserBundle',
+                'class' => 'AppBundle\Entity\Team'
+            ], $options));
+    }
+
+    /**
+     * @param $name
+     * @param array $childOptions
+     * @param array $parentOptions
+     *
+     * @return array
+     */
+    protected function overrideOptions($name, array $childOptions = [], array $parentOptions = [])
+    {
+        $overrideOptions = array_key_exists('override', $parentOptions) && is_array($parentOptions['override']) ? $parentOptions['override'] : [];
+
+        return array_merge(
+            $childOptions,
+            array_key_exists($name, $overrideOptions) ? $overrideOptions[$name] : []
+        );
     }
 }

@@ -23,3 +23,4 @@
 .idea
 .vagrant
 *.d4e.io.rb
+_build

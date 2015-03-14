@@ -27,9 +27,6 @@ class Task
      *
      * @ORM\ManyToOne(targetEntity="Team", inversedBy="tasks")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
-     *
-     * @Assert\NotNull()
-     * @Assert\Type(type="Team")
      */
     protected $team;
 

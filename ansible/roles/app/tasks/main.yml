@@ -10,7 +10,7 @@
   tags: composer
 
 - name: make composer executable
-  file: path=/usr/local/bin/composer mode=a+x state=file
+  file: path=/usr/local/bin/composer mode=755 state=file
   tags: composer
 
 - name: Set application parameters

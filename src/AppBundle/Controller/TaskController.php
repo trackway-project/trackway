@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
-use AppBundle\Form\Type\TaskFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -12,7 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Task controller.
+ * Class TaskController
+ *
+ * @package AppBundle\Controller
  *
  * @Route("/task")
  */
@@ -30,7 +31,7 @@ class TaskController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findAllByTeam($this->getUser()->getActiveTeam())];
+        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($this->getUser()->getActiveTeam())];
     }
 
     /**
@@ -66,10 +67,17 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $form = $this->createForm(new TaskFormType(), $task)->add('submit', 'submit', ['label' => 'Create'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.task')
+            ->createForm([
+                'submit' => ['label' => 'Create']
+            ])
+            ->setData($task)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
@@ -97,10 +105,17 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $form = $this->createForm(new TaskFormType(), $task)->add('submit', 'submit', ['label' => 'Update'])->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.task')
+            ->createForm([
+                'submit' => ['label' => 'Update']
+            ])
+            ->setData($task)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'task.flash.updated');

@@ -1,47 +1,71 @@
-group.edit.submit: 'Gruppe aktualisieren'
-group.show.name: Gruppenname
-group.new.submit: 'Gruppe erstellen'
-group.flash.updated: 'Die Gruppe wurde aktualisiert'
-group.flash.created: 'Die Gruppe wurde erstellt'
-group.flash.deleted: 'Die Gruppe wurde gelöscht'
-security.login.heading: Anmelden
-security.login.username: 'Benutzername:'
-security.login.password: 'Passwort:'
-security.login.remember_me: 'An mich erinnern'
-security.login.submit: Anmelden
-profile.show.username: Benutzername
-profile.show.email: E-Mail
-profile.edit.submit: 'Benutzer aktualisieren'
-profile.flash.updated: 'Das Benutzerprofil wurde aktualisiert'
-change_password.submit: 'Passwort ändern'
+absence.flash.created: 'Die Abwesendheit has been created'
+absence.flash.deleted: 'Die Abwesendheit wurde gelöscht'
+absence.flash.updated: 'Die Abwesendheit wurde aktualisiert'
 change_password.flash.success: 'Das Passwort wurde geändert'
-registration.check_email: 'Eine E-Mail wurde an %email% gesendet. Sie enthält einen Link, den Sie anklicken müssen, um Ihr Benutzerkonto zu bestätigen.'
-registration.confirmed: 'Glückwunsch %username%, Ihr Benutzerkonto ist jetzt bestätigt.'
-registration.back: 'Zurück zur ursprünglichen Seite.'
-registration.submit: Registrieren
-registration.flash.user_created: 'Der Benutzer wurde erfolgreich erstellt'
-registration.email.subject: 'Willkommen %username%!'
-registration.email.message: "Hallo %username%!\n\nBesuchen Sie bitte folgende Seite, um Ihr Benutzerkonto zu bestätigen: %confirmationUrl%\n\nMit besten Grüßen,\ndas Team.\n"
-resetting.password_already_requested: 'Für diesen Benutzer wurde in den vergangenen 24 Stunden bereits ein neues Passwort beantragt.'
-resetting.check_email: 'Eine E-Mail wurde an %email% gesendet. Sie enthält einen Link, den Sie anklicken müssen, um Ihr Passwort zurückzusetzen.'
-resetting.request.invalid_username: 'Der Benutzername oder die E-Mail-Adresse "%username%" existiert nicht.'
-resetting.request.username: 'Benutzername oder E-Mail-Adresse:'
-resetting.request.submit: 'Passwort zurücksetzen'
-resetting.reset.submit: 'Passwort ändern'
-resetting.flash.success: 'Das Passwort wurde erfolgreich zurückgesetzt'
-resetting.email.subject: 'Passwort zurücksetzen'
-resetting.email.message: "Hallo %username%!\n\nBesuchen Sie bitte folgende Seite, um Ihr Passwort zurückzusetzen: %confirmationUrl%\n\nMit besten Grüßen,\ndas Team.\n"
-layout.logout: Abmelden
-layout.login: Anmelden
-layout.register: Registrieren
-layout.logged_in_as: 'Angemeldet als %username%'
-form.group_name: 'Gruppenname:'
-form.username: 'Benutzername:'
-form.email: 'E-Mail-Adresse:'
+change_password.submit: 'Passwort ändern'
 form.current_password: 'Derzeitiges Passwort:'
-form.password: 'Passwort:'
-form.password_confirmation: 'Passwort bestätigen:'
+form.email: 'E-Mail-Adresse:'
+form.group_name: 'Gruppenname:'
 form.new_password: 'Neues Passwort:'
 form.new_password_confirmation: 'Neues Passwort bestätigen:'
-security.login.resetting: 'Passwort vergesssen?'
+form.password: 'Passwort:'
+form.password_confirmation: 'Passwort bestätigen:'
+form.username: 'Benutzername:'
+group.edit.submit: 'Gruppe aktualisieren'
+group.flash.created: 'Die Gruppe wurde erstellt'
+group.flash.deleted: 'Die Gruppe wurde gelöscht'
+group.flash.updated: 'Die Gruppe wurde aktualisiert'
+group.new.submit: 'Gruppe erstellen'
+group.show.name: Gruppenname
+layout.logged_in_as: 'Angemeldet als %username%'
+layout.login: Anmelden
+layout.logout: Abmelden
+layout.register: Registrieren
+profile.edit.submit: 'Benutzer aktualisieren'
+profile.flash.updated: 'Das Benutzerprofil wurde aktualisiert'
+profile.show.active_team: Aktives Team
+profile.show.email: E-Mail
+profile.show.username: Benutzername
+profile_membership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
+profile_membership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
+project.flash.created: 'Das Projekt has been created'
+project.flash.deleted: 'Das Projekt wurde gelöscht'
+project.flash.updated: 'Das Projekt wurde aktualisiert'
+registration.back: 'Zurück zur ursprünglichen Seite.'
+registration.check_email: 'Eine E-Mail wurde an %email% gesendet. Sie enthält einen Link, den Sie anklicken müssen, um Ihr Benutzerkonto zu bestätigen.'
+registration.confirmed: 'Glückwunsch %username%, Ihr Benutzerkonto ist jetzt bestätigt.'
+registration.email.message: "Hallo %username%!\n\nBesuchen Sie bitte folgende Seite, um Ihr Benutzerkonto zu bestätigen: %confirmationUrl%\n\nMit besten Grüßen,\ndas Team.\n"
+registration.email.subject: 'Willkommen %username%!'
+registration.flash.user_created: 'Der Benutzer wurde erfolgreich erstellt'
+registration.submit: Registrieren
+resetting.check_email: 'Eine E-Mail wurde an %email% gesendet. Sie enthält einen Link, den Sie anklicken müssen, um Ihr Passwort zurückzusetzen.'
+resetting.email.message: "Hallo %username%!\n\nBesuchen Sie bitte folgende Seite, um Ihr Passwort zurückzusetzen: %confirmationUrl%\n\nMit besten Grüßen,\ndas Team.\n"
+resetting.email.subject: 'Passwort zurücksetzen'
+resetting.flash.success: 'Das Passwort wurde erfolgreich zurückgesetzt'
+resetting.password_already_requested: 'Für diesen Benutzer wurde in den vergangenen 24 Stunden bereits ein neues Passwort beantragt.'
+resetting.request.invalid_username: 'Der Benutzername oder die E-Mail-Adresse "%username%" existiert nicht.'
+resetting.request.submit: 'Passwort zurücksetzen'
+resetting.request.username: 'Benutzername oder E-Mail-Adresse:'
+resetting.reset.submit: 'Passwort ändern'
+security.login.heading: Anmelden
+security.login.password: 'Passwort:'
 security.login.registration: 'Neu bei Trackway? Registrier dich jetzt!'
+security.login.remember_me: 'An mich erinnern'
+security.login.resetting: 'Passwort vergesssen?'
+security.login.submit: Anmelden
+security.login.username: 'Benutzername:'
+task.flash.created: 'Die Aufgabe has been created'
+task.flash.deleted: 'Die Aufgabe wurde gelöscht'
+task.flash.updated: 'Die Aufgabe wurde aktualisiert'
+team.flash.created: 'Das Team has been created'
+team.flash.deleted: 'Das Team wurde gelöscht'
+team.flash.updated: 'Das Team wurde aktualisiert'
+team_invitation.flash.deleted: 'Die Einladung wurde gelöscht'
+team_invitation.flash.invited: 'Eine Einladung wurde verschickt'
+team_invitation.flash.reinvited: 'Eine Einladung wurde erneut verschickt'
+team_invitation.flash.updated: 'Die Einladung wurde aktualisiert'
+team_membership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
+team_membership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
+time_entry.flash.created: 'Die Zeitbuchung has been created'
+time_entry.flash.deleted: 'Die Zeitbuchung wurde gelöscht'
+time_entry.flash.updated: 'Die Zeitbuchung wurde aktualisiert'

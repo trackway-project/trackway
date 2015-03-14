@@ -2,11 +2,15 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProjectFormType extends AbstractType
+/**
+ * Class ProjectFormType
+ *
+ * @package AppBundle\Form\Type
+ */
+class ProjectFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,7 +18,11 @@ class ProjectFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', null, ['trim' => true]);
+        $builder
+            ->add('name', null, $this->overrideOptions('name', [
+                'required' => true,
+                'trim' => true
+            ], $options));
     }
 
     /**
@@ -22,7 +30,10 @@ class ProjectFormType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Project']);
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\Project',
+            'override' => false
+        ]);
     }
 
     /**

@@ -1,5 +1,34 @@
+# config valid only for Capistrano 3.3.5
+lock '3.3.5'
+
 set :application, 'trackway'
-set :repo_url, 'https://github.com/MewesK/trackway.git'
+set :scm, :rsync
+set :repo_url, "."
+
+set :rsync_options, %w[
+  --recursive --delete --delete-excluded
+  --exclude .git*
+  --exclude vagrant
+  --exclude .vagrant
+  --exclude projectfiles/
+  --exclude Vagrantfile
+  --exclude Capfile
+  --exclude Gemfile
+  --exclude Gemfile.lock
+  --exclude .gitattributes
+  --exclude .gitignore
+  --exclude .capistrano
+  --exclude README.md
+  --exclude ./config*
+  --exclude .travis.yml
+  --exclude .idea
+  --exclude ansible
+  --exclude package.json
+  --exclude bower.json
+  --exclude gulpfile.js
+  --exclude bower_components
+  --exclude node_modules
+]
 
 # Default branch is :master
 set :branch, ENV['branch'] || (ask :branch, proc { `echo master`.chomp }.call)
@@ -34,5 +63,16 @@ set :symfony_console_flags,     fetch(:symfony_console_flags)
 fetch(:default_env).merge!(symfony_env: fetch(:symfony_env))
 
 namespace :deploy do
+
+  task :precompile do
+    Dir.chdir fetch(:build_dir) do
+      system "npm install"
+      system "bower install"
+      system "gulp"
+    end
+  end
+
   before :finishing, 'symfony:assetic:dump'
 end
+
+after "rsync:stage", "deploy:precompile"

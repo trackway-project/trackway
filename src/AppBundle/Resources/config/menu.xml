@@ -6,6 +6,13 @@
             <tag name="knp_menu.factory_extension"/>
         </service>
 
+        <service id="app.menu.renderer.breadcrumb" class="AppBundle\Menu\Renderer\BreadcrumbRenderer">
+            <tag name="knp_menu.renderer" alias="appbundle_breadcrumb_renderer"/>
+            <argument type="service" id="knp_menu.matcher"/>
+            <argument>%knp_menu.renderer.list.options%</argument>
+            <argument>%kernel.charset%</argument>
+        </service>
+
         <service id="app.menu.renderer.navbar" class="AppBundle\Menu\Renderer\NavbarRenderer">
             <tag name="knp_menu.renderer" alias="appbundle_navbar_renderer"/>
             <argument type="service" id="knp_menu.matcher"/>

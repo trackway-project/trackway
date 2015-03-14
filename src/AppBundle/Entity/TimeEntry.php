@@ -18,8 +18,6 @@ class TimeEntry extends BaseTimeEntry
      *
      * @ORM\ManyToOne(targetEntity="Project")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
-     *
-     * @Assert\Type(type="Project")
      */
     protected $project;
 
@@ -28,8 +26,6 @@ class TimeEntry extends BaseTimeEntry
      *
      * @ORM\ManyToOne(targetEntity="Task")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
-     *
-     * @Assert\Type(type="Task")
      */
     protected $task;
 

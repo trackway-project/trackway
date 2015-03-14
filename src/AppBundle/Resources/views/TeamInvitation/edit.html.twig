@@ -1,0 +1,17 @@
+{% extends 'AppBundle::layoutOffCanvasMain.html.twig' %}
+{% trans_default_domain 'AppBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block class %}team_invitation{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Team Invitation edit</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    {{ form(form) }}
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams', 'Invitations'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

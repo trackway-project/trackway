@@ -25,11 +25,16 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="locale", type="localeEnum", nullable=true)
+     */
+    protected $locale;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Membership", mappedBy="user")
-     *
-     * @Assert\Type(type="ArrayCollection")
      */
     protected $memberships;
 
@@ -45,8 +50,6 @@ class User extends BaseUser
      *
      * @ORM\ManyToOne(targetEntity="Team")
      * @ORM\JoinColumn(name="activeTeam_id", referencedColumnName="id")
-     *
-     * @Assert\Type(type="Team")
      */
     protected $activeTeam;
 
@@ -78,6 +81,22 @@ class User extends BaseUser
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
     }
 
     /**

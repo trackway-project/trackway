@@ -2,11 +2,15 @@
 
 namespace AppBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TeamFormType extends AbstractType
+/**
+ * Class TeamFormType
+ *
+ * @package AppBundle\Form\Type
+ */
+class TeamFormType extends AbstractOverridableFormType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,7 +18,16 @@ class TeamFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', null, ['trim' => true])->add('memberships');
+        $builder
+            ->add('name', null, $this->overrideOptions('name', [
+                'required' => true,
+                'trim' => true
+            ], $options))
+            ->add('memberships', 'entity', $this->overrideOptions('memberships', [
+                'class' => 'AppBundle\Entity\Membership',
+                'expanded'  => true,
+                'multiple'  => true
+            ], $options));
     }
 
     /**
@@ -22,7 +35,10 @@ class TeamFormType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Team']);
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\Team',
+            'override' => false
+        ]);
     }
 
     /**

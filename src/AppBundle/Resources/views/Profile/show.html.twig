@@ -1,4 +1,4 @@
-{% extends "AppBundle::layoutOffCanvas.html.twig" %}
+{% extends "AppBundle::layoutOffCanvasUser.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block class %}profile{% endblock class %}
@@ -19,18 +19,12 @@
             <td>{{ user.email }}</td>
         </tr>
         <tr>
-            <th>{{ 'profile.show.memberships'|trans }}</th>
-            <td>
-                <ul>
-                    {% for memberhsip in user.memberships %}
-                        <li>{{ memberhsip }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        <tr>
             <th>{{ 'profile.show.active_team'|trans }}</th>
             <td>{{ user.activeTeam }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'profile.show.locale'|trans }}</th>
+            <td>{% if user.locale %}{{ ('locale.' ~ user.locale)|trans }}{% endif %}</td>
         </tr>
         </tbody>
     </table>
