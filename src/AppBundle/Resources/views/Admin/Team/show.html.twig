@@ -1,0 +1,42 @@
+{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+
+{% block class %}team{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Team</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <th>Projects</th>
+            <td>
+                <ul>
+                    {% for project in entity.projects %}
+                        <li>{{ project }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Tasks</th>
+            <td>
+                <ul>
+                    {% for task in entity.tasks %}
+                        <li>{{ task }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:adminMenu', 'Teams'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

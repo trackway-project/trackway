@@ -64,16 +64,8 @@ class MembershipVoter implements VoterInterface
         }
 
         switch ($attribute) {
-            case self::EDIT:
-                /** @var Membership $_membership */
-                foreach ($user->getMemberships() as $_membership) {
-                    if (in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)
-                    ) {
-                        return VoterInterface::ACCESS_GRANTED;
-                    }
-                }
-                break;
             case self::VIEW:
+            case self::EDIT:
             case self::DELETE:
                 /** @var Membership $_membership */
                 foreach ($user->getMemberships() as $_membership) {

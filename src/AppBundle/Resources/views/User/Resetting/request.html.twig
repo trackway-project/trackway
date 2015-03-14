@@ -1,0 +1,10 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block class %}resetting{% endblock class %}
+
+{% block content %}
+    <h1>Reset request</h1>
+
+    {{ form(form) }}
+{% endblock content %}

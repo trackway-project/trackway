@@ -1,0 +1,26 @@
+{% extends "AppBundle::layoutOffCanvasUser.html.twig" %}
+
+{% block class %}profile_membership{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Profile Membership</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Team</th>
+            <td>{{ entity.team }}</td>
+        </tr>
+        <tr>
+            <th>Group</th>
+            <td>{{ entity.group }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'Profile', 'Memberships'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

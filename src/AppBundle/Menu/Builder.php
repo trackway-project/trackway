@@ -114,12 +114,12 @@ class Builder extends ContainerAware
         if ($authorizationChecker->isGranted('ROLE_USER')) {
             $username = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
 
-            $menu->addChild('Profile', ['label' => $username, 'route' => 'fos_user_profile_show']);
-            $menu['Profile']->addChild('Profile', ['icon' => 'fa fa-fw fa-user', 'route' => 'fos_user_profile_show']);
+            $menu->addChild('Profile', ['label' => $username, 'route' => 'profile_show']);
+            $menu['Profile']->addChild('Profile', ['icon' => 'fa fa-fw fa-user', 'route' => 'profile_show']);
             $menu['Profile']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'profile_membership_index']);
-            $menu['Profile']->addChild('Settings', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'fos_user_profile_edit']);
+            $menu['Profile']->addChild('Settings', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'profile_edit']);
 
-            $menu->addChild('Logout', ['route' => 'fos_user_security_logout']);
+            $menu->addChild('Logout', ['route' => 'security_logout']);
 
             /** @var Request $request */
             $request = $this->container->get('request');
@@ -132,10 +132,25 @@ class Builder extends ContainerAware
                 $menu['Profile']['Memberships']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'profile_membership_delete', 'routeParameters' => ['id' => $id]]);
             }
         } else {
-            $menu->addChild('Login', ['route' => 'fos_user_security_login']);
-            $menu->addChild('Register', ['route' => 'fos_user_registration_register']);
+            $menu->addChild('Login', ['route' => 'security_login']);
+            $menu->addChild('Register', ['route' => 'registration_register']);
         }
 
         return $menu;
+    }
+
+    public function adminMenu(FactoryInterface $factory)
+    {
+        $menu = $factory->createItem('root');
+
+        /** @var AuthorizationChecker $authorizationChecker */
+        $authorizationChecker = $this->container->get('security.authorization_checker');
+
+        if ($authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Admin', ['route' => 'admin_team_index']);
+            $menu['Profile']->addChild('Groups', ['route' => 'admin_group_index']);
+            $menu['Profile']->addChild('Teams', ['route' => 'admin_team_index']);
+            $menu['Profile']->addChild('Users', ['route' => 'admin_user_index']);
+        }
     }
 }

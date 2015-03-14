@@ -1,0 +1,39 @@
+{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+
+{% block class %}user{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Users</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.username }}</td>
+                <td>{{ entity.email }}</td>
+                <td class="text-right">
+                    <a href="{{ path('admin_user_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-eye"></i></a>
+                    <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
+                                class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('admin_user_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
+                                class="fa fa-times"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:adminMenu', 'Users'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

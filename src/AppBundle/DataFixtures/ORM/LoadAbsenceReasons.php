@@ -1,12 +1,12 @@
 <?php
 
-
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\AbsenceReason;
-use AppBundle\Entity\Group;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Id\AssignedGenerator;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 class LoadAbsenceReasons implements FixtureInterface{
     /**
@@ -20,8 +20,8 @@ class LoadAbsenceReasons implements FixtureInterface{
 
         // force id's
         $metadata = $manager->getClassMetadata(get_class($illness));
-        $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
-        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $metadata->setIdGenerator(new AssignedGenerator());
+        $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
         $manager->persist($illness);
 

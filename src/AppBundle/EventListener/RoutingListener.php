@@ -15,7 +15,7 @@ class RoutingListener
      *
      * @var array
      */
-    private static $ROUTES = ['fos_user_security_login', 'fos_user_registration_register', 'fos_user_registration_check_email', 'fos_user_registration_confirm', 'fos_user_registration_confirmed', 'fos_user_resetting_request ', 'fos_user_resetting_send_email', 'fos_user_resetting_check_email', 'fos_user_resetting_reset', 'fos_user_change_password'];
+    private static $ROUTES = ['security_login', 'registration_register', 'registration_confirm', 'resetting_request ', 'resetting_confirm'];
 
     /**
      * @var AuthorizationChecker
