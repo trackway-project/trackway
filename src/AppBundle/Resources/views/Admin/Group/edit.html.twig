@@ -1,0 +1,16 @@
+{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block class %}group{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Group edit</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    {{ form(form) }}
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:adminMenu', 'Groups'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

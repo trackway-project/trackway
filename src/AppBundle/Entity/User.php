@@ -4,16 +4,16 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
  *
  * @ORM\Table(name="users")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\UserRepository")
  */
-class User extends BaseUser
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var integer
@@ -23,6 +23,76 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255)
+     */
+    protected $username;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    protected $email;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enabled ", type="boolean")
+     */
+    protected $enabled ;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=255)
+     */
+    protected $salt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    protected $password;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lastLogin", type="datetime")
+     */
+    protected $lastLogin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="confirmationToken", type="string", length=255)
+     */
+    protected $confirmationToken;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="registrationRequestedAt", type="datetime")
+     */
+    protected $registrationRequestedAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="passwordRequestedAt", type="datetime")
+     */
+    protected $passwordRequestedAt;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="json_array")
+     */
+    protected $roles;
 
     /**
      * @var string
@@ -55,8 +125,8 @@ class User extends BaseUser
 
     public function __construct()
     {
-        parent::__construct();
         $this->memberships = new ArrayCollection();
+        $this->invitations = new ArrayCollection();
     }
 
     /**
@@ -67,8 +137,59 @@ class User extends BaseUser
         return $this->username;
     }
 
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
     /**
-     * @return integer
+     * @return string
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->salt
+        ));
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->salt
+            ) = unserialize($serialized);
+    }
+
+    /**
+     * @return int
      */
     public function getId()
     {
@@ -76,11 +197,163 @@ class User extends BaseUser
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      */
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * @param string $salt
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
+    }
+
+    /**
+     * @param \DateTime $lastLogin
+     */
+    public function setLastLogin($lastLogin)
+    {
+        $this->lastLogin = $lastLogin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * @param string $confirmationToken
+     */
+    public function setConfirmationToken($confirmationToken)
+    {
+        $this->confirmationToken = $confirmationToken;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getRegistrationRequestedAt()
+    {
+        return $this->registrationRequestedAt;
+    }
+
+    /**
+     * @param \DateTime $registrationRequestedAt
+     */
+    public function setRegistrationRequestedAt($registrationRequestedAt)
+    {
+        $this->registrationRequestedAt = $registrationRequestedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPasswordRequestedAt()
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    /**
+     * @param \DateTime $passwordRequestedAt
+     */
+    public function setPasswordRequestedAt($passwordRequestedAt)
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param array $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -110,13 +383,13 @@ class User extends BaseUser
     /**
      * @param ArrayCollection $memberships
      */
-    public function setMemberships(ArrayCollection $memberships)
+    public function setMemberships($memberships)
     {
         $this->memberships = $memberships;
     }
 
     /**
-     * @return Invitation
+     * @return ArrayCollection
      */
     public function getInvitations()
     {
@@ -124,7 +397,7 @@ class User extends BaseUser
     }
 
     /**
-     * @param Invitation $invitations
+     * @param ArrayCollection $invitations
      */
     public function setInvitations($invitations)
     {
@@ -142,7 +415,7 @@ class User extends BaseUser
     /**
      * @param Team $activeTeam
      */
-    public function setActiveTeam(Team $activeTeam)
+    public function setActiveTeam($activeTeam)
     {
         $this->activeTeam = $activeTeam;
     }

@@ -57,14 +57,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# FOSUserBundle Configuration
-fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: AppBundle\Entity\User
-    group:
-        group_class: AppBundle\Entity\Group
-
 # KnpMenuBundle Configuration
 knp_menu:
     twig:

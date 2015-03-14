@@ -53,41 +53,40 @@
             <argument>appbundle_time_entry_form</argument>
         </service>
 
-        <!-- FosUserBundle Form Factories  -->
-
-        <service id="fos_user.change_password.form.factory" class="AppBundle\Form\Factory\FormFactory">
+        <service id="app.form.factory.change_password" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="fos_user.change_password.form.type" />
-            <argument>%fos_user.change_password.form.name%</argument>
-            <argument>%fos_user.change_password.form.validation_groups%</argument>
+            <argument type="service" id="app.form.type.change_password" />
+            <argument>appbundle_change_password_form</argument>
         </service>
 
-        <service id="fos_user.group.form.factory" class="AppBundle\Form\Factory\FormFactory">
+        <service id="app.form.factory.group" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="fos_user.group.form.type" />
-            <argument>%fos_user.group.form.name%</argument>
-            <argument>%fos_user.group.form.validation_groups%</argument>
+            <argument type="service" id="app.form.type.group" />
+            <argument>appbundle_group_form</argument>
         </service>
 
-        <service id="fos_user.profile.form.factory" class="AppBundle\Form\Factory\FormFactory">
+        <service id="app.form.factory.profile" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="fos_user.profile.form.type" />
-            <argument>%fos_user.profile.form.name%</argument>
-            <argument>%fos_user.profile.form.validation_groups%</argument>
+            <argument type="service" id="app.form.type.profile" />
+            <argument>appbundle_profile_form</argument>
         </service>
 
-        <service id="fos_user.registration.form.factory" class="AppBundle\Form\Factory\FormFactory">
+        <service id="app.form.factory.registration" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="fos_user.registration.form.type" />
-            <argument>%fos_user.registration.form.name%</argument>
-            <argument>%fos_user.registration.form.validation_groups%</argument>
+            <argument type="service" id="app.form.type.registration" />
+            <argument>appbundle_registration_form</argument>
         </service>
 
-        <service id="fos_user.resetting.form.factory" class="AppBundle\Form\Factory\FormFactory">
+        <service id="app.form.factory.resetting_confirm" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="fos_user.resetting.form.type" />
-            <argument>%fos_user.resetting.form.name%</argument>
-            <argument>%fos_user.resetting.form.validation_groups%</argument>
+            <argument type="service" id="app.form.type.resetting_confirm" />
+            <argument>appbundle_resetting_confirm_form</argument>
+        </service>
+
+        <service id="app.form.factory.resetting_request" class="AppBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
+            <argument type="service" id="app.form.type.resetting_request" />
+            <argument>appbundle_resetting_request_form</argument>
         </service>
 
         <!-- AppBundle Form Types  -->
@@ -124,11 +123,28 @@
             <tag name="form.type" alias="appbundle_time_entry_form_type" />
         </service>
 
-        <!-- FosUserBundle Form Types  -->
+        <service id="app.form.type.change_password" class="AppBundle\Form\Type\ChangePasswordFormType">
+            <tag name="form.type" alias="appbundle_change_password_form_type"/>
+        </service>
 
-        <service id="fos_user.profile.form.type" class="AppBundle\Form\Type\ProfileFormType">
-            <tag name="form.type" alias="fos_user_profile"/>
-            <argument>%fos_user.model.user.class%</argument>
+        <service id="app.form.type.group" class="AppBundle\Form\Type\GroupFormType">
+            <tag name="form.type" alias="appbundle_group_form_type"/>
+        </service>
+
+        <service id="app.form.type.profile" class="AppBundle\Form\Type\ProfileFormType">
+            <tag name="form.type" alias="appbundle_profile_form_type"/>
+        </service>
+
+        <service id="app.form.type.registration" class="AppBundle\Form\Type\RegistrationFormType">
+            <tag name="form.type" alias="appbundle_registration_form_type"/>
+        </service>
+
+        <service id="app.form.type.resetting_confirm" class="AppBundle\Form\Type\ResettingConfirmFormType">
+            <tag name="form.type" alias="appbundle_resetting_confirm_form_type"/>
+        </service>
+
+        <service id="app.form.type.resetting_request" class="AppBundle\Form\Type\ResettingRequestFormType">
+            <tag name="form.type" alias="appbundle_resetting_request_form_type"/>
         </service>
     </services>
 </container>

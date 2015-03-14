@@ -1,0 +1,32 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block class %}login{% endblock class %}
+
+{% block content %}
+    <div class="panel panel-default form-login">
+        <form action="{{ path("security_login_check") }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+            <h2 class="form-login-heading">{{ 'security.login.heading'|trans }}</h2>
+            <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans }}</label>
+            <input type="text" id="inputEmail" class="form-control" placeholder="Email address" name="_username"
+                   value="{{ last_username }}" required autofocus>
+            <label for="inputPassword" class="sr-only">{{ 'security.login.password'|trans }}</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="_password"
+                   required>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="_remember_me" value="on"/> {{ 'security.login.remember_me'|trans }}
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"
+                    name="_submit">{{ 'security.login.submit'|trans }}</button>
+        </form>
+        <ul class="list-actions">
+            <li><a href="{{ path("resetting_request") }}">{{ 'security.login.resetting'|trans }}</a></li>
+            <li><a href="{{ path("registration_register") }}">{{ 'security.login.registration'|trans }}</a>
+            </li>
+        </ul>
+    </div>
+{% endblock content %}
