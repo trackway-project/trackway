@@ -27,14 +27,14 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     protected $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     protected $email;
 
@@ -62,28 +62,28 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastLogin", type="datetime")
+     * @ORM\Column(name="lastLogin", type="datetime", nullable=true)
      */
     protected $lastLogin;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="confirmationToken", type="string", length=255)
+     * @ORM\Column(name="confirmationToken", type="string", length=255, nullable=true)
      */
     protected $confirmationToken;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registrationRequestedAt", type="datetime")
+     * @ORM\Column(name="registrationRequestedAt", type="datetime", nullable=true)
      */
     protected $registrationRequestedAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="passwordRequestedAt", type="datetime")
+     * @ORM\Column(name="passwordRequestedAt", type="datetime", nullable=true)
      */
     protected $passwordRequestedAt;
 
@@ -97,7 +97,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="locale", type="localeEnum", nullable=true)
+     * @ORM\Column(name="locale", type="localeEnum")
      */
     protected $locale;
 
@@ -125,6 +125,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function __construct()
     {
+        $this->roles = [];
         $this->memberships = new ArrayCollection();
         $this->invitations = new ArrayCollection();
     }

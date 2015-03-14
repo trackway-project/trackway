@@ -3,11 +3,10 @@
 namespace AppBundle\Form\Factory;
 
 use AppBundle\Form\Type\OverridableFormTypeInterface;
-use FOS\UserBundle\Form\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
-class FormFactory implements FactoryInterface
+class FormFactory
 {
     /**
      * @var FormFactoryInterface

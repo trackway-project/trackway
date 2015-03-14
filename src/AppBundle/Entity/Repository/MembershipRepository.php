@@ -7,7 +7,9 @@ use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * MembershipRepository
+ * Class MembershipRepository
+ *
+ * @package AppBundle\Entity\Repository
  */
 class MembershipRepository extends EntityRepository
 {

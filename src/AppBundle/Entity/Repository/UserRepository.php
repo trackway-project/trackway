@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Repository;
 
 use AppBundle\Entity\Team;
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -16,13 +17,22 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class UserRepository extends EntityRepository implements UserProviderInterface
 {
     /**
-     * @param $token
+     * @param string $token
      *
-     * @return array
+     * @return User
      */
-    public function findUserByConfirmationToken($token)
+    public function findByConfirmationToken($token)
     {
-        return $this->findBy(['confirmationToken' => $token]);
+        return $this->findOneBy(['confirmationToken' => $token]);
+    }
+    /**
+     * @param string $email
+     *
+     * @return User
+     */
+    public function findByEmail($email)
+    {
+        return $this->findOneBy(['email' => $email]);
     }
 
     /**

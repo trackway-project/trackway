@@ -70,7 +70,7 @@ class TeamInvitationController extends Controller
 
             $invitation->setTeam($team);
             $invitation->setStatus('open');
-            $invitation->setConfirmationToken($this->get('fos_user.util.token_generator')->generateToken());
+            $invitation->setConfirmationToken(md5(uniqid(mt_rand(), true)));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($invitation);

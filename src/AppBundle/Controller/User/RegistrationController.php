@@ -32,7 +32,6 @@ class RegistrationController extends Controller
     public function registerAction(Request $request)
     {
         $user = new User();
-        $user->setEnabled(false);
 
         $form = $this
             ->get('app.form.factory.registration')
@@ -43,15 +42,32 @@ class RegistrationController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
+            $user->setConfirmationToken(md5(uniqid(mt_rand(), true)));
+            $user->setEnabled(false);
+            $user->setLocale($this->container->getParameter('locale'));
+            $user->setRegistrationRequestedAt(new \DateTime());
+            $user->setRoles(['ROLE_USER']);
+            $user->setSalt(md5(uniqid(mt_rand(), true)));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            // TODO: send mail
+            // Send mail
+            $mailer = $this->get('mailer');
+            $message = $mailer->createMessage()
+                ->setSubject('You have Completed Registration!')
+                ->setFrom('no-reply@trackway.org')
+                ->setTo($user->getEmail())
+                ->setBody($this->renderView(
+                        '@App/User/Registration/email.html.twig',
+                        ['entity' => $user]
+                    ), 'text/html');
+            $mailer->send($message);
 
             $this->get('session')->getFlashBag()->add('success', 'registration.flash.registered');
 
-            return $this->renderView('@App/User/Registration/checkMail.html.twig', ['entity' => $user]);
+            return $this->render('@App/User/Registration/checkMail.html.twig', ['entity' => $user]);
         }
 
         return ['entity' => $user, 'form' => $form->createView()];
@@ -67,7 +83,7 @@ class RegistrationController extends Controller
      */
     public function confirmAction(Request $request, $token)
     {
-        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findUserByConfirmationToken($token);
+        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findByConfirmationToken($token);
 
         if ($user === null) {
             throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
@@ -80,9 +96,8 @@ class RegistrationController extends Controller
         $this->getDoctrine()->getManager()->flush();
 
         // Login
-        $this->get('security.user_checker')->checkPostAuth($user);
-        $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-        $this->get('security.authentication.session_strategy')->onAuthentication($this->container->get('request'), $token);
+        $token = $this->get('security.authentication.manager')->authenticate(new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles()));
+        $this->get('session')->set('_security_main', serialize($token));
         $this->get('security.token_storage')->setToken($token);
 
         $this->get('session')->getFlashBag()->add('success', 'registration.flash.confirmed');

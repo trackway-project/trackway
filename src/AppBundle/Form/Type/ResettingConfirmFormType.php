@@ -20,8 +20,13 @@ class ResettingConfirmFormType extends AbstractOverridableFormType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('plainPassword', 'repeated', $this->overrideOptions('plainPassword', [
-                'type' => 'password'
+            ->add('password', 'repeated', $this->overrideOptions('password', [
+                'type' => 'password',
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password')
             ], $options));
     }
 

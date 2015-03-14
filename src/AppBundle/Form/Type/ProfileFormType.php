@@ -2,7 +2,6 @@
 
 namespace AppBundle\Form\Type;
 
-use FOS\UserBundle\Form\Type\ProfileFormType as BaseFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
