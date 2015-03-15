@@ -12,9 +12,8 @@ class SecurityControllerTest extends AbstractControllerTest
 {
     public function testLoginAction()
     {
-        // Prepare DB
+        // Prepare environment
 
-        $this->deleteUser();
         $this->createUser();
 
         // Test form view

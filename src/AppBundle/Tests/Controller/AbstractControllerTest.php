@@ -37,7 +37,7 @@ abstract class AbstractControllerTest extends WebTestCase
 
     protected function deleteUser()
     {
-        // Make sure the user is not already existing
+        // Delete old user
         $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
         if ($user) {
             $this->em->remove($user);
@@ -47,27 +47,30 @@ abstract class AbstractControllerTest extends WebTestCase
 
     protected function createUser()
     {
-        // Create a new user
-        $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
-        if (!$user) {
-            $user = new User();
-            $user->setId(1);
-            $user->setUsername('test');
-            $user->setEmail('test@trackway.org');
-            $user->setSalt('f0afecd49087e0971b807b3d5bb4d9f8');
-            $user->setPassword('$2y$12$5cvVIqGw.reNtu7EWzMKq.cSVO5R26L446nT0PSW8SOcodwfFRGoS');
-            $user->setRoles(['ROLE_USER']);
-            $user->setLocale('en');
-            $user->setEnabled(true);
-            $user->setLastLogin(new \DateTime());
+        // Delete old user
+        $this->deleteUser();
 
-            $this->em->persist($user);
-            $this->em->flush();
-        }
+        // Create new user
+        $user = new User();
+        $user->setId(1);
+        $user->setUsername('test');
+        $user->setEmail('test@trackway.org');
+        $user->setSalt('f0afecd49087e0971b807b3d5bb4d9f8');
+        $user->setPassword('$2y$12$5cvVIqGw.reNtu7EWzMKq.cSVO5R26L446nT0PSW8SOcodwfFRGoS');
+        $user->setRoles(['ROLE_USER']);
+        $user->setLocale('en');
+        $user->setEnabled(true);
+        $user->setLastLogin(new \DateTime());
+
+        $this->em->persist($user);
+        $this->em->flush();
     }
 
     protected function deleteTeam()
     {
+        // Login
+        $this->login();
+
         // Make sure the team is not already existing
         $team = $this->em->getRepository('AppBundle:Team')->findByName('test');
         if ($team) {
@@ -78,39 +81,38 @@ abstract class AbstractControllerTest extends WebTestCase
 
     protected function createTeam($active = true)
     {
+        // Delete old team
+        $this->deleteTeam();
+
         // Create a new user
-        $team = $this->em->getRepository('AppBundle:Team')->findByEmail('test@trackway.org');
-        if (!$team) {
-            $team = new Team();
-            $team->setId(1);
-            $team->setName('test');
+        $team = new Team();
+        $team->setId(1);
+        $team->setName('test');
 
-            $this->em->persist($team);
+        $this->em->persist($team);
 
-            if ($active) {
-                $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
-                if ($user) {
-                    $user->setActiveTeam($team);
+        if ($active) {
+            $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
+            if ($user) {
+                $user->setActiveTeam($team);
 
-                    $this->em->persist($user);
-                }
+                $this->em->persist($user);
             }
-
-            $this->em->flush();
         }
+
+        $this->em->flush();
     }
 
     protected function login()
     {
-        // Login with the new user
-        $session = $this->client->getContainer()->get('session');
+        // Create new user
+        $this->createUser();
 
-        $firewall = 'main';
-        $token = new UsernamePasswordToken('test', null, $firewall, array('ROLE_USER'));
-        $session->set('_security_'.$firewall, serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
+        // Login
+        $crawler = $this->client->request('GET', '/login');
+        $form = $crawler->selectButton('_submit')->form();
+        $form['_username'] = 'test';
+        $form['_password'] = 'test';
+        $crawler = $this->client->submit($form);
     }
 }

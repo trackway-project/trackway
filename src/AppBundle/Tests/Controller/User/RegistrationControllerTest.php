@@ -14,18 +14,18 @@ class RegistrationControllerTest extends AbstractControllerTest
 {
     public function testRegisterAction()
     {
-        // Prepare DB
+        // Prepare environment
 
         $this->deleteUser();
 
-        // Test form view
+        // Test view
 
         $crawler = $this->client->request('GET', '/register');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
         static::assertEquals(1, $crawler->filter('h1:contains("Registration")')->count());
 
-        // Test form submit
+        // Test form
 
         $form = $crawler->selectButton('appbundle_registration_form[submit]')->form();
         $form['appbundle_registration_form[email]'] = 'test@trackway.org';
@@ -43,13 +43,13 @@ class RegistrationControllerTest extends AbstractControllerTest
      */
     public function testConfirmAction()
     {
-        // Test DB content
+        // Test DB
 
         $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
 
         self::assertNotEmpty($user);
 
-        // Test confirmation
+        // Test view
 
         $crawler = $this->client->request('GET', '/register/' . $user->getConfirmationToken());
 
