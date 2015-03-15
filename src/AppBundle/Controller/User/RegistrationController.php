@@ -75,7 +75,6 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $token
      *
      * @return RedirectResponse

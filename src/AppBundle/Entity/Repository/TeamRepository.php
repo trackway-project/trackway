@@ -22,6 +22,16 @@ class TeamRepository extends EntityRepository
     }
 
     /**
+     * @param string $name
+     *
+     * @return array
+     */
+    public function findByName($name)
+    {
+        return $this->findBy(['name' => $name]);
+    }
+
+    /**
      * @param User $user
      *
      * @return array
