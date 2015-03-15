@@ -10,7 +10,7 @@
             <h2 class="form-login-heading">{{ 'security.login.heading'|trans }}</h2>
             <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans }}</label>
             <input type="text" id="inputEmail" class="form-control" placeholder="Email address" name="_username"
-                   value="{{ last_username }}" required autofocus>
+                   value="{{ entity.username }}" required autofocus>
             <label for="inputPassword" class="sr-only">{{ 'security.login.password'|trans }}</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="_password"
                    required>

@@ -38,8 +38,9 @@ class ProfileFormType extends AbstractOverridableFormType
             ->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', [
                 'class' => 'AppBundle\Entity\Team'
             ], $options))
-            ->add('current_password', 'password', $this->overrideOptions('current_password', [
+            ->add('currentPassword', 'password', $this->overrideOptions('currentPassword', [
                 'mapped' => false,
+                'required' => true,
                 'constraints' => new UserPassword()
             ], $options));
     }
@@ -51,7 +52,8 @@ class ProfileFormType extends AbstractOverridableFormType
     {
         $resolver->setDefaults([
             'data_class' => 'AppBundle\Entity\User',
-            'override' => false
+            'override' => false,
+            'validation_groups' => ['profile']
         ]);
     }
 

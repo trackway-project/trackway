@@ -28,6 +28,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
+     *
+     * @Assert\NotBlank(groups={"profile", "registration"})
+     * @Assert\Length(min=3, groups={"profile", "registration"})
      */
     protected $username;
 
@@ -35,6 +38,8 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
+     *
+     * @Assert\Email(groups={"profile", "registration", "resetting"})
      */
     protected $email;
 
@@ -56,6 +61,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     *
+     * @Assert\NotBlank(groups={"change_password", "registration"})
+     * @Assert\Length(min=3, groups={"change_password", "registration"})
      */
     protected $password;
 
