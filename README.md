@@ -27,20 +27,6 @@ The simple on-premise open source time tracker.
 * php app/console doctrine:schema:create
 * php app/console doctrine:fixtures:load -n
 
-## Vagrant and provisioning
-Need a local dev box? Use vagrant and ansible!
-Ansible is used for provisioning.
-You need to have virtualbox, vagrant and ansible installed.
-
-### The easiest way to get up and runnning is homebrew:
-* ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-* brew update
-* brew install caskroom/cask/brew-cask 
-* brew cask install virtualbox vagrant
-* brew install ansible
-* vagrant up
-* Open your browser with http://trackway.vagrant/ and have fun
-
 ## Development
 * After changes to composer.json: composer update
 * After changes to package.json: npm update
@@ -48,12 +34,11 @@ You need to have virtualbox, vagrant and ansible installed.
 * After changes to src/AppBundle/Resources/public: gulp
 * After changes to src/AppBundle/Entity: php app/console doctrine:schema:update
 
+## Vagrant and provisioning
+Take a look at https://github.com/trackway-project/trackway-vagrant
+
 ## Capistrano deployment
-* customize your capistrano environment file: config/deploy/prodcution.rb
-* gem install bundler
-* Create a parameters.yml on your host under: /web_directory/shared/parameters.yml
-* bundle install
-* bundle exec cap production deploy branch=master
+Take a look at https://github.com/trackway-project/trackway-deploy
 
 Enjoy!
 
