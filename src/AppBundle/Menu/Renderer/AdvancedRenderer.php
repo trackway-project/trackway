@@ -135,7 +135,7 @@ class AdvancedRenderer extends ListRenderer
             $html .= $this->renderLink($item, $options);
         } else {
             // Render the text/link without wrapper tag
-            if ($item->getUri() && (!$isCurrent || $currentAsLink)) {
+            if ((!$isCurrent || $currentAsLink) && $item->getUri()) {
                 $attributes = array_merge($item->getLinkAttributes(), $attributes);
                 $text = sprintf('<a href="%s"%s>%s</a>', $this->escape($item->getUri()), $this->renderHtmlAttributes($attributes), $this->renderLabel($item, $options));
             } else {

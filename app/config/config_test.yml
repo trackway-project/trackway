@@ -4,13 +4,38 @@ imports:
 framework:
     test: ~
     session:
-        storage_id: session.storage.mock_file
+        storage_id: session.storage.filesystem
+        #storage_id: session.storage.mock_file
     profiler:
         collect: false
 
+# Security Configuration
+security:
+    firewalls:
+        main:
+            http_basic: ~
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_sqlite
+                path:     %kernel.cache_dir%/test.db
+
+# Web Profiler Configuration
 web_profiler:
     toolbar: false
     intercept_redirects: false
 
+# Swiftmailer Configuration
 swiftmailer:
     disable_delivery: true
+
+# LiipFunctionalTest Configuration
+liip_functional_test:
+    authentication:
+        username: test
+        password: test
+    cache_sqlite_db: true

@@ -42,14 +42,12 @@
         {% for type, messages in app.session.flashBag.all %}
             {% for message in messages %}
                 <div class="alert{% if messageTypeClasses[type] is defined %} {{ messageTypeClasses[type] }}{% endif %}" role="alert">
-                    {{ message|trans({}, 'FOSUserBundle') }}
+                    {{ message }}
                 </div>
             {% endfor %}
         {% endfor %}
 
         {% block content %}
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
         {% endblock content %}
     </div>
 

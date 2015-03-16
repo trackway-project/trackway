@@ -1,0 +1,34 @@
+{% extends "AppBundle::layoutOffCanvasUser.html.twig" %}
+
+{% block class %}profile{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Profile</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>{{ 'profile.show.username'|trans }}</th>
+            <td>{{ entity.username }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'profile.show.email'|trans }}</th>
+            <td>{{ entity.email }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'profile.show.active_team'|trans }}</th>
+            <td>{{ entity.activeTeam }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'profile.show.locale'|trans }}</th>
+            <td>{{ ('locale.' ~ entity.locale.name)|trans }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'Profile'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

@@ -18,7 +18,6 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "friendsofsymfony/user-bundle": "2.0.*@dev",
         "knplabs/knp-menu-bundle": "2.0.*@dev",
         "knplabs/knp-paginator-bundle": "2.4.*@dev"
     },
@@ -26,7 +25,8 @@
         "sensio/generator-bundle": "~2.3",
         "phpunit/phpunit": "4.5.0",
         "matthiasnoback/symfony-dependency-injection-test": "0.*",
-        "doctrine/doctrine-fixtures-bundle": "~2.2"
+        "doctrine/doctrine-fixtures-bundle": "~2.2",
+        "liip/functional-test-bundle": "1.0.4"
     },
     "scripts": {
         "post-root-package-install": [

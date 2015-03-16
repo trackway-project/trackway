@@ -1,0 +1,16 @@
+{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block class %}team{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Team new</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    {{ form(form) }}
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:adminMenu', 'Teams'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}

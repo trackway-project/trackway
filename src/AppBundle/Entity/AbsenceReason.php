@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Absence
+ * AbsenceReason
  *
  * @ORM\Entity
  * @ORM\Table(name="absenceReasons")

@@ -39,12 +39,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        types:
-            invitationStatusEnum: AppBundle\Type\InvitationStatusEnumType
-            localeEnum: AppBundle\Type\LocaleEnumType
-        mapping_types:
-            enum: string
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
@@ -56,14 +50,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-# FOSUserBundle Configuration
-fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: AppBundle\Entity\User
-    group:
-        group_class: AppBundle\Entity\Group
 
 # KnpMenuBundle Configuration
 knp_menu:

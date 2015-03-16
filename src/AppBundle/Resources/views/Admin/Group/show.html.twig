@@ -1,0 +1,26 @@
+{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+
+{% block class %}group{% endblock class %}
+
+{% block titleOffCanvas %}
+    <h1>Group</h1>
+{% endblock titleOffCanvas %}
+
+{% block contentOffCanvas %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <th>Roles</th>
+            <td>{{ entity.roles }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock contentOffCanvas %}
+
+{% block sidebarOffCanvas %}
+    {{ knp_menu_render(['AppBundle:Builder:adminMenu', 'Groups'], {}, 'appbundle_sidebar_renderer') }}
+{% endblock sidebarOffCanvas %}
