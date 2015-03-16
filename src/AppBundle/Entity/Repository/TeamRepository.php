@@ -22,9 +22,9 @@ class TeamRepository extends EntityRepository
     }
 
     /**
-     * @param string $name
+     * @param $name
      *
-     * @return array
+     * @return null|object
      */
     public function findOneByName($name)
     {

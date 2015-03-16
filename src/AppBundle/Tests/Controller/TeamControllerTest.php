@@ -13,9 +13,12 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->getDefaultFixtures();
-        $this->getUserFixtures();
-        $this->getTeamFixtures();
+        $this->loadFixtures(array_merge(
+            self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$membershipOwnerFixtures
+        ));
         $this->login();
 
         // Test view
@@ -33,8 +36,10 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->getDefaultFixtures();
-        $this->getUserFixtures();
+        $this->loadFixtures(array_merge(
+            self::$defaultFixtures,
+            self::$userFixtures
+        ));
         $this->login();
 
         // Test view
@@ -61,16 +66,20 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->getDefaultFixtures();
-        $this->getUserFixtures();
-        $this->getTeamFixtures();
+        $this->loadFixtures(array_merge(
+            self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$membershipOwnerFixtures
+        ));
         $this->login();
 
         // Test view
 
         $crawler = $this->client->request('GET', '/team/1');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        //static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), $this->client->getResponse()->getContent());
         static::assertEquals(1, $crawler->filter('h1:contains("Team")')->count());
     }
 
@@ -81,9 +90,12 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->getDefaultFixtures();
-        $this->getUserFixtures();
-        $this->getTeamFixtures();
+        $this->loadFixtures(array_merge(
+            self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$membershipOwnerFixtures
+        ));
         $this->login();
 
         // Test view
@@ -109,9 +121,12 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->getDefaultFixtures();
-        $this->getUserFixtures();
-        $this->getTeamFixtures();
+        $this->loadFixtures(array_merge(
+            self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$membershipOwnerFixtures
+        ));
         $this->login();
 
         // Test view

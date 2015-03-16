@@ -22,8 +22,8 @@ class ProfileControllerTest extends AbstractControllerTest
     {
         // Prepare environment
         $this->loadFixtures(array_merge(
-            $this->getDefaultFixtures(),
-            $this->getUserFixtures()
+            self::$defaultFixtures,
+            self::$userFixtures
         ));
         $this->login();
 
@@ -43,8 +43,8 @@ class ProfileControllerTest extends AbstractControllerTest
         // Prepare environment
 
         $this->loadFixtures(array_merge(
-            $this->getDefaultFixtures(),
-            $this->getUserFixtures()
+            self::$defaultFixtures,
+            self::$userFixtures
         ));
         $this->login();
 
@@ -73,8 +73,8 @@ class ProfileControllerTest extends AbstractControllerTest
         // Prepare environment
 
         $this->loadFixtures(array_merge(
-            $this->getDefaultFixtures(),
-            $this->getUserFixtures()
+            self::$defaultFixtures,
+            self::$userFixtures
         ));
         $this->login();
 

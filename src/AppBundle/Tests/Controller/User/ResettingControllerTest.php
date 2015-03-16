@@ -23,8 +23,8 @@ class ResettingControllerTest extends AbstractControllerTest
         // Prepare environment
 
         $this->loadFixtures(array_merge(
-            $this->getDefaultFixtures(),
-            $this->getUserFixtures()
+            self::$defaultFixtures,
+            self::$userFixtures
         ));
 
         // Test view
@@ -52,7 +52,7 @@ class ResettingControllerTest extends AbstractControllerTest
     {
         // Test DB
 
-        $user = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
+        $user = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User')->findOneByEmail('test@trackway.org');
 
         self::assertNotEmpty($user);
         self::assertNotEmpty($user->getConfirmationToken());

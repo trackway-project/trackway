@@ -16,6 +16,25 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 abstract class AbstractControllerTest extends WebTestCase
 {
+    protected static $defaultFixtures = [
+        'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
+        'AppBundle\DataFixtures\ORM\LoadGroups',
+        'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
+        'AppBundle\DataFixtures\ORM\LoadLocales'
+    ];
+
+    protected static $userFixtures = [
+        'AppBundle\Tests\DataFixtures\ORM\LoadUser'
+    ];
+
+    protected static $teamFixtures = [
+        'AppBundle\Tests\DataFixtures\ORM\LoadTeam'
+    ];
+
+    protected static $membershipOwnerFixtures = [
+        'AppBundle\Tests\DataFixtures\ORM\LoadMembershipOwner'
+    ];
+
     /**
      * @var Client
      */
@@ -26,30 +45,6 @@ abstract class AbstractControllerTest extends WebTestCase
         $this->client = static::createClient();
         $this->client->followRedirects(true);
         $this->client->setMaxRedirects(10);
-    }
-
-    protected function getDefaultFixtures()
-    {
-        return [
-            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
-            'AppBundle\DataFixtures\ORM\LoadGroups',
-            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
-            'AppBundle\DataFixtures\ORM\LoadLocales'
-        ];
-    }
-
-    protected function getUserFixtures()
-    {
-        return [
-            'AppBundle\Tests\DataFixtures\ORM\LoadUser'
-        ];
-    }
-
-    protected function getTeamFixtures()
-    {
-        return [
-            'AppBundle\Tests\DataFixtures\ORM\LoadUser'
-        ];
     }
 
     protected function login($username = 'test', $password = 'test')

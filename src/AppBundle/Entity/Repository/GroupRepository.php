@@ -14,7 +14,7 @@ class GroupRepository extends EntityRepository
     /**
      * @param $name
      *
-     * @return array
+     * @return null|object
      */
     public function findOneByName($name)
     {

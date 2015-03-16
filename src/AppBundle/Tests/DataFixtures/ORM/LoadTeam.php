@@ -2,9 +2,7 @@
 
 namespace AppBundle\Tests\DataFixtures\ORM;
 
-use AppBundle\Entity\Group;
 use AppBundle\Entity\Team;
-use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Id\AssignedGenerator;

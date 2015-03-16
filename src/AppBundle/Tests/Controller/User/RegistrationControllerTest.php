@@ -20,7 +20,7 @@ class RegistrationControllerTest extends AbstractControllerTest
         // Prepare environment
 
         $this->loadFixtures(array_merge(
-            $this->getDefaultFixtures()
+            self::$defaultFixtures
         ));
 
         // Test view
@@ -52,7 +52,7 @@ class RegistrationControllerTest extends AbstractControllerTest
     {
         // Test DB
 
-        $user = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
+        $user = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User')->findOneByEmail('test@trackway.org');
 
         self::assertNotEmpty($user);
         self::assertNotEmpty($user->getConfirmationToken());
