@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Test\Controller\User;
+namespace AppBundle\Tests\Controller\User;
 
 use AppBundle\Entity\User;
-use AppBundle\Test\Controller\AbstractControllerTest;
+use AppBundle\Tests\Controller\AbstractControllerTest;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -19,7 +19,7 @@ class ResettingControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->createUser();
+        $this->loadUser();
 
         // Test view
 
@@ -45,9 +45,10 @@ class ResettingControllerTest extends AbstractControllerTest
     {
         // Test DB
 
-        $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
+        $user = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
 
         self::assertNotEmpty($user);
+        self::assertNotEmpty($user->getConfirmationToken());
 
         // Test view
 

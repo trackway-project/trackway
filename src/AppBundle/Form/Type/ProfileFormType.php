@@ -20,15 +20,9 @@ class ProfileFormType extends AbstractOverridableFormType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, $this->overrideOptions('username', [], $options))
             ->add('email', 'email', $this->overrideOptions('email', [], $options))
-            ->add('locale', 'choice', $this->overrideOptions('locale', [
-                'choices' => [
-                    null => 'locale.default',
-                    'de' => 'locale.de',
-                    'en' => 'locale.en'
-                ],
-                'required' => false
+            ->add('locale', 'entity', $this->overrideOptions('locale', [
+                'class' => 'AppBundle\Entity\Locale'
             ], $options))
             ->add('memberships', 'entity', $this->overrideOptions('memberships', [
                 'expanded'  => true,

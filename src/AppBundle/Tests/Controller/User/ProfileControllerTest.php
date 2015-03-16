@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Test\Controller\User;
+namespace AppBundle\Tests\Controller\User;
 
 use AppBundle\Entity\User;
-use AppBundle\Test\Controller\AbstractControllerTest;
+use AppBundle\Tests\Controller\AbstractControllerTest;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -19,6 +19,7 @@ class ProfileControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
+        $this->loadUser();
         $this->login();
 
         // Test view
@@ -33,6 +34,7 @@ class ProfileControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
+        $this->loadUser();
         $this->login();
 
         // Test view
@@ -45,11 +47,11 @@ class ProfileControllerTest extends AbstractControllerTest
         // Test form
 
         $form = $crawler->selectButton('appbundle_profile_form[submit]')->form();
-        $form['appbundle_profile_form[username]'] = 'test2';
+        $form['appbundle_profile_form[locale]'] = 2;
         $form['appbundle_profile_form[currentPassword]'] = 'test';
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('td:contains("test2")')->count());
+        static::assertEquals(1, $crawler->filter('td:contains("locale.de")')->count());
     }
 }

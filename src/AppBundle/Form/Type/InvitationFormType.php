@@ -27,14 +27,8 @@ class InvitationFormType extends AbstractOverridableFormType
             ->add('email', 'email', $this->overrideOptions('email', [
                 'trim' => true
             ], $options))
-            ->add('status', 'choice', $this->overrideOptions('status', [
-                'choices' => [
-                    'open' => 'Open',
-                    'cancelled' => 'Cancelled',
-                    'accepted' => 'Accepted',
-                    'rejected' => 'Rejected'
-                ],
-                'required' => true
+            ->add('status', 'entity', $this->overrideOptions('status', [
+                'class' => 'AppBundle\Entity\InvitationStatus'
             ], $options));
     }
 

@@ -44,7 +44,7 @@ class RegistrationController extends Controller
             // TODO: Maybe putting it in a manager?
             $user->setConfirmationToken(md5(uniqid(mt_rand(), true)));
             $user->setEnabled(false);
-            $user->setLocale($this->container->getParameter('locale'));
+            $user->setLocale($this->getDoctrine()->getManager()->getRepository('AppBundle:Locale')->findOneByName($this->container->getParameter('locale')));
             $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
             $user->setRegistrationRequestedAt(new \DateTime());
             $user->setRoles(['ROLE_USER']);

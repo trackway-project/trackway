@@ -11,19 +11,19 @@
         <tbody>
         <tr>
             <th>{{ 'profile.show.username'|trans }}</th>
-            <td>{{ user.username }}</td>
+            <td>{{ entity.username }}</td>
         </tr>
         <tr>
             <th>{{ 'profile.show.email'|trans }}</th>
-            <td>{{ user.email }}</td>
+            <td>{{ entity.email }}</td>
         </tr>
         <tr>
             <th>{{ 'profile.show.active_team'|trans }}</th>
-            <td>{{ user.activeTeam }}</td>
+            <td>{{ entity.activeTeam }}</td>
         </tr>
         <tr>
             <th>{{ 'profile.show.locale'|trans }}</th>
-            <td>{% if user.locale %}{{ ('locale.' ~ user.locale)|trans }}{% endif %}</td>
+            <td>{{ ('locale.' ~ entity.locale.name)|trans }}</td>
         </tr>
         </tbody>
     </table>

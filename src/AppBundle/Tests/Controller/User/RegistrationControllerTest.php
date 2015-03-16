@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Test\Controller\User;
+namespace AppBundle\Tests\Controller\User;
 
-use AppBundle\Test\Controller\AbstractControllerTest;
+use AppBundle\Tests\Controller\AbstractControllerTest;
 use Symfony\Bundle\FrameworkBundle\Client;
 
 /**
@@ -16,7 +16,7 @@ class RegistrationControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->deleteUser();
+        $this->load();
 
         // Test view
 
@@ -45,9 +45,10 @@ class RegistrationControllerTest extends AbstractControllerTest
     {
         // Test DB
 
-        $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
+        $user = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
 
         self::assertNotEmpty($user);
+        self::assertNotEmpty($user->getConfirmationToken());
 
         // Test view
 

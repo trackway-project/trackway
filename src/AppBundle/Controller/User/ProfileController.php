@@ -28,7 +28,7 @@ class ProfileController extends Controller
      */
     public function showAction()
     {
-        return ['user' => $this->getUser()];
+        return ['entity' => $this->getUser()];
     }
 
     /**
@@ -55,13 +55,11 @@ class ProfileController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
-            $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
-
             $this->getDoctrine()->getManager()->flush();
 
             // TODO: Maybe putting it in a event listener?
-            if (!empty($user->getLocale())) {
-                $request->getSession()->set('_locale', $user->getLocale());
+            if ($user->getLocale()) {
+                $request->getSession()->set('_locale', $user->getLocale()->getName());
             }
 
             $this->get('session')->getFlashBag()->add('success', 'profile.flash.updated');

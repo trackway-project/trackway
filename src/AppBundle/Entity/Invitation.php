@@ -58,9 +58,13 @@ class Invitation
     protected $confirmationToken;
 
     /**
-     * @var string
+     * @var InvitationStatus
      *
-     * @ORM\Column(name="status", type="invitationStatusEnum")
+     * @ORM\ManyToOne(targetEntity="InvitationStatus")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="AppBundle\Entity\InvitationStatus")
      */
     protected $status;
 
@@ -153,7 +157,7 @@ class Invitation
     }
 
     /**
-     * @return string
+     * @return InvitationStatus
      */
     public function getStatus()
     {
@@ -161,7 +165,7 @@ class Invitation
     }
 
     /**
-     * @param string $status
+     * @param InvitationStatus $status
      */
     public function setStatus($status)
     {

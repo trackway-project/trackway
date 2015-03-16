@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * AbsenceReason
+ * InvitationStatus
  *
- * @ORM\Entity
- * @ORM\Table(name="absenceReasons")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\InvitationStatusRepository")
+ * @ORM\Table(name="invitationStatuses")
  */
-class AbsenceReason
+class InvitationStatus
 {
     /**
      * @var integer

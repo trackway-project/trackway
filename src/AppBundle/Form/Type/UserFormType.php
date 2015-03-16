@@ -22,12 +22,7 @@ class UserFormType extends AbstractOverridableFormType
             ->add('username', null, $this->overrideOptions('username', [], $options))
             ->add('email', 'email', $this->overrideOptions('email', [], $options))
             ->add('locale', 'choice', $this->overrideOptions('locale', [
-                'choices' => [
-                    null => 'locale.default',
-                    'de' => 'locale.de',
-                    'en' => 'locale.en'
-                ],
-                'required' => false
+                'class' => 'AppBundle\Entity\Locale'
             ], $options))
             ->add('memberships', 'entity', $this->overrideOptions('memberships', [
                 'expanded'  => true,

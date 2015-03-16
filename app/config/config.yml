@@ -39,12 +39,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        types:
-            invitationStatusEnum: AppBundle\Type\InvitationStatusEnumType
-            localeEnum: AppBundle\Type\LocaleEnumType
-        mapping_types:
-            enum: string
-
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true

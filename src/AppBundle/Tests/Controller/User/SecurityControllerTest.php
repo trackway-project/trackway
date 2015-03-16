@@ -1,7 +1,8 @@
 <?php
 
-namespace AppBundle\Test\Controller\User;
-use AppBundle\Test\Controller\AbstractControllerTest;
+namespace AppBundle\Tests\Controller\User;
+
+use AppBundle\Tests\Controller\AbstractControllerTest;
 
 /**
  * Class SecurityControllerTest
@@ -14,7 +15,7 @@ class SecurityControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->createUser();
+        $this->loadUser();
 
         // Test form view
 

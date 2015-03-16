@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Test\Controller;
+namespace AppBundle\Tests\Controller;
 
 use AppBundle\Entity\Team;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Client;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
@@ -21,98 +21,49 @@ abstract class AbstractControllerTest extends WebTestCase
      */
     protected $client = null;
 
-    /**
-     * @var \Doctrine\ORM\EntityManager
-     */
-    protected $em;
-
-    public function setUp()
+    protected function setUp()
     {
-        self::bootKernel();
-
         $this->client = static::createClient();
         $this->client->followRedirects(true);
-        $this->em = static::$kernel->getContainer()->get('doctrine')->getManager();
+        $this->client->setMaxRedirects(10);
     }
 
-    protected function deleteUser()
+    protected function load()
     {
-        // Delete old user
-        $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
-        if ($user) {
-            $this->em->remove($user);
-            $this->em->flush();
-        }
+        $this->loadFixtures([
+            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
+            'AppBundle\DataFixtures\ORM\LoadGroups',
+            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
+            'AppBundle\DataFixtures\ORM\LoadLocales'
+        ]);
     }
 
-    protected function createUser()
+    protected function loadUser()
     {
-        // Delete old user
-        $this->deleteUser();
-
-        // Create new user
-        $user = new User();
-        $user->setId(1);
-        $user->setUsername('test');
-        $user->setEmail('test@trackway.org');
-        $user->setSalt('f0afecd49087e0971b807b3d5bb4d9f8');
-        $user->setPassword('$2y$12$5cvVIqGw.reNtu7EWzMKq.cSVO5R26L446nT0PSW8SOcodwfFRGoS');
-        $user->setRoles(['ROLE_USER']);
-        $user->setLocale('en');
-        $user->setEnabled(true);
-        $user->setLastLogin(new \DateTime());
-
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->loadFixtures([
+            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
+            'AppBundle\DataFixtures\ORM\LoadGroups',
+            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
+            'AppBundle\DataFixtures\ORM\LoadLocales',
+            'AppBundle\Tests\DataFixtures\ORM\LoadUser'
+        ]);
     }
 
-    protected function deleteTeam()
+    protected function loadUserWithActiveTeam()
     {
-        // Login
-        $this->login();
-
-        // Make sure the team is not already existing
-        $team = $this->em->getRepository('AppBundle:Team')->findByName('test');
-        if ($team) {
-            $this->em->remove($team);
-            $this->em->flush();
-        }
+        $this->loadFixtures([
+            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
+            'AppBundle\DataFixtures\ORM\LoadGroups',
+            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
+            'AppBundle\DataFixtures\ORM\LoadLocales',
+            'AppBundle\Tests\DataFixtures\ORM\LoadUserWithActiveTeam'
+        ]);
     }
 
-    protected function createTeam($active = true)
+    protected function login($username = 'test', $password = 'test')
     {
-        // Delete old team
-        $this->deleteTeam();
-
-        // Create a new user
-        $team = new Team();
-        $team->setId(1);
-        $team->setName('test');
-
-        $this->em->persist($team);
-
-        if ($active) {
-            $user = $this->em->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
-            if ($user) {
-                $user->setActiveTeam($team);
-
-                $this->em->persist($user);
-            }
-        }
-
-        $this->em->flush();
-    }
-
-    protected function login()
-    {
-        // Create new user
-        $this->createUser();
-
-        // Login
-        $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->selectButton('_submit')->form();
-        $form['_username'] = 'test';
-        $form['_password'] = 'test';
-        $crawler = $this->client->submit($form);
+        $this->client = static::makeClient(['username' => $username, 'password' => $password]);
+        $this->client->followRedirects(true);
+        $this->client->setMaxRedirects(10);
     }
 }

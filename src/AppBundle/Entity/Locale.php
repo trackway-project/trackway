@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * AbsenceReason
+ * Locale
  *
- * @ORM\Entity
- * @ORM\Table(name="absenceReasons")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\LocaleRepository")
+ * @ORM\Table(name="locales")
  */
-class AbsenceReason
+class Locale implements \Serializable
 {
     /**
      * @var integer
@@ -39,6 +39,29 @@ class AbsenceReason
     public function __toString()
     {
         return $this->name;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->name
+        ]);
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->name
+            ) = unserialize($serialized);
     }
 
     /**

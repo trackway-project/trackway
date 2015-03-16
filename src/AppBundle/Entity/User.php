@@ -103,9 +103,13 @@ class User implements AdvancedUserInterface, \Serializable
     protected $roles;
 
     /**
-     * @var string
+     * @var Locale
      *
-     * @ORM\Column(name="locale", type="localeEnum")
+     * @ORM\ManyToOne(targetEntity="Locale")
+     * @ORM\JoinColumn(name="locale_id", referencedColumnName="id")
+     *
+     * @Assert\NotNull()
+     * @Assert\Type(type="AppBundle\Entity\Locale")
      */
     protected $locale;
 
@@ -176,12 +180,13 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->id,
             $this->username,
             $this->password,
-            $this->salt
-        ));
+            $this->salt,
+            $this->locale
+        ]);
     }
 
     /**
@@ -193,7 +198,8 @@ class User implements AdvancedUserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->salt
+            $this->salt,
+            $this->locale
             ) = unserialize($serialized);
     }
 
@@ -366,7 +372,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @return string
+     * @return Locale
      */
     public function getLocale()
     {
@@ -374,7 +380,7 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param string $locale
+     * @param Locale $locale
      */
     public function setLocale($locale)
     {

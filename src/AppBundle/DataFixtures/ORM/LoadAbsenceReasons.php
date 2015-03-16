@@ -16,23 +16,14 @@ class LoadAbsenceReasons implements FixtureInterface{
     {
         $illness = new AbsenceReason();
         $illness->setName('Illness');
-        $illness->setId(1);
-
-        // force id's
-        $metadata = $manager->getClassMetadata(get_class($illness));
-        $metadata->setIdGenerator(new AssignedGenerator());
-        $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
-
         $manager->persist($illness);
 
         $vacation = new AbsenceReason();
         $vacation->setName('Vacation');
-        $vacation->setId(2);
         $manager->persist($vacation);
 
         $holiday = new AbsenceReason();
         $holiday->setName('Holiday');
-        $holiday->setId(3);
         $manager->persist($holiday);
 
         $manager->flush();

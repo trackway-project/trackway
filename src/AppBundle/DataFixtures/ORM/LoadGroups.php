@@ -15,24 +15,18 @@ class LoadGroups implements FixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $owner = new Group('Owner');
-        $owner->setId(1);
+        $owner = new Group();
+        $owner->setName('Owner');
         $owner->setRoles(['ROLE_ADMIN']);
-
-        // force id's
-        $metadata = $manager->getClassMetadata(get_class($owner));
-        $metadata->setIdGenerator(new AssignedGenerator());
-        $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
-
         $manager->persist($owner);
 
-        $admin = new Group('Admin');
-        $admin->setId(2);
+        $admin = new Group();
+        $admin->setName('Admin');
         $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
 
-        $user = new Group('User');
-        $user->setId(3);
+        $user = new Group();
+        $user->setName('User');
         $user->setRoles(['ROLE_USER']);
         $manager->persist($user);
 
