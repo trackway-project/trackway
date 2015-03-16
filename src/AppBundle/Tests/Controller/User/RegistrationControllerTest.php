@@ -12,11 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Client;
  */
 class RegistrationControllerTest extends AbstractControllerTest
 {
+    /**
+     * @coversNothing
+     */
     public function testRegisterAction()
     {
         // Prepare environment
 
-        $this->load();
+        $this->loadFixtures(array_merge(
+            $this->getDefaultFixtures()
+        ));
 
         // Test view
 
@@ -38,7 +43,9 @@ class RegistrationControllerTest extends AbstractControllerTest
         static::assertEquals(1, $crawler->filter('p:contains("Please check your mails and click on the confirmation link.")')->count());
     }
 
+
     /**
+     * @coversNothing
      * @depends testRegisterAction
      */
     public function testConfirmAction()

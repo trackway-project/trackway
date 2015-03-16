@@ -12,26 +12,6 @@ use Doctrine\ORM\EntityRepository;
 class TeamRepository extends EntityRepository
 {
     /**
-     * @param Team $team
-     */
-    public function remove(Team $team)
-    {
-        $this->getEntityManager()->getRepository('AppBundle:TimeEntry')->removeByTeam($team);
-        $this->getEntityManager()->remove($team);
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return array
-     */
-    public function findByName($name)
-    {
-        return $this->findBy(['name' => $name]);
-    }
-
-    /**
      * @param User $user
      *
      * @return array
@@ -39,5 +19,25 @@ class TeamRepository extends EntityRepository
     public function findByUser(User $user)
     {
         return $this->createQueryBuilder('t')->join('t.memberships', 'm')->where('m.user = ' . $user->getId())->getQuery()->getResult();
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return array
+     */
+    public function findOneByName($name)
+    {
+        return $this->findOneBy(['name' => $name]);
+    }
+
+    /**
+     * @param Team $team
+     */
+    public function remove(Team $team)
+    {
+        $this->getEntityManager()->getRepository('AppBundle:TimeEntry')->removeByTeam($team);
+        $this->getEntityManager()->remove($team);
+        $this->getEntityManager()->flush();
     }
 }

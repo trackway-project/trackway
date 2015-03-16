@@ -28,36 +28,28 @@ abstract class AbstractControllerTest extends WebTestCase
         $this->client->setMaxRedirects(10);
     }
 
-    protected function load()
+    protected function getDefaultFixtures()
     {
-        $this->loadFixtures([
+        return [
             'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
             'AppBundle\DataFixtures\ORM\LoadGroups',
             'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
             'AppBundle\DataFixtures\ORM\LoadLocales'
-        ]);
+        ];
     }
 
-    protected function loadUser()
+    protected function getUserFixtures()
     {
-        $this->loadFixtures([
-            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
-            'AppBundle\DataFixtures\ORM\LoadGroups',
-            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
-            'AppBundle\DataFixtures\ORM\LoadLocales',
+        return [
             'AppBundle\Tests\DataFixtures\ORM\LoadUser'
-        ]);
+        ];
     }
 
-    protected function loadUserWithActiveTeam()
+    protected function getTeamFixtures()
     {
-        $this->loadFixtures([
-            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
-            'AppBundle\DataFixtures\ORM\LoadGroups',
-            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
-            'AppBundle\DataFixtures\ORM\LoadLocales',
-            'AppBundle\Tests\DataFixtures\ORM\LoadUserWithActiveTeam'
-        ]);
+        return [
+            'AppBundle\Tests\DataFixtures\ORM\LoadUser'
+        ];
     }
 
     protected function login($username = 'test', $password = 'test')

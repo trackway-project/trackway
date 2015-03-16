@@ -15,11 +15,17 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class ResettingControllerTest extends AbstractControllerTest
 {
+    /**
+     * @coversNothing
+     */
     public function testRequestAction()
     {
         // Prepare environment
 
-        $this->loadUser();
+        $this->loadFixtures(array_merge(
+            $this->getDefaultFixtures(),
+            $this->getUserFixtures()
+        ));
 
         // Test view
 
@@ -39,6 +45,7 @@ class ResettingControllerTest extends AbstractControllerTest
     }
 
     /**
+     * @coversNothing
      * @depends testRequestAction
      */
     public function testConfirmAction()

@@ -118,6 +118,7 @@ class Builder extends ContainerAware
             $menu['Profile']->addChild('Profile', ['icon' => 'fa fa-fw fa-user', 'route' => 'profile_show']);
             $menu['Profile']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'profile_membership_index']);
             $menu['Profile']->addChild('Settings', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'profile_edit']);
+            $menu['Profile']->addChild('Change Password', ['icon' => 'fa fa-fw fa-key', 'route' => 'profile_change_password']);
 
             $menu->addChild('Logout', ['route' => 'security_logout']);
 

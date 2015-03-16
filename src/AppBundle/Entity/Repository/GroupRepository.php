@@ -16,8 +16,8 @@ class GroupRepository extends EntityRepository
      *
      * @return array
      */
-    public function findByName($name)
+    public function findOneByName($name)
     {
-        return $this->findBy(['name' => $name]);
+        return $this->findOneBy(['name' => $name]);
     }
 }
