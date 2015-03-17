@@ -35,6 +35,13 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.form.factory.task');
         $this->assertContainerBuilderHasService('app.form.factory.team');
         $this->assertContainerBuilderHasService('app.form.factory.time_entry');
+        $this->assertContainerBuilderHasService('app.form.factory.change_password');
+        $this->assertContainerBuilderHasService('app.form.factory.group');
+        $this->assertContainerBuilderHasService('app.form.factory.profile');
+        $this->assertContainerBuilderHasService('app.form.factory.user');
+        $this->assertContainerBuilderHasService('app.form.factory.registration');
+        $this->assertContainerBuilderHasService('app.form.factory.resetting_confirm');
+        $this->assertContainerBuilderHasService('app.form.factory.resetting_request');
 
         $this->assertContainerBuilderHasService('app.form.type.absence');
         $this->assertContainerBuilderHasService('app.form.type.absence_reason');
@@ -44,12 +51,22 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.form.type.task');
         $this->assertContainerBuilderHasService('app.form.type.team');
         $this->assertContainerBuilderHasService('app.form.type.time_entry');
+        $this->assertContainerBuilderHasService('app.form.type.change_password');
+        $this->assertContainerBuilderHasService('app.form.type.group');
+        $this->assertContainerBuilderHasService('app.form.type.profile');
+        $this->assertContainerBuilderHasService('app.form.type.user');
+        $this->assertContainerBuilderHasService('app.form.type.registration');
+        $this->assertContainerBuilderHasService('app.form.type.resetting_confirm');
+        $this->assertContainerBuilderHasService('app.form.type.resetting_request');
 
         // listeners.xml
+        $this->assertContainerBuilderHasService('app.event_listener.locale');
+        $this->assertContainerBuilderHasService('app.event_listener.login');
         $this->assertContainerBuilderHasService('app.event_listener.routing');
 
         // menu.xml
         $this->assertContainerBuilderHasService('app.menu.extension.icon');
+        $this->assertContainerBuilderHasService('app.menu.renderer.breadcrumb');
         $this->assertContainerBuilderHasService('app.menu.renderer.navbar');
         $this->assertContainerBuilderHasService('app.menu.renderer.sidebar');
 
