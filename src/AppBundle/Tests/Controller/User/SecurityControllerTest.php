@@ -18,10 +18,7 @@ class SecurityControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures));
 
         // Test form view
 
@@ -49,10 +46,7 @@ class SecurityControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures));
         $this->login();
 
         // Test

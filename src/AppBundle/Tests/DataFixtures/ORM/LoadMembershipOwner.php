@@ -6,9 +6,12 @@ use AppBundle\Entity\Membership;
 use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Id\AssignedGenerator;
-use Doctrine\ORM\Mapping\ClassMetadata;
 
+/**
+ * Class LoadMembershipOwner
+ *
+ * @package AppBundle\Tests\DataFixtures\ORM
+ */
 class LoadMembershipOwner implements FixtureInterface
 {
     /**

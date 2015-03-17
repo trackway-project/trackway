@@ -4,9 +4,6 @@ namespace AppBundle\Tests\Controller\User;
 
 use AppBundle\Entity\User;
 use AppBundle\Tests\Controller\AbstractControllerTest;
-use Symfony\Bundle\FrameworkBundle\Client;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class ResettingControllerTest
@@ -22,10 +19,7 @@ class ResettingControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures));
 
         // Test view
 

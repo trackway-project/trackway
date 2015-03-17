@@ -2,11 +2,7 @@
 
 namespace AppBundle\Tests\Controller\User;
 
-use AppBundle\Entity\User;
 use AppBundle\Tests\Controller\AbstractControllerTest;
-use Symfony\Bundle\FrameworkBundle\Client;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class ProfileControllerTest
@@ -21,10 +17,7 @@ class ProfileControllerTest extends AbstractControllerTest
     public function testShowAction()
     {
         // Prepare environment
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures));
         $this->login();
 
         // Test view
@@ -42,10 +35,7 @@ class ProfileControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures));
         $this->login();
 
         // Test view
@@ -72,10 +62,7 @@ class ProfileControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures));
         $this->login();
 
         // Test view

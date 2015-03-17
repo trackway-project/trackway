@@ -2,8 +2,11 @@
 
 namespace AppBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
+/**
+ * Class TeamControllerTest
+ *
+ * @package AppBundle\Tests\Controller
+ */
 class TeamControllerTest extends AbstractControllerTest
 {
     /**
@@ -13,19 +16,14 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$membershipOwnerFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures));
         $this->login();
 
         // Test view
 
         $crawler = $this->client->request('GET', '/team/');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
         static::assertEquals(1, $crawler->filter('h1:contains("Teams")')->count());
     }
 
@@ -36,17 +34,14 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures));
         $this->login();
 
         // Test view
 
         $crawler = $this->client->request('GET', '/team/new');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
         static::assertEquals(1, $crawler->filter('h1:contains("Team new")')->count());
 
         // Test form
@@ -55,7 +50,7 @@ class TeamControllerTest extends AbstractControllerTest
         $form['appbundle_team_form[name]'] = 'test';
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
         static::assertEquals(1, $crawler->filter('h1:contains("Team")')->count());
     }
 
@@ -66,20 +61,14 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$membershipOwnerFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures));
         $this->login();
 
         // Test view
 
         $crawler = $this->client->request('GET', '/team/1');
 
-        //static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), $this->client->getResponse()->getContent());
+        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
         static::assertEquals(1, $crawler->filter('h1:contains("Team")')->count());
     }
 
@@ -90,19 +79,14 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$membershipOwnerFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures));
         $this->login();
 
         // Test view
 
         $crawler = $this->client->request('GET', '/team/1/edit');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
         static::assertEquals(1, $crawler->filter('h1:contains("Team edit")')->count());
 
         // Test form
@@ -110,7 +94,7 @@ class TeamControllerTest extends AbstractControllerTest
         $form = $crawler->selectButton('appbundle_team_form[submit]')->form();
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
         static::assertEquals(1, $crawler->filter('h1:contains("Team")')->count());
     }
 
@@ -121,19 +105,14 @@ class TeamControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$membershipOwnerFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures));
         $this->login();
 
         // Test view
 
         $crawler = $this->client->request('GET', '/team/1/delete');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
         static::assertEquals(1, $crawler->filter('h1:contains("Teams")')->count());
     }
 }

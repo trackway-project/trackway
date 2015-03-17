@@ -2,12 +2,8 @@
 
 namespace AppBundle\Tests\Controller;
 
-use AppBundle\Entity\Team;
-use AppBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Bundle\FrameworkBundle\Client;
 
 /**
  * Class AbstractControllerTest
@@ -16,24 +12,11 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 abstract class AbstractControllerTest extends WebTestCase
 {
-    protected static $defaultFixtures = [
-        'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
-        'AppBundle\DataFixtures\ORM\LoadGroups',
-        'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
-        'AppBundle\DataFixtures\ORM\LoadLocales'
-    ];
-
-    protected static $userFixtures = [
-        'AppBundle\Tests\DataFixtures\ORM\LoadUser'
-    ];
-
-    protected static $teamFixtures = [
-        'AppBundle\Tests\DataFixtures\ORM\LoadTeam'
-    ];
-
-    protected static $membershipOwnerFixtures = [
-        'AppBundle\Tests\DataFixtures\ORM\LoadMembershipOwner'
-    ];
+    protected static $defaultFixtures = ['AppBundle\DataFixtures\ORM\LoadAbsenceReasons', 'AppBundle\DataFixtures\ORM\LoadGroups', 'AppBundle\DataFixtures\ORM\LoadInvitationStatuses', 'AppBundle\DataFixtures\ORM\LoadLocales'];
+    protected static $userFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadUser'];
+    protected static $teamFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadTeam', 'AppBundle\Tests\DataFixtures\ORM\LoadMembershipOwner', 'AppBundle\Tests\DataFixtures\ORM\LoadActiveTeam'];
+    protected static $projectFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadProject'];
+    protected static $taskFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadTask'];
 
     /**
      * @var Client

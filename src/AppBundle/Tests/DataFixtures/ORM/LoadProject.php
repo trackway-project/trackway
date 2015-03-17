@@ -2,25 +2,27 @@
 
 namespace AppBundle\Tests\DataFixtures\ORM;
 
+use AppBundle\Entity\Project;
 use AppBundle\Entity\Team;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class LoadTeam
+ * Class LoadProject
  *
  * @package AppBundle\Tests\DataFixtures\ORM
  */
-class LoadTeam implements FixtureInterface
+class LoadProject implements FixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $team = new Team();
-        $team->setName('test');
-        $manager->persist($team);
+        $project = new Project();
+        $project->setName('test');
+        $project->setTeam($manager->getRepository('AppBundle:Team')->findOneByName('test'));
+        $manager->persist($project);
 
         $manager->flush();
     }

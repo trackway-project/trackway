@@ -3,7 +3,6 @@
 namespace AppBundle\Tests\Controller\User;
 
 use AppBundle\Tests\Controller\AbstractControllerTest;
-use Symfony\Bundle\FrameworkBundle\Client;
 
 /**
  * Class RegistrationControllerTest
@@ -19,9 +18,7 @@ class RegistrationControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures));
 
         // Test view
 
