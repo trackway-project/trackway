@@ -6,6 +6,11 @@ use AppBundle\DependencyInjection\AppExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
+/**
+ * Class AppExtensionTest
+ *
+ * @package AppBundle\Tests\DependencyInjection
+ */
 class AppExtensionTest extends AbstractExtensionTestCase
 {
     /**
@@ -20,9 +25,9 @@ class AppExtensionTest extends AbstractExtensionTestCase
     }
 
     /**
-     * Test if all service configuration files are loaded
+     * Test if all services are loaded
      */
-    public function testIsLoadableAndIncludeAllFiles()
+    public function testIsLoadableAndIncludeAllServices()
     {
         $this->load();
 
