@@ -14,7 +14,7 @@ class TeamRepository extends EntityRepository
     /**
      * @param User $user
      *
-     * @return array
+     * @return Team[]
      */
     public function findByUser(User $user)
     {
@@ -24,7 +24,7 @@ class TeamRepository extends EntityRepository
     /**
      * @param $name
      *
-     * @return null|object
+     * @return null|Team
      */
     public function findOneByName($name)
     {
