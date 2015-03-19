@@ -3,21 +3,21 @@
 {% block class %}team{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>{{ 'team.index.title'|trans }}</h1>
+    <h1>{{ 'team.template.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ 'team.name'|trans }}</th>
+            <th>{{ 'team.entity.name'|trans }}</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{% if entity == app.user.activeTeam %}<i class="fa fa-star" title="Active Team"></i>&nbsp;{% endif %}{{ entity.name }}</td>
+                <td>{% if entity == app.user.activeTeam %}<i class="fa fa-star" title="{{ 'team.template.activeTeam'|trans }}"></i>&nbsp;{% endif %}{{ entity.name }}</td>
                 <td class="text-right">
                     <a href="{{ path('team_show', { 'id': entity.id }) }}"
                        class="btn btn-sm btn-default"

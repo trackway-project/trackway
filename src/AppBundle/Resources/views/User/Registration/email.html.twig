@@ -1,1 +1,4 @@
-{{ path('registration_confirm', {'token': entity.confirmationToken}) }}
+{{ 'registration.email.text'|trans({
+    'linkStart': '<a href="' ~ path('registration_confirm', {'token': entity.confirmationToken}) ~ '">',
+    'linkEnd': '</a>'
+}) }}

@@ -1,3 +1,6 @@
-{{ path('team_invitation_accept', {'token': entity.confirmationToken}) }}
-
-{{ path('team_invitation_cancel', {'token': entity.confirmationToken}) }}
+{{ 'invitation.email.text'|trans({
+    'acceptLinkStart': '<a href="' ~ path('team_invitation_accept', {'token': entity.confirmationToken}) ~ '">',
+    'acceptLinkEnd': '</a>',
+    'cancelLinkStart': '<a href="' ~ path('team_invitation_cancel', {'token': entity.confirmationToken}) ~ '">',
+    'cancelLinkEnd': '</a>'
+}) }}

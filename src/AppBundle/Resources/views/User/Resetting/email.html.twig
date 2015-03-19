@@ -1,1 +1,4 @@
-{{ path('resetting_confirm', {'token': entity.confirmationToken}) }}
+{{ 'resetting.email.text'|trans({
+    'linkStart': '<a href="' ~ path('resetting_confirm', {'token': entity.confirmationToken}) ~ '">',
+    'linkEnd': '</a>'
+}) }}

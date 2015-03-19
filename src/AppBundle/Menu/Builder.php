@@ -128,7 +128,6 @@ class Builder extends ContainerAware
             if ($id && strpos($route, 'profile_membership_') === 0) {
                 $menu['Profile']['Memberships']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'profile_membership_index']);
                 $menu['Profile']['Memberships']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'profile_membership_show', 'routeParameters' => ['id' => $id]]);
-                $menu['Profile']['Memberships']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'profile_membership_edit', 'routeParameters' => ['id' => $id]]);
                 $menu['Profile']['Memberships']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'profile_membership_delete', 'routeParameters' => ['id' => $id]]);
             }
         } else {

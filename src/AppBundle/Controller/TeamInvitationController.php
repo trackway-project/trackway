@@ -73,7 +73,7 @@ class TeamInvitationController extends Controller
                     ->setParameters([1 => $invitation->getEmail(),2 => $invitation->getId()])
                     ->getQuery()->getFirstResult() > 0
             ) {
-                $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.already_invited');
+                $this->get('session')->getFlashBag()->add('success', 'invitation.flash.alreadyInvited');
 
                 return ['entity' => $team, 'form' => $form->createView()];
             }
@@ -98,7 +98,7 @@ class TeamInvitationController extends Controller
                 ), 'text/html');
             $mailer->send($message);
 
-            $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.invited');
+            $this->get('session')->getFlashBag()->add('success', 'invitation.flash.invited');
 
             return $this->redirect($this->generateUrl('team_invitation_show', ['id' => $team->getId(), 'invitationId' => $invitation->getId()]));
         }
@@ -126,7 +126,7 @@ class TeamInvitationController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.accepted');
+        $this->get('session')->getFlashBag()->add('success', 'invitation.flash.accepted');
 
         return $this->redirect($this->generateUrl('dashboard_index'));
     }
@@ -149,7 +149,7 @@ class TeamInvitationController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.cancelled');
+        $this->get('session')->getFlashBag()->add('success', 'invitation.flash.cancelled');
 
         return $this->redirect($this->generateUrl('dashboard_index'));
     }
@@ -194,7 +194,7 @@ class TeamInvitationController extends Controller
         $em->remove($invitation);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.deleted');
+        $this->get('session')->getFlashBag()->add('success', 'invitation.flash.deleted');
 
         return $this->redirect($this->generateUrl('team_invitation_index', ['id' => $team->getId()]));
     }

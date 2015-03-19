@@ -1,25 +1,25 @@
 {% extends 'AppBundle::layoutOffCanvasMain.html.twig' %}
 
-{% block class %}team_invitation{% endblock class %}
+{% block class %}invitation{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Team Invitation</h1>
+    <h1>{{ 'invitation.template.show.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
-            <th>Email</th>
+            <th>{{ 'invitation.entity.email'|trans }}</th>
             <td>{{ entity.email }}</td>
         </tr>
         <tr>
-            <th>Status</th>
-            <td>{{ entity.status }}</td>
+            <th>{{ 'invitation.entity.status'|trans }}</th>
+            <td>{{ ('invitation.value.status.' ~ entity.status.name)|trans }}</td>
         </tr>
         {% if entity.user %}
         <tr>
-            <th>User</th>
+            <th>{{ 'invitation.entity.user'|trans }}</th>
             <td>{{ entity.user }}</td>
         </tr>
         {% endif %}

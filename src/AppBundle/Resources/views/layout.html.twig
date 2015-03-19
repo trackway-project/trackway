@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}{% block subtitle %}{% endblock subtitle %}{{ 'layout.title'|trans }}{% endblock title %}</title>
+    <title>{% block title %}{% block subtitle %}{% endblock subtitle %}{{ 'template.title'|trans }}{% endblock title %}</title>
 
     <link href="/css/combined.css" rel="stylesheet">
 
@@ -22,12 +22,12 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">{{ 'layout.toggleNavigation'|trans }}</span>
+                    <span class="sr-only">{{ 'template.toggleNavigation'|trans }}</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('dashboard_index') }}">{{ 'layout.title'|trans }}</a>
+                <a class="navbar-brand" href="{{ path('dashboard_index') }}">{{ 'template.title'|trans }}</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -56,7 +56,7 @@
 
 <div id="footer">
     <div class="container">
-        <p class="text-muted">{{ 'layout.forkIt'|trans({'%linkStart%': '<a href="https://github.com/MewesK/trackway">', '%linkEnd%'. '</a>'}) }}</p>
+        <p class="text-muted">{{ 'template.forkIt'|trans({'%linkStart%': '<a href="https://github.com/MewesK/trackway">', '%linkEnd%': '</a>'}) }}</p>
     </div>
 </div>
 
