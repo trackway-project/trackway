@@ -15,15 +15,15 @@ class LoadAbsenceReasons implements FixtureInterface{
     public function load(ObjectManager $manager)
     {
         $illness = new AbsenceReason();
-        $illness->setName('Illness');
+        $illness->setName('illness');
         $manager->persist($illness);
 
         $vacation = new AbsenceReason();
-        $vacation->setName('Vacation');
+        $vacation->setName('vacation');
         $manager->persist($vacation);
 
         $holiday = new AbsenceReason();
-        $holiday->setName('Holiday');
+        $holiday->setName('holiday');
         $manager->persist($holiday);
 
         $manager->flush();

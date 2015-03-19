@@ -53,7 +53,7 @@ class Invitation
     /**
      * @var string
      *
-     * @ORM\Column(name="confirmation_token", type="string", length=255)
+     * @ORM\Column(name="confirmation_token", type="string", length=255, nullable=true)
      */
     protected $confirmationToken;
 
@@ -62,9 +62,6 @@ class Invitation
      *
      * @ORM\ManyToOne(targetEntity="InvitationStatus")
      * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
-     *
-     * @Assert\NotNull()
-     * @Assert\Type(type="AppBundle\Entity\InvitationStatus")
      */
     protected $status;
 

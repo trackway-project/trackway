@@ -23,7 +23,7 @@ class LoadAbsence implements FixtureInterface
         $absence->setDate(new \DateTime());
         $absence->setEndsAt(new \DateTime());
         $absence->setNote('test');
-        $absence->setReason($manager->getRepository('AppBundle:AbsenceReason')->findOneByName('Holiday'));
+        $absence->setReason($manager->getRepository('AppBundle:AbsenceReason')->findOneByName('holiday'));
         $absence->setStartsAt(new \DateTime());
         $absence->setTeam($manager->getRepository('AppBundle:Team')->findOneByName('test'));
         $absence->setUser($manager->getRepository('AppBundle:User')->findOneByEmail('test@trackway.org'));

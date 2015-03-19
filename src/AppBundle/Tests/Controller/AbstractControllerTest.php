@@ -21,7 +21,7 @@ abstract class AbstractControllerTest extends WebTestCase
     protected static $timeEntryFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadTimeEntry'];
     protected static $absenceFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadAbsence'];
     protected static $membershipFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadMembership'];
-
+    protected static $invitationFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadInvitation'];
     /**
      * @var Client
      */

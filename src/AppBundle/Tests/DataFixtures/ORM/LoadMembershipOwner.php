@@ -20,7 +20,7 @@ class LoadMembershipOwner implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $membership = new Membership();
-        $membership->setGroup($manager->getRepository('AppBundle:Group')->findOneByName('Owner'));
+        $membership->setGroup($manager->getRepository('AppBundle:Group')->findOneByName('owner'));
         $membership->setTeam($manager->getRepository('AppBundle:Team')->findOneByName('test'));
         $membership->setUser($manager->getRepository('AppBundle:User')->findOneByEmail('test@trackway.org'));
         $manager->persist($membership);

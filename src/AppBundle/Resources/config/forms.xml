@@ -20,7 +20,7 @@
         <service id="app.form.factory.invitation" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="app.form.type.invitation"/>
-            <argument>appbundle_invitation_form_type</argument>
+            <argument>appbundle_invitation_form</argument>
         </service>
 
         <service id="app.form.factory.membership" class="AppBundle\Form\Factory\FormFactory">
