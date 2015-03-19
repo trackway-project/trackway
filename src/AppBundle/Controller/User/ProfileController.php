@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class ProfileController
@@ -93,7 +94,14 @@ class ProfileController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
+            $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
+
             $this->getDoctrine()->getManager()->flush();
+
+            // Login
+            $token = $this->get('security.authentication.manager')->authenticate(new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles()));
+            $this->get('session')->set('_security_main', serialize($token));
+            $this->get('security.token_storage')->setToken($token);
 
             $this->get('session')->getFlashBag()->add('success', 'profile.flash.passwordChanged');
 

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * AbsenceReason
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\AbsenceReasonRepository")
  * @ORM\Table(name="absenceReasons")
  */
 class AbsenceReason

@@ -79,7 +79,7 @@ class TeamController extends Controller
 
         if ($form->isValid()) {
             /** @var Group $group */
-            $group = $this->getDoctrine()->getManager()->getRepository('AppBundle:Group')->findByName('Owner');
+            $group = $this->getDoctrine()->getManager()->getRepository('AppBundle:Group')->findOneByName('owner');
 
             if (!$group) {
                 throw $this->createNotFoundException('Unable to find Group entity.');

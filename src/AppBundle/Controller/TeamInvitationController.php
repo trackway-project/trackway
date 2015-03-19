@@ -10,7 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class TeamInvitationController
@@ -66,23 +68,90 @@ class TeamInvitationController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
-            // TODO: check if email is already member of the team
+            if ($this->getDoctrine()->getRepository('AppBundle:Invitation')->createQueryBuilder('i')
+                    ->select('count(i.id)')->where('i.email = ?1')->andWhere('i.id != ?2')
+                    ->setParameters([1 => $invitation->getEmail(),2 => $invitation->getId()])
+                    ->getQuery()->getFirstResult() > 0
+            ) {
+                $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.already_invited');
+
+                return ['entity' => $team, 'form' => $form->createView()];
+            }
 
             $invitation->setTeam($team);
-            $invitation->setStatus('open');
+            $invitation->setStatus($this->getDoctrine()->getRepository('AppBundle:InvitationStatus')->findOneByName('open'));
             $invitation->setConfirmationToken(md5(uniqid(mt_rand(), true)));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($invitation);
             $em->flush();
 
-            // TODO: send mail
+            // Send mail
+            $mailer = $this->get('mailer');
+            $message = $mailer->createMessage()
+                ->setSubject('You were invited!')
+                ->setFrom('no-reply@trackway.org')
+                ->setTo($invitation->getEmail())
+                ->setBody($this->renderView(
+                    '@App/TeamInvitation/email.html.twig',
+                    ['entity' => $invitation]
+                ), 'text/html');
+            $mailer->send($message);
+
             $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.invited');
 
             return $this->redirect($this->generateUrl('team_invitation_show', ['id' => $team->getId(), 'invitationId' => $invitation->getId()]));
         }
 
         return ['entity' => $team, 'form' => $form->createView()];
+    }
+
+    /**
+     * @param $token
+     *
+     * @return RedirectResponse
+     * @throws NotFoundHttpException
+     *
+     * @Method("GET")
+     * @Route("/invitation/{token}/accept", requirements={"token": "[a-zA-Z0-9]+"}, name="team_invitation_accept")
+     */
+    public function acceptAction($token)
+    {
+        /** @var Invitation $invitation */
+        $invitation = $this->getDoctrine()->getManager()->getRepository('AppBundle:Invitation')->findOneBy(['confirmationToken' => $token]);
+
+        $invitation->setConfirmationToken(null);
+        $invitation->setStatus($this->getDoctrine()->getManager()->getRepository('AppBundle:InvitationStatus')->findOneByName('accepted'));
+        $invitation->setUser($this->getUser());
+
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.accepted');
+
+        return $this->redirect($this->generateUrl('dashboard_index'));
+    }
+
+    /**
+     * @param $token
+     *
+     * @return RedirectResponse
+     * @throws NotFoundHttpException
+     *
+     * @Method("GET")
+     * @Route("/invitation/{token}/cancel", requirements={"token": "[a-zA-Z0-9]+"}, name="team_invitation_cancel")
+     */
+    public function cancelAction($token)
+    {
+        /** @var Invitation $invitation */
+        $invitation = $this->getDoctrine()->getManager()->getRepository('AppBundle:Invitation')->findOneBy(['confirmationToken' => $token]);
+
+        $invitation->setStatus($this->getDoctrine()->getManager()->getRepository('AppBundle:InvitationStatus')->findOneByName('cancelled'));
+
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.cancelled');
+
+        return $this->redirect($this->generateUrl('dashboard_index'));
     }
 
     /**
@@ -136,7 +205,15 @@ class TeamInvitationController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
-            // TODO: check if email is already member of the team
+            if ($this->getDoctrine()->getRepository('AppBundle:Invitation')->createQueryBuilder('i')
+                    ->select('count(i.id)')->where('i.email = ?1')->andWhere('i.id != ?2')
+                    ->setParameters([1 => $invitation->getEmail(),2 => $invitation->getId()])
+                    ->getQuery()->getFirstResult() > 0
+            ) {
+                $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.already_invited');
+
+                return ['entity' => $team, 'form' => $form->createView()];
+            }
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -144,10 +221,21 @@ class TeamInvitationController extends Controller
 
             // Reinvite
             if (
-                ($oldStatus !== $invitation->getStatus() && $oldStatus !== 'open') ||
-                ($oldEmail !== $invitation->getEmail() && $invitation->getStatus() === 'open')
+                ($oldStatus !== $invitation->getStatus() && $invitation->getStatus()->getName() === 'open') ||
+                ($oldEmail !== $invitation->getEmail() && $invitation->getStatus()->getName() === 'open')
             ) {
-                // TODO: send mail
+                // Send mail
+                $mailer = $this->get('mailer');
+                $message = $mailer->createMessage()
+                    ->setSubject('You were invited!')
+                    ->setFrom('no-reply@trackway.org')
+                    ->setTo($invitation->getEmail())
+                    ->setBody($this->renderView(
+                        '@App/TeamInvitation/email.html.twig',
+                        ['entity' => $invitation]
+                    ), 'text/html');
+                $mailer->send($message);
+
                 $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.reinvited');
             }
 
@@ -179,6 +267,6 @@ class TeamInvitationController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.deleted');
 
-        return $this->redirect($this->generateUrl('team_invitation_index'));
+        return $this->redirect($this->generateUrl('team_invitation_index', ['id' => $team->getId()]));
     }
 }

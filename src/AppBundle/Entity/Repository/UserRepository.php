@@ -20,7 +20,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
      *
      * @return User
      */
-    public function findByConfirmationToken($token)
+    public function findOneByConfirmationToken($token)
     {
         return $this->findOneBy(['confirmationToken' => $token]);
     }
@@ -29,7 +29,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
      *
      * @return User
      */
-    public function findByEmail($email)
+    public function findOneByEmail($email)
     {
         return $this->findOneBy(['email' => $email]);
     }

@@ -41,7 +41,6 @@ class RegistrationController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
-            // TODO: Maybe putting it in a manager?
             $user->setConfirmationToken(md5(uniqid(mt_rand(), true)));
             $user->setEnabled(false);
             $user->setLocale($this->getDoctrine()->getManager()->getRepository('AppBundle:Locale')->findOneByName($this->container->getParameter('locale')));
@@ -84,7 +83,7 @@ class RegistrationController extends Controller
      */
     public function confirmAction($token)
     {
-        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findByConfirmationToken($token);
+        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findOneByConfirmationToken($token);
 
         if ($user === null) {
             throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));

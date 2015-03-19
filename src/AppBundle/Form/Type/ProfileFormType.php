@@ -24,11 +24,6 @@ class ProfileFormType extends AbstractOverridableFormType
             ->add('locale', 'entity', $this->overrideOptions('locale', [
                 'class' => 'AppBundle\Entity\Locale'
             ], $options))
-            ->add('memberships', 'entity', $this->overrideOptions('memberships', [
-                'expanded'  => true,
-                'multiple'  => true,
-                'class' => 'AppBundle\Entity\Membership'
-            ], $options))
             ->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', [
                 'class' => 'AppBundle\Entity\Team'
             ], $options))

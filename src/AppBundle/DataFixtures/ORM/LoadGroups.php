@@ -16,17 +16,17 @@ class LoadGroups implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $owner = new Group();
-        $owner->setName('Owner');
+        $owner->setName('owner');
         $owner->setRoles(['ROLE_ADMIN']);
         $manager->persist($owner);
 
         $admin = new Group();
-        $admin->setName('Admin');
+        $admin->setName('admin');
         $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
 
         $user = new Group();
-        $user->setName('User');
+        $user->setName('user');
         $user->setRoles(['ROLE_USER']);
         $manager->persist($user);
 

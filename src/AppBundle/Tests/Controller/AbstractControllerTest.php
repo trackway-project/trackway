@@ -2,12 +2,8 @@
 
 namespace AppBundle\Tests\Controller;
 
-use AppBundle\Entity\Team;
-use AppBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Bundle\FrameworkBundle\Client;
 
 /**
  * Class AbstractControllerTest
@@ -16,6 +12,16 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 abstract class AbstractControllerTest extends WebTestCase
 {
+    protected static $defaultFixtures = ['AppBundle\DataFixtures\ORM\LoadAbsenceReasons', 'AppBundle\DataFixtures\ORM\LoadGroups', 'AppBundle\DataFixtures\ORM\LoadInvitationStatuses', 'AppBundle\DataFixtures\ORM\LoadLocales'];
+    protected static $userFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadUser'];
+    protected static $usersFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadUsers'];
+    protected static $teamFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadTeam', 'AppBundle\Tests\DataFixtures\ORM\LoadMembershipOwner', 'AppBundle\Tests\DataFixtures\ORM\LoadActiveTeam'];
+    protected static $projectFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadProject'];
+    protected static $taskFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadTask'];
+    protected static $timeEntryFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadTimeEntry'];
+    protected static $absenceFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadAbsence'];
+    protected static $membershipFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadMembership'];
+    protected static $invitationFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadInvitation'];
     /**
      * @var Client
      */
@@ -26,38 +32,6 @@ abstract class AbstractControllerTest extends WebTestCase
         $this->client = static::createClient();
         $this->client->followRedirects(true);
         $this->client->setMaxRedirects(10);
-    }
-
-    protected function load()
-    {
-        $this->loadFixtures([
-            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
-            'AppBundle\DataFixtures\ORM\LoadGroups',
-            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
-            'AppBundle\DataFixtures\ORM\LoadLocales'
-        ]);
-    }
-
-    protected function loadUser()
-    {
-        $this->loadFixtures([
-            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
-            'AppBundle\DataFixtures\ORM\LoadGroups',
-            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
-            'AppBundle\DataFixtures\ORM\LoadLocales',
-            'AppBundle\Tests\DataFixtures\ORM\LoadUser'
-        ]);
-    }
-
-    protected function loadUserWithActiveTeam()
-    {
-        $this->loadFixtures([
-            'AppBundle\DataFixtures\ORM\LoadAbsenceReasons',
-            'AppBundle\DataFixtures\ORM\LoadGroups',
-            'AppBundle\DataFixtures\ORM\LoadInvitationStatuses',
-            'AppBundle\DataFixtures\ORM\LoadLocales',
-            'AppBundle\Tests\DataFixtures\ORM\LoadUserWithActiveTeam'
-        ]);
     }
 
     protected function login($username = 'test', $password = 'test')

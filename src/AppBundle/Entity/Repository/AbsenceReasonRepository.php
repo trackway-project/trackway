@@ -2,20 +2,20 @@
 
 namespace AppBundle\Entity\Repository;
 
-use AppBundle\Entity\Group;
+use AppBundle\Entity\AbsenceReason;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class GroupRepository
+ * Class AbsenceReasonRepository
  *
  * @package AppBundle\Entity\Repository
  */
-class GroupRepository extends EntityRepository
+class AbsenceReasonRepository extends EntityRepository
 {
     /**
      * @param $name
      *
-     * @return null|Group
+     * @return null|AbsenceReason
      */
     public function findOneByName($name)
     {

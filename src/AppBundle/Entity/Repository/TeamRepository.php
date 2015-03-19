@@ -12,6 +12,26 @@ use Doctrine\ORM\EntityRepository;
 class TeamRepository extends EntityRepository
 {
     /**
+     * @param User $user
+     *
+     * @return Team[]
+     */
+    public function findByUser(User $user)
+    {
+        return $this->createQueryBuilder('t')->join('t.memberships', 'm')->where('m.user = ' . $user->getId())->getQuery()->getResult();
+    }
+
+    /**
+     * @param $name
+     *
+     * @return null|Team
+     */
+    public function findOneByName($name)
+    {
+        return $this->findOneBy(['name' => $name]);
+    }
+
+    /**
      * @param Team $team
      */
     public function remove(Team $team)
@@ -19,25 +39,5 @@ class TeamRepository extends EntityRepository
         $this->getEntityManager()->getRepository('AppBundle:TimeEntry')->removeByTeam($team);
         $this->getEntityManager()->remove($team);
         $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return array
-     */
-    public function findByName($name)
-    {
-        return $this->findBy(['name' => $name]);
-    }
-
-    /**
-     * @param User $user
-     *
-     * @return array
-     */
-    public function findByUser(User $user)
-    {
-        return $this->createQueryBuilder('t')->join('t.memberships', 'm')->where('m.user = ' . $user->getId())->getQuery()->getResult();
     }
 }

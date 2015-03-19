@@ -41,7 +41,7 @@ class ResettingController extends Controller
             ->handleRequest($request);
 
         if ($form->isValid()) {
-            $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findByEmail($user->getEmail());
+            $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findOneByEmail($user->getEmail());
 
             $user->setPasswordRequestedAt(new \DateTime());
             $user->setConfirmationToken(md5(uniqid(mt_rand(), true)));
@@ -80,7 +80,7 @@ class ResettingController extends Controller
      */
     public function confirmAction(Request $request, $token)
     {
-        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findByConfirmationToken($token);
+        $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findOneByConfirmationToken($token);
 
         if ($user === null) {
             throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));

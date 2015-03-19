@@ -3,7 +3,6 @@
 namespace AppBundle\Tests\Controller\User;
 
 use AppBundle\Tests\Controller\AbstractControllerTest;
-use Symfony\Bundle\FrameworkBundle\Client;
 
 /**
  * Class RegistrationControllerTest
@@ -12,11 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Client;
  */
 class RegistrationControllerTest extends AbstractControllerTest
 {
+    /**
+     * @coversNothing
+     */
     public function testRegisterAction()
     {
         // Prepare environment
 
-        $this->load();
+        $this->loadFixtures(array_merge(self::$defaultFixtures));
 
         // Test view
 
@@ -38,14 +40,16 @@ class RegistrationControllerTest extends AbstractControllerTest
         static::assertEquals(1, $crawler->filter('p:contains("Please check your mails and click on the confirmation link.")')->count());
     }
 
+
     /**
+     * @coversNothing
      * @depends testRegisterAction
      */
     public function testConfirmAction()
     {
         // Test DB
 
-        $user = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User')->findByEmail('test@trackway.org');
+        $user = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User')->findOneByEmail('test@trackway.org');
 
         self::assertNotEmpty($user);
         self::assertNotEmpty($user->getConfirmationToken());

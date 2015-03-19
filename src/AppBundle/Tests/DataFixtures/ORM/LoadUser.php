@@ -5,9 +5,12 @@ namespace AppBundle\Tests\DataFixtures\ORM;
 use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Id\AssignedGenerator;
-use Doctrine\ORM\Mapping\ClassMetadata;
 
+/**
+ * Class LoadUser
+ *
+ * @package AppBundle\Tests\DataFixtures\ORM
+ */
 class LoadUser implements FixtureInterface
 {
     /**
