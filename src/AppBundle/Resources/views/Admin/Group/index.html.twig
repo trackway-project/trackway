@@ -3,15 +3,15 @@
 {% block class %}group{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Groups</h1>
+    <h1>{{ 'admin.group.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Roles</th>
+            <th>{{ 'admin.group.name'|trans }}</th>
+            <th>{{ 'admin.group.roles'|trans }}</th>
             <th></th>
         </tr>
         </thead>
@@ -21,12 +21,15 @@
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.roles }}</td>
                 <td class="text-right">
-                    <a href="{{ path('admin_group_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-eye"></i></a>
-                    <a href="{{ path('admin_group_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('admin_group_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
-                                class="fa fa-times"></i></a>
+                    <a href="{{ path('admin_group_show', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'admin.group.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('admin_group_edit', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'admin.group.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('admin_group_delete', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-danger"
+                       title="{{ 'admin.group.action.delete'|trans }}"><i class="fa fa-times"></i></a>
                 </td>
             </tr>
         {% endfor %}

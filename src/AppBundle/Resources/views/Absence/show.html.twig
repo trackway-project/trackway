@@ -3,30 +3,30 @@
 {% block class %}absence{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Absence</h1>
+    <h1>{{ 'absence.show.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
-            <th>Date</th>
+            <th>{{ 'absence.date'|trans }}</th>
             <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Starts At</th>
+            <th>{{ 'absence.startsAt'|trans }}</th>
             <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Ends At</th>
+            <th>{{ 'absence.endsAt'|trans }}</th>
             <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Reason</th>
-            <td>{{ entity.reason }}</td>
+            <th>{{ 'absence.reason'|trans }}</th>
+            <td>{{ 'absence.reason.' ~ entity.reason }}</td>
         </tr>
         <tr>
-            <th>Note</th>
+            <th>{{ 'absence.note'|trans }}</th>
             <td>{{ entity.note }}</td>
         </tr>
         </tbody>

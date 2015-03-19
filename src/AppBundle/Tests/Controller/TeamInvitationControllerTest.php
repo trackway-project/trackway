@@ -3,11 +3,11 @@
 namespace AppBundle\Tests\Controller;
 
 /**
- * Class TeamMembershipControllerTest
+ * Class TeamInvitationControllerTest
  *
  * @package AppBundle\Tests\Controller
  */
-class TeamMembershipControllerTest extends AbstractControllerTest
+class TeamInvitationControllerTest extends AbstractControllerTest
 {
     /**
      * @coversNothing
@@ -141,37 +141,6 @@ class TeamMembershipControllerTest extends AbstractControllerTest
         // Test view
 
         $crawler = $this->client->request('GET', '/team/1/invitation/1');
-
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team Invitation")')->count());
-    }
-
-    /**
-     * @coversNothing
-     */
-    public function testEditAction()
-    {
-        // Prepare environment
-
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$usersFixtures,
-            self::$teamFixtures,
-            self::$invitationFixtures
-        ));
-        $this->login();
-
-        // Test view
-
-        $crawler = $this->client->request('GET', '/team/1/invitation/1/edit');
-
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team Invitation edit")')->count());
-
-        // Test form
-
-        $form = $crawler->selectButton('appbundle_invitation_form[submit]')->form();
-        $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
         static::assertEquals(1, $crawler->filter('h1:contains("Team Invitation")')->count());

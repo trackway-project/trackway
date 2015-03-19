@@ -3,18 +3,18 @@
 {% block class %}group{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Group</h1>
+    <h1>{{ 'admin.group.show.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
-            <th>Name</th>
+            <th>{{ 'admin.group.name'|trans }}</th>
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Roles</th>
+            <th>{{ 'admin.group.roles'|trans }}</th>
             <td>{{ entity.roles }}</td>
         </tr>
         </tbody>

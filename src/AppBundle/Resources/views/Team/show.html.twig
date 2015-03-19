@@ -3,18 +3,18 @@
 {% block class %}team{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Team</h1>
+    <h1>{{ 'team.show.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
-            <th>Name</th>
+            <th>{{ 'team.name'|trans }}</th>
             <td>{{ entity.name }}</td>
         </tr>
         <tr>
-            <th>Projects</th>
+            <th>{{ 'team.projects'|trans }}</th>
             <td>
                 <ul>
                     {% for project in entity.projects %}
@@ -24,7 +24,7 @@
             </td>
         </tr>
         <tr>
-            <th>Tasks</th>
+            <th>{{ 'team.tasks'|trans }}</th>
             <td>
                 <ul>
                     {% for task in entity.tasks %}

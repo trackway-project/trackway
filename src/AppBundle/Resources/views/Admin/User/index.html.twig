@@ -3,15 +3,15 @@
 {% block class %}user{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Users</h1>
+    <h1>{{ 'admin.user.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Username</th>
-            <th>Email</th>
+            <th>{{ 'admin.user.username'|trans }}</th>
+            <th>{{ 'admin.user.email'|trans }}</th>
             <th></th>
         </tr>
         </thead>
@@ -21,12 +21,15 @@
                 <td>{{ entity.username }}</td>
                 <td>{{ entity.email }}</td>
                 <td class="text-right">
-                    <a href="{{ path('admin_user_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-eye"></i></a>
-                    <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('admin_user_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
-                                class="fa fa-times"></i></a>
+                    <a href="{{ path('admin_user_show', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'admin.user.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'admin.user.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('admin_user_delete', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-danger"
+                       title="{{ 'admin.user.action.delete'|trans }}"><i class="fa fa-times"></i></a>
                 </td>
             </tr>
         {% endfor %}

@@ -3,18 +3,18 @@
 {% block class %}absence{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Absences</h1>
+    <h1>{{ 'absence.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Starts At</th>
-            <th>Ends At</th>
-            <th>Reason</th>
-            <th>Note</th>
+            <th>{{ 'absence.date'|trans }}</th>
+            <th>{{ 'absence.startsAt'|trans }}</th>
+            <th>{{ 'absence.endsAt'|trans }}</th>
+            <th>{{ 'absence.reason'|trans }}</th>
+            <th>{{ 'absence.note'|trans }}</th>
             <th></th>
         </tr>
         </thead>
@@ -27,11 +27,15 @@
                 <td>{{ entity.reason }}</td>
                 <td>{{ entity.note }}</td>
                 <td class="text-right">
-                    <a href="{{ path('absence_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-eye"></i></a>
-                    <a href="{{ path('absence_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('absence_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
+                    <a href="{{ path('absence_show', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'absence.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('absence_edit', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'absence.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('absence_delete', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-danger"
+                       title="{{ 'absence.action.delete'|trans }}"><i
                                 class="fa fa-times"></i></a>
                 </td>
             </tr>
