@@ -1,4 +1,4 @@
-{{ 'invitation.email.html'|trans({
+{{ 'invitation.email.txt'|trans({
     '%acceptLink%': path('team_invitation_accept', {'token': entity.confirmationToken}),
     '%cancelLink%': path('team_invitation_cancel', {'token': entity.confirmationToken})
-},'mails')|raw }}
+},'mails') }}

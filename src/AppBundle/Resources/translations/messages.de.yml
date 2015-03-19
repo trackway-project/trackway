@@ -26,7 +26,6 @@ dashboard.template.index.title: __dashboard.template.index.title
 invitation.action.delete: __invitation.action.delete
 invitation.action.edit: __invitation.action.edit
 invitation.action.show: __invitation.action.show
-invitation.email.text: __invitation.email.text
 invitation.entity.email: __invitation.entity.email
 invitation.entity.status: __invitation.entity.status
 invitation.entity.user: __invitation.entity.user
@@ -64,13 +63,11 @@ project.template.edit.title: __project.template.edit.title
 project.template.index.title: __project.template.index.title
 project.template.new.title: __project.template.new.title
 project.template.show.title: __project.template.show.title
-registration.email.text: __registration.email.text
 registration.flash.confirmed: __registration.flash.confirmed
 registration.flash.registered: __registration.flash.registered
 registration.template.checkMail.text: __registration.template.checkMail.text
 registration.template.checkMail.title: __registration.template.checkMail.title
 registration.template.register.title: __registration.template.register.title
-resetting.email.text: __resetting.email.text
 resetting.flash.confirmed: __resetting.flash.confirmed
 resetting.flash.resetted: __resetting.flash.resetted
 resetting.template.checkMail.text: __resetting.template.checkMail.text

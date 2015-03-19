@@ -1,0 +1,26 @@
+invitation.email.html: |
+  <h1>You were invited to join a team on Trackway.</h1>
+
+  Accept the invitation by clicking on this link: <a href="%acceptLink%">Accept</a>
+  Reject the invitation by clicking on this link: <a href="%rejectLink%">Reject</a>
+invitation.email.txt: |
+  You were invited to join a team on Trackway.
+
+  Accept the invitation by opening this link: %acceptLink%
+  Reject the invitation by opening this link: %rejectLink%
+registration.email.html: |
+  <h1>Your registration on Trackway was successful.</h1>
+
+  Confirm the registration by clicking on this link: <a href="%link%">Confirm</a>
+registration.email.txt: |
+  Your registration on Trackway was successful.
+
+  Confirm the registration by opening this link: %link%
+resetting.email.html: |
+  <h1>Your password reset on Trackway was successful.</h1>
+
+  Confirm the password reset by clicking on this link: <a href="%link%">Confirm</a>
+resetting.email.txt: |
+  Your password reset on Trackway was successful.
+
+  Confirm the password reset by opening this link: %link%
