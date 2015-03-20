@@ -78,15 +78,7 @@ class TimeEntryController extends Controller
         $user = $this->getUser();
         $activeTeam = $user->getActiveTeam();
 
-        $form = $this
-            ->get('app.form.factory.time_entry')
-            ->createForm([
-                'project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)],
-                'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
-                'submit' => ['label' => 'Create']
-            ])
-            ->setData($timeEntry)
-            ->handleRequest($request);
+        $form = $this->get('app.form.factory.time_entry')->createForm(['project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)], 'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)], 'submit' => ['label' => 'Create']])->setData($timeEntry)->handleRequest($request);
 
         if ($form->isValid()) {
             $timeEntry->setTeam($user->getActiveTeam());
@@ -119,13 +111,7 @@ class TimeEntryController extends Controller
      */
     public function editAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this
-            ->get('app.form.factory.time_entry')
-            ->createForm([
-                'submit' => ['label' => 'Update']
-            ])
-            ->setData($timeEntry)
-            ->handleRequest($request);
+        $form = $this->get('app.form.factory.time_entry')->createForm(['submit' => ['label' => 'Update']])->setData($timeEntry)->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */

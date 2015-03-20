@@ -18,11 +18,7 @@ class ProjectFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name', null, $this->overrideOptions('name', [
-                'required' => true,
-                'trim' => true
-            ], $options));
+        $builder->add('name', null, $this->overrideOptions('name', ['required' => true, 'trim' => true], $options));
     }
 
     /**
@@ -30,10 +26,7 @@ class ProjectFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Project',
-            'override' => false
-        ]);
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Project', 'override' => false]);
     }
 
     /**

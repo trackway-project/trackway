@@ -1,10 +1,12 @@
-Master: [![Build Status](https://travis-ci.org/trackway-project/trackway.svg?branch=master)](https://travis-ci.org/trackway-project/trackway)
-Develop: [![Build Status](https://travis-ci.org/trackway-project/trackway.svg?branch=develop)](https://travis-ci.org/trackway-project/trackway)
+Master: [![Build Status](https://travis-ci.org/trackway-project/trackway.svg?branch=master)](https://travis-ci.org/trackway-project/trackway)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/trackway-project/trackway/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/trackway-project/trackway/?branch=master)
+Develop: [![Build Status](https://travis-ci.org/trackway-project/trackway.svg?branch=develop)](https://travis-ci.org/trackway-project/trackway)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/trackway-project/trackway/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/trackway-project/trackway/?branch=develop)
 
 Trackway
 ========================
 
 The simple on-premise open source time tracker.
+
+Enjoy!
 
 ## Requirements
 * PHP 5.5+
@@ -40,7 +42,6 @@ Take a look at https://github.com/trackway-project/trackway-vagrant
 ## Capistrano deployment
 Take a look at https://github.com/trackway-project/trackway-deploy
 
-Enjoy!
 
 ## Thanks
 

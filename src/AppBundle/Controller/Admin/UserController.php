@@ -67,13 +67,7 @@ class UserController extends Controller
     {
         $user = new User();
 
-        $form = $this
-            ->get('app.form.factory.user')
-            ->createForm([
-                'submit' => ['label' => 'Create']
-            ])
-            ->setData($user)
-            ->handleRequest($request);
+        $form = $this->get('app.form.factory.user')->createForm(['submit' => ['label' => 'Create']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -103,13 +97,7 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        $form = $this
-            ->get('app.form.factory.user')
-            ->createForm([
-                'submit' => ['label' => 'Update']
-            ])
-            ->setData($user)
-            ->handleRequest($request);
+        $form = $this->get('app.form.factory.user')->createForm(['submit' => ['label' => 'Update']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

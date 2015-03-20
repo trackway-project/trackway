@@ -17,22 +17,7 @@ class MembershipFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('team', 'entity', $this->overrideOptions('team', [
-                'class' => 'AppBundle\Entity\Team',
-                'expanded'  => true,
-                'required' => true
-            ], $options))
-            ->add('user', 'entity', $this->overrideOptions('user', [
-                'class' => 'AppBundle\Entity\User',
-                'expanded'  => true,
-                'required' => true
-            ], $options))
-            ->add('group', 'entity', $this->overrideOptions('group', [
-                'class' => 'AppBundle\Entity\Group',
-                'expanded'  => true,
-                'required' => true
-            ], $options));
+        $builder->add('team', 'entity', $this->overrideOptions('team', ['class' => 'AppBundle\Entity\Team', 'expanded' => true, 'required' => true], $options))->add('user', 'entity', $this->overrideOptions('user', ['class' => 'AppBundle\Entity\User', 'expanded' => true, 'required' => true], $options))->add('group', 'entity', $this->overrideOptions('group', ['class' => 'AppBundle\Entity\Group', 'expanded' => true, 'required' => true], $options));
     }
 
     /**
@@ -40,10 +25,7 @@ class MembershipFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Membership',
-            'override' => false
-        ]);
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Membership', 'override' => false]);
     }
 
     /**

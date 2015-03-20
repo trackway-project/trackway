@@ -3,7 +3,6 @@
 namespace AppBundle\Tests\DataFixtures\ORM;
 
 use AppBundle\Entity\Absence;
-use AppBundle\Entity\TimeEntry;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 

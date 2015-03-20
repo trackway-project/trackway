@@ -204,7 +204,7 @@ class AdvancedRenderer extends ListRenderer
         $label = $options['allow_safe_labels'] && $item->getExtra('safe_label', false) ? $item->getLabel() : $this->escape($item->getLabel());
 
         if (!empty($icon)) {
-            return !empty($label) ? $icon . '&nbsp;'. $label : $icon;
+            return !empty($label) ? $icon . '&nbsp;' . $label : $icon;
         }
 
         return $label;

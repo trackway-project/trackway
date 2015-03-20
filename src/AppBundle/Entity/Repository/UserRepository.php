@@ -11,7 +11,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * UserRepository
+ * Class UserRepository
+ *
+ * @package AppBundle\Entity\Repository
  */
 class UserRepository extends EntityRepository implements UserProviderInterface
 {
@@ -24,6 +26,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     {
         return $this->findOneBy(['confirmationToken' => $token]);
     }
+
     /**
      * @param string $email
      *
@@ -37,17 +40,12 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     /**
      * @param string $username
      *
-     * @return mixed
+     * @return User
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function loadUserByUsername($username)
     {
-        $q = $this
-            ->createQueryBuilder('u')
-            ->where('u.username = :username OR u.email = :email')
-            ->setParameter('username', $username)
-            ->setParameter('email', $username)
-            ->getQuery();
+        $q = $this->createQueryBuilder('u')->where('u.username = :username OR u.email = :email')->setParameter('username', $username)->setParameter('email', $username)->getQuery();
 
         try {
             $user = $q->getSingleResult();
@@ -58,6 +56,11 @@ class UserRepository extends EntityRepository implements UserProviderInterface
         return $user;
     }
 
+    /**
+     * @param UserInterface $user
+     *
+     * @return User
+     */
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);
@@ -70,6 +73,11 @@ class UserRepository extends EntityRepository implements UserProviderInterface
         return $this->find($user->getId());
     }
 
+    /**
+     * @param string $class
+     *
+     * @return bool
+     */
     public function supportsClass($class)
     {
         return $this->getEntityName() === $class || is_subclass_of($class, $this->getEntityName());

@@ -48,7 +48,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @ORM\Column(name="enabled ", type="boolean")
      */
-    protected $enabled ;
+    protected $enabled;
 
     /**
      * @var string
@@ -180,13 +180,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function serialize()
     {
-        return serialize([
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->salt,
-            $this->locale
-        ]);
+        return serialize([$this->id, $this->username, $this->password, $this->salt, $this->locale]);
     }
 
     /**
@@ -194,13 +188,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list (
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->salt,
-            $this->locale
-            ) = unserialize($serialized);
+        list ($this->id, $this->username, $this->password, $this->salt, $this->locale) = unserialize($serialized);
     }
 
     /**

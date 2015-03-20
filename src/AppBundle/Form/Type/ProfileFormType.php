@@ -19,19 +19,7 @@ class ProfileFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('email', 'email', $this->overrideOptions('email', [], $options))
-            ->add('locale', 'entity', $this->overrideOptions('locale', [
-                'class' => 'AppBundle\Entity\Locale'
-            ], $options))
-            ->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', [
-                'class' => 'AppBundle\Entity\Team'
-            ], $options))
-            ->add('currentPassword', 'password', $this->overrideOptions('currentPassword', [
-                'mapped' => false,
-                'required' => true,
-                'constraints' => new UserPassword()
-            ], $options));
+        $builder->add('email', 'email', $this->overrideOptions('email', [], $options))->add('locale', 'entity', $this->overrideOptions('locale', ['class' => 'AppBundle\Entity\Locale'], $options))->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', ['class' => 'AppBundle\Entity\Team'], $options))->add('currentPassword', 'password', $this->overrideOptions('currentPassword', ['mapped' => false, 'required' => true, 'constraints' => new UserPassword()], $options));
     }
 
     /**
@@ -39,11 +27,7 @@ class ProfileFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\User',
-            'override' => false,
-            'validation_groups' => ['profile']
-        ]);
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\User', 'override' => false, 'validation_groups' => ['profile']]);
     }
 
     /**

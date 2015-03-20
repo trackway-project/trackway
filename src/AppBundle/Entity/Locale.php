@@ -47,10 +47,7 @@ class Locale implements \Serializable
      */
     public function serialize()
     {
-        return serialize([
-            $this->id,
-            $this->name
-        ]);
+        return serialize([$this->id, $this->name]);
     }
 
     /**
@@ -58,10 +55,7 @@ class Locale implements \Serializable
      */
     public function unserialize($serialized)
     {
-        list (
-            $this->id,
-            $this->name
-            ) = unserialize($serialized);
+        list ($this->id, $this->name) = unserialize($serialized);
     }
 
     /**

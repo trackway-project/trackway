@@ -2,14 +2,12 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\AbsenceReason;
 use AppBundle\Entity\InvitationStatus;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Id\AssignedGenerator;
-use Doctrine\ORM\Mapping\ClassMetadata;
 
-class LoadInvitationStatuses implements FixtureInterface{
+class LoadInvitationStatuses implements FixtureInterface
+{
     /**
      * {@inheritDoc}
      */

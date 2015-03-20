@@ -3,7 +3,6 @@
 namespace AppBundle\Tests\DataFixtures\ORM;
 
 use AppBundle\Entity\Invitation;
-use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 

@@ -40,7 +40,7 @@ class Builder extends ContainerAware
                     $menu['Teams']['Memberships']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_membership_edit', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                     $menu['Teams']['Memberships']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_membership_delete', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                 }
-                
+
                 $invitationId = $request->get('invitationId');
                 if ($invitationId && $route !== 'team_invitation_index' && strpos($route, 'team_invitation_') === 0) {
                     $menu['Teams']['Invitations']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);

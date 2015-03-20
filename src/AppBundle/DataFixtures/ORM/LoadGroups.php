@@ -5,8 +5,6 @@ namespace AppBundle\DataFixtures\ORM;
 use AppBundle\Entity\Group;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Id\AssignedGenerator;
-use Doctrine\ORM\Mapping\ClassMetadata;
 
 class LoadGroups implements FixtureInterface
 {

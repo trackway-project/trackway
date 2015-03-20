@@ -7,8 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
@@ -32,13 +32,7 @@ class ResettingController extends Controller
     {
         $user = new User();
 
-        $form = $this
-            ->get('app.form.factory.resetting_request')
-            ->createForm([
-                'submit' => ['label' => 'Reset']
-            ])
-            ->setData($user)
-            ->handleRequest($request);
+        $form = $this->get('app.form.factory.resetting_request')->createForm(['submit' => ['label' => 'Reset']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findOneByEmail($user->getEmail());
@@ -50,14 +44,7 @@ class ResettingController extends Controller
 
             // Send mail
             $mailer = $this->get('mailer');
-            $message = $mailer->createMessage()
-                ->setSubject('You have Completed Registration!')
-                ->setFrom('no-reply@trackway.org')
-                ->setTo($user->getEmail())
-                ->setBody($this->renderView(
-                    '@App/User/Resetting/email.html.twig',
-                    ['entity' => $user]
-                ), 'text/html');
+            $message = $mailer->createMessage()->setSubject('You have Completed Registration!')->setFrom('no-reply@trackway.org')->setTo($user->getEmail())->setBody($this->renderView('@App/User/Resetting/email.html.twig', ['entity' => $user]), 'text/html');
             $mailer->send($message);
 
             $this->get('session')->getFlashBag()->add('success', 'resetting.flash.resetted');
@@ -89,13 +76,7 @@ class ResettingController extends Controller
         $user->setPasswordRequestedAt(null);
         $user->setConfirmationToken(null);
 
-        $form = $this
-            ->get('app.form.factory.resetting_confirm')
-            ->createForm([
-                'submit' => ['label' => 'Reset']
-            ])
-            ->setData($user)
-            ->handleRequest($request);
+        $form = $this->get('app.form.factory.resetting_confirm')->createForm(['submit' => ['label' => 'Reset']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));

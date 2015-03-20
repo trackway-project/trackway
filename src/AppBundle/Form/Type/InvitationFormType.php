@@ -18,18 +18,7 @@ class InvitationFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('team', 'entity', $this->overrideOptions('team', [
-                'class' => 'AppBundle\Entity\Team',
-                'expanded'  => true,
-                'required' => true
-            ], $options))
-            ->add('email', 'email', $this->overrideOptions('email', [
-                'trim' => true
-            ], $options))
-            ->add('status', 'entity', $this->overrideOptions('status', [
-                'class' => 'AppBundle\Entity\InvitationStatus'
-            ], $options));
+        $builder->add('team', 'entity', $this->overrideOptions('team', ['class' => 'AppBundle\Entity\Team', 'expanded' => true, 'required' => true], $options))->add('email', 'email', $this->overrideOptions('email', ['trim' => true], $options))->add('status', 'entity', $this->overrideOptions('status', ['class' => 'AppBundle\Entity\InvitationStatus'], $options));
     }
 
     /**
@@ -37,10 +26,7 @@ class InvitationFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Invitation',
-            'override' => false
-        ]);
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Invitation', 'override' => false]);
     }
 
     /**

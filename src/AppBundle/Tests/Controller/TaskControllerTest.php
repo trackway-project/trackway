@@ -16,12 +16,7 @@ class TaskControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$taskFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$taskFixtures));
         $this->login();
 
         // Test view
@@ -39,11 +34,7 @@ class TaskControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures));
         $this->login();
 
         // Test view
@@ -71,12 +62,7 @@ class TaskControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$taskFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$taskFixtures));
         $this->login();
 
         // Test view
@@ -94,12 +80,7 @@ class TaskControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$taskFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$taskFixtures));
         $this->login();
 
         // Test view
@@ -126,12 +107,7 @@ class TaskControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$taskFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$taskFixtures));
         $this->login();
 
         // Test view

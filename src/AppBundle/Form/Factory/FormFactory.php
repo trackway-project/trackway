@@ -42,10 +42,7 @@ class FormFactory
      */
     public function createForm(array $options = [])
     {
-        $submitOptions = array_merge(
-            ['label' => 'Submit'],
-            array_key_exists('submit', $options) ? $options['submit'] : []
-        );
+        $submitOptions = array_merge(['label' => 'Submit'], array_key_exists('submit', $options) ? $options['submit'] : []);
 
         return $this->createFormWithoutSubmit($options)->add('submit', 'submit', $submitOptions);
     }

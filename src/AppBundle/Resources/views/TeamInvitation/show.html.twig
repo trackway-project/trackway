@@ -18,10 +18,10 @@
             <td>{{ ('invitation.value.status.' ~ entity.status.name)|trans }}</td>
         </tr>
         {% if entity.user %}
-        <tr>
-            <th>{{ 'invitation.entity.user'|trans }}</th>
-            <td>{{ entity.user }}</td>
-        </tr>
+            <tr>
+                <th>{{ 'invitation.entity.user'|trans }}</th>
+                <td>{{ entity.user }}</td>
+            </tr>
         {% endif %}
         </tbody>
     </table>

@@ -16,12 +16,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$usersFixtures,
-            self::$teamFixtures,
-            self::$invitationFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$usersFixtures, self::$teamFixtures, self::$invitationFixtures));
         $this->login();
 
         // Test view
@@ -39,11 +34,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$usersFixtures,
-            self::$teamFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$usersFixtures, self::$teamFixtures));
         $this->login();
 
         // Test view
@@ -71,12 +62,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$usersFixtures,
-            self::$teamFixtures,
-            self::$invitationFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$usersFixtures, self::$teamFixtures, self::$invitationFixtures));
         $this->login('test2');
 
         // Test DB
@@ -102,12 +88,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$usersFixtures,
-            self::$teamFixtures,
-            self::$invitationFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$usersFixtures, self::$teamFixtures, self::$invitationFixtures));
         $this->login('test2');
 
         // Test DB
@@ -133,12 +114,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$usersFixtures,
-            self::$teamFixtures,
-            self::$invitationFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$usersFixtures, self::$teamFixtures, self::$invitationFixtures));
         $this->login();
 
         // Test view
@@ -156,12 +132,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(
-            self::$defaultFixtures,
-            self::$usersFixtures,
-            self::$teamFixtures,
-            self::$invitationFixtures
-        ));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$usersFixtures, self::$teamFixtures, self::$invitationFixtures));
         $this->login();
 
         // Test view

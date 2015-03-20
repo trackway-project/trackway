@@ -18,28 +18,7 @@ class TimeEntryFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('date', 'date', $this->overrideOptions('date', [
-                'required' => true
-            ], $options))
-            ->add('endsAt', 'time', $this->overrideOptions('endsAt', [
-                'required' => false
-            ], $options))
-            ->add('startsAt', 'time', $this->overrideOptions('startsAt', [
-                'required' => false
-            ], $options))
-            ->add('note', null, $this->overrideOptions('note', [
-                'required' => false,
-                'trim' => true
-            ], $options))
-            ->add('project', 'entity', $this->overrideOptions('project', [
-                'class' => 'AppBundle\Entity\Project',
-                'required' => false
-            ], $options))
-            ->add('task', 'entity', $this->overrideOptions('task', [
-                'class' => 'AppBundle\Entity\Task',
-                'required' => false
-            ], $options));
+        $builder->add('date', 'date', $this->overrideOptions('date', ['required' => true], $options))->add('endsAt', 'time', $this->overrideOptions('endsAt', ['required' => false], $options))->add('startsAt', 'time', $this->overrideOptions('startsAt', ['required' => false], $options))->add('note', null, $this->overrideOptions('note', ['required' => false, 'trim' => true], $options))->add('project', 'entity', $this->overrideOptions('project', ['class' => 'AppBundle\Entity\Project', 'required' => false], $options))->add('task', 'entity', $this->overrideOptions('task', ['class' => 'AppBundle\Entity\Task', 'required' => false], $options));
     }
 
     /**
@@ -47,10 +26,7 @@ class TimeEntryFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\TimeEntry',
-            'override' => false
-        ]);
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\TimeEntry', 'override' => false]);
     }
 
     /**
