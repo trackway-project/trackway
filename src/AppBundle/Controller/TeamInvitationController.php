@@ -73,7 +73,7 @@ class TeamInvitationController extends Controller
                     ->setParameters([1 => $invitation->getEmail(),2 => $invitation->getId()])
                     ->getQuery()->getFirstResult() > 0
             ) {
-                $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.already_invited');
+                $this->get('session')->getFlashBag()->add('success', 'invitation.flash.alreadyInvited');
 
                 return ['entity' => $team, 'form' => $form->createView()];
             }
@@ -98,7 +98,7 @@ class TeamInvitationController extends Controller
                 ), 'text/html');
             $mailer->send($message);
 
-            $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.invited');
+            $this->get('session')->getFlashBag()->add('success', 'invitation.flash.invited');
 
             return $this->redirect($this->generateUrl('team_invitation_show', ['id' => $team->getId(), 'invitationId' => $invitation->getId()]));
         }
@@ -126,7 +126,7 @@ class TeamInvitationController extends Controller
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.accepted');
+        $this->get('session')->getFlashBag()->add('success', 'invitation.flash.accepted');
 
         return $this->redirect($this->generateUrl('dashboard_index'));
     }
@@ -138,18 +138,18 @@ class TeamInvitationController extends Controller
      * @throws NotFoundHttpException
      *
      * @Method("GET")
-     * @Route("/invitation/{token}/cancel", requirements={"token": "[a-zA-Z0-9]+"}, name="team_invitation_cancel")
+     * @Route("/invitation/{token}/reject", requirements={"token": "[a-zA-Z0-9]+"}, name="team_invitation_reject")
      */
-    public function cancelAction($token)
+    public function rejectAction($token)
     {
         /** @var Invitation $invitation */
         $invitation = $this->getDoctrine()->getManager()->getRepository('AppBundle:Invitation')->findOneBy(['confirmationToken' => $token]);
 
-        $invitation->setStatus($this->getDoctrine()->getManager()->getRepository('AppBundle:InvitationStatus')->findOneByName('cancelled'));
+        $invitation->setStatus($this->getDoctrine()->getManager()->getRepository('AppBundle:InvitationStatus')->findOneByName('rejected'));
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.cancelled');
+        $this->get('session')->getFlashBag()->add('success', 'invitation.flash.rejected');
 
         return $this->redirect($this->generateUrl('dashboard_index'));
     }
@@ -175,77 +175,6 @@ class TeamInvitationController extends Controller
     }
 
     /**
-     * Edits an existing Invitation entity.
-     *
-     * @param Request $request
-     * @param Team $team
-     * @param Invitation $invitation
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Method("GET|POST")
-     * @ParamConverter("team", class="AppBundle:Team", options={"id" = "id"})
-     * @ParamConverter("invitation", class="AppBundle:Invitation", options={"id" = "invitationId"})
-     * @Route("/{id}/invitation/{invitationId}/edit", requirements={"id": "\d+", "invitationId": "\d+"}, name="team_invitation_edit")
-     * @Security("is_granted('EDIT', team)")
-     * @Template()
-     */
-    public function editAction(Request $request, Team $team, Invitation $invitation)
-    {
-        $oldEmail = $invitation->getEmail();
-        $oldStatus = $invitation->getStatus();
-
-        $form = $this
-            ->get('app.form.factory.invitation')
-            ->createForm([
-                'submit' => ['label' => 'Update']
-            ])
-            ->remove('team')
-            ->setData($invitation)
-            ->handleRequest($request);
-
-        if ($form->isValid()) {
-            if ($this->getDoctrine()->getRepository('AppBundle:Invitation')->createQueryBuilder('i')
-                    ->select('count(i.id)')->where('i.email = ?1')->andWhere('i.id != ?2')
-                    ->setParameters([1 => $invitation->getEmail(),2 => $invitation->getId()])
-                    ->getQuery()->getFirstResult() > 0
-            ) {
-                $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.already_invited');
-
-                return ['entity' => $team, 'form' => $form->createView()];
-            }
-
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.updated');
-
-            // Reinvite
-            if (
-                ($oldStatus !== $invitation->getStatus() && $invitation->getStatus()->getName() === 'open') ||
-                ($oldEmail !== $invitation->getEmail() && $invitation->getStatus()->getName() === 'open')
-            ) {
-                // Send mail
-                $mailer = $this->get('mailer');
-                $message = $mailer->createMessage()
-                    ->setSubject('You were invited!')
-                    ->setFrom('no-reply@trackway.org')
-                    ->setTo($invitation->getEmail())
-                    ->setBody($this->renderView(
-                        '@App/TeamInvitation/email.html.twig',
-                        ['entity' => $invitation]
-                    ), 'text/html');
-                $mailer->send($message);
-
-                $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.reinvited');
-            }
-
-            return $this->redirect($this->generateUrl('team_invitation_show', ['id' => $team->getId(), 'invitationId' => $invitation->getId()]));
-        }
-
-        return ['team' => $team, 'entity' => $invitation, 'form' => $form->createView()];
-    }
-
-    /**
      * Deletes an existing Invitation entity.
      *
      * @param Team $team
@@ -265,7 +194,7 @@ class TeamInvitationController extends Controller
         $em->remove($invitation);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'team_invitation.flash.deleted');
+        $this->get('session')->getFlashBag()->add('success', 'invitation.flash.deleted');
 
         return $this->redirect($this->generateUrl('team_invitation_index', ['id' => $team->getId()]));
     }

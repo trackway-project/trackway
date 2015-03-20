@@ -3,19 +3,19 @@
 {% block class %}profile_membership{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Profile Membership</h1>
+    <h1>{{ 'profileMembership.template.show.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
-            <th>Team</th>
+            <th>{{ 'membership.entity.team'|trans }}</th>
             <td>{{ entity.team }}</td>
         </tr>
         <tr>
-            <th>Group</th>
-            <td>{{ entity.group }}</td>
+            <th>{{ 'membership.entity.group'|trans }}</th>
+            <td>{{ ('membership.value.group.' ~ entity.group.name)|trans }}</td>
         </tr>
         </tbody>
     </table>

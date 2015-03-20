@@ -3,18 +3,18 @@
 {% block class %}user{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>User</h1>
+    <h1>{{ 'admin.user.template.show.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
-            <th>Username</th>
+            <th>{{ 'user.entity.username'|trans }}</th>
             <td>{{ entity.username }}</td>
         </tr>
         <tr>
-            <th>Email</th>
+            <th>{{ 'user.entity.email'|trans }}</th>
             <td>{{ entity.email }}</td>
         </tr>
         </tbody>

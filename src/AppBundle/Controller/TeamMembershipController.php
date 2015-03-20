@@ -89,7 +89,7 @@ class TeamMembershipController extends Controller
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'team_membership.flash.updated');
+            $this->get('session')->getFlashBag()->add('success', 'teamMembership.flash.updated');
 
             return $this->redirect($this->generateUrl('team_membership_show', ['id' => $team->getId(), 'membershipId' => $membership->getId()]));
         }
@@ -117,7 +117,7 @@ class TeamMembershipController extends Controller
         $em->remove($membership);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'team_membership.flash.deleted');
+        $this->get('session')->getFlashBag()->add('success', 'teamMembership.flash.deleted');
 
         return $this->redirect($this->generateUrl('team_membership_index'));
     }

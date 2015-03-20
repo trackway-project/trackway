@@ -28,8 +28,8 @@ class TaskControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/task/');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Tasks")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'task.template.index.title');
     }
 
     /**
@@ -50,8 +50,8 @@ class TaskControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/task/new');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task new")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'task.template.new.title');
 
         // Test form
 
@@ -59,8 +59,9 @@ class TaskControllerTest extends AbstractControllerTest
         $form['appbundle_task_form[name]'] = 'test';
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'task.flash.created');
+        static::assertHeadline($crawler, 'task.template.show.title');
     }
 
     /**
@@ -82,8 +83,8 @@ class TaskControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/task/1');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'task.template.show.title');
     }
 
     /**
@@ -105,16 +106,17 @@ class TaskControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/task/1/edit');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task edit")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'task.template.edit.title');
 
         // Test form
 
         $form = $crawler->selectButton('appbundle_task_form[submit]')->form();
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'task.flash.updated');
+        static::assertHeadline($crawler, 'task.template.show.title');
     }
 
     /**
@@ -136,7 +138,8 @@ class TaskControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/task/1/delete');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Tasks")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'task.flash.deleted');
+        static::assertHeadline($crawler, 'task.template.index.title');
     }
 }

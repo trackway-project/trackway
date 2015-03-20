@@ -3,18 +3,18 @@
 {% block class %}absence{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Absences</h1>
+    <h1>{{ 'absence.template.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Starts At</th>
-            <th>Ends At</th>
-            <th>Reason</th>
-            <th>Note</th>
+            <th>{{ 'absence.entity.date'|trans }}</th>
+            <th>{{ 'absence.entity.startsAt'|trans }}</th>
+            <th>{{ 'absence.entity.endsAt'|trans }}</th>
+            <th>{{ 'absence.entity.reason'|trans }}</th>
+            <th>{{ 'absence.entity.note'|trans }}</th>
             <th></th>
         </tr>
         </thead>
@@ -24,14 +24,18 @@
                 <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
                 <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
-                <td>{{ entity.reason }}</td>
+                <td>{{ ('absence.value.reason.' ~ entity.reason.name)|trans }}</td>
                 <td>{{ entity.note }}</td>
                 <td class="text-right">
-                    <a href="{{ path('absence_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-eye"></i></a>
-                    <a href="{{ path('absence_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('absence_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
+                    <a href="{{ path('absence_show', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'absence.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('absence_edit', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'absence.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('absence_delete', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-danger"
+                       title="{{ 'absence.action.delete'|trans }}"><i
                                 class="fa fa-times"></i></a>
                 </td>
             </tr>

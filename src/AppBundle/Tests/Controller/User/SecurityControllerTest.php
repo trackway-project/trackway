@@ -25,7 +25,7 @@ class SecurityControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/login');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h2:contains("security.login.heading")')->count());
+        static::assertEquals(1, $crawler->filter('h2:contains("security.template.login.title")')->count());
 
         // Test form submit
 
@@ -35,7 +35,7 @@ class SecurityControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Dashboard")')->count());
+        static::assertHeadline($crawler, 'dashboard.template.index.title');
     }
 
     /**
@@ -54,6 +54,6 @@ class SecurityControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/logout');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h2:contains("security.login.heading")')->count(), $this->client->getResponse()->headers);
+        static::assertEquals(1, $crawler->filter('h2:contains("security.template.login.title")')->count());
     }
 }

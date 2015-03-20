@@ -1,0 +1,6 @@
+invitation.email.html: __invitation.email.html
+invitation.email.txt: __invitation.email.txt
+registration.email.html: __registration.email.html
+registration.email.txt: __registration.email.txt
+resetting.email.html: __resetting.email.html
+resetting.email.txt: __resetting.email.txt
