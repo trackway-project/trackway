@@ -1,144 +1,144 @@
-absence.action.delete: __absence.action.delete
-absence.action.edit: __absence.action.edit
-absence.action.show: __absence.action.show
-absence.entity.date: __absence.entity.date
-absence.entity.endsAt: __absence.entity.endsAt
-absence.entity.note: __absence.entity.note
-absence.entity.reason: __absence.entity.reason
-absence.entity.startsAt: __absence.entity.startsAt
-absence.flash.created: __absence.flash.created
-absence.flash.deleted: __absence.flash.deleted
-absence.flash.updated: __absence.flash.updated
-absence.template.edit.title: __absence.template.edit.title
-absence.template.index.title: __absence.template.index.title
-absence.template.new.title: __absence.template.new.title
-absence.template.show.title: __absence.template.show.title
-admin.team.template.activeTeam: __admin.team.template.activeTeam
-admin.team.template.edit.title: __admin.team.template.edit.title
-admin.team.template.index.title: __admin.team.template.index.title
-admin.team.template.new.title: __admin.team.template.new.title
-admin.team.template.show.title: __admin.team.template.show.title
-admin.user.template.edit.title: __admin.user.template.edit.title
-admin.user.template.index.title: __admin.user.template.index.title
-admin.user.template.new.title: __admin.user.template.new.title
-admin.user.template.show.title: __admin.user.template.show.title
-dashboard.template.index.title: __dashboard.template.index.title
-invitation.action.delete: __invitation.action.delete
-invitation.action.edit: __invitation.action.edit
-invitation.action.show: __invitation.action.show
-invitation.entity.email: __invitation.entity.email
-invitation.entity.status: __invitation.entity.status
-invitation.entity.user: __invitation.entity.user
-invitation.flash.accepted: __invitation.flash.accepted
-invitation.flash.alreadyInvited: __invitation.flash.alreadyInvited
-invitation.flash.rejected: __invitation.flash.rejected
-invitation.flash.deleted: __invitation.flash.deleted
-invitation.flash.invited: __invitation.flash.invited
-invitation.template.index.title: __invitation.template.index.title
-invitation.template.invite.title: __invitation.template.invite.title
-invitation.template.show.title: __invitation.template.show.title
-membership.action.delete: __membership.action.delete
-membership.action.edit: __membership.action.edit
-membership.action.show: __membership.action.show
-membership.entity.group: __membership.entity.group
-membership.entity.team: __membership.entity.team
-membership.entity.user: __membership.entity.user
-membership.flash.deleted: __membership.flash.deleted
-membership.flash.updated: __membership.flash.updated
-profile.flash.passwordChanged: __profile.flash.passwordChanged
-profile.flash.updated: __profile.flash.updated
-profile.template.changePassword.title: __profile.template.changePassword.title
-profile.template.edit.title: __profile.template.edit.title
-profile.template.show.title: __profile.template.show.title
-profileMembership.template.index.title: __profileMembership.template.index.title
-profileMembership.template.show.title: __profileMembership.template.show.title
-project.action.delete: __project.action.delete
-project.action.edit: __project.action.edit
-project.action.show: __project.action.show
-project.entity.name: __project.entity.name
-project.flash.created: __project.flash.created
-project.flash.deleted: __project.flash.deleted
-project.flash.updated: __project.flash.updated
-project.template.edit.title: __project.template.edit.title
-project.template.index.title: __project.template.index.title
-project.template.new.title: __project.template.new.title
-project.template.show.title: __project.template.show.title
-registration.flash.confirmed: __registration.flash.confirmed
-registration.flash.registered: __registration.flash.registered
-registration.template.checkMail.text: __registration.template.checkMail.text
-registration.template.checkMail.title: __registration.template.checkMail.title
-registration.template.register.title: __registration.template.register.title
-resetting.flash.confirmed: __resetting.flash.confirmed
-resetting.flash.resetted: __resetting.flash.resetted
-resetting.template.checkMail.text: __resetting.template.checkMail.text
-resetting.template.checkMail.title: __resetting.template.checkMail.title
-resetting.template.confirm.title: __resetting.template.confirm.title
-resetting.template.request.title: __resetting.template.request.title
-security.login.action.registration: __security.login.action.registration
-security.login.action.resetting: __security.login.action.resetting
-security.login.entity.password: __security.login.entity.password
-security.login.entity.rememberMe: __security.login.entity.rememberMe
-security.login.entity.submit: __security.login.entity.submit
-security.login.entity.username: __security.login.entity.username
-security.template.login.title: __security.template.login.title
-task.action.delete: __task.action.delete
-task.action.edit: __task.action.edit
-task.action.show: __task.action.show
-task.entity.name: __task.entity.name
-task.flash.created: __task.flash.created
-task.flash.deleted: __task.flash.deleted
-task.flash.updated: __task.flash.updated
-task.template.edit.title: __task.template.edit.title
-task.template.index.title: __task.template.index.title
-task.template.new.title: __task.template.new.title
-task.template.show.title: __task.template.show.title
-team.action.delete: __team.action.delete
-team.action.edit: __team.action.edit
-team.action.memberships: __team.action.memberships
-team.action.show: __team.action.show
-team.entity.name: __team.entity.name
-team.entity.projects: __team.entity.projects
-team.entity.tasks: __team.entity.tasks
-team.flash.created: __team.flash.created
-team.flash.deleted: __team.flash.deleted
-team.flash.updated: __team.flash.updated
-team.template.activeTeam: __team.template.activeTeam
-team.template.edit.title: __team.template.edit.title
-team.template.index.title: __team.template.index.title
-team.template.new.title: __team.template.new.title
-team.template.show.title: __team.template.show.title
-teamMembership.flash.deleted: __teamMembership.flash.deleted
-teamMembership.flash.updated: __teamMembership.flash.updated
-teamMembership.template.edit.title: __teamMembership.template.edit.title
-teamMembership.template.index.title: __teamMembership.template.index.title
-teamMembership.template.show.title: __teamMembership.template.show.title
-template.closeSidebar: __layout.closeSidebar
-template.forkIt: __template.forkIt
-template.title: __template.title
-template.toggleNavigation: __template.toggleNavigation
-timeEntry.action.delete: __timeEntry.action.delete
-timeEntry.action.edit: __timeEntry.action.edit
-timeEntry.action.show: __timeEntry.action.show
-timeEntry.entity.date: __timeEntry.entity.date
-timeEntry.entity.endsAt: __timeEntry.entity.endsAt
-timeEntry.entity.note: __timeEntry.entity.note
-timeEntry.entity.project: __timeEntry.entity.project
-timeEntry.entity.startsAt: __timeEntry.entity.startsAt
-timeEntry.entity.task: __timeEntry.entity.task
-timeEntry.flash.created: __timeEntry.flash.created
-timeEntry.flash.deleted: __timeEntry.flash.deleted
-timeEntry.flash.updated: __timeEntry.flash.updated
-timeEntry.template.edit.title: __timeEntry.template.edit.title
-timeEntry.template.index.title: __timeEntry.template.index.title
-timeEntry.template.new.title: __timeEntry.template.new.title
-timeEntry.template.show.title: __timeEntry.template.show.title
-user.action.delete: __user.action.delete
-user.action.edit: __user.action.edit
-user.action.show: __user.action.show
-user.entity.activeTeam: __user.entity.activeTeam
-user.entity.email: __user.entity.email
-user.entity.locale: __user.entity.locale
-user.entity.username: __user.entity.username
-user.flash.created: __user.flash.created
-user.flash.deleted: __user.flash.deleted
-user.flash.updated: __user.flash.updated
+absence.action.delete: Löschen
+absence.action.edit: Bearbeiten
+absence.action.show: Anzeigen
+absence.entity.date: Datum
+absence.entity.endsAt: 'Endet am'
+absence.entity.note: Note
+absence.entity.reason: Grund
+absence.entity.startsAt: 'Startet am'
+absence.flash.created: 'Die Abwesenheit wurde angelegt'
+absence.flash.deleted: 'Die Abwesenheit wurde gelöscht'
+absence.flash.updated: 'Die Abwesenheit wurde aktualisiert'
+absence.template.edit.title: 'Abwesenheit bearbeiten'
+absence.template.index.title: Abwesenheiten
+absence.template.new.title: 'Abwesenheit anlegen'
+absence.template.show.title: Abwesenheit
+admin.team.template.activeTeam: 'Aktives Team'
+admin.team.template.edit.title: 'Team bearbeiten'
+admin.team.template.index.title: 'Teams'
+admin.team.template.new.title: 'Team erstellen'
+admin.team.template.show.title: Team
+admin.user.template.edit.title: 'Benutzer bearbeiten'
+admin.user.template.index.title: Benutzer
+admin.user.template.new.title: 'Benutzer erstellen'
+admin.user.template.show.title: Benutzer
+dashboard.template.index.title: Dashboard
+invitation.action.delete: Löschen
+invitation.action.edit: Bearbeiten
+invitation.action.show: Anzeigen
+invitation.entity.email: Email
+invitation.entity.status: Status
+invitation.entity.user: Benutzer
+invitation.flash.accepted: 'Die Einladung wurde akzeptiert'
+invitation.flash.alreadyInvited: 'Der Benutzer wurde bereits eingeladen'
+invitation.flash.rejected: 'Die Einladung wurde zujrückgewiesen'
+invitation.flash.deleted: 'Die Einladung wurde gelöscht'
+invitation.flash.invited: 'Der Benutzer wurde eingeladen'
+invitation.template.index.title: Einladungen
+invitation.template.invite.title: Benutzer einladen
+invitation.template.show.title: Einladung
+membership.action.delete: Löschen
+membership.action.edit: Bearbeiten
+membership.action.show: Anzeigen
+membership.entity.group: Gruppe
+membership.entity.team: Team
+membership.entity.user: Benutzer
+membership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
+membership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
+profile.flash.passwordChanged: 'Ihr Passwort wurde geändert'
+profile.flash.updated: 'Ihr Profil wurde aktualisiert'
+profile.template.changePassword.title: 'Passwort ändern'
+profile.template.edit.title: 'Einstellungen'
+profile.template.show.title: Profil
+profileMembership.template.index.title: Mitgliedschaften
+profileMembership.template.show.title: Mitgliedschaft
+project.action.delete: Löschen
+project.action.edit: Bearbeiten
+project.action.show: Anzeigen
+project.entity.name: Name
+project.flash.created: 'Das Projekt wurde geändert'
+project.flash.deleted: 'Das Projekt wurde gelöscht'
+project.flash.updated: 'Das Projekt wurde aktualisiert'
+project.template.edit.title: 'Projekt bearbeiten'
+project.template.index.title: Projekte
+project.template.new.title: 'Projekt anlegen'
+project.template.show.title: Projekt
+registration.flash.confirmed: 'Ihre Registrierung wurde bestätigt'
+registration.flash.registered: 'Ihr Account wurde registriert'
+registration.template.checkMail.text: 'Ein Link um Ihre Registrierung zu bestätigen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Registrierprozess.'
+registration.template.checkMail.title: 'Registrierung bestätigen'
+registration.template.register.title: Registrierung
+resetting.flash.confirmed: 'Das Zurücksetzen Ihres Passwortes wurde bestätigt'
+resetting.flash.resetted: 'Ihr Passwort wurde zurückgesetzt'
+resetting.template.checkMail.text: 'Ein Link um Ihr Passwort zurückzusetzen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Prozess.'
+resetting.template.checkMail.title: 'Passwortzurücksetzen bestätigen'
+resetting.template.confirm.title: 'Passwortzurücksetzen bestätigen'
+resetting.template.request.title: 'Passwort zurücksetzen'
+security.login.action.registration: 'Neu bei Trackway? Jetzt registrieren!'
+security.login.action.resetting: 'Passwort vergessen?'
+security.login.entity.password: Passwort
+security.login.entity.rememberMe: 'Login merken'
+security.login.entity.submit: 'Einloggen'
+security.login.entity.username: Benutzername
+security.template.login.title: 'Einloggen'
+task.action.delete: Löschen
+task.action.edit: Bearbeiten
+task.action.show: Anzeigen
+task.entity.name: Name
+task.flash.created: 'Der Eintrag wurde erstellt'
+task.flash.deleted: 'Der Eintrag wurde gelöscht'
+task.flash.updated: 'Der Eintrag wurde aktualisiert'
+task.template.edit.title: 'Eintrag anzeigen'
+task.template.index.title: Einträge
+task.template.new.title: 'Eintrag erstellen'
+task.template.show.title: Eintrag
+team.action.delete: Löschen
+team.action.edit: Bearbeiten
+team.action.memberships: Mitgliedschaften
+team.action.show: Anzeigen
+team.entity.name: Name
+team.entity.projects: Projekte
+team.entity.tasks: Einträge
+team.flash.created: 'Das Team wurde erstellt'
+team.flash.deleted: 'Das Team wurde gelöscht'
+team.flash.updated: 'Das Team wurde aktualisiert'
+team.template.activeTeam: 'Aktives Team'
+team.template.edit.title: 'Team bearbeiten'
+team.template.index.title: Teams
+team.template.new.title: 'Team erstellen'
+team.template.show.title: Team
+teamMembership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
+teamMembership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
+teamMembership.template.edit.title: 'Mitgliedschaft bearbeiten'
+teamMembership.template.index.title: Mitgliedschaften
+teamMembership.template.show.title: Mitgliedschaft
+template.closeSidebar: Schließen
+template.forkIt: 'Fork me on <a href="%link%">Github</a>'
+template.title: Trackway
+template.toggleNavigation: 'Navigation umschalten'
+timeEntry.action.delete: Löschen
+timeEntry.action.edit: Bearbeiten
+timeEntry.action.show: Anzeigen
+timeEntry.entity.date: Datum
+timeEntry.entity.endsAt: 'Endet am'
+timeEntry.entity.note: Notiz
+timeEntry.entity.project: Projekt
+timeEntry.entity.startsAt: 'Starten am'
+timeEntry.entity.task: Eintrag
+timeEntry.flash.created: 'Der Zeiteintrag wurde erstellt'
+timeEntry.flash.deleted: 'Der Zeiteintrag wurde gelöscht'
+timeEntry.flash.updated: 'Der Zeiteintrag wurde aktualisiert'
+timeEntry.template.edit.title: 'Zeiteintrag bearbeiten'
+timeEntry.template.index.title: 'Zeiteinträge'
+timeEntry.template.new.title: 'Zeiteintrag erstellen'
+timeEntry.template.show.title: 'Zeiteintrag'
+user.action.delete: Löschen
+user.action.edit: Bearbeiten
+user.action.show: Anzeigen
+user.entity.activeTeam: 'Aktives Team'
+user.entity.email: E-Mail
+user.entity.locale: Sprache
+user.entity.username: Benutzername
+user.flash.created: 'Account wurde erstellt'
+user.flash.deleted: 'Account wurde gelöscht'
+user.flash.updated: 'Account wurde aktualisiert'
