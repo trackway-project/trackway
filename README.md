@@ -42,21 +42,16 @@ Take a look at https://github.com/trackway-project/trackway-vagrant
 ## Capistrano deployment
 Take a look at https://github.com/trackway-project/trackway-deploy
 
-
 ## Thanks
 
-### trackway foundation
 * http://bootswatch.com
-* http://getbootstrap.com/
 * http://bower.io/
+* http://getbootstrap.com/
 * http://gulpjs.com/
-* http://www.vagrantup.com/
-* http://www.ansible.com/
 * http://nodejs.org/
-* http://capistranorb.com/
 * http://symfony.com/
 
-### Contributors
+## Contributors
 * Mewes Kochheim
 * Markus Wanjura
 * Felix Peters
