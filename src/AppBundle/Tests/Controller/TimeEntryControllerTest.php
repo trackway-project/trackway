@@ -24,7 +24,7 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/timeentry/');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entries")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.index.title")')->count());
     }
 
     /**
@@ -42,7 +42,7 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/timeentry/new');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry new")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.new.title")')->count());
 
         // Test form
 
@@ -60,7 +60,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("timeEntry.flash.created")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.show.title")')->count());
     }
 
     /**
@@ -78,7 +79,7 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/timeentry/1');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.show.title")')->count());
     }
 
     /**
@@ -96,7 +97,7 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/timeentry/1/edit');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry edit")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.edit.title")')->count());
 
         // Test form
 
@@ -104,7 +105,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("timeEntry.flash.updated")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.show.title")')->count());
     }
 
     /**
@@ -122,6 +124,7 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/timeentry/1/delete');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entries")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("timeEntry.flash.deleted")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.index.title")')->count());
     }
 }

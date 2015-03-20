@@ -31,7 +31,7 @@ invitation.entity.status: invitation.entity.status
 invitation.entity.user: invitation.entity.user
 invitation.flash.accepted: invitation.flash.accepted
 invitation.flash.alreadyInvited: invitation.flash.alreadyInvited
-invitation.flash.cancelled: invitation.flash.cancelled
+invitation.flash.rejected: invitation.flash.rejected
 invitation.flash.deleted: invitation.flash.deleted
 invitation.flash.invited: invitation.flash.invited
 invitation.template.index.title: invitation.template.index.title
@@ -116,6 +116,9 @@ template.closeSidebar: layout.closeSidebar
 template.forkIt: template.forkIt
 template.title: template.title
 template.toggleNavigation: template.toggleNavigation
+timeEntry.action.delete: timeEntry.action.delete
+timeEntry.action.edit: timeEntry.action.edit
+timeEntry.action.show: timeEntry.action.show
 timeEntry.entity.date: timeEntry.entity.date
 timeEntry.entity.endsAt: timeEntry.entity.endsAt
 timeEntry.entity.note: timeEntry.entity.note

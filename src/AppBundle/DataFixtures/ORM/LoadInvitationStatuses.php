@@ -19,10 +19,6 @@ class LoadInvitationStatuses implements FixtureInterface{
         $open->setName('open');
         $manager->persist($open);
 
-        $cancelled = new InvitationStatus();
-        $cancelled->setName('cancelled');
-        $manager->persist($cancelled);
-
         $accepted = new InvitationStatus();
         $accepted->setName('accepted');
         $manager->persist($accepted);

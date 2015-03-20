@@ -31,7 +31,7 @@ invitation.entity.status: Status
 invitation.entity.user: User
 invitation.flash.accepted: 'The invitation has been accepted'
 invitation.flash.alreadyInvited: 'The user was already invitated'
-invitation.flash.cancelled: 'The invitation has been cancelled'
+invitation.flash.rejected: 'The invitation has been rejected'
 invitation.flash.deleted: 'The invitation has been deleted'
 invitation.flash.invited: 'The invitation has been invited'
 invitation.template.index.title: Invitations
@@ -48,7 +48,7 @@ membership.flash.updated: 'The membership has been updated'
 profile.flash.passwordChanged: 'Your password has been changed'
 profile.flash.updated: 'Your profile has been updated'
 profile.template.changePassword.title: 'Change password'
-profile.template.edit.title: 'Edit profile'
+profile.template.edit.title: 'Settings'
 profile.template.show.title: Profile
 profileMembership.template.index.title: Memberships
 profileMembership.template.show.title: Membership
@@ -116,6 +116,9 @@ template.closeSidebar: Close
 template.forkIt: 'Fork me on <a href="%link%">Github</a>'
 template.title: Trackway
 template.toggleNavigation: 'Toggle Navigation'
+timeEntry.action.delete: Delete
+timeEntry.action.edit: Edit
+timeEntry.action.show: Show
 timeEntry.entity.date: Date
 timeEntry.entity.endsAt: 'Ends at'
 timeEntry.entity.note: Note

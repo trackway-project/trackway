@@ -26,7 +26,7 @@ class ResettingControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/resetting');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Reset request")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("resetting.template.request.title")')->count());
 
         // Test form
 
@@ -35,7 +35,8 @@ class ResettingControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('p:contains("Please check your mails and click on the confirmation link.")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("resetting.flash.resetted")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("resetting.template.checkMail.title")')->count());
     }
 
     /**
@@ -56,7 +57,7 @@ class ResettingControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/resetting/' . $user->getConfirmationToken());
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Reset confirm")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("resetting.template.confirm.title")')->count());
 
         // Test form
 
@@ -66,6 +67,7 @@ class ResettingControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Dashboard")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("resetting.flash.confirmed")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("dashboard.template.index.title")')->count());
     }
 }

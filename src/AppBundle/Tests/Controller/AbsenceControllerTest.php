@@ -24,7 +24,7 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/absence/');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Absences")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("absence.template.index.title")')->count());
     }
 
     /**
@@ -42,7 +42,7 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/absence/new');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Absence new")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("absence.template.new.title")')->count());
 
         // Test form
 
@@ -59,7 +59,8 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Absence")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("absence.flash.created")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("absence.template.show.title")')->count());
     }
 
     /**
@@ -77,7 +78,7 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/absence/1');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Absence")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("absence.template.show.title")')->count());
     }
 
     /**
@@ -95,7 +96,7 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/absence/1/edit');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Absence edit")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("absence.template.edit.title")')->count());
 
         // Test form
 
@@ -103,7 +104,8 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Absence")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("absence.flash.updated")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("absence.template.show.title")')->count());
     }
 
     /**
@@ -121,6 +123,7 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/absence/1/delete');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Absences")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("absence.flash.deleted")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("absence.template.index.title")')->count());
     }
 }

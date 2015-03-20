@@ -29,7 +29,7 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/task/');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Tasks")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("task.template.index.title")')->count());
     }
 
     /**
@@ -51,7 +51,7 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/task/new');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task new")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("task.template.new.title")')->count());
 
         // Test form
 
@@ -60,7 +60,8 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("task.flash.created")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("task.template.show.title")')->count());
     }
 
     /**
@@ -83,7 +84,7 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/task/1');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("task.template.show.title")')->count());
     }
 
     /**
@@ -106,7 +107,7 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/task/1/edit');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task edit")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("task.template.edit.title")')->count());
 
         // Test form
 
@@ -114,7 +115,8 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Task")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("task.flash.updated")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("task.template.show.title")')->count());
     }
 
     /**
@@ -137,6 +139,7 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/task/1/delete');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Tasks")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("task.flash.deleted")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("task.template.index.title")')->count());
     }
 }

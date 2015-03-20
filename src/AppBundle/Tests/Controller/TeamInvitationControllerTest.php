@@ -29,7 +29,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/1/invitation/');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team Invitations")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.index.title")')->count());
     }
 
     /**
@@ -51,7 +51,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/1/invite');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team Invite")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.invite.title")')->count());
 
         // Test form
 
@@ -60,7 +60,8 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team Invitation")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("invitation.flash.invited")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.show.title")')->count());
     }
 
     /**
@@ -90,13 +91,14 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/invitation/' . $invitation->getConfirmationToken() . '/accept');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Dashboard")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("invitation.flash.accepted")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("dashboard.template.index.title")')->count());
     }
 
     /**
      * @coversNothing
      */
-    public function testCancelAction()
+    public function testRejectAction()
     {
         // Prepare environment
 
@@ -117,10 +119,11 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         // Test view
 
-        $crawler = $this->client->request('GET', '/team/invitation/' . $invitation->getConfirmationToken() . '/cancel');
+        $crawler = $this->client->request('GET', '/team/invitation/' . $invitation->getConfirmationToken() . '/reject');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Dashboard")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("invitation.flash.rejected")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("dashboard.template.index.title")')->count());
     }
 
     /**
@@ -143,7 +146,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/1/invitation/1');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team Invitation")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.show.title")')->count());
     }
 
     /**
@@ -166,6 +169,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/1/invitation/1/delete');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team Invitations")')->count());
+        static::assertEquals(1, $crawler->filter('div.alert:contains("invitation.flash.deleted")')->count());
+        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.index.title")')->count());
     }
 }

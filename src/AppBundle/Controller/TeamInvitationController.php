@@ -138,18 +138,18 @@ class TeamInvitationController extends Controller
      * @throws NotFoundHttpException
      *
      * @Method("GET")
-     * @Route("/invitation/{token}/cancel", requirements={"token": "[a-zA-Z0-9]+"}, name="team_invitation_cancel")
+     * @Route("/invitation/{token}/reject", requirements={"token": "[a-zA-Z0-9]+"}, name="team_invitation_reject")
      */
-    public function cancelAction($token)
+    public function rejectAction($token)
     {
         /** @var Invitation $invitation */
         $invitation = $this->getDoctrine()->getManager()->getRepository('AppBundle:Invitation')->findOneBy(['confirmationToken' => $token]);
 
-        $invitation->setStatus($this->getDoctrine()->getManager()->getRepository('AppBundle:InvitationStatus')->findOneByName('cancelled'));
+        $invitation->setStatus($this->getDoctrine()->getManager()->getRepository('AppBundle:InvitationStatus')->findOneByName('rejected'));
 
         $this->getDoctrine()->getManager()->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'invitation.flash.cancelled');
+        $this->get('session')->getFlashBag()->add('success', 'invitation.flash.rejected');
 
         return $this->redirect($this->generateUrl('dashboard_index'));
     }

@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Client;
  */
 abstract class AbstractControllerTest extends WebTestCase
 {
-    protected static $defaultFixtures = ['AppBundle\DataFixtures\ORM\LoadAbsenceReasons', 'AppBundle\DataFixtures\ORM\LoadGroups', 'AppBundle\DataFixtures\ORM\LoadInvitationStatuses', 'AppBundle\DataFixtures\ORM\LoadLocales'];
+    protected static $defaultFixtures = ['AppBundle\DataFixtures\ORM\LoadAbsenceReasons', 'AppBundle\DataFixtures\ORM\LoadGroups', 'AppBundle\DataFixtures\ORM\LoadInvitationStatuses', 'AppBundle\DataFixtures\ORM\LoadLocales', 'AppBundle\Tests\DataFixtures\ORM\LoadTestLocale'];
     protected static $userFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadUser'];
     protected static $usersFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadUsers'];
     protected static $teamFixtures = ['AppBundle\Tests\DataFixtures\ORM\LoadTeam', 'AppBundle\Tests\DataFixtures\ORM\LoadMembershipOwner', 'AppBundle\Tests\DataFixtures\ORM\LoadActiveTeam'];
