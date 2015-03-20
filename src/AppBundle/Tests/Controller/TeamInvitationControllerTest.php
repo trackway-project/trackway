@@ -28,8 +28,8 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/1/invitation/');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.index.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'invitation.template.index.title');
     }
 
     /**
@@ -50,8 +50,8 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/1/invite');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.invite.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'invitation.template.invite.title');
 
         // Test form
 
@@ -59,9 +59,9 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $form['appbundle_invitation_form[email]'] = 'test2@trackway.org';
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("invitation.flash.invited")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.show.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'invitation.flash.invited');
+        static::assertHeadline($crawler, 'invitation.template.show.title');
     }
 
     /**
@@ -90,9 +90,9 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/invitation/' . $invitation->getConfirmationToken() . '/accept');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("invitation.flash.accepted")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("dashboard.template.index.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'invitation.flash.accepted');
+        static::assertHeadline($crawler, 'dashboard.template.index.title');
     }
 
     /**
@@ -121,9 +121,9 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/invitation/' . $invitation->getConfirmationToken() . '/reject');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("invitation.flash.rejected")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("dashboard.template.index.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'invitation.flash.rejected');
+        static::assertHeadline($crawler, 'dashboard.template.index.title');
     }
 
     /**
@@ -145,8 +145,8 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/1/invitation/1');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.show.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'invitation.template.show.title');
     }
 
     /**
@@ -168,8 +168,8 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/1/invitation/1/delete');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("invitation.flash.deleted")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("invitation.template.index.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'invitation.flash.deleted');
+        static::assertHeadline($crawler, 'invitation.template.index.title');
     }
 }

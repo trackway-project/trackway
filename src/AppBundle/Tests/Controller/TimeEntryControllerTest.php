@@ -23,8 +23,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.index.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'timeEntry.template.index.title');
     }
 
     /**
@@ -41,8 +41,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/new');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.new.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'timeEntry.template.new.title');
 
         // Test form
 
@@ -59,9 +59,9 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $form['appbundle_time_entry_form[task]'] = 1;
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("timeEntry.flash.created")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.show.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'timeEntry.flash.created');
+        static::assertHeadline($crawler, 'timeEntry.template.show.title');
     }
 
     /**
@@ -78,8 +78,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/1');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.show.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'timeEntry.template.show.title');
     }
 
     /**
@@ -96,17 +96,17 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/1/edit');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.edit.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'timeEntry.template.edit.title');
 
         // Test form
 
         $form = $crawler->selectButton('appbundle_time_entry_form[submit]')->form();
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("timeEntry.flash.updated")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.show.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'timeEntry.flash.updated');
+        static::assertHeadline($crawler, 'timeEntry.template.show.title');
     }
 
     /**
@@ -123,8 +123,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/1/delete');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("timeEntry.flash.deleted")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("timeEntry.template.index.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'timeEntry.flash.deleted');
+        static::assertHeadline($crawler, 'timeEntry.template.index.title');
     }
 }

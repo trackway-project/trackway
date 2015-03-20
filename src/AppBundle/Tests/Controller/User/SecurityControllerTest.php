@@ -35,7 +35,7 @@ class SecurityControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("dashboard.template.index.title")')->count());
+        static::assertHeadline($crawler, 'dashboard.template.index.title');
     }
 
     /**

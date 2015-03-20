@@ -25,7 +25,7 @@ class RegistrationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/register');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("registration.template.register.title")')->count());
+        static::assertHeadline($crawler, 'registration.template.register.title');
 
         // Test form
 
@@ -37,8 +37,8 @@ class RegistrationControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("registration.flash.registered")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("registration.template.checkMail.title")')->count());
+        static::assertFlashMessage($crawler, 'registration.flash.registered');
+        static::assertHeadline($crawler, 'registration.template.checkMail.title');
     }
 
 
@@ -60,7 +60,7 @@ class RegistrationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/register/' . $user->getConfirmationToken());
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("registration.flash.confirmed")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("dashboard.template.index.title")')->count());
+        static::assertFlashMessage($crawler, 'registration.flash.confirmed');
+        static::assertHeadline($crawler, 'dashboard.template.index.title');
     }
 }

@@ -28,8 +28,8 @@ class ProjectControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/project/');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("project.template.index.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'project.template.index.title');
     }
 
     /**
@@ -50,8 +50,8 @@ class ProjectControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/project/new');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("project.template.new.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'project.template.new.title');
 
         // Test form
 
@@ -59,9 +59,9 @@ class ProjectControllerTest extends AbstractControllerTest
         $form['appbundle_project_form[name]'] = 'test';
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("project.flash.created")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("project.template.show.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'project.flash.created');
+        static::assertHeadline($crawler, 'project.template.show.title');
     }
 
     /**
@@ -83,8 +83,8 @@ class ProjectControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/project/1');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("project.template.show.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'project.template.show.title');
     }
 
     /**
@@ -106,17 +106,17 @@ class ProjectControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/project/1/edit');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("project.template.edit.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'project.template.edit.title');
 
         // Test form
 
         $form = $crawler->selectButton('appbundle_project_form[submit]')->form();
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("project.flash.updated")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("project.template.show.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'project.flash.updated');
+        static::assertHeadline($crawler, 'project.template.show.title');
     }
 
     /**
@@ -138,8 +138,8 @@ class ProjectControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/project/1/delete');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('div.alert:contains("project.flash.deleted")')->count());
-        static::assertEquals(1, $crawler->filter('h1:contains("project.template.index.title")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'project.flash.deleted');
+        static::assertHeadline($crawler, 'project.template.index.title');
     }
 }
