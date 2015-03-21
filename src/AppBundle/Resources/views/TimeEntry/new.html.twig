@@ -8,44 +8,7 @@
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
-    {{ form_start(form) }}
-    {{ form_errors(form) }}
-
-    <div class="row dateBlock" >
-        <div class="col-md-4 form-group">
-            {{ form_label(form.date) }}
-            {{ form_errors(form.date) }}
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                {{ form_widget(form.date) }}
-            </div>
-        </div>
-        <div class="col-md-4 form-group">
-            {{ form_label(form.startsAt) }}
-            {{ form_errors(form.startsAt) }}
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                {{ form_widget(form.startsAt) }}
-            </div>
-        </div>
-        <div class="col-md-4 form-group">
-            {{ form_label(form.endsAt) }}
-            {{ form_errors(form.endsAt) }}
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                {{ form_widget(form.endsAt) }}
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            {{ form_row(form.project) }}
-            {{ form_row(form.task) }}
-            {{ form_row(form.note) }}
-        </div>
-    </div>
-
-
-    {{ form_end(form) }}
+    {{ include('AppBundle:TimeEntry:editNewForm.html.twig') }}
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
