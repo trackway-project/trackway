@@ -25,9 +25,6 @@
                        class="btn btn-sm btn-default"
                        title="{{ 'invitation.action.show'|trans }}"><i class="fa fa-eye"></i></a>
                     {% if is_granted('EDIT', entity.team) %}
-                        <a href="{{ path('team_invitation_edit', { 'id': team.id, 'invitationId': entity.id }) }}"
-                           class="btn btn-sm btn-default"
-                           title="{{ 'invitation.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
                         <a href="{{ path('team_invitation_delete', { 'id': team.id, 'invitationId': entity.id }) }}"
                            class="btn btn-sm btn-danger"
                            title="{{ 'invitation.action.delete'|trans }}"><i class="fa fa-times"></i></a>

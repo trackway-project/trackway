@@ -22,6 +22,7 @@ class LoadInvitation implements FixtureInterface
         $invitation->setConfirmationToken(md5(uniqid(mt_rand(), true)));
         $invitation->setEmail('test2@trackway.org');
         $invitation->setStatus($manager->getRepository('AppBundle:InvitationStatus')->findOneByName('open'));
+        $invitation->setTeam($manager->getRepository('AppBundle:Team')->findOneByName('test'));
         $manager->persist($invitation);
 
         $manager->flush();

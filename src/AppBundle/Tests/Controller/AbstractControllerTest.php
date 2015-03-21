@@ -33,8 +33,11 @@ abstract class AbstractControllerTest extends WebTestCase
      * @param bool $canonicalize
      * @param bool $ignoreCase
      */
-    public static function assertHeadline(Crawler $crawler, $text, $message = 'Unexpected headline', $delta = 0.0, $maxDepth = 10, $canonicalize = false, $ignoreCase = false)
+    public static function assertHeadline(Crawler $crawler, $text, $message = 'Unexpected headline.', $delta = 0.0, $maxDepth = 10, $canonicalize = false, $ignoreCase = false)
     {
+        if (getenv('OUTPUT_RESPONSE_ON_FAILURE')) {
+            $message .= ' Response:' . PHP_EOL . $crawler->html();
+        }
         static::assertEquals(1, $crawler->filter('h1:contains("' . $text . '")')->count(), $message, $delta, $maxDepth, $canonicalize, $ignoreCase);
     }
 
@@ -47,8 +50,11 @@ abstract class AbstractControllerTest extends WebTestCase
      * @param bool $canonicalize
      * @param bool $ignoreCase
      */
-    public static function assertFlashMessage(Crawler $crawler, $text, $message = 'Unexpected flash message', $delta = 0.0, $maxDepth = 10, $canonicalize = false, $ignoreCase = false)
+    public static function assertFlashMessage(Crawler $crawler, $text, $message = 'Unexpected flash message.', $delta = 0.0, $maxDepth = 10, $canonicalize = false, $ignoreCase = false)
     {
+        if (getenv('OUTPUT_RESPONSE_ON_FAILURE')) {
+            $message .= ' Response:' . PHP_EOL . $crawler->html();
+        }
         static::assertEquals(1, $crawler->filter('div.alert:contains("' . $text . '")')->count(), $message, $delta, $maxDepth, $canonicalize, $ignoreCase);
     }
 
@@ -60,8 +66,11 @@ abstract class AbstractControllerTest extends WebTestCase
      * @param bool $canonicalize
      * @param bool $ignoreCase
      */
-    public static function assertStatusCode(Client $client, $message = 'Unexpected HTTP status code', $delta = 0.0, $maxDepth = 10, $canonicalize = false, $ignoreCase = false)
+    public static function assertStatusCode(Client $client, $message = 'Unexpected HTTP status code.', $delta = 0.0, $maxDepth = 10, $canonicalize = false, $ignoreCase = false)
     {
+        if (getenv('OUTPUT_RESPONSE_ON_FAILURE')) {
+            $message .= ' Response:' . PHP_EOL . $client->getResponse()->getContent();
+        }
         static::assertEquals(200, $client->getResponse()->getStatusCode(), $message, $delta, $maxDepth, $canonicalize, $ignoreCase);
     }
 

@@ -47,13 +47,9 @@ class AbsenceControllerTest extends AbstractControllerTest
         // Test form
 
         $form = $crawler->selectButton('appbundle_absence_form[submit]')->form();
-        $form['appbundle_absence_form[date][year]'] = 2016;
-        $form['appbundle_absence_form[date][month]'] = 11;
-        $form['appbundle_absence_form[date][day]'] = 3;
-        $form['appbundle_absence_form[endsAt][hour]'] = 13;
-        $form['appbundle_absence_form[endsAt][minute]'] = 37;
-        $form['appbundle_absence_form[startsAt][hour]'] = 11;
-        $form['appbundle_absence_form[startsAt][minute]'] = 00;
+        $form['appbundle_absence_form[date]'] = '2016-01-31';
+        $form['appbundle_absence_form[endsAt]'] = '13:37';
+        $form['appbundle_absence_form[startsAt]'] = '08:15';
         $form['appbundle_absence_form[note]'] = 'test';
         $form['appbundle_absence_form[reason]'] = 3;
         $crawler = $this->client->submit($form);

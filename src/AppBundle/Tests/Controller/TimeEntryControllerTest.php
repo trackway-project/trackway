@@ -47,13 +47,9 @@ class TimeEntryControllerTest extends AbstractControllerTest
         // Test form
 
         $form = $crawler->selectButton('appbundle_time_entry_form[submit]')->form();
-        $form['appbundle_time_entry_form[date][year]'] = 2016;
-        $form['appbundle_time_entry_form[date][month]'] = 11;
-        $form['appbundle_time_entry_form[date][day]'] = 3;
-        $form['appbundle_time_entry_form[endsAt][hour]'] = 13;
-        $form['appbundle_time_entry_form[endsAt][minute]'] = 37;
-        $form['appbundle_time_entry_form[startsAt][hour]'] = 11;
-        $form['appbundle_time_entry_form[startsAt][minute]'] = 00;
+        $form['appbundle_time_entry_form[date]'] = '2016-01-31';
+        $form['appbundle_time_entry_form[endsAt]'] = '13:37';
+        $form['appbundle_time_entry_form[startsAt]'] = '08:15';
         $form['appbundle_time_entry_form[note]'] = 'test';
         $form['appbundle_time_entry_form[project]'] = 1;
         $form['appbundle_time_entry_form[task]'] = 1;
