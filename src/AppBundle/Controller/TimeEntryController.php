@@ -78,7 +78,15 @@ class TimeEntryController extends Controller
         $user = $this->getUser();
         $activeTeam = $user->getActiveTeam();
 
-        $form = $this->get('app.form.factory.time_entry')->createForm(['project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)], 'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)], 'submit' => ['label' => 'Create']])->setData($timeEntry)->handleRequest($request);
+        $form = $this
+            ->get('app.form.factory.time_entry')
+            ->createForm([
+                'project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)],
+                'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
+                'submit' => ['label' => 'Create']])
+            ->add('submitNew', 'submit', ['label' => 'Create and new', 'attr' => ['value' => 1]])
+            ->setData($timeEntry)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             $timeEntry->setTeam($user->getActiveTeam());
@@ -89,6 +97,12 @@ class TimeEntryController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.created');
+
+            // Handle submitNew
+            $formValues = $request->get('appbundle_time_entry_form', []);
+            if (array_key_exists('submitNew', $formValues) && $formValues['submitNew']) {
+                return $this->redirect($this->generateUrl('timeentry_new'));
+            }
 
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
