@@ -38,7 +38,7 @@ class AbsenceReason
      */
     public function __toString()
     {
-        return $this->name;
+        return 'value.absenceReason.' . $this->name;
     }
 
     /**

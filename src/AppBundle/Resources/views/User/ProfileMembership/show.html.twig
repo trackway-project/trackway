@@ -15,12 +15,12 @@
         </tr>
         <tr>
             <th>{{ 'membership.entity.group'|trans }}</th>
-            <td>{{ ('membership.value.group.' ~ entity.group.name)|trans }}</td>
+            <td>{{ entity.group|trans }}</td>
         </tr>
         </tbody>
     </table>
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'Profile', 'Memberships'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'profile', 'profile.membership'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

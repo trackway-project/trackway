@@ -24,7 +24,7 @@
                 <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
                 <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
                 <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
-                <td>{{ ('absence.value.reason.' ~ entity.reason.name)|trans }}</td>
+                <td>{{ entity.reason|trans }}</td>
                 <td>{{ entity.note }}</td>
                 <td class="text-right">
                     <a href="{{ path('absence_show', { 'id': entity.id }) }}"

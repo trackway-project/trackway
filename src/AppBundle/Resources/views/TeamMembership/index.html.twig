@@ -19,7 +19,7 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.user }}</td>
-                <td>{{ ('membership.value.group.' ~ entity.group.name)|trans }}</td>
+                <td>{{ entity.group|trans }}</td>
                 <td class="text-right">
                     <a href="{{ path('team_membership_show', { 'id': team.id, 'membershipId': entity.id }) }}"
                        class="btn btn-sm btn-default"

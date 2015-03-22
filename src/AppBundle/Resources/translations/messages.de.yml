@@ -147,3 +147,12 @@ user.entity.username: Benutzername
 user.flash.created: 'Account wurde erstellt'
 user.flash.deleted: 'Account wurde gelöscht'
 user.flash.updated: 'Account wurde aktualisiert'
+value.absenceReason.illness: Krankheit
+value.absenceReason.vacation: Urlaub
+value.absenceReason.holiday: Feiertag
+value.group.admin: Admin
+value.group.owner: Eigentümer
+value.group.user: Benutzer
+value.locale.de: Deutsch
+value.locale.en: Englisch
+value.locale.test: Debug

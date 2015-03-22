@@ -45,7 +45,7 @@ class Group
      */
     public function __toString()
     {
-        return $this->name;
+        return 'value.group.' . $this->name;
     }
 
     /**

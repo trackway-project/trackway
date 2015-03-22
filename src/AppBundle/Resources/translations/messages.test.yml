@@ -147,3 +147,12 @@ user.entity.username: user.entity.username
 user.flash.created: user.flash.created
 user.flash.deleted: user.flash.deleted
 user.flash.updated: user.flash.updated
+value.absenceReason.illness: absence.value.reason.illness
+value.absenceReason.vacation: absence.value.reason.vacation
+value.absenceReason.holiday: absence.value.reason.holiday
+value.group.admin: membership.value.group.admin
+value.group.owner: membership.value.group.owner
+value.group.user: membership.value.group.user
+value.locale.de: user.value.locale.de
+value.locale.en: user.value.locale.en
+value.locale.test: user.value.locale.test

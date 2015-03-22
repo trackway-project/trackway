@@ -19,7 +19,7 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.team.name }}</td>
-                <td>{{ ('membership.value.group.' ~ entity.group.name)|trans }}</td>
+                <td>{{ entity.group|trans }}</td>
                 <td class="text-right">
                     <a href="{{ path('profile_membership_show', { 'id': entity.id }) }}"
                        class="btn btn-sm btn-default"
@@ -37,5 +37,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'Profile'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'profile'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}
