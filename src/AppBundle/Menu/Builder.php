@@ -131,7 +131,7 @@ class Builder implements ContainerAwareInterface
 
                 $membershipId = $request->get('membershipId');
                 if ($membershipId && $route !== 'team_membership_index' && strpos($route, 'team_membership_') === 0) {
-                    $menu['team']['team.membership']->addChild('team.membership.back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
+                    $menu['team']['team.membership']->addChild('team.membership.index', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
                     $menu['team']['team.membership']->addChild('team.membership.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_membership_show', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                     $menu['team']['team.membership']->addChild('team.membership.edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_membership_edit', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                     $menu['team']['team.membership']->addChild('team.membership.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_membership_delete', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
@@ -139,7 +139,7 @@ class Builder implements ContainerAwareInterface
 
                 $invitationId = $request->get('invitationId');
                 if ($invitationId && $route !== 'team_invitation_index' && strpos($route, 'team_invitation_') === 0) {
-                    $menu['team']['team.invitation']->addChild('team.invitation.back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
+                    $menu['team']['team.invitation']->addChild('team.invitation.index', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
                     $menu['team']['team.invitation']->addChild('team.invitation.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_invitation_show', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
                     $menu['team']['team.invitation']->addChild('team.invitation.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_invitation_delete', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
                 }
@@ -173,7 +173,7 @@ class Builder implements ContainerAwareInterface
             $route = $request->get('_route');
             $id = $request->get('id');
             if ($id && strpos($route, 'profile_membership_') === 0) {
-                $menu['profile']['profile.membership']->addChild('profile.membership.back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'profile_membership_index']);
+                $menu['profile']['profile.membership']->addChild('profile.membership.index', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'profile_membership_index']);
                 $menu['profile']['profile.membership']->addChild('profile.membership.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'profile_membership_show', 'routeParameters' => ['id' => $id]]);
                 $menu['profile']['profile.membership']->addChild('profile.membership.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'profile_membership_delete', 'routeParameters' => ['id' => $id]]);
             }

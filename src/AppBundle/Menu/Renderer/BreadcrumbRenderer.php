@@ -4,6 +4,8 @@ namespace AppBundle\Menu\Renderer;
 
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\MatcherInterface;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class BreadcrumbRenderer
@@ -15,14 +17,15 @@ class BreadcrumbRenderer extends AdvancedRenderer
     /**
      * @param MatcherInterface $matcher
      * @param array $defaultOptions
-     * @param null|string $charset
+     * @param string|null $charset
+     * @param TranslatorInterface|null $translator
      */
-    public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null)
+    public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null, TranslatorInterface $translator = null)
     {
         // Initialize default options
-        $defaultOptions = array_merge(['ancestorClass' => '', 'currentAsLink' => false, 'currentClass' => 'active', 'listAttributes' => ['class' => 'breadcrumb'], 'listElement' => 'ol', 'raw' => false], $defaultOptions);
+        $defaultOptions = array_merge(['ancestorClass' => '', 'currentAsLink' => false, 'currentClass' => 'active', 'listAttributes' => ['class' => 'breadcrumb'], 'listElement' => 'ol', 'raw' => false, 'translationDomain' => 'menu'], $defaultOptions);
 
-        parent::__construct($matcher, $defaultOptions, $charset);
+        parent::__construct($matcher, $defaultOptions, $charset, $translator);
     }
 
     /**

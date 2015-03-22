@@ -5,6 +5,8 @@ namespace AppBundle\Menu\Renderer;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\MatcherInterface;
 use Knp\Menu\Renderer\ListRenderer;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class AdvancedRenderer
@@ -15,12 +17,20 @@ use Knp\Menu\Renderer\ListRenderer;
 class AdvancedRenderer extends ListRenderer
 {
     /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    /**
      * @param MatcherInterface $matcher
      * @param array $defaultOptions
-     * @param null|string $charset
+     * @param string|null $charset
+     * @param TranslatorInterface|null $translator
      */
-    public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null)
+    public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null, TranslatorInterface $translator = null)
     {
+        $this->translator = $translator;
+
         // Initialize default options
         $defaultOptions = array_merge(['dropdown' => false, 'icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
 
@@ -151,7 +161,7 @@ class AdvancedRenderer extends ListRenderer
             $html = $this->format('<' . $itemElement . $this->renderHtmlAttributes($attributes) . '>', $itemElement, $item->getLevel(), $options);
             $html .= $this->renderLink($item, $options);
         } else {
-            // Render the text/link without wrapper tag
+            // Render the text/link without wrapper tag. Ignores dropdown option
             if ((!$isCurrent || $currentAsLink) && $item->getUri()) {
                 $attributes = array_merge($item->getLinkAttributes(), $attributes);
                 $text = sprintf('<a href="%s"%s>%s</a>', $this->escape($item->getUri()), $this->renderHtmlAttributes($attributes), $this->renderLabel($item, $options));
@@ -248,6 +258,11 @@ class AdvancedRenderer extends ListRenderer
         $icon = $icon ? sprintf('<i class="%s"></i>', $icon) : false;
 
         $label = $options['allow_safe_labels'] && $item->getExtra('safe_label', false) ? $item->getLabel() : $this->escape($item->getLabel());
+
+        // Option: translationDomain
+        if ($this->translator !== null && array_key_exists('translationDomain', $options)) {
+            $label = $this->translator->trans($label, [], $options['translationDomain']);
+        }
 
         if (!empty($icon)) {
             return !empty($label) ? $icon . '&nbsp;' . $label : $icon;
