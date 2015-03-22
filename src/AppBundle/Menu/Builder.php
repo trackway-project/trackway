@@ -4,55 +4,55 @@ namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
-class Builder extends ContainerAware
+/**
+ * Class Builder
+ *
+ * @package AppBundle\Menu
+ */
+class Builder implements ContainerAwareInterface
 {
+    /**
+     * @var ContainerInterface|null
+     */
+    private $container;
+
+    /**
+     * @var AuthorizationChecker|null
+     */
+    private $authorizationChecker;
+
+    /**
+     * @param ContainerInterface $container
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+        $this->authorizationChecker = $container !== null ? $container->get('security.authorization_checker') : null;
+    }
+
+    /**
+     * @param FactoryInterface $factory
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
     public function mainMenu(FactoryInterface $factory)
     {
         $menu = $factory->createItem('root');
 
-        /** @var AuthorizationChecker $authorizationChecker */
-        $authorizationChecker = $this->container->get('security.authorization_checker');
-
-        if ($authorizationChecker->isGranted('ROLE_USER')) {
+        if ($this->authorizationChecker !== null && $this->authorizationChecker->isGranted('ROLE_USER')) {
             /** @var Request $request */
             $request = $this->container->get('request');
             $route = $request->get('_route');
             $id = $request->get('id');
-
-            $menu->addChild('Teams', ['route' => 'team_index']);
-            $menu['Teams']->addChild('Overview', ['icon' => 'fa fa-fw fa-list', 'route' => 'team_index']);
-            $menu['Teams']->addChild('Create', ['icon' => 'fa fa-fw fa-plus', 'route' => 'team_new']);
-            if ($id && strpos($route, 'team_') === 0) {
-                $menu['Teams']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_show', 'routeParameters' => ['id' => $id]]);
-                $menu['Teams']->addChild('Invite', ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_invite', 'routeParameters' => ['id' => $id]]);
-                $menu['Teams']->addChild('Invitations', ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
-                $menu['Teams']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
-                $menu['Teams']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_edit', 'routeParameters' => ['id' => $id]]);
-                $menu['Teams']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_delete', 'routeParameters' => ['id' => $id]]);
-
-                $membershipId = $request->get('membershipId');
-                if ($membershipId && $route !== 'team_membership_index' && strpos($route, 'team_membership_') === 0) {
-                    $menu['Teams']['Memberships']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
-                    $menu['Teams']['Memberships']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_membership_show', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
-                    $menu['Teams']['Memberships']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_membership_edit', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
-                    $menu['Teams']['Memberships']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_membership_delete', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
-                }
-
-                $invitationId = $request->get('invitationId');
-                if ($invitationId && $route !== 'team_invitation_index' && strpos($route, 'team_invitation_') === 0) {
-                    $menu['Teams']['Invitations']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
-                    $menu['Teams']['Invitations']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_invitation_show', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
-                    $menu['Teams']['Invitations']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_invitation_delete', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
-                }
-            }
-
             $activeTeam = $this->container->get('security.token_storage')->getToken()->getUser()->getActiveTeam();
 
             if ($activeTeam) {
-                $isTeamAdmin = $authorizationChecker->isGranted('EDIT', $activeTeam);
+                $isTeamAdmin = $this->authorizationChecker->isGranted('EDIT', $activeTeam);
 
                 $menu->addChild('Projects', ['route' => 'project_index']);
                 $menu['Projects']->addChild('Overview', ['icon' => 'fa fa-fw fa-list', 'route' => 'project_index']);
@@ -103,14 +103,62 @@ class Builder extends ContainerAware
         return $menu;
     }
 
+    /**
+     * @param FactoryInterface $factory
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
+    public function teamMenu(FactoryInterface $factory)
+    {
+        $menu = $factory->createItem('root');
+
+        if ($this->authorizationChecker !== null && $this->authorizationChecker->isGranted('ROLE_USER')) {
+            /** @var Request $request */
+            $request = $this->container->get('request');
+            $route = $request->get('_route');
+            $id = $request->get('id');
+
+            $menu->addChild('Teams', ['route' => 'team_index']);
+            $menu['Teams']->addChild('Overview', ['icon' => 'fa fa-fw fa-list', 'route' => 'team_index']);
+            $menu['Teams']->addChild('Create', ['icon' => 'fa fa-fw fa-plus', 'route' => 'team_new']);
+            if ($id && strpos($route, 'team_') === 0) {
+                $menu['Teams']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_show', 'routeParameters' => ['id' => $id]]);
+                $menu['Teams']->addChild('Invite', ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_invite', 'routeParameters' => ['id' => $id]]);
+                $menu['Teams']->addChild('Invitations', ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
+                $menu['Teams']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
+                $menu['Teams']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_edit', 'routeParameters' => ['id' => $id]]);
+                $menu['Teams']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_delete', 'routeParameters' => ['id' => $id]]);
+
+                $membershipId = $request->get('membershipId');
+                if ($membershipId && $route !== 'team_membership_index' && strpos($route, 'team_membership_') === 0) {
+                    $menu['Teams']['Memberships']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
+                    $menu['Teams']['Memberships']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_membership_show', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                    $menu['Teams']['Memberships']->addChild('Edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_membership_edit', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                    $menu['Teams']['Memberships']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_membership_delete', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                }
+
+                $invitationId = $request->get('invitationId');
+                if ($invitationId && $route !== 'team_invitation_index' && strpos($route, 'team_invitation_') === 0) {
+                    $menu['Teams']['Invitations']->addChild('Back', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
+                    $menu['Teams']['Invitations']->addChild('Show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_invitation_show', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
+                    $menu['Teams']['Invitations']->addChild('Delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_invitation_delete', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
+                }
+            }
+        }
+
+        return $menu;
+    }
+
+    /**
+     * @param FactoryInterface $factory
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
     public function userMenu(FactoryInterface $factory)
     {
         $menu = $factory->createItem('root');
 
-        /** @var AuthorizationChecker $authorizationChecker */
-        $authorizationChecker = $this->container->get('security.authorization_checker');
-
-        if ($authorizationChecker->isGranted('ROLE_USER')) {
+        if ($this->authorizationChecker !== null && $this->authorizationChecker->isGranted('ROLE_USER')) {
             $username = $this->container->get('security.token_storage')->getToken()->getUser()->getUsername();
 
             $menu->addChild('Profile', ['label' => $username, 'route' => 'profile_show']);
@@ -118,8 +166,7 @@ class Builder extends ContainerAware
             $menu['Profile']->addChild('Memberships', ['icon' => 'fa fa-fw fa-users', 'route' => 'profile_membership_index']);
             $menu['Profile']->addChild('Settings', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'profile_edit']);
             $menu['Profile']->addChild('Change Password', ['icon' => 'fa fa-fw fa-key', 'route' => 'profile_change_password']);
-
-            $menu->addChild('Logout', ['route' => 'security_logout']);
+            $menu['Profile']->addChild('Logout', ['icon' => 'fa fa-fw fa-sign-out', 'route' => 'security_logout']);
 
             /** @var Request $request */
             $request = $this->container->get('request');
@@ -138,18 +185,22 @@ class Builder extends ContainerAware
         return $menu;
     }
 
+    /**
+     * @param FactoryInterface $factory
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
     public function adminMenu(FactoryInterface $factory)
     {
         $menu = $factory->createItem('root');
 
-        /** @var AuthorizationChecker $authorizationChecker */
-        $authorizationChecker = $this->container->get('security.authorization_checker');
-
-        if ($authorizationChecker->isGranted('ROLE_ADMIN')) {
+        if ($this->authorizationChecker !== null && $this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $menu->addChild('Admin', ['route' => 'admin_team_index']);
             $menu['Profile']->addChild('Groups', ['route' => 'admin_group_index']);
             $menu['Profile']->addChild('Teams', ['route' => 'admin_team_index']);
             $menu['Profile']->addChild('Users', ['route' => 'admin_user_index']);
         }
+
+        return $menu;
     }
 }
