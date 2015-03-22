@@ -19,7 +19,16 @@ class ChangePasswordFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('password', 'repeated', $this->overrideOptions('password', ['type' => 'password', 'invalid_message' => 'The password fields must match.', 'options' => array('attr' => array('class' => 'password-field')), 'required' => true, 'first_options' => array('label' => 'Password'), 'second_options' => array('label' => 'Repeat Password')], $options))->add('currentPassword', 'password', $this->overrideOptions('currentPassword', ['mapped' => false, 'required' => true, 'constraints' => new UserPassword()], $options));
+        $builder
+            ->add('password', 'repeated', $this->overrideOptions('password', [
+                'type' => 'password',
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options' => array('label' => 'user.entity.password'),
+                'second_options' => array('label' => 'user.entity.passwordRepeat')
+            ], $options))
+            ->add('currentPassword', 'password', $this->overrideOptions('currentPassword', ['label' => 'user.entity.passwordCurrent', 'mapped' => false, 'required' => true, 'constraints' => new UserPassword()], $options));
     }
 
     /**

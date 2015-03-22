@@ -33,7 +33,6 @@ class AppExtensionTest extends AbstractExtensionTestCase
 
         // forms.xml
         $this->assertContainerBuilderHasService('app.form.factory.absence');
-        $this->assertContainerBuilderHasService('app.form.factory.absence_reason');
         $this->assertContainerBuilderHasService('app.form.factory.invitation');
         $this->assertContainerBuilderHasService('app.form.factory.membership');
         $this->assertContainerBuilderHasService('app.form.factory.project');
@@ -48,7 +47,6 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.form.factory.resetting_request');
 
         $this->assertContainerBuilderHasService('app.form.type.absence');
-        $this->assertContainerBuilderHasService('app.form.type.absence_reason');
         $this->assertContainerBuilderHasService('app.form.type.invitation');
         $this->assertContainerBuilderHasService('app.form.type.membership');
         $this->assertContainerBuilderHasService('app.form.type.project');

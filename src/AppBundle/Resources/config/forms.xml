@@ -11,12 +11,6 @@
             <argument>appbundle_absence_form</argument>
         </service>
 
-        <service id="app.form.factory.absence_reason" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.absence_reason"/>
-            <argument>appbundle_absence_reason_form</argument>
-        </service>
-
         <service id="app.form.factory.invitation" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="app.form.type.invitation"/>
@@ -93,10 +87,6 @@
 
         <service id="app.form.type.absence" class="AppBundle\Form\Type\AbsenceFormType">
             <tag name="form.type" alias="appbundle_absence_form_type"/>
-        </service>
-
-        <service id="app.form.type.absence_reason" class="AppBundle\Form\Type\AbsenceReasonFormType">
-            <tag name="form.type" alias="appbundle_absence_reason_form_type"/>
         </service>
 
         <service id="app.form.type.invitation" class="AppBundle\Form\Type\InvitationFormType">

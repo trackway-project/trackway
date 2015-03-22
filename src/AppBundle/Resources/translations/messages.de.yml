@@ -28,6 +28,7 @@ invitation.action.edit: Bearbeiten
 invitation.action.show: Anzeigen
 invitation.entity.email: Email
 invitation.entity.status: Status
+invitation.entity.team: Team
 invitation.entity.user: Benutzer
 invitation.flash.accepted: 'Die Einladung wurde akzeptiert'
 invitation.flash.alreadyInvited: 'Der Benutzer wurde bereits eingeladen'
@@ -137,7 +138,11 @@ user.action.edit: Bearbeiten
 user.action.show: Anzeigen
 user.entity.activeTeam: 'Aktives Team'
 user.entity.email: E-Mail
+user.entity.enabled: Aktiviert
 user.entity.locale: Sprache
+user.entity.password: Passwort
+user.entity.passwordCurrent: 'Aktuelles Password'
+user.entity.passwordRepeat: 'Wiederhole Password'
 user.entity.username: Benutzername
 user.flash.created: 'Account wurde erstellt'
 user.flash.deleted: 'Account wurde gelöscht'

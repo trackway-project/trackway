@@ -19,7 +19,11 @@ class ProfileFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('email', 'email', $this->overrideOptions('email', [], $options))->add('locale', 'entity', $this->overrideOptions('locale', ['class' => 'AppBundle\Entity\Locale'], $options))->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', ['class' => 'AppBundle\Entity\Team'], $options))->add('currentPassword', 'password', $this->overrideOptions('currentPassword', ['mapped' => false, 'required' => true, 'constraints' => new UserPassword()], $options));
+        $builder
+            ->add('email', 'email', $this->overrideOptions('email', ['label' => 'user.entity.email', 'required' => true], $options))
+            ->add('locale', 'entity', $this->overrideOptions('locale', ['label' => 'user.entity.locale', 'class' => 'AppBundle\Entity\Locale'], $options))
+            ->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', ['label' => 'user.entity.activeTeam', 'class' => 'AppBundle\Entity\Team'], $options))
+            ->add('currentPassword', 'password', $this->overrideOptions('currentPassword', ['label' => 'user.entity.currentPassword', 'mapped' => false, 'required' => true, 'constraints' => new UserPassword()], $options));
     }
 
     /**

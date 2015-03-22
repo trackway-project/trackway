@@ -28,6 +28,7 @@ invitation.action.edit: invitation.action.edit
 invitation.action.show: invitation.action.show
 invitation.entity.email: invitation.entity.email
 invitation.entity.status: invitation.entity.status
+invitation.entity.team: invitation.entity.team
 invitation.entity.user: invitation.entity.user
 invitation.flash.accepted: invitation.flash.accepted
 invitation.flash.alreadyInvited: invitation.flash.alreadyInvited
@@ -137,7 +138,11 @@ user.action.edit: user.action.edit
 user.action.show: user.action.show
 user.entity.activeTeam: user.entity.activeTeam
 user.entity.email: user.entity.email
+user.entity.enabled: user.entity.enabled
 user.entity.locale: user.entity.locale
+user.entity.password: user.entity.password
+user.entity.passwordCurrent: user.entity.passwordCurrent
+user.entity.passwordRepeat: user.entity.passwordRepeat
 user.entity.username: user.entity.username
 user.flash.created: user.flash.created
 user.flash.deleted: user.flash.deleted

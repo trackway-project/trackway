@@ -28,6 +28,7 @@ invitation.action.edit: Edit
 invitation.action.show: Show
 invitation.entity.email: Email
 invitation.entity.status: Status
+invitation.entity.team: Team
 invitation.entity.user: User
 invitation.flash.accepted: 'The invitation has been accepted'
 invitation.flash.alreadyInvited: 'The user was already invitated'
@@ -137,7 +138,11 @@ user.action.edit: Edit
 user.action.show: Show
 user.entity.activeTeam: 'Active team'
 user.entity.email: Email
+user.entity.enabled: Enabled
 user.entity.locale: Locale
+user.entity.password: Password
+user.entity.passwordCurrent: 'Current password'
+user.entity.passwordRepeat: 'Repeat password'
 user.entity.username: Username
 user.flash.created: 'The account has been created'
 user.flash.deleted: 'The account has been deleted'

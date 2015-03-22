@@ -18,7 +18,7 @@ class ProjectFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', null, $this->overrideOptions('name', ['required' => true, 'trim' => true], $options));
+        $builder->add('name', null, $this->overrideOptions('name', ['label' => 'project.entity.name', 'required' => true, 'trim' => true], $options));
     }
 
     /**
