@@ -25,9 +25,6 @@
                        class="btn btn-sm btn-default"
                        title="{{ 'membership.action.show'|trans }}"><i class="fa fa-eye"></i></a>
                     {% if is_granted('EDIT', entity) %}
-                        <a href="{{ path('profile_membership_edit', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-default"
-                           title="{{ 'membership.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
                         <a href="{{ path('profile_membership_delete', { 'id': entity.id }) }}"
                            class="btn btn-sm btn-danger"
                            title="{{ 'membership.action.delete'|trans }}"><i class="fa fa-times"></i></a>

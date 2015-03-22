@@ -8,7 +8,7 @@ use Knp\Menu\Renderer\ListRenderer;
 
 /**
  * Class AdvancedRenderer
- * 
+ *
  * @package AppBundle\Menu\Renderer
  * TODO: move dropdown option to NavbarRenderer without copy-pasting all the code. Requires more modular architecture.
  */
