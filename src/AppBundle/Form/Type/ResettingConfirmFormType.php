@@ -18,15 +18,16 @@ class ResettingConfirmFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('password', 'repeated', $this->overrideOptions('password', [
-                'type' => 'password',
-                'invalid_message' => 'The password fields must match.',
-                'options' => array('attr' => array('class' => 'password-field')),
-                'required' => true,
-                'first_options' => array('label' => 'user.entity.password'),
-                'second_options' => array('label' => 'user.entity.passwordRepeat')
-            ], $options));
+        $builder->add('password',
+            'repeated',
+            $this->overrideOptions('password',
+                ['type' => 'password',
+                    'invalid_message' => 'The password fields must match.',
+                    'options' => ['attr' => ['class' => 'password-field']],
+                    'required' => true,
+                    'first_options' => ['label' => 'user.entity.password'],
+                    'second_options' => ['label' => 'user.entity.passwordRepeat']],
+                $options));
     }
 
     /**
@@ -34,7 +35,7 @@ class ResettingConfirmFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'AppBundle\Entity\User', 'override' => false, 'validation_groups' => ['change_password']));
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\User', 'override' => false, 'validation_groups' => ['change_password']]);
     }
 
     /**

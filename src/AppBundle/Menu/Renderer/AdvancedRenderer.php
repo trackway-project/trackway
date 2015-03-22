@@ -5,7 +5,6 @@ namespace AppBundle\Menu\Renderer;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\MatcherInterface;
 use Knp\Menu\Renderer\ListRenderer;
-use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -31,7 +30,8 @@ class AdvancedRenderer extends ListRenderer
         $this->translator = $translator;
 
         // Initialize default options
-        $defaultOptions = array_merge(['icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
+        $defaultOptions =
+            array_merge(['icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
 
         parent::__construct($matcher, $defaultOptions, $charset);
     }
@@ -164,7 +164,11 @@ class AdvancedRenderer extends ListRenderer
             // Render the text/link without wrapper tag
             if ((!$isCurrent || $currentAsLink) && $item->getUri()) {
                 $attributes = array_merge($item->getLinkAttributes(), $attributes);
-                $text = sprintf('<a href="%s"%s>%s</a>', $this->escape($item->getUri()), $this->renderHtmlAttributes($attributes), $this->renderLabel($item, $options));
+                $text =
+                    sprintf('<a href="%s"%s>%s</a>',
+                        $this->escape($item->getUri()),
+                        $this->renderHtmlAttributes($attributes),
+                        $this->renderLabel($item, $options));
             } else {
                 $attributes = array_merge($item->getLabelAttributes(), $attributes);
                 $text = sprintf('<span%s>%s</span>', $this->renderHtmlAttributes($attributes), $this->renderLabel($item, $options));
@@ -212,7 +216,7 @@ class AdvancedRenderer extends ListRenderer
      *
      * @return string
      */
-    protected function renderLink(ItemInterface $item, array $options = array())
+    protected function renderLink(ItemInterface $item, array $options = [])
     {
         // Option: currentAsLink
         $currentAsLink = $this->defaultOptions['currentAsLink'];
@@ -223,9 +227,7 @@ class AdvancedRenderer extends ListRenderer
         // Active link
         if ($item->getUri() && (!$this->matcher->isCurrent($item) || $currentAsLink)) {
             $text = $this->renderLinkElement($item, $options);
-        }
-
-        // Inactive link
+        } // Inactive link
         else {
             $text = $this->renderSpanElement($item, $options);
         }

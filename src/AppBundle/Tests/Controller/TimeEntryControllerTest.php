@@ -16,7 +16,12 @@ class TimeEntryControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures, self::$timeEntryFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$projectFixtures,
+            self::$taskFixtures,
+            self::$timeEntryFixtures));
         $this->login();
 
         // Test view
@@ -67,7 +72,12 @@ class TimeEntryControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures, self::$timeEntryFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$projectFixtures,
+            self::$taskFixtures,
+            self::$timeEntryFixtures));
         $this->login();
 
         // Test view
@@ -85,7 +95,12 @@ class TimeEntryControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures, self::$timeEntryFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$projectFixtures,
+            self::$taskFixtures,
+            self::$timeEntryFixtures));
         $this->login();
 
         // Test view
@@ -112,7 +127,12 @@ class TimeEntryControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures, self::$timeEntryFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$projectFixtures,
+            self::$taskFixtures,
+            self::$timeEntryFixtures));
         $this->login();
 
         // Test view

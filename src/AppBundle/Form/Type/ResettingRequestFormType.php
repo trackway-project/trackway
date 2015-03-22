@@ -26,7 +26,7 @@ class ResettingRequestFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'AppBundle\Entity\User', 'override' => false, 'validation_groups' => ['resetting']));
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\User', 'override' => false, 'validation_groups' => ['resetting']]);
     }
 
     /**

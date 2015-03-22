@@ -3,13 +3,9 @@
 namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
@@ -73,30 +69,38 @@ class Builder
                 if ($id && strpos($route, 'project_') === 0) {
                     $menu['project']->addChild('project.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'project_show', 'routeParameters' => ['id' => $id]]);
                     if ($isTeamAdmin) {
-                        $menu['project']->addChild('project.edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'project_edit', 'routeParameters' => ['id' => $id]]);
-                        $menu['project']->addChild('project.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'project_delete', 'routeParameters' => ['id' => $id]]);
+                        $menu['project']->addChild('project.edit',
+                            ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'project_edit', 'routeParameters' => ['id' => $id]]);
+                        $menu['project']->addChild('project.delete',
+                            ['icon' => 'fa fa-fw fa-times', 'route' => 'project_delete', 'routeParameters' => ['id' => $id]]);
                     }
                 }
 
                 if ($id && strpos($route, 'task_') === 0) {
                     $menu['task']->addChild('task.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'task_show', 'routeParameters' => ['id' => $id]]);
                     if ($isTeamAdmin) {
-                        $menu['task']->addChild('task.edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'task_edit', 'routeParameters' => ['id' => $id]]);
+                        $menu['task']->addChild('task.edit',
+                            ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'task_edit', 'routeParameters' => ['id' => $id]]);
                         $menu['task']->addChild('task.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'task_delete', 'routeParameters' => ['id' => $id]]);
                     }
                 }
 
                 if ($id && strpos($route, 'timeentry_') === 0) {
-                    $menu['timeEntry']->addChild('timeEntry.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'timeentry_show', 'routeParameters' => ['id' => $id]]);
-                    $menu['timeEntry']->addChild('timeEntry.edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'timeentry_edit', 'routeParameters' => ['id' => $id]]);
-                    $menu['timeEntry']->addChild('timeEntry.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'timeentry_delete', 'routeParameters' => ['id' => $id]]);
+                    $menu['timeEntry']->addChild('timeEntry.show',
+                        ['icon' => 'fa fa-fw fa-eye', 'route' => 'timeentry_show', 'routeParameters' => ['id' => $id]]);
+                    $menu['timeEntry']->addChild('timeEntry.edit',
+                        ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'timeentry_edit', 'routeParameters' => ['id' => $id]]);
+                    $menu['timeEntry']->addChild('timeEntry.delete',
+                        ['icon' => 'fa fa-fw fa-times', 'route' => 'timeentry_delete', 'routeParameters' => ['id' => $id]]);
                 }
 
 
                 if ($id && strpos($route, 'absence_') === 0) {
                     $menu['absence']->addChild('absence.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'absence_show', 'routeParameters' => ['id' => $id]]);
-                    $menu['absence']->addChild('absence.edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'absence_edit', 'routeParameters' => ['id' => $id]]);
-                    $menu['absence']->addChild('absence.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'absence_delete', 'routeParameters' => ['id' => $id]]);
+                    $menu['absence']->addChild('absence.edit',
+                        ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'absence_edit', 'routeParameters' => ['id' => $id]]);
+                    $menu['absence']->addChild('absence.delete',
+                        ['icon' => 'fa fa-fw fa-times', 'route' => 'absence_delete', 'routeParameters' => ['id' => $id]]);
                 }
             }
         }
@@ -127,25 +131,41 @@ class Builder
 
             if ($id && strpos($route, 'team_') === 0) {
                 $menu['team']->addChild('team.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_show', 'routeParameters' => ['id' => $id]]);
-                $menu['team']->addChild('team.invite', ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_invite', 'routeParameters' => ['id' => $id]]);
-                $menu['team']->addChild('team.invitation', ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
-                $menu['team']->addChild('team.membership', ['icon' => 'fa fa-fw fa-users', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
+                $menu['team']->addChild('team.invite',
+                    ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_invite', 'routeParameters' => ['id' => $id]]);
+                $menu['team']->addChild('team.invitation',
+                    ['icon' => 'fa fa-fw fa-user-plus', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
+                $menu['team']->addChild('team.membership',
+                    ['icon' => 'fa fa-fw fa-users', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
                 $menu['team']->addChild('team.edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_edit', 'routeParameters' => ['id' => $id]]);
                 $menu['team']->addChild('team.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_delete', 'routeParameters' => ['id' => $id]]);
 
                 $membershipId = $request->get('membershipId');
                 if ($membershipId && $route !== 'team_membership_index' && strpos($route, 'team_membership_') === 0) {
-                    $menu['team']['team.membership']->addChild('team.membership.index', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
-                    $menu['team']['team.membership']->addChild('team.membership.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_membership_show', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
-                    $menu['team']['team.membership']->addChild('team.membership.edit', ['icon' => 'fa fa-fw fa-pencil-square-o', 'route' => 'team_membership_edit', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
-                    $menu['team']['team.membership']->addChild('team.membership.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_membership_delete', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                    $menu['team']['team.membership']->addChild('team.membership.index',
+                        ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_membership_index', 'routeParameters' => ['id' => $id]]);
+                    $menu['team']['team.membership']->addChild('team.membership.show',
+                        ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_membership_show', 'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                    $menu['team']['team.membership']->addChild('team.membership.edit',
+                        ['icon' => 'fa fa-fw fa-pencil-square-o',
+                            'route' => 'team_membership_edit',
+                            'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
+                    $menu['team']['team.membership']->addChild('team.membership.delete',
+                        ['icon' => 'fa fa-fw fa-times',
+                            'route' => 'team_membership_delete',
+                            'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                 }
 
                 $invitationId = $request->get('invitationId');
                 if ($invitationId && $route !== 'team_invitation_index' && strpos($route, 'team_invitation_') === 0) {
-                    $menu['team']['team.invitation']->addChild('team.invitation.index', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
-                    $menu['team']['team.invitation']->addChild('team.invitation.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_invitation_show', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
-                    $menu['team']['team.invitation']->addChild('team.invitation.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'team_invitation_delete', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
+                    $menu['team']['team.invitation']->addChild('team.invitation.index',
+                        ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'team_invitation_index', 'routeParameters' => ['id' => $id]]);
+                    $menu['team']['team.invitation']->addChild('team.invitation.show',
+                        ['icon' => 'fa fa-fw fa-eye', 'route' => 'team_invitation_show', 'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
+                    $menu['team']['team.invitation']->addChild('team.invitation.delete',
+                        ['icon' => 'fa fa-fw fa-times',
+                            'route' => 'team_invitation_delete',
+                            'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
                 }
             }
         }
@@ -179,9 +199,12 @@ class Builder
             $route = $request->get('_route');
             $id = $request->get('id');
             if ($id && strpos($route, 'profile_membership_') === 0) {
-                $menu['profile']['profile.membership']->addChild('profile.membership.index', ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'profile_membership_index']);
-                $menu['profile']['profile.membership']->addChild('profile.membership.show', ['icon' => 'fa fa-fw fa-eye', 'route' => 'profile_membership_show', 'routeParameters' => ['id' => $id]]);
-                $menu['profile']['profile.membership']->addChild('profile.membership.delete', ['icon' => 'fa fa-fw fa-times', 'route' => 'profile_membership_delete', 'routeParameters' => ['id' => $id]]);
+                $menu['profile']['profile.membership']->addChild('profile.membership.index',
+                    ['icon' => 'fa fa-fw fa-arrow-circle-left', 'route' => 'profile_membership_index']);
+                $menu['profile']['profile.membership']->addChild('profile.membership.show',
+                    ['icon' => 'fa fa-fw fa-eye', 'route' => 'profile_membership_show', 'routeParameters' => ['id' => $id]]);
+                $menu['profile']['profile.membership']->addChild('profile.membership.delete',
+                    ['icon' => 'fa fa-fw fa-times', 'route' => 'profile_membership_delete', 'routeParameters' => ['id' => $id]]);
             }
         } else {
             $menu->addChild('login', ['route' => 'security_login']);

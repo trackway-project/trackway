@@ -76,7 +76,13 @@ class TeamMembershipController extends Controller
      */
     public function editAction(Request $request, Team $team, Membership $membership)
     {
-        $form = $this->get('app.form.factory.membership')->createForm(['submit' => ['label' => 'teamMembership.template.edit.submit']])->remove('team')->remove('user')->setData($membership)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.membership')
+                ->createForm(['submit' => ['label' => 'teamMembership.template.edit.submit']])
+                ->remove('team')
+                ->remove('user')
+                ->setData($membership)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();

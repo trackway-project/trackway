@@ -51,6 +51,6 @@ class LocaleListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         // must be registered before the default Locale listener
-        return array(KernelEvents::REQUEST => [['onKernelRequest', 17]]);
+        return [KernelEvents::REQUEST => [['onKernelRequest', 17]]];
     }
 }

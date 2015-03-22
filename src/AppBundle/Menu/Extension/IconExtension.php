@@ -14,7 +14,7 @@ class IconExtension implements ExtensionInterface
      *
      * @return array
      */
-    public function buildOptions(array $options = array())
+    public function buildOptions(array $options = [])
     {
         if (!empty($options['icon'])) {
             $options['extras']['icon'] = $options['icon'];

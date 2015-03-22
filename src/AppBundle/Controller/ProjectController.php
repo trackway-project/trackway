@@ -67,7 +67,11 @@ class ProjectController extends Controller
     {
         $project = new Project();
 
-        $form = $this->get('app.form.factory.project')->createForm(['submit' => ['label' => 'project.template.new.submit']])->setData($project)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.project')
+                ->createForm(['submit' => ['label' => 'project.template.new.submit']])
+                ->setData($project)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());
@@ -99,7 +103,11 @@ class ProjectController extends Controller
      */
     public function editAction(Request $request, Project $project)
     {
-        $form = $this->get('app.form.factory.project')->createForm(['submit' => ['label' => 'project.template.edit.submit']])->setData($project)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.project')
+                ->createForm(['submit' => ['label' => 'project.template.edit.submit']])
+                ->setData($project)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             $project->setTeam($this->getUser()->getActiveTeam());

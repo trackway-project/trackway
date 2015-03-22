@@ -18,11 +18,12 @@ class UserFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('username', null, $this->overrideOptions('username', ['label' => 'user.entity.username', 'required' => true], $options))
+        $builder->add('username', null, $this->overrideOptions('username', ['label' => 'user.entity.username', 'required' => true], $options))
             ->add('email', 'email', $this->overrideOptions('email', ['label' => 'user.entity.email', 'required' => true], $options))
             ->add('locale', 'choice', $this->overrideOptions('locale', ['label' => 'user.entity.locale', 'class' => 'AppBundle\Entity\Locale'], $options))
-            ->add('activeTeam', 'entity', $this->overrideOptions('activeTeam', ['label' => 'user.entity.activeTeam', 'class' => 'AppBundle\Entity\Team'], $options))
+            ->add('activeTeam',
+                'entity',
+                $this->overrideOptions('activeTeam', ['label' => 'user.entity.activeTeam', 'class' => 'AppBundle\Entity\Team'], $options))
             ->add('enabled', 'checkbox', $this->overrideOptions('enabled', ['label' => 'user.entity.enabled'], $options));
     }
 

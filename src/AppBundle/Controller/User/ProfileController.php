@@ -46,14 +46,12 @@ class ProfileController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        $form = $this
-            ->get('app.form.factory.profile')
-            ->createForm([
-                'activeTeam' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUser($user)],
-                'submit' => ['label' => 'profile.template.edit.submit']
-            ])
-            ->setData($user)
-            ->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.profile')->createForm(['activeTeam' => ['choices' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Team')
+                ->findByUser($user)],
+                'submit' => ['label' => 'profile.template.edit.submit']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -85,7 +83,11 @@ class ProfileController extends Controller
         /** @var User */
         $user = $this->getUser();
 
-        $form = $this->get('app.form.factory.change_password')->createForm(['submit' => ['label' => 'profile.template.changePassword.submit']])->setData($user)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.change_password')
+                ->createForm(['submit' => ['label' => 'profile.template.changePassword.submit']])
+                ->setData($user)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
@@ -93,7 +95,8 @@ class ProfileController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             // Login
-            $token = $this->get('security.authentication.manager')->authenticate(new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles()));
+            $token =
+                $this->get('security.authentication.manager')->authenticate(new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles()));
             $this->get('session')->set('_security_main', serialize($token));
             $this->get('security.token_storage')->setToken($token);
 

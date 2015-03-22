@@ -40,6 +40,7 @@ class SecurityControllerTest extends AbstractControllerTest
 
     /**
      * TODO: Does not work in unit tests - find solution
+     *
      * @coversNothing
      */
     public function ignoreLogoutAction()
