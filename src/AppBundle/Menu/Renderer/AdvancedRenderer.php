@@ -6,6 +6,12 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\MatcherInterface;
 use Knp\Menu\Renderer\ListRenderer;
 
+/**
+ * Class AdvancedRenderer
+ * 
+ * @package AppBundle\Menu\Renderer
+ * TODO: move dropdown option to NavbarRenderer without copy-pasting all the code. Requires more modular architecture.
+ */
 class AdvancedRenderer extends ListRenderer
 {
     /**
@@ -16,7 +22,7 @@ class AdvancedRenderer extends ListRenderer
     public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null)
     {
         // Initialize default options
-        $defaultOptions = array_merge(['icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
+        $defaultOptions = array_merge(['dropdown' => false, 'icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
 
         parent::__construct($matcher, $defaultOptions, $charset);
     }
@@ -49,6 +55,12 @@ class AdvancedRenderer extends ListRenderer
         $listElement = $this->defaultOptions['listElement'];
         if (array_key_exists('listElement', $options)) {
             $listElement = $options['listElement'];
+        }
+
+        // Option: dropdown
+        if (array_key_exists('dropdown', $options) && $options['dropdown'] === true && $item->getParent() !== null) {
+            $attributes['class'] = ''; // reset list classes
+            $attributes = $this->merge($attributes, ['class' => 'dropdown-menu', 'role' => 'menu']);
         }
 
         // Render list
@@ -88,8 +100,13 @@ class AdvancedRenderer extends ListRenderer
             $currentAsLink = $options['currentAsLink'];
         }
 
-        // Option: itemAttributes
+        // Option: dropdown
         $attributes = $item->getAttributes();
+        if (array_key_exists('dropdown', $options) && $options['dropdown'] === true && $item->hasChildren()) {
+            $attributes = $this->merge($attributes, ['class' => 'dropdown']);
+        }
+
+        // Option: itemAttributes
         if (array_key_exists('itemAttributes', $options) && is_array($options['itemAttributes'])) {
             $attributes = $this->merge($attributes, $options['itemAttributes']);
         }
@@ -176,13 +193,42 @@ class AdvancedRenderer extends ListRenderer
             $currentAsLink = $options['currentAsLink'];
         }
 
-        if ($item->getUri() && (!$this->matcher->isCurrent($item) || $currentAsLink)) {
+        // Option: dropdown
+        if (array_key_exists('dropdown', $options) && $options['dropdown'] === true && $item->hasChildren()) {
+            $text = $this->renderDropdownElement($item, $options);
+        }
+
+        // Active link
+        elseif ($item->getUri() && (!$this->matcher->isCurrent($item) || $currentAsLink)) {
             $text = $this->renderLinkElement($item, $options);
-        } else {
+        }
+
+        // Inactive link
+        else {
             $text = $this->renderSpanElement($item, $options);
         }
 
         return $this->format($text, 'link', $item->getLevel(), $options);
+    }
+
+    /**
+     * @param ItemInterface $item
+     * @param array $options
+     *
+     * @return string
+     */
+    protected function renderDropdownElement(ItemInterface $item, array $options)
+    {
+        return sprintf('<a href="%s"%s>%s <span class="caret"></span></a>',
+            '#', // override URI here so we don't get a route mismatch earlier
+            $this->renderHtmlAttributes($this->merge($item->getLinkAttributes(), [
+                'class' => 'dropdown-toggle',
+                'data-toggle' => 'dropdown',
+                'role' => 'button',
+                'aria-expanded' => 'false'
+            ])),
+            $this->renderLabel($item, $options)
+        );
     }
 
     /**
