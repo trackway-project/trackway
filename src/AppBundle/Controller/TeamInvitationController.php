@@ -57,7 +57,7 @@ class TeamInvitationController extends Controller
     {
         $invitation = new Invitation();
 
-        $form = $this->get('app.form.factory.invitation')->createForm(['submit' => ['label' => 'Invite']])->remove('team')->remove('status')->setData($invitation)->handleRequest($request);
+        $form = $this->get('app.form.factory.invitation')->createForm(['submit' => ['label' => 'invitation.template.invite.submit']])->remove('team')->remove('status')->setData($invitation)->handleRequest($request);
 
         if ($form->isValid()) {
             if ($this->getDoctrine()->getRepository('AppBundle:Invitation')->createQueryBuilder('i')->select('count(i.id)')->where('i.email = ?1')->andWhere('i.id != ?2')->setParameters([1 => $invitation->getEmail(), 2 => $invitation->getId()])->getQuery()->getFirstResult() > 0

@@ -32,7 +32,7 @@ class RegistrationController extends Controller
     {
         $user = new User();
 
-        $form = $this->get('app.form.factory.registration')->createForm(['submit' => ['label' => 'Register']])->setData($user)->handleRequest($request);
+        $form = $this->get('app.form.factory.registration')->createForm(['submit' => ['label' => 'registration.template.register.submit']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $user->setConfirmationToken(md5(uniqid(mt_rand(), true)));

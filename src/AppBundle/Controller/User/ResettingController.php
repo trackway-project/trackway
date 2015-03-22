@@ -32,7 +32,7 @@ class ResettingController extends Controller
     {
         $user = new User();
 
-        $form = $this->get('app.form.factory.resetting_request')->createForm(['submit' => ['label' => 'Reset']])->setData($user)->handleRequest($request);
+        $form = $this->get('app.form.factory.resetting_request')->createForm(['submit' => ['label' => 'resetting.template.request.submit']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $user = $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findOneByEmail($user->getEmail());
@@ -76,7 +76,7 @@ class ResettingController extends Controller
         $user->setPasswordRequestedAt(null);
         $user->setConfirmationToken(null);
 
-        $form = $this->get('app.form.factory.resetting_confirm')->createForm(['submit' => ['label' => 'Reset']])->setData($user)->handleRequest($request);
+        $form = $this->get('app.form.factory.resetting_confirm')->createForm(['submit' => ['label' => 'resetting.template.confirm.submit']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));

@@ -68,7 +68,7 @@ class TeamController extends Controller
     {
         $team = new Team();
 
-        $form = $this->get('app.form.factory.team')->createForm(['submit' => ['label' => 'Create']])->remove('memberships')->setData($team)->handleRequest($request);
+        $form = $this->get('app.form.factory.team')->createForm(['submit' => ['label' => 'team.template.new.submit']])->remove('memberships')->setData($team)->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var Group $group */
@@ -119,7 +119,7 @@ class TeamController extends Controller
      */
     public function editAction(Request $request, Team $team)
     {
-        $form = $this->get('app.form.factory.team')->createForm(['submit' => ['label' => 'Update']])->remove('memberships')->setData($team)->handleRequest($request);
+        $form = $this->get('app.form.factory.team')->createForm(['submit' => ['label' => 'team.template.edit.submit']])->remove('memberships')->setData($team)->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
