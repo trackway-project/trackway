@@ -31,9 +31,9 @@
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                {{ knp_menu_render('AppBundle:Builder:mainMenu', {}, 'appbundle_navbar_renderer') }}
-                {{ knp_menu_render('AppBundle:Builder:userMenu', {'depth': 2, 'dropdown': true, 'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
-                {{ knp_menu_render('AppBundle:Builder:teamMenu', {'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
+                {{ knp_menu_render('appbundle_main_menu', {}, 'appbundle_navbar_renderer') }}
+                {{ knp_menu_render('appbundle_user_menu', {'depth': 2, 'dropdown': true, 'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
+                {{ knp_menu_render('appbundle_team_menu', {'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
             </div>
         </div>
     </nav>

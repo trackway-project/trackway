@@ -30,5 +30,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'profile'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['appbundle_user_menu', 'profile'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

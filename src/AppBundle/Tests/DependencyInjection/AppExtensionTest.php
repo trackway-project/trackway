@@ -66,6 +66,11 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.event_listener.routing');
 
         // menu.xml
+        $this->assertContainerBuilderHasService('app.menu.builder');
+        $this->assertContainerBuilderHasService('app.menu.main');
+        $this->assertContainerBuilderHasService('app.menu.team');
+        $this->assertContainerBuilderHasService('app.menu.user');
+        $this->assertContainerBuilderHasService('app.menu.admin');
         $this->assertContainerBuilderHasService('app.menu.extension.icon');
         $this->assertContainerBuilderHasService('app.menu.renderer.breadcrumb');
         $this->assertContainerBuilderHasService('app.menu.renderer.navbar');

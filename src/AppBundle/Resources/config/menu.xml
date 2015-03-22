@@ -2,6 +2,38 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="app.menu.builder" class="AppBundle\Menu\Builder">
+            <argument type="service" id="knp_menu.factory"/>
+        </service>
+
+        <service id="app.menu.main" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createMainMenu">
+            <tag name="knp_menu.menu" alias="appbundle_main_menu"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="security.token_storage"/>
+        </service>
+
+        <service id="app.menu.team" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createTeamMenu">
+            <tag name="knp_menu.menu" alias="appbundle_team_menu"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="security.token_storage"/>
+        </service>
+
+        <service id="app.menu.user" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createUserMenu">
+            <tag name="knp_menu.menu" alias="appbundle_user_menu"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="security.token_storage"/>
+        </service>
+
+        <service id="app.menu.admin" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createAdminMenu">
+            <tag name="knp_menu.menu" alias="appbundle_admin_menu"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="security.token_storage"/>
+        </service>
+
         <service id="app.menu.extension.icon" class="AppBundle\Menu\Extension\IconExtension">
             <tag name="knp_menu.factory_extension"/>
         </service>
