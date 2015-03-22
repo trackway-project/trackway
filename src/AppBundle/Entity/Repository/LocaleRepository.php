@@ -3,7 +3,6 @@
 namespace AppBundle\Entity\Repository;
 
 use AppBundle\Entity\Locale;
-use AppBundle\Entity\Team;
 use Doctrine\ORM\EntityRepository;
 
 /**

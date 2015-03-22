@@ -18,8 +18,7 @@ class ResettingRequestFormType extends AbstractOverridableFormType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('email', 'email', $this->overrideOptions('email', [], $options));
+        $builder->add('email', 'email', $this->overrideOptions('email', ['label' => 'user.entity.email', 'required' => true], $options));
     }
 
     /**
@@ -27,11 +26,7 @@ class ResettingRequestFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User',
-            'override' => false,
-            'validation_groups' => ['resetting']
-        ));
+        $resolver->setDefaults(array('data_class' => 'AppBundle\Entity\User', 'override' => false, 'validation_groups' => ['resetting']));
     }
 
     /**

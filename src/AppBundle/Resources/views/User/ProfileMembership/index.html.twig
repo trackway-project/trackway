@@ -3,31 +3,31 @@
 {% block class %}profile_membership{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Profile Membership</h1>
+    <h1>{{ 'profileMembership.template.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Team</th>
-            <th>Group</th>
+            <th>{{ 'membership.entity.team'|trans }}</th>
+            <th>{{ 'membership.entity.group'|trans }}</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.team }}</td>
-                <td>{{ entity.group }}</td>
+                <td>{{ entity.team.name }}</td>
+                <td>{{ entity.group|trans }}</td>
                 <td class="text-right">
-                    <a href="{{ path('profile_membership_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-eye"></i></a>
+                    <a href="{{ path('profile_membership_show', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'membership.action.show'|trans }}"><i class="fa fa-eye"></i></a>
                     {% if is_granted('EDIT', entity) %}
-                        <a href="{{ path('profile_membership_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                    class="fa fa-pencil-square-o"></i></a>
-                        <a href="{{ path('profile_membership_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></a>
+                        <a href="{{ path('profile_membership_delete', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-danger"
+                           title="{{ 'membership.action.delete'|trans }}"><i class="fa fa-times"></i></a>
                     {% endif %}
                 </td>
             </tr>
@@ -37,5 +37,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'Profile'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'profile'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

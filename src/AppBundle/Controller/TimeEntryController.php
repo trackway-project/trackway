@@ -83,8 +83,8 @@ class TimeEntryController extends Controller
             ->createForm([
                 'project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)],
                 'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
-                'submit' => ['label' => 'Create']
-            ])
+                'submit' => ['label' => 'Create']])
+            ->add('submitNew', 'submit', ['label' => 'Create and new', 'attr' => ['value' => 1]])
             ->setData($timeEntry)
             ->handleRequest($request);
 
@@ -96,7 +96,13 @@ class TimeEntryController extends Controller
             $em->persist($timeEntry);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'time_entry.flash.created');
+            $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.created');
+
+            // Handle submitNew
+            $formValues = $request->get('appbundle_time_entry_form', []);
+            if (array_key_exists('submitNew', $formValues) && $formValues['submitNew']) {
+                return $this->redirect($this->generateUrl('timeentry_new'));
+            }
 
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
@@ -119,13 +125,7 @@ class TimeEntryController extends Controller
      */
     public function editAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this
-            ->get('app.form.factory.time_entry')
-            ->createForm([
-                'submit' => ['label' => 'Update']
-            ])
-            ->setData($timeEntry)
-            ->handleRequest($request);
+        $form = $this->get('app.form.factory.time_entry')->createForm(['submit' => ['label' => 'Update']])->setData($timeEntry)->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -136,7 +136,7 @@ class TimeEntryController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'time_entry.flash.updated');
+            $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.updated');
 
             return $this->redirect($this->generateUrl('timeentry_show', ['id' => $timeEntry->getId()]));
         }
@@ -161,7 +161,7 @@ class TimeEntryController extends Controller
         $em->remove($timeEntry);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('success', 'time_entry.flash.deleted');
+        $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.deleted');
 
         return $this->redirect($this->generateUrl('timeentry_index'));
     }

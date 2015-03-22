@@ -23,8 +23,8 @@ class TeamControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Teams")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'team.template.index.title');
     }
 
     /**
@@ -41,8 +41,8 @@ class TeamControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/new');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team new")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'team.template.new.title');
 
         // Test form
 
@@ -50,8 +50,9 @@ class TeamControllerTest extends AbstractControllerTest
         $form['appbundle_team_form[name]'] = 'test';
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'team.flash.created');
+        static::assertHeadline($crawler, 'team.template.show.title');
     }
 
     /**
@@ -68,8 +69,8 @@ class TeamControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/1');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'team.template.show.title');
     }
 
     /**
@@ -86,16 +87,17 @@ class TeamControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/1/edit');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team edit")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'team.template.edit.title');
 
         // Test form
 
         $form = $crawler->selectButton('appbundle_team_form[submit]')->form();
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Team")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'team.flash.updated');
+        static::assertHeadline($crawler, 'team.template.show.title');
     }
 
     /**
@@ -112,7 +114,8 @@ class TeamControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/team/1/delete');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Teams")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'team.flash.deleted');
+        static::assertHeadline($crawler, 'team.template.index.title');
     }
 }

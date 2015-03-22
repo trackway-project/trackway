@@ -4,7 +4,7 @@
 {% block class %}task{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Task new</h1>
+    <h1>{{ 'task.template.new.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
@@ -12,5 +12,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Tasks'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'task'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

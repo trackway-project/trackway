@@ -1,0 +1,3 @@
+{{ 'registration.email.txt'|trans({
+    '%link%': path('registration_confirm', {'token': entity.confirmationToken})
+},'mails') }}

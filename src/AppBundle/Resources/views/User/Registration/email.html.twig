@@ -1,1 +1,3 @@
-{{ path('registration_confirm', {'token': entity.confirmationToken}) }}
+{{ 'registration.email.html'|trans({
+    '%link%': path('registration_confirm', {'token': entity.confirmationToken})
+},'mails')|raw }}

@@ -3,14 +3,14 @@
 {% block class %}project{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Projects</h1>
+    <h1>{{ 'project.template.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
+            <th>{{ 'project.entity.name'|trans }}</th>
             <th></th>
         </tr>
         </thead>
@@ -19,13 +19,16 @@
             <tr>
                 <td>{{ entity.name }}</td>
                 <td class="text-right">
-                    <a href="{{ path('project_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-eye"></i></a>
+                    <a href="{{ path('project_show', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'project.action.show'|trans }}"><i class="fa fa-eye"></i></a>
                     {% if is_granted('EDIT', entity) %}
-                        <a href="{{ path('project_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                    class="fa fa-pencil-square-o"></i></a>
-                        <a href="{{ path('project_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></a>
+                        <a href="{{ path('project_edit', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'project.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="{{ path('project_delete', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-danger"
+                           title="{{ 'project.action.delete'|trans }}"><i class="fa fa-times"></i></a>
                     {% endif %}
                 </td>
             </tr>
@@ -35,5 +38,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Projects'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'project'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

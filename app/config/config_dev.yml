@@ -16,7 +16,13 @@ monolog:
         main:
             type:   stream
             path:   "%kernel.logs_dir%/%kernel.environment%.log"
+            level:  info
+            channels: ["!doctrine"]
+        doctrine:
+            type:   stream
+            path:   "%kernel.logs_dir%/%kernel.environment%.doctrine.log"
             level:  debug
+            channels: ["doctrine"]
         console:
             type:   console
             bubble: false

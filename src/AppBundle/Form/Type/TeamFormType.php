@@ -19,15 +19,8 @@ class TeamFormType extends AbstractOverridableFormType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, $this->overrideOptions('name', [
-                'required' => true,
-                'trim' => true
-            ], $options))
-            ->add('memberships', 'entity', $this->overrideOptions('memberships', [
-                'class' => 'AppBundle\Entity\Membership',
-                'expanded'  => true,
-                'multiple'  => true
-            ], $options));
+            ->add('name', null, $this->overrideOptions('name', ['label' => 'team.entity.name', 'required' => true, 'trim' => true], $options))
+            ->add('memberships', 'entity', $this->overrideOptions('memberships', ['label' => 'team.entity.name', 'class' => 'AppBundle\Entity\Membership', 'expanded' => true, 'multiple' => true], $options));
     }
 
     /**
@@ -35,10 +28,7 @@ class TeamFormType extends AbstractOverridableFormType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Team',
-            'override' => false
-        ]);
+        $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Team', 'override' => false]);
     }
 
     /**

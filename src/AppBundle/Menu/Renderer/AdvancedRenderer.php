@@ -5,16 +5,31 @@ namespace AppBundle\Menu\Renderer;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\MatcherInterface;
 use Knp\Menu\Renderer\ListRenderer;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * Class AdvancedRenderer
+ *
+ * @package AppBundle\Menu\Renderer
+ */
 class AdvancedRenderer extends ListRenderer
 {
     /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    /**
      * @param MatcherInterface $matcher
      * @param array $defaultOptions
-     * @param null|string $charset
+     * @param string|null $charset
+     * @param TranslatorInterface|null $translator
      */
-    public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null)
+    public function __construct(MatcherInterface $matcher, array $defaultOptions = [], $charset = null, TranslatorInterface $translator = null)
     {
+        $this->translator = $translator;
+
         // Initialize default options
         $defaultOptions = array_merge(['icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
 
@@ -40,10 +55,8 @@ class AdvancedRenderer extends ListRenderer
             return '';
         }
 
-        // Option: listAttributes
-        if (array_key_exists('listAttributes', $options) && is_array($options['listAttributes'])) {
-            $attributes = $this->merge($attributes, $options['listAttributes']);
-        }
+        // Prepare attributes
+        $attributes = $this->prepareListAttributes($item, $attributes, $options);
 
         // Option: listElement
         $listElement = $this->defaultOptions['listElement'];
@@ -68,6 +81,23 @@ class AdvancedRenderer extends ListRenderer
 
     /**
      * @param ItemInterface $item
+     * @param array $attributes
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function prepareListAttributes(ItemInterface $item, array $attributes, array $options)
+    {
+        // Option: listAttributes
+        if (array_key_exists('listAttributes', $options) && is_array($options['listAttributes'])) {
+            $attributes = $this->merge($attributes, $options['listAttributes']);
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @param ItemInterface $item
      * @param array $options
      *
      * @return string
@@ -82,16 +112,13 @@ class AdvancedRenderer extends ListRenderer
             return '';
         }
 
+        // Prepare attributes
+        $attributes = $this->prepareItemAttributes($item, $item->getAttributes(), $options);
+
         // Option: currentAsLink
         $currentAsLink = $this->defaultOptions['currentAsLink'];
         if (array_key_exists('currentAsLink', $options)) {
             $currentAsLink = $options['currentAsLink'];
-        }
-
-        // Option: itemAttributes
-        $attributes = $item->getAttributes();
-        if (array_key_exists('itemAttributes', $options) && is_array($options['itemAttributes'])) {
-            $attributes = $this->merge($attributes, $options['itemAttributes']);
         }
 
         // Option: itemElement
@@ -164,6 +191,23 @@ class AdvancedRenderer extends ListRenderer
 
     /**
      * @param ItemInterface $item
+     * @param array $attributes
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function prepareItemAttributes(ItemInterface $item, array $attributes, array $options)
+    {
+        // Option: itemAttributes
+        if (array_key_exists('itemAttributes', $options) && is_array($options['itemAttributes'])) {
+            $attributes = $this->merge($attributes, $options['itemAttributes']);
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @param ItemInterface $item
      * @param array $options
      *
      * @return string
@@ -176,9 +220,13 @@ class AdvancedRenderer extends ListRenderer
             $currentAsLink = $options['currentAsLink'];
         }
 
+        // Active link
         if ($item->getUri() && (!$this->matcher->isCurrent($item) || $currentAsLink)) {
             $text = $this->renderLinkElement($item, $options);
-        } else {
+        }
+
+        // Inactive link
+        else {
             $text = $this->renderSpanElement($item, $options);
         }
 
@@ -203,8 +251,13 @@ class AdvancedRenderer extends ListRenderer
 
         $label = $options['allow_safe_labels'] && $item->getExtra('safe_label', false) ? $item->getLabel() : $this->escape($item->getLabel());
 
+        // Option: translationDomain
+        if ($this->translator !== null && array_key_exists('translationDomain', $options)) {
+            $label = $this->translator->trans($label, [], $options['translationDomain']);
+        }
+
         if (!empty($icon)) {
-            return !empty($label) ? $icon . '&nbsp;'. $label : $icon;
+            return !empty($label) ? $icon . '&nbsp;' . $label : $icon;
         }
 
         return $label;

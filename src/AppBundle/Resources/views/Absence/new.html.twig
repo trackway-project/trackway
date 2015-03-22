@@ -4,13 +4,13 @@
 {% block class %}absence{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Absence new</h1>
+    <h1>{{ 'absence.template.new.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
-    {{ form(form) }}
+    {{ include('AppBundle:Absence:editNewForm.html.twig') }}
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Absences'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'absence'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

@@ -11,6 +11,7 @@
             <argument type="service" id="knp_menu.matcher"/>
             <argument>%knp_menu.renderer.list.options%</argument>
             <argument>%kernel.charset%</argument>
+            <argument type="service" id="translator"/>
         </service>
 
         <service id="app.menu.renderer.navbar" class="AppBundle\Menu\Renderer\NavbarRenderer">
@@ -18,6 +19,7 @@
             <argument type="service" id="knp_menu.matcher"/>
             <argument>%knp_menu.renderer.list.options%</argument>
             <argument>%kernel.charset%</argument>
+            <argument type="service" id="translator"/>
         </service>
 
         <service id="app.menu.renderer.sidebar" class="AppBundle\Menu\Renderer\SidebarRenderer">
@@ -25,6 +27,7 @@
             <argument type="service" id="knp_menu.matcher"/>
             <argument>%knp_menu.renderer.list.options%</argument>
             <argument>%kernel.charset%</argument>
+            <argument type="service" id="translator"/>
         </service>
     </services>
 </container>

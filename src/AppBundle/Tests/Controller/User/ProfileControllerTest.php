@@ -25,7 +25,7 @@ class ProfileControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/profile');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Profile")')->count());
+        static::assertHeadline($crawler, 'profile.template.show.title');
     }
 
     /**
@@ -43,7 +43,7 @@ class ProfileControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/profile/edit');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Profile edit")')->count());
+        static::assertHeadline($crawler, 'profile.template.edit.title');
 
         // Test form
 
@@ -52,7 +52,8 @@ class ProfileControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Profile")')->count());
+        static::assertFlashMessage($crawler, 'profile.flash.updated');
+        static::assertHeadline($crawler, 'profile.template.show.title');
     }
 
     /**
@@ -70,7 +71,7 @@ class ProfileControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/profile/change-password');
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Change password")')->count());
+        static::assertHeadline($crawler, 'profile.template.changePassword.title');
 
         // Test form
 
@@ -81,6 +82,7 @@ class ProfileControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertEquals(1, $crawler->filter('h1:contains("Profile")')->count());
+        static::assertFlashMessage($crawler, 'profile.flash.passwordChanged');
+        static::assertHeadline($crawler, 'profile.template.show.title');
     }
 }

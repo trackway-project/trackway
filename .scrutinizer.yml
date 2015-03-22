@@ -1,0 +1,22 @@
+filter:
+    paths:
+        - 'src/*'
+checks:
+    php:
+        avoid_multiple_statements_on_same_line: true
+        classes_in_camel_caps: true
+        encourage_single_quotes: true
+        function_in_camel_caps: true
+        no_goto: true
+        optional_parameters_at_the_end: true
+        parameters_in_camelcaps: true
+        properties_in_camelcaps: true
+        use_self_instead_of_fqcn: true
+        uppercase_constants: true
+        fix_doc_comments: false
+
+tools:
+    php_code_sniffer:
+        config:
+            standard: 'PSR2'
+    sensiolabs_security_checker: true

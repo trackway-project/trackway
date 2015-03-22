@@ -1,0 +1,3 @@
+{{ 'resetting.email.txt'|trans({
+    '%link%': path('resetting_confirm', {'token': entity.confirmationToken})
+},'mails') }}

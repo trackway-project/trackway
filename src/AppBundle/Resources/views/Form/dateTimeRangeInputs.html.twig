@@ -1,0 +1,24 @@
+<div class="col-md-4 form-group">
+    {{ form_label(form.date) }}
+    {{ form_errors(form.date) }}
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        {{ form_widget(form.date) }}
+    </div>
+</div>
+<div class="col-md-4 form-group">
+    {{ form_label(form.startsAt) }}
+    {{ form_errors(form.startsAt) }}
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+        {{ form_widget(form.startsAt) }}
+    </div>
+</div>
+<div class="col-md-4 form-group">
+    {{ form_label(form.endsAt) }}
+    {{ form_errors(form.endsAt) }}
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+        {{ form_widget(form.endsAt) }}
+    </div>
+</div>

@@ -2,14 +2,12 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\AbsenceReason;
 use AppBundle\Entity\Locale;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\Id\AssignedGenerator;
-use Doctrine\ORM\Mapping\ClassMetadata;
 
-class LoadLocales implements FixtureInterface{
+class LoadLocales implements FixtureInterface
+{
     /**
      * {@inheritDoc}
      */

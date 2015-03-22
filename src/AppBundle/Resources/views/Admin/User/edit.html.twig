@@ -4,7 +4,7 @@
 {% block class %}user{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>User edit</h1>
+    <h1>{{ 'admin.user.template.edit.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
@@ -12,5 +12,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:adminMenu', 'Users'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:adminMenu', 'admin', 'admin.user'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

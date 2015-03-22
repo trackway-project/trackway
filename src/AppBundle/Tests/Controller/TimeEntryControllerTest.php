@@ -23,8 +23,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entries")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'timeEntry.template.index.title');
     }
 
     /**
@@ -41,26 +41,23 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/new');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry new")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'timeEntry.template.new.title');
 
         // Test form
 
         $form = $crawler->selectButton('appbundle_time_entry_form[submit]')->form();
-        $form['appbundle_time_entry_form[date][year]'] = 2016;
-        $form['appbundle_time_entry_form[date][month]'] = 11;
-        $form['appbundle_time_entry_form[date][day]'] = 3;
-        $form['appbundle_time_entry_form[endsAt][hour]'] = 13;
-        $form['appbundle_time_entry_form[endsAt][minute]'] = 37;
-        $form['appbundle_time_entry_form[startsAt][hour]'] = 11;
-        $form['appbundle_time_entry_form[startsAt][minute]'] = 00;
+        $form['appbundle_time_entry_form[date]'] = '2016-01-31';
+        $form['appbundle_time_entry_form[endsAt]'] = '13:37';
+        $form['appbundle_time_entry_form[startsAt]'] = '08:15';
         $form['appbundle_time_entry_form[note]'] = 'test';
         $form['appbundle_time_entry_form[project]'] = 1;
         $form['appbundle_time_entry_form[task]'] = 1;
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'timeEntry.flash.created');
+        static::assertHeadline($crawler, 'timeEntry.template.show.title');
     }
 
     /**
@@ -77,8 +74,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/1');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'timeEntry.template.show.title');
     }
 
     /**
@@ -95,16 +92,17 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/1/edit');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry edit")')->count());
+        static::assertStatusCode($this->client);
+        static::assertHeadline($crawler, 'timeEntry.template.edit.title');
 
         // Test form
 
         $form = $crawler->selectButton('appbundle_time_entry_form[submit]')->form();
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entry")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'timeEntry.flash.updated');
+        static::assertHeadline($crawler, 'timeEntry.template.show.title');
     }
 
     /**
@@ -121,7 +119,8 @@ class TimeEntryControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/timeentry/1/delete');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code');
-        static::assertEquals(1, $crawler->filter('h1:contains("Time Entries")')->count());
+        static::assertStatusCode($this->client);
+        static::assertFlashMessage($crawler, 'timeEntry.flash.deleted');
+        static::assertHeadline($crawler, 'timeEntry.template.index.title');
     }
 }

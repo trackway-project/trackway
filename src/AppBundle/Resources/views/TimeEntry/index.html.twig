@@ -3,19 +3,19 @@
 {% block class %}timeentry{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Time Entries</h1>
+    <h1>{{ 'timeEntry.template.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Date</th>
-            <th>Starts At</th>
-            <th>Ends At</th>
-            <th>Project</th>
-            <th>Task</th>
-            <th>Note</th>
+            <th>{{ 'timeEntry.entity.date'|trans }}</th>
+            <th>{{ 'timeEntry.entity.startsAt'|trans }}</th>
+            <th>{{ 'timeEntry.entity.endsAt'|trans }}</th>
+            <th>{{ 'timeEntry.entity.project'|trans }}</th>
+            <th>{{ 'timeEntry.entity.task'|trans }}</th>
+            <th>{{ 'timeEntry.entity.note'|trans }}</th>
             <th></th>
         </tr>
         </thead>
@@ -29,12 +29,15 @@
                 <td>{{ entity.task }}</td>
                 <td>{{ entity.note }}</td>
                 <td class="text-right">
-                    <a href="{{ path('timeentry_show', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-eye"></i></a>
-                    <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}" class="btn btn-sm btn-danger"><i
-                                class="fa fa-times"></i></a>
+                    <a href="{{ path('timeentry_show', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'timeEntry.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'timeEntry.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                    <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}"
+                       class="btn btn-sm btn-danger"
+                       title="{{ 'timeEntry.action.delete'|trans }}"><i class="fa fa-times"></i></a>
                 </td>
             </tr>
         {% endfor %}
@@ -43,5 +46,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Time Entries'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'timeEntry'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

@@ -3,34 +3,34 @@
 {% block class %}timeentry{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Time Entry</h1>
+    <h1>{{ 'timeEntry.template.show.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
-            <th>Date</th>
+            <th>{{ 'timeEntry.entity.date'|trans }}</th>
             <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Starts At</th>
+            <th>{{ 'timeEntry.entity.startsAt'|trans }}</th>
             <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Ends At</th>
+            <th>{{ 'timeEntry.entity.endsAt'|trans }}</th>
             <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Project</th>
+            <th>{{ 'timeEntry.entity.project'|trans }}</th>
             <td>{{ entity.project }}</td>
         </tr>
         <tr>
-            <th>Task</th>
+            <th>{{ 'timeEntry.entity.task'|trans }}</th>
             <td>{{ entity.task }}</td>
         </tr>
         <tr>
-            <th>Note</th>
+            <th>{{ 'timeEntry.entity.note'|trans }}</th>
             <td>{{ entity.note }}</td>
         </tr>
         </tbody>
@@ -38,5 +38,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Time Entries'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'timeEntry'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

@@ -1,0 +1,158 @@
+absence.action.delete: Löschen
+absence.action.edit: Bearbeiten
+absence.action.show: Anzeigen
+absence.entity.date: Datum
+absence.entity.endsAt: 'Endet am'
+absence.entity.note: Note
+absence.entity.reason: Grund
+absence.entity.startsAt: 'Startet am'
+absence.flash.created: 'Die Abwesenheit wurde angelegt'
+absence.flash.deleted: 'Die Abwesenheit wurde gelöscht'
+absence.flash.updated: 'Die Abwesenheit wurde aktualisiert'
+absence.template.edit.title: 'Abwesenheit bearbeiten'
+absence.template.index.title: Abwesenheiten
+absence.template.new.title: 'Abwesenheit anlegen'
+absence.template.show.title: Abwesenheit
+admin.team.template.activeTeam: 'Aktives Team'
+admin.team.template.edit.title: 'Team bearbeiten'
+admin.team.template.index.title: 'Teams'
+admin.team.template.new.title: 'Team erstellen'
+admin.team.template.show.title: Team
+admin.user.template.edit.title: 'Benutzer bearbeiten'
+admin.user.template.index.title: Benutzer
+admin.user.template.new.title: 'Benutzer erstellen'
+admin.user.template.show.title: Benutzer
+dashboard.template.index.title: Dashboard
+invitation.action.delete: Löschen
+invitation.action.edit: Bearbeiten
+invitation.action.show: Anzeigen
+invitation.entity.email: Email
+invitation.entity.status: Status
+invitation.entity.team: Team
+invitation.entity.user: Benutzer
+invitation.flash.accepted: 'Die Einladung wurde akzeptiert'
+invitation.flash.alreadyInvited: 'Der Benutzer wurde bereits eingeladen'
+invitation.flash.rejected: 'Die Einladung wurde zujrückgewiesen'
+invitation.flash.deleted: 'Die Einladung wurde gelöscht'
+invitation.flash.invited: 'Der Benutzer wurde eingeladen'
+invitation.template.index.title: Einladungen
+invitation.template.invite.title: Benutzer einladen
+invitation.template.show.title: Einladung
+membership.action.delete: Löschen
+membership.action.edit: Bearbeiten
+membership.action.show: Anzeigen
+membership.entity.group: Gruppe
+membership.entity.team: Team
+membership.entity.user: Benutzer
+membership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
+membership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
+profile.flash.passwordChanged: 'Ihr Passwort wurde geändert'
+profile.flash.updated: 'Ihr Profil wurde aktualisiert'
+profile.template.changePassword.title: 'Passwort ändern'
+profile.template.edit.title: 'Einstellungen'
+profile.template.show.title: Profil
+profileMembership.template.index.title: Mitgliedschaften
+profileMembership.template.show.title: Mitgliedschaft
+project.action.delete: Löschen
+project.action.edit: Bearbeiten
+project.action.show: Anzeigen
+project.entity.name: Name
+project.flash.created: 'Das Projekt wurde geändert'
+project.flash.deleted: 'Das Projekt wurde gelöscht'
+project.flash.updated: 'Das Projekt wurde aktualisiert'
+project.template.edit.title: 'Projekt bearbeiten'
+project.template.index.title: Projekte
+project.template.new.title: 'Projekt anlegen'
+project.template.show.title: Projekt
+registration.flash.confirmed: 'Ihre Registrierung wurde bestätigt'
+registration.flash.registered: 'Ihr Account wurde registriert'
+registration.template.checkMail.text: 'Ein Link um Ihre Registrierung zu bestätigen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Registrierprozess.'
+registration.template.checkMail.title: 'Registrierung bestätigen'
+registration.template.register.title: Registrierung
+resetting.flash.confirmed: 'Das Zurücksetzen Ihres Passwortes wurde bestätigt'
+resetting.flash.resetted: 'Ihr Passwort wurde zurückgesetzt'
+resetting.template.checkMail.text: 'Ein Link um Ihr Passwort zurückzusetzen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Prozess.'
+resetting.template.checkMail.title: 'Passwortzurücksetzen bestätigen'
+resetting.template.confirm.title: 'Passwortzurücksetzen bestätigen'
+resetting.template.request.title: 'Passwort zurücksetzen'
+security.login.action.registration: 'Neu bei Trackway? Jetzt registrieren!'
+security.login.action.resetting: 'Passwort vergessen?'
+security.login.entity.password: Passwort
+security.login.entity.rememberMe: 'Login merken'
+security.login.entity.submit: 'Einloggen'
+security.login.entity.username: Benutzername
+security.template.login.title: 'Einloggen'
+task.action.delete: Löschen
+task.action.edit: Bearbeiten
+task.action.show: Anzeigen
+task.entity.name: Name
+task.flash.created: 'Der Eintrag wurde erstellt'
+task.flash.deleted: 'Der Eintrag wurde gelöscht'
+task.flash.updated: 'Der Eintrag wurde aktualisiert'
+task.template.edit.title: 'Eintrag anzeigen'
+task.template.index.title: Einträge
+task.template.new.title: 'Eintrag erstellen'
+task.template.show.title: Eintrag
+team.action.delete: Löschen
+team.action.edit: Bearbeiten
+team.action.memberships: Mitgliedschaften
+team.action.show: Anzeigen
+team.entity.name: Name
+team.entity.projects: Projekte
+team.entity.tasks: Einträge
+team.flash.created: 'Das Team wurde erstellt'
+team.flash.deleted: 'Das Team wurde gelöscht'
+team.flash.updated: 'Das Team wurde aktualisiert'
+team.template.activeTeam: 'Aktives Team'
+team.template.edit.title: 'Team bearbeiten'
+team.template.index.title: Teams
+team.template.new.title: 'Team erstellen'
+team.template.show.title: Team
+teamMembership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
+teamMembership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
+teamMembership.template.edit.title: 'Mitgliedschaft bearbeiten'
+teamMembership.template.index.title: Mitgliedschaften
+teamMembership.template.show.title: Mitgliedschaft
+template.closeSidebar: Schließen
+template.forkIt: 'Fork me on <a href="%link%">Github</a>'
+template.title: Trackway
+template.toggleNavigation: 'Navigation umschalten'
+timeEntry.action.delete: Löschen
+timeEntry.action.edit: Bearbeiten
+timeEntry.action.show: Anzeigen
+timeEntry.entity.date: Datum
+timeEntry.entity.endsAt: 'Endet am'
+timeEntry.entity.note: Notiz
+timeEntry.entity.project: Projekt
+timeEntry.entity.startsAt: 'Starten am'
+timeEntry.entity.task: Eintrag
+timeEntry.flash.created: 'Der Zeiteintrag wurde erstellt'
+timeEntry.flash.deleted: 'Der Zeiteintrag wurde gelöscht'
+timeEntry.flash.updated: 'Der Zeiteintrag wurde aktualisiert'
+timeEntry.template.edit.title: 'Zeiteintrag bearbeiten'
+timeEntry.template.index.title: 'Zeiteinträge'
+timeEntry.template.new.title: 'Zeiteintrag erstellen'
+timeEntry.template.show.title: 'Zeiteintrag'
+user.action.delete: Löschen
+user.action.edit: Bearbeiten
+user.action.show: Anzeigen
+user.entity.activeTeam: 'Aktives Team'
+user.entity.email: E-Mail
+user.entity.enabled: Aktiviert
+user.entity.locale: Sprache
+user.entity.password: Passwort
+user.entity.passwordCurrent: 'Aktuelles Password'
+user.entity.passwordRepeat: 'Wiederhole Password'
+user.entity.username: Benutzername
+user.flash.created: 'Account wurde erstellt'
+user.flash.deleted: 'Account wurde gelöscht'
+user.flash.updated: 'Account wurde aktualisiert'
+value.absenceReason.illness: Krankheit
+value.absenceReason.vacation: Urlaub
+value.absenceReason.holiday: Feiertag
+value.group.admin: Admin
+value.group.owner: Eigentümer
+value.group.user: Benutzer
+value.locale.de: Deutsch
+value.locale.en: Englisch
+value.locale.test: Debug

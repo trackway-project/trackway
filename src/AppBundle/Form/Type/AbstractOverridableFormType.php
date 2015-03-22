@@ -22,9 +22,6 @@ abstract class AbstractOverridableFormType extends AbstractType implements Overr
     {
         $overrideOptions = array_key_exists('override', $parentOptions) && is_array($parentOptions['override']) ? $parentOptions['override'] : [];
 
-        return array_merge(
-            $childOptions,
-            array_key_exists($name, $overrideOptions) ? $overrideOptions[$name] : []
-        );
+        return array_merge($childOptions, array_key_exists($name, $overrideOptions) ? $overrideOptions[$name] : []);
     }
 }

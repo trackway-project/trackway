@@ -1,10 +1,10 @@
 {% extends 'AppBundle::layoutOffCanvasMain.html.twig' %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
-{% block class %}team_invitation{% endblock class %}
+{% block class %}invitation{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Team Invite</h1>
+    <h1>{{ 'invitation.template.invite.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
@@ -12,5 +12,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:teamMenu', 'team'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

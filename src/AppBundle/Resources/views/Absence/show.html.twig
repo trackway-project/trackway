@@ -3,30 +3,30 @@
 {% block class %}absence{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Absence</h1>
+    <h1>{{ 'absence.template.show.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table">
         <tbody>
         <tr>
-            <th>Date</th>
+            <th>{{ 'absence.entity.date'|trans }}</th>
             <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Starts At</th>
+            <th>{{ 'absence.entity.startsAt'|trans }}</th>
             <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Ends At</th>
+            <th>{{ 'absence.entity.endsAt'|trans }}</th>
             <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Reason</th>
-            <td>{{ entity.reason }}</td>
+            <th>{{ 'absence.entity.reason'|trans }}</th>
+            <td>{{ entity.reason|trans }}</td>
         </tr>
         <tr>
-            <th>Note</th>
+            <th>{{ 'absence.entity.note'|trans }}</th>
             <td>{{ entity.note }}</td>
         </tr>
         </tbody>
@@ -34,5 +34,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Absences'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'absence'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+<div class="row" >
+    {% include 'AppBundle:Form:dateTimeRangeInputs.html.twig' %}
+
+    <div class="col-md-12">
+        {{ form_row(form.project) }}
+        {{ form_row(form.task) }}
+        {{ form_row(form.note) }}
+    </div>
+</div>
+{{ form_end(form) }}

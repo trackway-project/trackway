@@ -1,17 +1,17 @@
 {% extends 'AppBundle::layoutOffCanvasMain.html.twig' %}
 
-{% block class %}team_invitation{% endblock class %}
+{% block class %}invitation{% endblock class %}
 
 {% block titleOffCanvas %}
-    <h1>Team Invitations</h1>
+    <h1>{{ 'invitation.template.index.title'|trans }}</h1>
 {% endblock titleOffCanvas %}
 
 {% block contentOffCanvas %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Email</th>
-            <th>Status</th>
+            <th>{{ 'invitation.entity.email'|trans }}</th>
+            <th>{{ 'invitation.entity.status'|trans }}</th>
             <th></th>
         </tr>
         </thead>
@@ -19,15 +19,15 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.email }}</td>
-                <td>{{ entity.status }}</td>
+                <td>{{ ('invitation.value.status.' ~ entity.status.name)|trans }}</td>
                 <td class="text-right">
-                    <a href="{{ path('team_invitation_show', { 'id': team.id, 'invitationId': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                class="fa fa-eye"></i></a>
+                    <a href="{{ path('team_invitation_show', { 'id': team.id, 'invitationId': entity.id }) }}"
+                       class="btn btn-sm btn-default"
+                       title="{{ 'invitation.action.show'|trans }}"><i class="fa fa-eye"></i></a>
                     {% if is_granted('EDIT', entity.team) %}
-                        <a href="{{ path('team_invitation_edit', { 'id': team.id, 'invitationId': entity.id }) }}" class="btn btn-sm btn-default"><i
-                                    class="fa fa-pencil-square-o"></i></a>
-                        <a href="{{ path('team_invitation_delete', { 'id': team.id, 'invitationId': entity.id }) }}" class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></a>
+                        <a href="{{ path('team_invitation_delete', { 'id': team.id, 'invitationId': entity.id }) }}"
+                           class="btn btn-sm btn-danger"
+                           title="{{ 'invitation.action.delete'|trans }}"><i class="fa fa-times"></i></a>
                     {% endif %}
                 </td>
             </tr>
@@ -37,5 +37,5 @@
 {% endblock contentOffCanvas %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'Teams'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['AppBundle:Builder:teamMenu', 'team'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

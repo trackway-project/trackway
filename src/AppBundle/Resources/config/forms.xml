@@ -11,12 +11,6 @@
             <argument>appbundle_absence_form</argument>
         </service>
 
-        <service id="app.form.factory.absence_reason" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.absence_reason"/>
-            <argument>appbundle_absence_reason_form</argument>
-        </service>
-
         <service id="app.form.factory.invitation" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument type="service" id="app.form.type.invitation"/>
@@ -55,86 +49,72 @@
 
         <service id="app.form.factory.change_password" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.change_password" />
+            <argument type="service" id="app.form.type.change_password"/>
             <argument>appbundle_change_password_form</argument>
-        </service>
-
-        <service id="app.form.factory.group" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.group" />
-            <argument>appbundle_group_form</argument>
         </service>
 
         <service id="app.form.factory.profile" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.profile" />
+            <argument type="service" id="app.form.type.profile"/>
             <argument>appbundle_profile_form</argument>
         </service>
 
         <service id="app.form.factory.user" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.user" />
+            <argument type="service" id="app.form.type.user"/>
             <argument>appbundle_user_form</argument>
         </service>
 
         <service id="app.form.factory.registration" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.registration" />
+            <argument type="service" id="app.form.type.registration"/>
             <argument>appbundle_registration_form</argument>
         </service>
 
         <service id="app.form.factory.resetting_confirm" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.resetting_confirm" />
+            <argument type="service" id="app.form.type.resetting_confirm"/>
             <argument>appbundle_resetting_confirm_form</argument>
         </service>
 
         <service id="app.form.factory.resetting_request" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
-            <argument type="service" id="app.form.type.resetting_request" />
+            <argument type="service" id="app.form.type.resetting_request"/>
             <argument>appbundle_resetting_request_form</argument>
         </service>
 
         <!-- AppBundle Form Types  -->
 
         <service id="app.form.type.absence" class="AppBundle\Form\Type\AbsenceFormType">
-            <tag name="form.type" alias="appbundle_absence_form_type" />
-        </service>
-
-        <service id="app.form.type.absence_reason" class="AppBundle\Form\Type\AbsenceReasonFormType">
-            <tag name="form.type" alias="appbundle_absence_reason_form_type" />
+            <tag name="form.type" alias="appbundle_absence_form_type"/>
         </service>
 
         <service id="app.form.type.invitation" class="AppBundle\Form\Type\InvitationFormType">
-            <tag name="form.type" alias="appbundle_invitation_form_type" />
+            <tag name="form.type" alias="appbundle_invitation_form_type"/>
         </service>
 
         <service id="app.form.type.membership" class="AppBundle\Form\Type\MembershipFormType">
-            <tag name="form.type" alias="appbundle_membership_form_type" />
+            <tag name="form.type" alias="appbundle_membership_form_type"/>
         </service>
 
         <service id="app.form.type.project" class="AppBundle\Form\Type\ProjectFormType">
-            <tag name="form.type" alias="appbundle_project_form_type" />
+            <tag name="form.type" alias="appbundle_project_form_type"/>
         </service>
 
         <service id="app.form.type.task" class="AppBundle\Form\Type\TaskFormType">
-            <tag name="form.type" alias="appbundle_task_form_type" />
+            <tag name="form.type" alias="appbundle_task_form_type"/>
         </service>
 
         <service id="app.form.type.team" class="AppBundle\Form\Type\TeamFormType">
-            <tag name="form.type" alias="appbundle_team_form_type" />
+            <tag name="form.type" alias="appbundle_team_form_type"/>
         </service>
 
         <service id="app.form.type.time_entry" class="AppBundle\Form\Type\TimeEntryFormType">
-            <tag name="form.type" alias="appbundle_time_entry_form_type" />
+            <tag name="form.type" alias="appbundle_time_entry_form_type"/>
         </service>
 
         <service id="app.form.type.change_password" class="AppBundle\Form\Type\ChangePasswordFormType">
             <tag name="form.type" alias="appbundle_change_password_form_type"/>
-        </service>
-
-        <service id="app.form.type.group" class="AppBundle\Form\Type\GroupFormType">
-            <tag name="form.type" alias="appbundle_group_form_type"/>
         </service>
 
         <service id="app.form.type.profile" class="AppBundle\Form\Type\ProfileFormType">

@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProfileMembershipController
@@ -49,42 +48,6 @@ class ProfileMembershipController extends Controller
     public function showAction(Membership $membership)
     {
         return ['entity' => $membership];
-    }
-
-    /**
-     * Edits an existing Membership entity.
-     *
-     * @param Request $request
-     * @param Membership $membership
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Method("GET|POST")
-     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="profile_membership_edit")
-     * @Security("is_granted('EDIT', membership)")
-     * @Template()
-     */
-    public function editAction(Request $request, Membership $membership)
-    {
-        $form = $this
-            ->get('app.form.factory.membership')
-            ->createForm([
-                'submit' => ['label' => 'Update']
-            ])
-            ->remove('team')
-            ->remove('user')
-            ->setData($membership)
-            ->handleRequest($request);
-
-        if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'profile_membership.flash.updated');
-
-            return $this->redirect($this->generateUrl('profile_membership_show', ['id' => $membership->getId()]));
-        }
-
-        return ['entity' => $membership, 'form' => $form->createView()];
     }
 
     /**

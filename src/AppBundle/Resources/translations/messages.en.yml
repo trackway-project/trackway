@@ -1,0 +1,158 @@
+absence.action.delete: Delete
+absence.action.edit: Edit
+absence.action.show: Show
+absence.entity.date: Date
+absence.entity.endsAt: 'Ends at'
+absence.entity.note: Note
+absence.entity.reason: Reason
+absence.entity.startsAt: 'Starts at'
+absence.flash.created: 'The absence has been created'
+absence.flash.deleted: 'The absence has been deleted'
+absence.flash.updated: 'The absence has been updated'
+absence.template.edit.title: 'Edit absence'
+absence.template.index.title: Absences
+absence.template.new.title: 'Create absence'
+absence.template.show.title: Absence
+admin.team.template.activeTeam: 'Active team'
+admin.team.template.edit.title: 'Edit team'
+admin.team.template.index.title: 'Teams'
+admin.team.template.new.title: 'Create team'
+admin.team.template.show.title: Team
+admin.user.template.edit.title: 'Edit user'
+admin.user.template.index.title: Users
+admin.user.template.new.title: 'Create user'
+admin.user.template.show.title: User
+dashboard.template.index.title: Dashboard
+invitation.action.delete: Delete
+invitation.action.edit: Edit
+invitation.action.show: Show
+invitation.entity.email: Email
+invitation.entity.status: Status
+invitation.entity.team: Team
+invitation.entity.user: User
+invitation.flash.accepted: 'The invitation has been accepted'
+invitation.flash.alreadyInvited: 'The user was already invitated'
+invitation.flash.rejected: 'The invitation has been rejected'
+invitation.flash.deleted: 'The invitation has been deleted'
+invitation.flash.invited: 'The invitation has been invited'
+invitation.template.index.title: Invitations
+invitation.template.invite.title: Invite user
+invitation.template.show.title: Invitation
+membership.action.delete: Delete
+membership.action.edit: Edit
+membership.action.show: Show
+membership.entity.group: Group
+membership.entity.team: Team
+membership.entity.user: User
+membership.flash.deleted: 'The membership has been deleted'
+membership.flash.updated: 'The membership has been updated'
+profile.flash.passwordChanged: 'Your password has been changed'
+profile.flash.updated: 'Your profile has been updated'
+profile.template.changePassword.title: 'Change password'
+profile.template.edit.title: 'Settings'
+profile.template.show.title: Profile
+profileMembership.template.index.title: Memberships
+profileMembership.template.show.title: Membership
+project.action.delete: Delete
+project.action.edit: Edit
+project.action.show: Show
+project.entity.name: Name
+project.flash.created: 'The project has been created'
+project.flash.deleted: 'The project has been deleted'
+project.flash.updated: 'The project has been updated'
+project.template.edit.title: 'Edit project'
+project.template.index.title: Projects
+project.template.new.title: 'Create project'
+project.template.show.title: Project
+registration.flash.confirmed: 'Your registration has been confirmed'
+registration.flash.registered: 'Your account has been registered'
+registration.template.checkMail.text: 'A link to confirm your registration has been send to your email adresse. Please follow the link to finish the process.'
+registration.template.checkMail.title: 'Confirm registration'
+registration.template.register.title: Registration
+resetting.flash.confirmed: 'Your password reset has been confirmed'
+resetting.flash.resetted: 'Your password has been resetted'
+resetting.template.checkMail.text: 'A link to confirm your password reset has been send to your email adresse. Please follow the link to finish the process.'
+resetting.template.checkMail.title: 'Confirm password reset'
+resetting.template.confirm.title: 'Confirm password reset'
+resetting.template.request.title: 'Reset password'
+security.login.action.registration: 'New to Trackway? Sign up now!'
+security.login.action.resetting: 'Forgot your password?'
+security.login.entity.password: Password
+security.login.entity.rememberMe: 'Remember me'
+security.login.entity.submit: 'Sign in'
+security.login.entity.username: Username
+security.template.login.title: 'Sign in'
+task.action.delete: Delete
+task.action.edit: Edit
+task.action.show: Show
+task.entity.name: Name
+task.flash.created: 'The task has been created'
+task.flash.deleted: 'The task has been deleted'
+task.flash.updated: 'The task has been updated'
+task.template.edit.title: 'Edit task'
+task.template.index.title: Tasks
+task.template.new.title: 'Create task'
+task.template.show.title: Task
+team.action.delete: Delete
+team.action.edit: Edit
+team.action.memberships: Memberships
+team.action.show: Show
+team.entity.name: Name
+team.entity.projects: Projects
+team.entity.tasks: Tasks
+team.flash.created: 'The team has been created'
+team.flash.deleted: 'The team has been deleted'
+team.flash.updated: 'The team has been updated'
+team.template.activeTeam: 'Active team'
+team.template.edit.title: 'Edit team'
+team.template.index.title: Teams
+team.template.new.title: 'Create team'
+team.template.show.title: Team
+teamMembership.flash.deleted: 'The membership has been deleted'
+teamMembership.flash.updated: 'The membership has been updated'
+teamMembership.template.edit.title: 'Edit membership'
+teamMembership.template.index.title: Memberships
+teamMembership.template.show.title: Membership
+template.closeSidebar: Close
+template.forkIt: 'Fork me on <a href="%link%">Github</a>'
+template.title: Trackway
+template.toggleNavigation: 'Toggle Navigation'
+timeEntry.action.delete: Delete
+timeEntry.action.edit: Edit
+timeEntry.action.show: Show
+timeEntry.entity.date: Date
+timeEntry.entity.endsAt: 'Ends at'
+timeEntry.entity.note: Note
+timeEntry.entity.project: Project
+timeEntry.entity.startsAt: 'Starts at'
+timeEntry.entity.task: Task
+timeEntry.flash.created: 'The time entry has been created'
+timeEntry.flash.deleted: 'The time entry has been deleted'
+timeEntry.flash.updated: 'The time entry has been updated'
+timeEntry.template.edit.title: 'Edit time entry'
+timeEntry.template.index.title: 'Time entries'
+timeEntry.template.new.title: 'Create time entry'
+timeEntry.template.show.title: 'Time entry'
+user.action.delete: Delete
+user.action.edit: Edit
+user.action.show: Show
+user.entity.activeTeam: 'Active team'
+user.entity.email: Email
+user.entity.enabled: Enabled
+user.entity.locale: Locale
+user.entity.password: Password
+user.entity.passwordCurrent: 'Current password'
+user.entity.passwordRepeat: 'Repeat password'
+user.entity.username: Username
+user.flash.created: 'The account has been created'
+user.flash.deleted: 'The account has been deleted'
+user.flash.updated: 'The user has been updated'
+value.absenceReason.illness: Illness
+value.absenceReason.vacation: Vacation
+value.absenceReason.holiday: Holiday
+value.group.admin: Admin
+value.group.owner: Owner
+value.group.user: User
+value.locale.de: German
+value.locale.en: English
+value.locale.test: Debug
