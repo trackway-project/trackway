@@ -12,7 +12,6 @@ use Symfony\Component\Translation\TranslatorInterface;
  * Class AdvancedRenderer
  *
  * @package AppBundle\Menu\Renderer
- * TODO: move dropdown option to NavbarRenderer without copy-pasting all the code. Requires more modular architecture.
  */
 class AdvancedRenderer extends ListRenderer
 {
@@ -32,7 +31,7 @@ class AdvancedRenderer extends ListRenderer
         $this->translator = $translator;
 
         // Initialize default options
-        $defaultOptions = array_merge(['dropdown' => false, 'icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
+        $defaultOptions = array_merge(['icon' => true, 'itemAttributes' => [], 'itemElement' => 'li', 'listAttributes' => [], 'listElement' => 'ul'], $defaultOptions);
 
         parent::__construct($matcher, $defaultOptions, $charset);
     }
@@ -56,21 +55,13 @@ class AdvancedRenderer extends ListRenderer
             return '';
         }
 
-        // Option: listAttributes
-        if (array_key_exists('listAttributes', $options) && is_array($options['listAttributes'])) {
-            $attributes = $this->merge($attributes, $options['listAttributes']);
-        }
+        // Prepare attributes
+        $attributes = $this->prepareListAttributes($item, $attributes, $options);
 
         // Option: listElement
         $listElement = $this->defaultOptions['listElement'];
         if (array_key_exists('listElement', $options)) {
             $listElement = $options['listElement'];
-        }
-
-        // Option: dropdown
-        if (array_key_exists('dropdown', $options) && $options['dropdown'] === true && $item->getParent() !== null) {
-            $attributes['class'] = ''; // reset list classes
-            $attributes = $this->merge($attributes, ['class' => 'dropdown-menu', 'role' => 'menu']);
         }
 
         // Render list
@@ -90,6 +81,23 @@ class AdvancedRenderer extends ListRenderer
 
     /**
      * @param ItemInterface $item
+     * @param array $attributes
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function prepareListAttributes(ItemInterface $item, array $attributes, array $options)
+    {
+        // Option: listAttributes
+        if (array_key_exists('listAttributes', $options) && is_array($options['listAttributes'])) {
+            $attributes = $this->merge($attributes, $options['listAttributes']);
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @param ItemInterface $item
      * @param array $options
      *
      * @return string
@@ -104,21 +112,13 @@ class AdvancedRenderer extends ListRenderer
             return '';
         }
 
+        // Prepare attributes
+        $attributes = $this->prepareItemAttributes($item, $item->getAttributes(), $options);
+
         // Option: currentAsLink
         $currentAsLink = $this->defaultOptions['currentAsLink'];
         if (array_key_exists('currentAsLink', $options)) {
             $currentAsLink = $options['currentAsLink'];
-        }
-
-        // Option: dropdown
-        $attributes = $item->getAttributes();
-        if (array_key_exists('dropdown', $options) && $options['dropdown'] === true && $item->hasChildren()) {
-            $attributes = $this->merge($attributes, ['class' => 'dropdown']);
-        }
-
-        // Option: itemAttributes
-        if (array_key_exists('itemAttributes', $options) && is_array($options['itemAttributes'])) {
-            $attributes = $this->merge($attributes, $options['itemAttributes']);
         }
 
         // Option: itemElement
@@ -161,7 +161,7 @@ class AdvancedRenderer extends ListRenderer
             $html = $this->format('<' . $itemElement . $this->renderHtmlAttributes($attributes) . '>', $itemElement, $item->getLevel(), $options);
             $html .= $this->renderLink($item, $options);
         } else {
-            // Render the text/link without wrapper tag. Ignores dropdown option
+            // Render the text/link without wrapper tag
             if ((!$isCurrent || $currentAsLink) && $item->getUri()) {
                 $attributes = array_merge($item->getLinkAttributes(), $attributes);
                 $text = sprintf('<a href="%s"%s>%s</a>', $this->escape($item->getUri()), $this->renderHtmlAttributes($attributes), $this->renderLabel($item, $options));
@@ -191,6 +191,23 @@ class AdvancedRenderer extends ListRenderer
 
     /**
      * @param ItemInterface $item
+     * @param array $attributes
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function prepareItemAttributes(ItemInterface $item, array $attributes, array $options)
+    {
+        // Option: itemAttributes
+        if (array_key_exists('itemAttributes', $options) && is_array($options['itemAttributes'])) {
+            $attributes = $this->merge($attributes, $options['itemAttributes']);
+        }
+
+        return $attributes;
+    }
+
+    /**
+     * @param ItemInterface $item
      * @param array $options
      *
      * @return string
@@ -203,13 +220,8 @@ class AdvancedRenderer extends ListRenderer
             $currentAsLink = $options['currentAsLink'];
         }
 
-        // Option: dropdown
-        if (array_key_exists('dropdown', $options) && $options['dropdown'] === true && $item->hasChildren()) {
-            $text = $this->renderDropdownElement($item, $options);
-        }
-
         // Active link
-        elseif ($item->getUri() && (!$this->matcher->isCurrent($item) || $currentAsLink)) {
+        if ($item->getUri() && (!$this->matcher->isCurrent($item) || $currentAsLink)) {
             $text = $this->renderLinkElement($item, $options);
         }
 
@@ -219,26 +231,6 @@ class AdvancedRenderer extends ListRenderer
         }
 
         return $this->format($text, 'link', $item->getLevel(), $options);
-    }
-
-    /**
-     * @param ItemInterface $item
-     * @param array $options
-     *
-     * @return string
-     */
-    protected function renderDropdownElement(ItemInterface $item, array $options)
-    {
-        return sprintf('<a href="%s"%s>%s <span class="caret"></span></a>',
-            '#', // override URI here so we don't get a route mismatch earlier
-            $this->renderHtmlAttributes($this->merge($item->getLinkAttributes(), [
-                'class' => 'dropdown-toggle',
-                'data-toggle' => 'dropdown',
-                'role' => 'button',
-                'aria-expanded' => 'false'
-            ])),
-            $this->renderLabel($item, $options)
-        );
     }
 
     /**
