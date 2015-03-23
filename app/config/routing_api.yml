@@ -1,0 +1,7 @@
+teams:
+    type:     rest
+    resource: AppBundle\Controller\Api\TeamController
+
+projects:
+    type:     rest
+    resource: AppBundle\Controller\Api\ProjectController
