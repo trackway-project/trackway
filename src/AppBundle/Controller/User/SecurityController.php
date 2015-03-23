@@ -41,6 +41,7 @@ class SecurityController extends Controller
     /**
      * Dummy
      *
+     * @Method("POST")
      * @Route("/login_check", name="security_login_check")
      */
     public function loginCheckAction()
@@ -50,6 +51,7 @@ class SecurityController extends Controller
     /**
      * Dummy
      *
+     * @Method("GET")
      * @Route("/logout", name="security_logout")
      */
     public function logoutCheckAction()
