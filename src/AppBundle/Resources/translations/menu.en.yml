@@ -43,6 +43,7 @@ team.membership.index: Back
 team.membership.show: Show
 team.membership: Memberships
 team.new: Create
+team.newRoot: 'Create team'
 team.show: Show
 team: Teams
 timeEntry.delete: Delete
