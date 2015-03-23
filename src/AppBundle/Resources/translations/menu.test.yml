@@ -43,6 +43,7 @@ team.membership.index: team.membership.index
 team.membership.show: team.membership.show
 team.membership: team.membership
 team.new: team.new
+team.newRoot: team.newRoot
 team.show: team.show
 team: team
 timeEntry.delete: timeEntry.delete

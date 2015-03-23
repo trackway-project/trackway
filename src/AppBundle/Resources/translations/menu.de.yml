@@ -43,6 +43,7 @@ team.membership.index: __team.membership.index
 team.membership.show: __team.membership.show
 team.membership: __team.membership
 team.new: __team.new
+team.newRoot: __team.newRoot
 team.show: __team.show
 team: __team
 timeEntry.delete: __timeEntry.delete
