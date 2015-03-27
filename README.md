@@ -21,6 +21,7 @@ Enjoy!
 * `sudo npm install`
 * `bower install`
 * `gulp`
+* `gulp favicons:build`
 
 ## Reset Database
 * `php app/console doctrine:database:drop --force`
@@ -32,7 +33,8 @@ Enjoy!
 * Changed composer.json? Run `composer update`
 * Changed package.json? Run `npm update`
 * Changed bower.json? Run `bower update`
-* Changed anything in src/AppBundle/Resources/private? Run `gulp`
+* Changed src/AppBundle/Resources/private/favicon.png? Run `gulp favicons:build`
+* Changed anything else in src/AppBundle/Resources/private? Run `gulp`
 * Changed anything in src/AppBundle/Entity? Run `php app/console doctrine:schema:update`
 
 ## Vagrant and Provisioning

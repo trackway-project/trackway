@@ -6,7 +6,7 @@
 
     {% block stylesheets %}<link href="{{ asset('css/combined.css') }}" rel="stylesheet">{% endblock %}
 
-    {% block favicon %}<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />{% endblock %}
+    {% block favicon %}{% include '@App/favicons.html.twig' %}{% endblock %}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

@@ -17,7 +17,9 @@ var browserSync = require('browser-sync'),
     uglify = require('gulp-uglify'),
     watch = require('gulp-watch'),
     wrap = require('gulp-wrap'),
-    livereload = require('gulp-livereload');
+    livereload = require('gulp-livereload'),
+    favicons = require('favicons'),
+    path = require('path');
 
 // Configuration
 
@@ -164,6 +166,40 @@ gulp.task('js:compressAsync', ['js:copyAsync'], function () {
     return gulp.src(buildDirectory + '/js/' + asyncDirectory + '/*.js')
         .pipe(uglify())
         .pipe(gulp.dest(buildDirectory + '/js/' + asyncDirectory));
+});
+
+gulp.task('favicons:clean', function (cb) {
+    del([
+        sourceDirectory + '/../views/favicons.html.twig',
+        buildDirectory + '/*.png',
+        buildDirectory + '/*.ico',
+        buildDirectory + '/*.xml',
+        buildDirectory + '/*.json',
+        buildDirectory + '/*.webapp'
+    ], cb);
+});
+
+gulp.task('favicons:build', ['favicons:clean'], function (cb) {
+    favicons({
+        files: {
+            src: path.resolve(sourceDirectory + '/favicon.png'),
+            dest: path.resolve(buildDirectory),
+            html: path.resolve(sourceDirectory + '/../views/favicons.html.twig')
+        },
+        settings: {
+            appName: 'Trackway',
+            appDescription: 'The simple on-premise open source time tracker.',
+            developerURL: 'http://trackway.org/',
+            background: '#A32A31',
+            silhouette: true
+        }
+    }, function() {
+        cb();
+        return gulp.src(sourceDirectory + '/../views/favicons.html.twig')
+            .pipe(replace('../../../../web', ''))
+            .pipe(gulp.dest(sourceDirectory + '/../views/'));
+
+    });
 });
 
 // Watchers
