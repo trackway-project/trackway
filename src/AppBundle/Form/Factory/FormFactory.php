@@ -54,7 +54,7 @@ class FormFactory
      */
     public function createFormWithoutSubmit(array $options = [])
     {
-        $formOptions = [];
+        $formOptions = ['attr' => ['role' => 'form']];
 
         if ($this->formType instanceof OverridableFormTypeInterface) {
             $formOptions['override'] = count($options) ? $options : false;

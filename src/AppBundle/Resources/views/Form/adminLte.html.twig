@@ -1,0 +1,29 @@
+{% extends 'bootstrap_3_layout.html.twig' %}
+
+{%- block form_start -%}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <form name="{{ name }}" method="{{ form_method|lower }}" role="form" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
+    <div class="box-body">
+{%- endblock form_start -%}
+
+{%- block form_end -%}
+    </div>
+    {%- if not render_rest is defined or render_rest -%}
+    <div class="box-footer">
+        {{ form_rest(form) }}
+    </div>
+    {%- endif -%}
+    </form>
+{%- endblock form_end -%}
+
+{% block button_row -%}
+    {{- form_widget(form) -}}
+{%- endblock button_row %}
