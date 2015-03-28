@@ -59,6 +59,7 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.form.type.registration');
         $this->assertContainerBuilderHasService('app.form.type.resetting_confirm');
         $this->assertContainerBuilderHasService('app.form.type.resetting_request');
+        $this->assertContainerBuilderHasService('app.form.type.date_time_range');
 
         // listeners.xml
         $this->assertContainerBuilderHasService('app.event_listener.locale');
