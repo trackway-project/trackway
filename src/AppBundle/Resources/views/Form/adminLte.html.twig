@@ -1,24 +1,24 @@
 {% extends 'bootstrap_3_layout.html.twig' %}
 
-{% block button_row -%}
+{%- block button_row -%}
     {{- form_widget(form) -}}
 {%- endblock button_row %}
 
 {%- block form_start -%}
-    {% set attr = attr|merge({'role': 'form'}) %}
-    {{ parent() }}
+    {%- set attr = attr|merge({'role': 'form'}) -%}
+    {{- parent() -}}
 {%- endblock form_start -%}
 
 {%- block widget_container_attributes -%}
-    {% set attr = attr|merge({'class': 'box-body'}) %}
-    {{ parent() }}
+    {%- set attr = attr|merge({'class': 'box-body'}) -%}
+    {{- parent() -}}
 {%- endblock widget_container_attributes -%}
 
-{% block appbundle_date_time_range_form_type_row %}
-    {{ form_widget(form) }}
-{% endblock %}
+{%- block appbundle_date_time_range_form_type_row -%}
+    {{- form_widget(form) -}}
+{%- endblock -%}
 
-{% block appbundle_date_time_range_form_type_widget %}
+{%- block appbundle_date_time_range_form_type_widget -%}
     <div class="row">
         <div class="col-md-4 form-group">
             {{ form_label(form.date) }}
@@ -45,4 +45,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+{%- endblock -%}

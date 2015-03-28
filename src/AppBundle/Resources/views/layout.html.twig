@@ -1,28 +1,17 @@
-{% extends "AppBundle::base.html.twig" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="{{ _charset }}" />
+    <title>{% block subtitle %}{% endblock %}{{ 'template.title'|trans }}</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-{% block class %}sidebar-collapse{% endblock class %}
+    {% block stylesheets %}<link href="{{ asset('css/combined.css') }}" rel="stylesheet">{% endblock %}
+    {% block favicon %}<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />{% endblock %}
 
-{% block navbar %}
-    {{ knp_menu_render('appbundle_navbar_menu', {'template': 'AppBundle:Menu/Navbar:list.html.twig'}) }}
-{% endblock %}
-
-{% block body %}
-    {% set messageTypeClasses = { 'success': 'alert-success', 'info': 'alert-info', 'warning': 'alert-warning', 'error': 'alert-danger'} %}
-    {% for type, messages in app.session.flashBag.all %}
-        {% for message in messages %}
-            <div class="alert{% if messageTypeClasses[type] is defined %} {{ messageTypeClasses[type] }}{% endif %} alert-dismissable" role="alert">
-                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                {{ message|trans }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-    <section class="content-header">
-        {% block title %}{% endblock %}
-        {% block breadcrumb %}{% endblock %}
-    </section>
-    <section class="content">
-        <div class="box box-default">
-            {% block content %}{% endblock %}
-        </div>
-    </section>
-{% endblock %}
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+{% block body %}{% endblock %}
+</html>

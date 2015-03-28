@@ -61,9 +61,11 @@ gulp.task('bower', ['clean'], function () {
 });
 
 gulp.task('admin-lte:prepare', ['bower'], function () {
-    gulp.src(buildDirectory + '/lib/admin-lte/dist/js/app.js')
-        .pipe(replace('"use strict";', ''))
-        .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/dist/js/'));
+    // Fix image paths
+    gulp.src(buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css')
+        .pipe(replace('url(', 'url(../images/'))
+        .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/plugins/iCheck/square/'));
+    // Remove imports of the integrated bootstrap files - we're going to use the real ones
     gulp.src(buildDirectory + '/lib/admin-lte/build/less/AdminLTE.less')
         .pipe(replace('@import "../bootstrap-less/mixins.less";', ''))
         .pipe(replace('@import "../bootstrap-less/variables.less";', ''))
@@ -75,11 +77,13 @@ gulp.task('admin-lte:prepare', ['bower'], function () {
 });
 
 gulp.task('bootstrap:prepare', ['admin-lte:prepare'], function () {
+    // Append additional imports
     return gulp.src(buildDirectory + '/lib/bootstrap/less/bootstrap.less')
-        .pipe(replace('glyphicons', '../../font-awesome/less/font-awesome'))
-        .pipe(insert.append('\n// Admin-LTE'))
+        .pipe(insert.append('\n// Font Awesome'))
+        .pipe(insert.append('\n@import "../../font-awesome/less/font-awesome.less";'))
+        .pipe(insert.append('\n\n// Admin-LTE'))
         .pipe(insert.append('\n@import "../../admin-lte/build/less/AdminLTE.less";'))
-        .pipe(insert.append('\n@import "../../admin-lte/build/less/skins/_all-skins.less";'))
+        .pipe(insert.append('\n@import "../../admin-lte/build/less/skins/skin-red.less";'))
         .pipe(insert.append('\n\n// Custom'))
         .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/main.less";'))
         .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/variables.less";'))
@@ -93,8 +97,11 @@ gulp.task('less:build', ['bootstrap:prepare'], function () {
         .pipe(gulp.dest(buildDirectory + '/css/'));
 });
 
-gulp.task('css:compress', ['less:build'], function () {
-    return gulp.src(buildDirectory + '/css/*.css')
+gulp.task('css:compress', ['less:build', 'admin-lte:prepare'], function () {
+    return gulp.src([
+        buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css',
+        buildDirectory + '/css/*.css'
+    ])
         .pipe(minifyCSS())
         .pipe(concat('combined.css'))
         .pipe(gulp.dest(buildDirectory + '/css/'))
@@ -103,8 +110,9 @@ gulp.task('css:compress', ['less:build'], function () {
 
 gulp.task('fonts:copy', ['bower'], function () {
     return gulp.src([
-        buildDirectory + '/lib/font-awesome/fonts/*.{eot,svg,ttf,woff}',
-        sourceDirectory + '/fonts/*.{eot,svg,ttf,woff}'
+        buildDirectory + '/lib/bootstrap/fonts/*.{eot,svg,ttf,woff,woff2}',
+        buildDirectory + '/lib/font-awesome/fonts/*.{eot,svg,ttf,woff,woff2}',
+        sourceDirectory + '/fonts/*.{eot,svg,ttf,woff,woff2}'
     ])
         .pipe(gulp.dest(buildDirectory + '/fonts/'));
 });
@@ -124,17 +132,20 @@ gulp.task('handlebars:build', ['bower'], function () {
 gulp.task('images:copy', ['bower'], function () {
     return gulp.src([
         buildDirectory + '/lib/admin-lte/dist/img/**/*',
+        buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue*',
         sourceDirectory + '/images/*'
     ])
         .pipe(gulp.dest(buildDirectory + '/images/'));
 });
 
-gulp.task('js:copy', ['bower'], function () {
+gulp.task('js:copy', ['handlebars:build'], function () {
     return gulp.src([
         buildDirectory + '/lib/jquery/dist/jquery.js',
         buildDirectory + '/lib/bootstrap/js/dropdown.js',
+        buildDirectory + '/lib/bootstrap/js/tooltip.js',
         buildDirectory + '/lib/admin-lte/dist/js/app.js',
         buildDirectory + '/lib/admin-lte/plugins/fastclick/fastclick.js',
+        buildDirectory + '/lib/admin-lte/plugins/iCheck/icheck.js',
         nodeDirectory + '/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js',
         buildDirectory + '/js/templates.js',
         sourceDirectory + '/js/*.js'
