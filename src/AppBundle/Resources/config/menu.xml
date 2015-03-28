@@ -6,29 +6,15 @@
             <argument type="service" id="knp_menu.factory"/>
         </service>
 
-        <service id="app.menu.main" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createMainMenu">
-            <tag name="knp_menu.menu" alias="appbundle_main_menu"/>
+        <service id="app.menu.navbar" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createNavbarMenu">
+            <tag name="knp_menu.menu" alias="appbundle_navbar_menu"/>
             <argument type="service" id="request_stack"/>
             <argument type="service" id="security.authorization_checker"/>
             <argument type="service" id="security.token_storage"/>
         </service>
 
-        <service id="app.menu.team" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createTeamMenu">
-            <tag name="knp_menu.menu" alias="appbundle_team_menu"/>
-            <argument type="service" id="request_stack"/>
-            <argument type="service" id="security.authorization_checker"/>
-            <argument type="service" id="security.token_storage"/>
-        </service>
-
-        <service id="app.menu.user" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createUserMenu">
-            <tag name="knp_menu.menu" alias="appbundle_user_menu"/>
-            <argument type="service" id="request_stack"/>
-            <argument type="service" id="security.authorization_checker"/>
-            <argument type="service" id="security.token_storage"/>
-        </service>
-
-        <service id="app.menu.admin" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createAdminMenu">
-            <tag name="knp_menu.menu" alias="appbundle_admin_menu"/>
+        <service id="app.menu.sidebar" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createSidebarMenu">
+            <tag name="knp_menu.menu" alias="appbundle_sidebar_menu"/>
             <argument type="service" id="request_stack"/>
             <argument type="service" id="security.authorization_checker"/>
             <argument type="service" id="security.token_storage"/>
@@ -38,24 +24,12 @@
             <tag name="knp_menu.factory_extension"/>
         </service>
 
+        <service id="app.menu.extension.template" class="AppBundle\Menu\Extension\TemplateExtension">
+            <tag name="knp_menu.factory_extension"/>
+        </service>
+
         <service id="app.menu.renderer.breadcrumb" class="AppBundle\Menu\Renderer\BreadcrumbRenderer">
             <tag name="knp_menu.renderer" alias="appbundle_breadcrumb_renderer"/>
-            <argument type="service" id="knp_menu.matcher"/>
-            <argument>%knp_menu.renderer.list.options%</argument>
-            <argument>%kernel.charset%</argument>
-            <argument type="service" id="translator"/>
-        </service>
-
-        <service id="app.menu.renderer.navbar" class="AppBundle\Menu\Renderer\NavbarRenderer">
-            <tag name="knp_menu.renderer" alias="appbundle_navbar_renderer"/>
-            <argument type="service" id="knp_menu.matcher"/>
-            <argument>%knp_menu.renderer.list.options%</argument>
-            <argument>%kernel.charset%</argument>
-            <argument type="service" id="translator"/>
-        </service>
-
-        <service id="app.menu.renderer.sidebar" class="AppBundle\Menu\Renderer\SidebarRenderer">
-            <tag name="knp_menu.renderer" alias="appbundle_sidebar_renderer"/>
             <argument type="service" id="knp_menu.matcher"/>
             <argument>%knp_menu.renderer.list.options%</argument>
             <argument>%kernel.charset%</argument>

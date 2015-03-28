@@ -57,3 +57,18 @@ knp_menu:
         template: knp_menu.html.twig
     templating: false
     default_renderer: twig
+
+# KnpPaginatorBundle Configuration
+knp_paginator:
+    page_range: 5
+    default_options:
+        page_name: page
+        sort_field_name: name
+        sort_direction_name: direction
+        distinct: true
+    template:
+        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+# OrnicarGravatarBundle Configuration
+ornicar_gravatar: ~

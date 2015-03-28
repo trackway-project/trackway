@@ -1,0 +1,14 @@
+<li class="treeview">
+    <a href="{{ item.uri }}">
+        {% if item.extras['icon'] is defined %}
+            <i class="{{ item.extras['icon'] }}"></i>
+        {% endif %}
+        <span>{{ item.label|trans({}, 'menu') }}</span>
+        {% if item.hasChildren %}
+            <i class="fa fa-angle-left pull-right"></i>
+        {% endif %}
+    </a>
+    {% if item.extras['listTemplate'] is defined %}
+        {% include item.extras['listTemplate'] with {'item': item} %}
+    {% endif %}
+</li>

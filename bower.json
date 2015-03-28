@@ -13,7 +13,8 @@
     "dependencies": {
         "jquery": "~2.1.3",
         "bootstrap": "~3.3.4",
-        "font-awesome": "~4.3.0"
+        "font-awesome": "~4.3.0",
+        "admin-lte": "~2.0.5"
     },
     "overrides": {
         "bootstrap": {
@@ -28,6 +29,14 @@
                 "fonts/*.*",
                 "less/**/*.less"
             ]
+        },
+        "admin-lte": {
+          "main": [
+            "dist/img/*.*",
+            "dist/js/*.js",
+            "build/less/**/*.less",
+            "plugins/**/*"
+          ]
         }
     }
 }

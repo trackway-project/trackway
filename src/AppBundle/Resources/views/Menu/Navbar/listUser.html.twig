@@ -1,0 +1,16 @@
+<ul class="dropdown-menu">
+    <li class="user-header">
+        <img src="{{ gravatar(app.user.email, 90) }}" class="img-circle" alt="User Image">
+        <p>
+            {{ app.user.username }}
+            <small>Lorem ipsum</small>
+        </p>
+    </li>
+    {% for child in item.children %}
+        {% if child.extras['itemTemplate'] is defined %}
+            {% include child.extras['itemTemplate'] with {'item': child} %}
+        {% elseif child.extras['listTemplate'] is defined %}
+            {% include child.extras['listTemplate'] with {'item': child} %}
+        {% endif %}
+    {% endfor %}
+</ul>

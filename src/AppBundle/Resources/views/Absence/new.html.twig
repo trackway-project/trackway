@@ -1,15 +1,15 @@
-{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 {% block class %}absence{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'absence.template.new.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     {{ include('AppBundle:Absence:editNewForm.html.twig') }}
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
     {{ knp_menu_render(['appbundle_main_menu', 'absence'], {}, 'appbundle_sidebar_renderer') }}

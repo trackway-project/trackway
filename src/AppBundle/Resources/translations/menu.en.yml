@@ -8,14 +8,9 @@ admin.team: Teams
 admin.user: Users
 admin: Admin
 login: Login
-profile.changePassword: 'Change password'
-profile.edit: Settings
-profile.logout: Logout
-profile.membership.delete: Delete
-profile.membership.index: Back
-profile.membership.show: Show
-profile.membership: Memberships
-profile.show: Profile
+main: NAVIGATION
+user.edit: Settings
+user.logout: Logout
 project.delete: Delete
 project.edit: Edit
 project.index: Overview
@@ -37,6 +32,7 @@ team.invitation.index: Back
 team.invitation.show: Show
 team.invitation: Invitations
 team.invite: Invite
+team.manage: 'Manage teams'
 team.membership.delete: Delete
 team.membership.edit: Edit
 team.membership.index: Back

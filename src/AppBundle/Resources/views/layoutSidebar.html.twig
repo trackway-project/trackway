@@ -1,0 +1,17 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block class %}sidebar-mini{% endblock class %}
+
+{% block navbar %}
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </a>
+    {{ parent() }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ knp_menu_render('appbundle_sidebar_menu', {'template': 'AppBundle:Menu/Sidebar:list.html.twig'}) }}
+{% endblock %}

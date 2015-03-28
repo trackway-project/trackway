@@ -1,23 +1,31 @@
 {% extends "AppBundle::base.html.twig" %}
 
-{% block title %}{% block subtitle %}{% endblock subtitle %}{{ 'template.title'|trans }}{% endblock title %}
+{% block class %}sidebar-collapse{% endblock class %}
 
 {% block navbar %}
-    {{ knp_menu_render('appbundle_main_menu', {}, 'appbundle_navbar_renderer') }}
-    {{ knp_menu_render('appbundle_user_menu', {'depth': 2, 'dropdown': true, 'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
-    {{ knp_menu_render('appbundle_team_menu', {'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
+    {{ knp_menu_render('appbundle_navbar_menu', {'template': 'AppBundle:Menu/Navbar:list.html.twig'}) }}
 {% endblock %}
 
 {% block body %}
     {% set messageTypeClasses = { 'success': 'alert-success', 'info': 'alert-info', 'warning': 'alert-warning', 'error': 'alert-danger'} %}
     {% for type, messages in app.session.flashBag.all %}
         {% for message in messages %}
-            <div class="alert{% if messageTypeClasses[type] is defined %} {{ messageTypeClasses[type] }}{% endif %}" role="alert">
+            <div class="alert{% if messageTypeClasses[type] is defined %} {{ messageTypeClasses[type] }}{% endif %} alert-dismissable" role="alert">
+                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
                 {{ message|trans }}
             </div>
         {% endfor %}
     {% endfor %}
-
-    {% block content %}
-    {% endblock content %}
+    <section class="content-header">
+        {% block title %}{% endblock %}
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Blank page</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="box box-default">
+            {% block content %}{% endblock %}
+        </div>
+    </section>
 {% endblock %}

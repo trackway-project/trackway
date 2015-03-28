@@ -1,0 +1,7 @@
+<ul class="treeview-menu">
+    {% for child in item.children %}
+        {% if child.extras['itemTemplate'] is defined %}
+            {% include child.extras['itemTemplate'] with {'item': child} %}
+        {% endif %}
+    {% endfor %}
+</ul>

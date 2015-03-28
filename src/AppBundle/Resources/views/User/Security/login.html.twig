@@ -1,6 +1,6 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block class %}login{% endblock class %}
+{% block class %}{{ parent() }} login{% endblock class %}
 
 {% block content %}
     <div class="panel panel-default form-login">
@@ -29,4 +29,4 @@
             </li>
         </ul>
     </div>
-{% endblock content %}
+{% endblock %}

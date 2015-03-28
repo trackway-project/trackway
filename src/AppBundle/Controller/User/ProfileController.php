@@ -21,18 +21,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class ProfileController extends Controller
 {
     /**
-     * @return array
-     *
-     * @Method("GET")
-     * @Route("/", name="profile_show")
-     * @Template()
-     */
-    public function showAction()
-    {
-        return ['entity' => $this->getUser()];
-    }
-
-    /**
      * @param Request $request
      *
      * @return array|RedirectResponse

@@ -33,7 +33,11 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUser($this->getUser())];
+        return ['pagination' => $this->get('knp_paginator')->paginate(
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUserQuery($this->getUser()),
+            $this->get('request')->query->get('page', 1),
+            $this->get('request')->query->get('limit', 10)
+        )];
     }
 
     /**

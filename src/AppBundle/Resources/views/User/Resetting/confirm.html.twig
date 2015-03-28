@@ -1,10 +1,10 @@
 {% extends "AppBundle::layout.html.twig" %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
-{% block class %}resetting{% endblock class %}
+{% block class %}{{ parent() }} resetting{% endblock class %}
+
+{% block title %}<h1>{{ 'resetting.template.confirm.title'|trans }}</h1>{% endblock %}
 
 {% block content %}
-    <h1>{{ 'resetting.template.confirm.title'|trans }}</h1>
-
     {{ form(form) }}
 {% endblock content %}
