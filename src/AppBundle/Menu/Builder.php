@@ -302,6 +302,11 @@ class Builder
                     $menu['action']->addChild('profile', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listInvisible.html.twig']);
 
+                    $menu['action']['profile']->addChild('profile.membership', [
+                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                        'icon' => 'fa fa-fw fa-users',
+                        'route' => 'profile_membership_index',
+                        'routeParameters' => ['id' => $id]]);
                     $menu['action']['profile']->addChild('profile.edit', [
                         'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
                         'icon' => 'fa fa-fw fa-pencil-square-o',
