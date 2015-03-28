@@ -51,7 +51,7 @@ class ProfileController extends Controller
 
             $this->get('session')->getFlashBag()->add('success', 'profile.flash.updated');
 
-            return $this->redirect($this->generateUrl('profile_show'));
+            return $this->redirect($this->generateUrl('dashboard_index'));
         }
 
         return ['entity' => $user, 'form' => $form->createView()];
@@ -90,7 +90,7 @@ class ProfileController extends Controller
 
             $this->get('session')->getFlashBag()->add('success', 'profile.flash.passwordChanged');
 
-            return $this->redirect($this->generateUrl('profile_show'));
+            return $this->redirect($this->generateUrl('dashboard_index'));
         }
 
         return ['form' => $form->createView()];

@@ -14,23 +14,6 @@ class ProfileControllerTest extends AbstractControllerTest
     /**
      * @coversNothing
      */
-    public function testShowAction()
-    {
-        // Prepare environment
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures));
-        $this->login();
-
-        // Test view
-
-        $crawler = $this->client->request('GET', '/profile');
-
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertHeadline($crawler, 'profile.template.show.title');
-    }
-
-    /**
-     * @coversNothing
-     */
     public function testEditAction()
     {
         // Prepare environment
@@ -53,7 +36,7 @@ class ProfileControllerTest extends AbstractControllerTest
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
         static::assertFlashMessage($crawler, 'profile.flash.updated');
-        static::assertHeadline($crawler, 'profile.template.show.title');
+        static::assertHeadline($crawler, 'dashboard.template.index.title');
     }
 
     /**
@@ -83,6 +66,6 @@ class ProfileControllerTest extends AbstractControllerTest
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
         static::assertFlashMessage($crawler, 'profile.flash.passwordChanged');
-        static::assertHeadline($crawler, 'profile.template.show.title');
+        static::assertHeadline($crawler, 'dashboard.template.index.title');
     }
 }
