@@ -165,4 +165,26 @@ class TeamController extends Controller
 
         return $this->redirect($this->generateUrl('team_index'));
     }
+
+    /**
+     * Deletes an existing Team entity.
+     *
+     * @param Team $team
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Method("GET")
+     * @Route("/{id}/activate", requirements={"id": "\d+"}, name="team_activate")
+     * @Security("is_granted('EDIT', team)")
+     */
+    public function activateAction(Request $request, Team $team)
+    {
+        $this->getUser()->setActiveTeam($team);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'team.flash.activated');
+
+        return $this->redirect($request->headers->get('referer'));
+    }
 }

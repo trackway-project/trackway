@@ -4,9 +4,11 @@ absence.index: Overview
 absence.new: Create
 absence.show: Show
 absence: Absences
+action: ACTIONS
 admin.team: Teams
 admin.user: Users
 admin: Admin
+dashboard: Dashboard
 login: Login
 main: NAVIGATION
 user.edit: Settings
@@ -38,8 +40,7 @@ team.membership.edit: Edit
 team.membership.index: Back
 team.membership.show: Show
 team.membership: Memberships
-team.new: Create
-team.newRoot: 'Create team'
+team.new: 'Create team'
 team.show: Show
 team: Teams
 timeEntry.delete: Delete

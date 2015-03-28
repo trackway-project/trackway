@@ -11,6 +11,7 @@
             <argument type="service" id="request_stack"/>
             <argument type="service" id="security.authorization_checker"/>
             <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
         <service id="app.menu.sidebar" class="Knp\Menu\MenuItem" factory-service="app.menu.builder" factory-method="createSidebarMenu">
