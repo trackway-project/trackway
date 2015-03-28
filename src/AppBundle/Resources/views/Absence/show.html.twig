@@ -11,15 +11,15 @@
         <tbody>
         <tr>
             <th>{{ 'absence.entity.date'|trans }}</th>
-            <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
+            <td>{% if entity.dateTimeRange.date %}{{ entity.dateTimeRange.date|date('Y-m-d') }}{% endif %}</td>
         </tr>
         <tr>
             <th>{{ 'absence.entity.startsAt'|trans }}</th>
-            <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
+            <td>{% if entity.dateTimeRange.startsAt %}{{ entity.dateTimeRange.startsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
             <th>{{ 'absence.entity.endsAt'|trans }}</th>
-            <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
+            <td>{% if entity.dateTimeRange.endsAt %}{{ entity.dateTimeRange.endsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
             <th>{{ 'absence.entity.reason'|trans }}</th>

@@ -49,13 +49,17 @@ class Builder
             $id = $request->get('id', false);
             $activeTeam = $tokenStorage->getToken()->getUser()->getActiveTeam();
 
-            // Create groups
+            //
+            // Entity main group
+            //
+
             $menu->addChild('main', [
                 'listTemplate' => 'AppBundle:Menu/Sidebar:listHeader.html.twig']);
 
             if ($activeTeam !== null) {
                 $isTeamAdmin = $authorizationChecker->isGranted('EDIT', $activeTeam);
 
+                // Create entity group
                 $menu['main']->addChild('dashboard', [
                     'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
                     'route' => 'dashboard_index']);
@@ -76,7 +80,7 @@ class Builder
                     'listTemplate' => 'AppBundle:Menu/Sidebar:listTreeview.html.twig',
                     'route' => 'absence_index']);
 
-                // Create actions
+                // Create actions without context
                 $menu['main']['project']->addChild('project.index', [
                     'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
                     'icon' => 'fa fa-fw fa-list',
@@ -113,6 +117,11 @@ class Builder
                         'route' => 'task_new']);
                 }
 
+                //
+                // Action main group
+                //
+
+                // Project context
                 if ($id && strpos($route, 'project_') === 0) {
                     $menu->addChild('action', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listHeader.html.twig']);
@@ -138,6 +147,7 @@ class Builder
                     }
                 }
 
+                // Task context
                 elseif ($id && strpos($route, 'task_') === 0) {
                     $menu->addChild('action', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listHeader.html.twig']);
@@ -163,6 +173,7 @@ class Builder
                     }
                 }
 
+                // Time entry context
                 elseif ($id && strpos($route, 'timeentry_') === 0) {
                     $menu->addChild('action', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listHeader.html.twig']);
@@ -186,6 +197,7 @@ class Builder
                         'routeParameters' => ['id' => $id]]);
                 }
 
+                // Absence context
                 elseif ($id && strpos($route, 'absence_') === 0) {
                     $menu->addChild('action', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listHeader.html.twig']);
@@ -209,45 +221,18 @@ class Builder
                         'routeParameters' => ['id' => $id]]);
                 }
 
+                // Team contexts
                 elseif ($id && strpos($route, 'team_') === 0) {
+                    $membershipId = $request->get('membershipId');
+                    $invitationId = $request->get('invitationId');
+
                     $menu->addChild('action', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listHeader.html.twig']);
                     $menu['action']->addChild('team', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listInvisible.html.twig']);
 
-                    $menu['action']['team']->addChild('team.show', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-eye',
-                        'route' => 'team_show',
-                        'routeParameters' => ['id' => $id]]);
-                    $menu['action']['team']->addChild('team.invite', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-user-plus',
-                        'route' => 'team_invitation_invite',
-                        'routeParameters' => ['id' => $id]]);
-                    $menu['action']['team']->addChild('team.invitation', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-user-plus',
-                        'route' => 'team_invitation_index',
-                        'routeParameters' => ['id' => $id]]);
-                    $menu['action']['team']->addChild('team.membership', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-users',
-                        'route' => 'team_membership_index',
-                        'routeParameters' => ['id' => $id]]);
-                    $menu['action']['team']->addChild('team.edit', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-pencil-square-o',
-                        'route' => 'team_edit',
-                        'routeParameters' => ['id' => $id]]);
-                    $menu['action']['team']->addChild('team.delete', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-times',
-                        'route' => 'team_delete',
-                        'routeParameters' => ['id' => $id]]);
-
-                    $membershipId = $request->get('membershipId');
-                    if ($membershipId && $route !== 'team_membership_index' && strpos($route, 'team_membership_') === 0) {
+                    // Membership context
+                    if ($membershipId && strpos($route, 'team_membership_') === 0) {
                         $menu['action']['team']->addChild('membership', [
                             'listTemplate' => 'AppBundle:Menu/Sidebar:listInvisible.html.twig']);
 
@@ -273,8 +258,8 @@ class Builder
                             'routeParameters' => ['id' => $id, 'membershipId' => $membershipId]]);
                     }
 
-                    $invitationId = $request->get('invitationId');
-                    if ($invitationId && $route !== 'team_invitation_index' && strpos($route, 'team_invitation_') === 0) {
+                    // Invitation context
+                    elseif ($invitationId && strpos($route, 'team_invitation_') === 0) {
                         $menu['action']['team']->addChild('invitation', [
                             'listTemplate' => 'AppBundle:Menu/Sidebar:listInvisible.html.twig']);
 
@@ -294,8 +279,43 @@ class Builder
                             'route' => 'team_invitation_delete',
                             'routeParameters' => ['id' => $id, 'invitationId' => $invitationId]]);
                     }
+
+                    // Team context
+                    else {
+                        $menu['action']['team']->addChild('team.show', [
+                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                            'icon' => 'fa fa-fw fa-eye',
+                            'route' => 'team_show',
+                            'routeParameters' => ['id' => $id]]);
+                        $menu['action']['team']->addChild('team.invite', [
+                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                            'icon' => 'fa fa-fw fa-user-plus',
+                            'route' => 'team_invitation_invite',
+                            'routeParameters' => ['id' => $id]]);
+                        $menu['action']['team']->addChild('team.invitation', [
+                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                            'icon' => 'fa fa-fw fa-user-plus',
+                            'route' => 'team_invitation_index',
+                            'routeParameters' => ['id' => $id]]);
+                        $menu['action']['team']->addChild('team.membership', [
+                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                            'icon' => 'fa fa-fw fa-users',
+                            'route' => 'team_membership_index',
+                            'routeParameters' => ['id' => $id]]);
+                        $menu['action']['team']->addChild('team.edit', [
+                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                            'icon' => 'fa fa-fw fa-pencil-square-o',
+                            'route' => 'team_edit',
+                            'routeParameters' => ['id' => $id]]);
+                        $menu['action']['team']->addChild('team.delete', [
+                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                            'icon' => 'fa fa-fw fa-times',
+                            'route' => 'team_delete',
+                            'routeParameters' => ['id' => $id]]);
+                    }
                 }
 
+                // Profile contexts
                 elseif (strpos($route, 'profile_') === 0) {
                     $menu->addChild('action', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listHeader.html.twig']);
@@ -318,6 +338,10 @@ class Builder
                 }
             }
         }
+
+        //
+        // Admin main group
+        //
 
         if ($authorizationChecker->isGranted('ROLE_ADMIN')) {
             $menu->addChild('admin', [

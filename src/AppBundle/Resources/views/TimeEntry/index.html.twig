@@ -22,9 +22,9 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
-                <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
+                <td>{% if entity.dateTimeRange.date %}{{ entity.dateTimeRange.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if entity.dateTimeRange.startsAt %}{{ entity.dateTimeRange.startsAt|date('H:i') }}{% endif %}</td>
+                <td>{% if entity.dateTimeRange.endsAt %}{{ entity.dateTimeRange.endsAt|date('H:i') }}{% endif %}</td>
                 <td>{{ entity.project }}</td>
                 <td>{{ entity.task }}</td>
                 <td>{{ entity.note }}</td>
