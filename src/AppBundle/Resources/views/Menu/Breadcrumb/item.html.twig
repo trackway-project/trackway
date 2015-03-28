@@ -1,0 +1,23 @@
+{% for child in item.children %}
+    {% set class = false %}
+    {% if matcher.isCurrent(child) %}
+        {% set class = 'active' %}
+    {% elseif matcher.isAncestor(child, options.matchingDepth) %}
+        {% set class = 'active' %}
+    {% endif %}
+    {% if class %}
+        <li>
+            {% if child.uri %}
+                <a href="{{ child.uri }}">
+            {% endif %}
+            {% if item.extras['icon'] is defined %}
+                <i class="{{ item.extras['icon'] }}"></i>
+            {% endif %}
+            {{ child.label|trans({}, 'menu') }}
+            {% if child.uri %}
+                </a>
+            {% endif %}
+        </li>
+        {%  include 'AppBundle:Menu/Breadcrumb:item.html.twig' with {'item': child} %}
+    {% endif %}
+{% endfor %}

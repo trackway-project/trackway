@@ -71,7 +71,6 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.menu.sidebar');
         $this->assertContainerBuilderHasService('app.menu.extension.icon');
         $this->assertContainerBuilderHasService('app.menu.extension.template');
-        $this->assertContainerBuilderHasService('app.menu.renderer.breadcrumb');
 
         // security.xml
         $this->assertContainerBuilderHasService('app.security.authorization.voter.basetimeentry');

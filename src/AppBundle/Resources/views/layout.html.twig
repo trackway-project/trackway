@@ -18,10 +18,7 @@
     {% endfor %}
     <section class="content-header">
         {% block title %}{% endblock %}
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Blank page</li>
-        </ol>
+        {% block breadcrumb %}{% endblock %}
     </section>
     <section class="content">
         <div class="box box-default">
