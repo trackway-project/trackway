@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <th>{{ 'invitation.entity.status'|trans }}</th>
-            <td>{{ ('invitation.value.status.' ~ entity.status.name)|trans }}</td>
+            <td>{{ entity.status.name|trans }}</td>
         </tr>
         {% if entity.user %}
             <tr>

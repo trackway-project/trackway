@@ -4,6 +4,15 @@
     <body class="login-page">
     <div class="login-box">
         <div class="login-logo">{{ 'template.title'|trans }}</div>
+        {% set messageTypeClasses = { 'success': 'alert-success', 'info': 'alert-info', 'warning': 'alert-warning', 'error': 'alert-danger'} %}
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="alert{% if messageTypeClasses[type] is defined %} {{ messageTypeClasses[type] }}{% endif %} alert-dismissable" role="alert">
+                    <h4><i class="icon fa fa-ban"></i> {{ 'template.alert'|trans }}!</h4>
+                    {{ message|trans }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         <div class="login-box-body">
             <p class="login-box-msg">{{ 'security.template.login.message'|trans }}</p>
             <form action="{{ path("security_login_check") }}" method="post">
@@ -25,7 +34,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">{{ 'security.login.entity.submit'|trans }}</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" name="_submit">{{ 'security.login.entity.submit'|trans }}</button>
                     </div>
                 </div>
             </form>

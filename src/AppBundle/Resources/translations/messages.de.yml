@@ -78,14 +78,18 @@ registration.flash.registered: 'Ihr Account wurde registriert'
 registration.template.checkMail.text: 'Ein Link um Ihre Registrierung zu bestätigen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Registrierprozess.'
 registration.template.checkMail.title: 'Registrierung bestätigen'
 registration.template.register.submit: __registration.template.register.submit
+registration.template.register.message: __registration.template.register.message
+registration.template.register.terms: __registration.template.register.terms
 registration.template.register.title: Registrierung
 resetting.flash.confirmed: 'Das Zurücksetzen Ihres Passwortes wurde bestätigt'
 resetting.flash.resetted: 'Ihr Passwort wurde zurückgesetzt'
 resetting.template.checkMail.text: 'Ein Link um Ihr Passwort zurückzusetzen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Prozess.'
 resetting.template.checkMail.title: 'Passwortzurücksetzen bestätigen'
 resetting.template.confirm.submit: __resetting.template.confirm.submit
+resetting.template.confirm.message: __resetting.template.confirm.message
 resetting.template.confirm.title: 'Passwortzurücksetzen bestätigen'
 resetting.template.request.submit: __resetting.template.request.submit
+resetting.template.request.message: __resetting.template.request.message
 resetting.template.request.title: 'Passwort zurücksetzen'
 security.login.action.registration: 'Neu bei Trackway? Jetzt registrieren!'
 security.login.action.resetting: 'Passwort vergessen?'
@@ -129,12 +133,14 @@ teamMembership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
 teamMembership.template.edit.submit: __teamMembership.template.edit.submit
 teamMembership.template.edit.title: 'Mitgliedschaft bearbeiten'
 teamMembership.template.index.title: Mitgliedschaften
-teamMembership.template.show.title: Mitgliedschaft
+teamMembership.template.show.title: __teamMembership.template.show.title
+template.alert: __template.alert
 template.closeSidebar: Schließen
 template.forkIt: 'Fork me on <a href="%link%">Github</a>'
 template.submit: __template.submit
 template.title: Trackway
-template.toggleNavigation: 'Navigation umschalten'
+template.toggleNavigation: __template.toggleNavigation
+template.version: Version
 timeEntry.action.delete: Löschen
 timeEntry.action.edit: Bearbeiten
 timeEntry.action.show: Anzeigen
@@ -157,7 +163,8 @@ timeEntry.template.show.title: 'Zeiteintrag'
 user.action.delete: Löschen
 user.action.edit: Bearbeiten
 user.action.show: Anzeigen
-user.entity.activeTeam: 'Aktives Team'
+user.entity.activeTeam: __user.entity.activeTeam
+user.entity.currentPassword: __user.entity.currentPassword
 user.entity.email: E-Mail
 user.entity.enabled: Aktiviert
 user.entity.locale: Sprache
@@ -173,7 +180,10 @@ value.absenceReason.illness: Krankheit
 value.absenceReason.vacation: Urlaub
 value.group.admin: Admin
 value.group.owner: Eigentümer
-value.group.user: Benutzer
+value.group.user: __value.group.user
+value.invitationStatus.open: __value.invitationStatus.open
+value.invitationStatus.accepted: __value.invitationStatus.accepted
+value.invitationStatus.rejected: __value.invitationStatus.rejected
 value.locale.de: Deutsch
 value.locale.en: Englisch
 value.locale.test: Debug

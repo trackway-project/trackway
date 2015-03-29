@@ -29,9 +29,10 @@ task: Tasks
 team.delete: Delete
 team.edit: Edit
 team.index: Overview
-team.invitation.delete: Delete
-team.invitation.index: Back
-team.invitation.show: Show
+invitation.delete: Delete
+invitation.index: Back
+invitation.show: Show
+invitation: Invitations
 team.invitation: Invitations
 team.invite: Invite
 team.manage: 'Manage teams'

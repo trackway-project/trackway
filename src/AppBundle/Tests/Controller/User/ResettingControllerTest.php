@@ -25,8 +25,8 @@ class ResettingControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/resetting');
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertHeadline($crawler, 'resetting.template.request.title');
+        static::assertStatusCode($this->client);
+        static::assertMessage($crawler, 'resetting.template.request.message');
 
         // Test form
 
@@ -34,9 +34,9 @@ class ResettingControllerTest extends AbstractControllerTest
         $form['appbundle_resetting_request_form[email]'] = 'test@trackway.org';
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertStatusCode($this->client);
         static::assertFlashMessage($crawler, 'resetting.flash.resetted');
-        static::assertHeadline($crawler, 'resetting.template.checkMail.title');
+        static::assertMessage($crawler, 'resetting.template.checkMail.message');
     }
 
     /**
@@ -56,8 +56,8 @@ class ResettingControllerTest extends AbstractControllerTest
 
         $crawler = $this->client->request('GET', '/resetting/' . $user->getConfirmationToken());
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertHeadline($crawler, 'resetting.template.confirm.title');
+        static::assertStatusCode($this->client);
+        static::assertMessage($crawler, 'resetting.template.confirm.message');
 
         // Test form
 
@@ -66,7 +66,7 @@ class ResettingControllerTest extends AbstractControllerTest
         $form['appbundle_resetting_confirm_form[password][second]'] = 'foobar';
         $crawler = $this->client->submit($form);
 
-        static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
+        static::assertStatusCode($this->client);
         static::assertFlashMessage($crawler, 'resetting.flash.confirmed');
         static::assertHeadline($crawler, 'dashboard.template.index.title');
     }

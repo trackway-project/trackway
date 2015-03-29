@@ -1,9 +1,34 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block class %}resetting{% endblock class %}
+{% block body %}
+    <body class="register-page">
+    <div class="register-box">
+        <div class="register-logo">{{ 'template.title'|trans }}</div>
+        {% set messageTypeClasses = { 'success': 'alert-success', 'info': 'alert-info', 'warning': 'alert-warning', 'error': 'alert-danger'} %}
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="alert{% if messageTypeClasses[type] is defined %} {{ messageTypeClasses[type] }}{% endif %} alert-dismissable" role="alert">
+                    <h4><i class="icon fa fa-ban"></i> {{ 'template.alert'|trans }}!</h4>
+                    {{ message|trans }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div class="register-box-body">
+            <p class="login-box-msg">{{ 'resetting.template.checkMail.message'|trans }}</p>
 
-{% block content %}
-    <h1>{{ 'resetting.template.checkMail.title'|trans }}</h1>
+            <a href="{{ path('security_login') }}" class="text-center">{{ 'resetting.template.checkMail.login'|trans }}</a>
+        </div>
+    </div>
 
-    <p>{{ 'resetting.template.checkMail.text'|trans }}</p>
-{% endblock content %}
+    <script src="{{ asset('js/combined.js') }}"></script>
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%'
+            });
+        });
+    </script>
+    </body>
+{% endblock %}
