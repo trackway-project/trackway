@@ -1,12 +1,12 @@
-{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
 
 {% block class %}team_membership{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'teamMembership.template.index.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -37,7 +37,7 @@
         {% endfor %}
         </tbody>
     </table>
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
     {{ knp_menu_render(['appbundle_team_menu', 'team'], {}, 'appbundle_sidebar_renderer') }}

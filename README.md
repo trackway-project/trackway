@@ -18,7 +18,7 @@ Enjoy!
 * `php app/console doctrine:database:create`
 * `php app/console doctrine:schema:create`
 * `php app/console doctrine:fixtures:load`
-* `sudo npm install`
+* `npm install`
 * `bower install`
 * `gulp`
 * `gulp favicons:build`
@@ -44,9 +44,9 @@ Take a look at https://github.com/trackway-project/trackway-vagrant
 Take a look at https://github.com/trackway-project/trackway-deploy
 
 ## Thanks
-* http://bootswatch.com
 * http://bower.io/
 * http://getbootstrap.com/
+* http://github.com/almasaeed2010/AdminLTE
 * http://gulpjs.com/
 * http://nodejs.org/
 * http://symfony.com/

@@ -75,25 +75,29 @@ project.template.new.title: 'Create project'
 project.template.show.title: Project
 registration.flash.confirmed: 'Your registration was confirmed'
 registration.flash.registered: 'Your account was registered'
-registration.template.checkMail.text: 'A link to confirm your registration was send to your email adresse. Please follow the link to finish the process.'
-registration.template.checkMail.title: 'Confirm registration'
+registration.template.checkMail.message: 'A link to confirm your registration was send to your email adresse. Please follow the link to finish the process.'
+registration.template.checkMail.login: 'I already have an account'
 registration.template.register.submit: Register
-registration.template.register.title: Registration
+registration.template.register.message: 'Enter your details below to create a new account'
+registration.template.register.terms: 'I agree to the terms'
+registration.template.register.login: 'I already have an account'
 resetting.flash.confirmed: 'Your password reset was confirmed'
 resetting.flash.resetted: 'Your password was resetted'
-resetting.template.checkMail.text: 'A link to confirm your password reset was send to your email adresse. Please follow the link to finish the process.'
-resetting.template.checkMail.title: 'Confirm password reset'
+resetting.template.checkMail.message: 'A link to confirm your password reset was send to your email adresse. Please follow the link to finish the process.'
+resetting.template.checkMail.login: 'I already have an account'
 resetting.template.confirm.submit: Save
-resetting.template.confirm.title: 'Confirm password reset'
+resetting.template.confirm.message: 'Enter your new password'
+resetting.template.confirm.login: 'I already have an account'
 resetting.template.request.submit: Request
-resetting.template.request.title: 'Reset password'
+resetting.template.request.message: 'Reset your password'
+resetting.template.request.login: 'I already have an account'
 security.login.action.registration: 'New to Trackway? Sign up now!'
 security.login.action.resetting: 'Forgot your password?'
 security.login.entity.password: Password
 security.login.entity.rememberMe: 'Remember me'
 security.login.entity.submit: 'Sign in'
 security.login.entity.username: Username
-security.template.login.title: 'Sign in'
+security.template.login.message: 'Sign in'
 task.action.delete: Delete
 task.action.edit: Edit
 task.action.show: Show
@@ -130,11 +134,13 @@ teamMembership.template.edit.submit: Save
 teamMembership.template.edit.title: 'Edit membership'
 teamMembership.template.index.title: Memberships
 teamMembership.template.show.title: Membership
+template.alert: 'Alert!'
 template.closeSidebar: Close
 template.forkIt: 'Fork me on <a href="%link%">Github</a>'
 template.submit: Submit
 template.title: Trackway
 template.toggleNavigation: 'Toggle Navigation'
+template.version: Version
 timeEntry.action.delete: Delete
 timeEntry.action.edit: Edit
 timeEntry.action.show: Show
@@ -158,6 +164,7 @@ user.action.delete: Delete
 user.action.edit: Edit
 user.action.show: Show
 user.entity.activeTeam: 'Active team'
+user.entity.currentPassword: 'Current password'
 user.entity.email: Email
 user.entity.enabled: Enabled
 user.entity.locale: Locale
@@ -174,6 +181,9 @@ value.absenceReason.vacation: Vacation
 value.group.admin: Admin
 value.group.owner: Owner
 value.group.user: User
+value.invitationStatus.open: Open
+value.invitationStatus.accepted: Accepted
+value.invitationStatus.rejected: Rejected
 value.locale.de: German
 value.locale.en: English
 value.locale.test: Debug

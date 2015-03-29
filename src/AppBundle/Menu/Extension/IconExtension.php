@@ -5,6 +5,11 @@ namespace AppBundle\Menu\Extension;
 use Knp\Menu\Factory\ExtensionInterface;
 use Knp\Menu\ItemInterface;
 
+/**
+ * Class IconExtension
+ *
+ * @package AppBundle\Menu\Extension
+ */
 class IconExtension implements ExtensionInterface
 {
     /**

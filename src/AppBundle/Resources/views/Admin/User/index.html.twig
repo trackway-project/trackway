@@ -1,12 +1,12 @@
-{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
 
 {% block class %}user{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'admin.user.template.index.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -35,7 +35,7 @@
         {% endfor %}
         </tbody>
     </table>
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
     {{ knp_menu_render(['appbundle_admin_menu', 'admin', 'admin.user'], {}, 'appbundle_sidebar_renderer') }}

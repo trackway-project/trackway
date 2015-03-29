@@ -59,6 +59,7 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.form.type.registration');
         $this->assertContainerBuilderHasService('app.form.type.resetting_confirm');
         $this->assertContainerBuilderHasService('app.form.type.resetting_request');
+        $this->assertContainerBuilderHasService('app.form.type.date_time_range');
 
         // listeners.xml
         $this->assertContainerBuilderHasService('app.event_listener.locale');
@@ -67,14 +68,10 @@ class AppExtensionTest extends AbstractExtensionTestCase
 
         // menu.xml
         $this->assertContainerBuilderHasService('app.menu.builder');
-        $this->assertContainerBuilderHasService('app.menu.main');
-        $this->assertContainerBuilderHasService('app.menu.team');
-        $this->assertContainerBuilderHasService('app.menu.user');
-        $this->assertContainerBuilderHasService('app.menu.admin');
+        $this->assertContainerBuilderHasService('app.menu.navbar');
+        $this->assertContainerBuilderHasService('app.menu.sidebar');
         $this->assertContainerBuilderHasService('app.menu.extension.icon');
-        $this->assertContainerBuilderHasService('app.menu.renderer.breadcrumb');
-        $this->assertContainerBuilderHasService('app.menu.renderer.navbar');
-        $this->assertContainerBuilderHasService('app.menu.renderer.sidebar');
+        $this->assertContainerBuilderHasService('app.menu.extension.template');
 
         // security.xml
         $this->assertContainerBuilderHasService('app.security.authorization.voter.basetimeentry');

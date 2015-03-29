@@ -11,8 +11,8 @@
     "require": {
         "php": ">=5.5",
         "symfony/symfony": "2.6.*",
-        "doctrine/orm": "2.4.*",
-        "doctrine/dbal": "2.4.*",
+        "doctrine/orm": "2.5.*@dev",
+        "doctrine/common": "2.5.*@dev",
         "doctrine/doctrine-bundle": "1.4.*",
         "twig/extensions": "1.2.*",
         "symfony/swiftmailer-bundle": "2.3.*",
@@ -23,15 +23,10 @@
         "gedmo/doctrine-extensions": "2.3.*",
         "knplabs/knp-menu-bundle": "2.0.*",
         "knplabs/knp-paginator-bundle": "2.4.*",
-
-    
-    "friendsofsymfony/rest-bundle": "~1.5",
-
-    
-    "jms/serializer-bundle": "0.13.*",
-
-    
-    "nelmio/api-doc-bundle": "~2.8"
+        "friendsofsymfony/rest-bundle": "~1.5",
+        "jms/serializer-bundle": "0.13.*",
+        "nelmio/api-doc-bundle": "~2.8",
+        "ornicar/gravatar-bundle": "1.1.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "2.5.*",

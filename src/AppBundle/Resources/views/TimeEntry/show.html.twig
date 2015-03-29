@@ -1,25 +1,25 @@
-{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
 
 {% block class %}timeentry{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'timeEntry.template.show.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     <table class="table">
         <tbody>
         <tr>
             <th>{{ 'timeEntry.entity.date'|trans }}</th>
-            <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
+            <td>{% if entity.dateTimeRange.date %}{{ entity.dateTimeRange.date|date('Y-m-d') }}{% endif %}</td>
         </tr>
         <tr>
             <th>{{ 'timeEntry.entity.startsAt'|trans }}</th>
-            <td>{% if entity.startsAt %}{{ entity.startsAt|date('H:i') }}{% endif %}</td>
+            <td>{% if entity.dateTimeRange.startsAt %}{{ entity.dateTimeRange.startsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
             <th>{{ 'timeEntry.entity.endsAt'|trans }}</th>
-            <td>{% if entity.endsAt %}{{ entity.endsAt|date('H:i') }}{% endif %}</td>
+            <td>{% if entity.dateTimeRange.endsAt %}{{ entity.dateTimeRange.endsAt|date('H:i') }}{% endif %}</td>
         </tr>
         <tr>
             <th>{{ 'timeEntry.entity.project'|trans }}</th>
@@ -35,7 +35,7 @@
         </tr>
         </tbody>
     </table>
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
     {{ knp_menu_render(['appbundle_main_menu', 'timeEntry'], {}, 'appbundle_sidebar_renderer') }}

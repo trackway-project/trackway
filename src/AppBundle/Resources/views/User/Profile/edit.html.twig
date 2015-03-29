@@ -1,15 +1,15 @@
-{% extends "AppBundle::layoutOffCanvasUser.html.twig" %}
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
+{% form_theme form 'AppBundle:Form:adminLte.html.twig' %}
 
 {% block class %}profile{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'profile.template.edit.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     {{ form(form) }}
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
     {{ knp_menu_render(['appbundle_user_menu', 'profile'], {}, 'appbundle_sidebar_renderer') }}

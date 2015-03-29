@@ -18,7 +18,19 @@ class TeamRepository extends EntityRepository
      */
     public function findByUser(User $user)
     {
-        return $this->createQueryBuilder('t')->join('t.memberships', 'm')->where('m.user = ' . $user->getId())->getQuery()->getResult();
+        return $this->findByUserQuery($user)->getResult();
+    }
+
+    /**
+     * Used for KnpPaginator.
+     *
+     * @param User $user
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function findByUserQuery(User $user)
+    {
+        return $this->createQueryBuilder('t')->join('t.memberships', 'm')->where('m.user = ' . $user->getId())->getQuery();
     }
 
     /**

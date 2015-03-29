@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\DateTimeRange;
 use AppBundle\Entity\TimeEntry;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -70,9 +71,13 @@ class TimeEntryController extends Controller
     public function newAction(Request $request)
     {
         $timeEntry = new TimeEntry();
-        $timeEntry->setDate(new \DateTime());
-        $timeEntry->setStartsAt(new \DateTime());
-        $timeEntry->setEndsAt(new \DateTime());
+
+        $dateTimeRange = new DateTimeRange();
+        $dateTimeRange->setDate(new \DateTime());
+        $dateTimeRange->setStartsAt(new \DateTime());
+        $dateTimeRange->setEndsAt(new \DateTime());
+
+        $timeEntry->setDateTimeRange($dateTimeRange);
 
         /** @var User $user */
         $user = $this->getUser();

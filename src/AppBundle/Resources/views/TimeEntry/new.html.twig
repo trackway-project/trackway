@@ -1,15 +1,15 @@
-{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
+{% form_theme form 'AppBundle:Form:adminLte.html.twig' %}
 
 {% block class %}timeentry{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'timeEntry.template.new.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
-    {{ include('AppBundle:TimeEntry:editNewForm.html.twig') }}
-{% endblock contentOffCanvas %}
+{% block content %}
+    {{ form(form) }}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
     {{ knp_menu_render(['appbundle_main_menu', 'timeEntry'], {}, 'appbundle_sidebar_renderer') }}

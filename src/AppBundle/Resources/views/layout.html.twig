@@ -1,23 +1,17 @@
-{% extends "AppBundle::base.html.twig" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="{{ _charset }}" />
+    <title>{% block subtitle %}{% endblock %}{{ 'template.title'|trans }}</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-{% block title %}{% block subtitle %}{% endblock subtitle %}{{ 'template.title'|trans }}{% endblock title %}
+    {% block stylesheets %}<link href="{{ asset('css/combined.css') }}" rel="stylesheet">{% endblock %}
+    {% block favicon %}{% include '@App/favicons.html.twig' %}{% endblock %}
 
-{% block navbar %}
-    {{ knp_menu_render('appbundle_main_menu', {}, 'appbundle_navbar_renderer') }}
-    {{ knp_menu_render('appbundle_user_menu', {'depth': 2, 'dropdown': true, 'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
-    {{ knp_menu_render('appbundle_team_menu', {'listAttributes': {'class': 'nav navbar-nav navbar-right'}}, 'appbundle_navbar_renderer') }}
-{% endblock %}
-
-{% block body %}
-    {% set messageTypeClasses = { 'success': 'alert-success', 'info': 'alert-info', 'warning': 'alert-warning', 'error': 'alert-danger'} %}
-    {% for type, messages in app.session.flashBag.all %}
-        {% for message in messages %}
-            <div class="alert{% if messageTypeClasses[type] is defined %} {{ messageTypeClasses[type] }}{% endif %}" role="alert">
-                {{ message|trans }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-
-    {% block content %}
-    {% endblock content %}
-{% endblock %}
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+{% block body %}{% endblock %}
+</html>

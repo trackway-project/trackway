@@ -1,12 +1,12 @@
-{% extends 'AppBundle::layoutOffCanvasMain.html.twig' %}
+{% extends 'AppBundle::layoutSidebar.html.twig' %}
 
 {% block class %}invitation{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'invitation.template.index.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -19,7 +19,7 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.email }}</td>
-                <td>{{ ('invitation.value.status.' ~ entity.status.name)|trans }}</td>
+                <td>{{ entity.status|trans }}</td>
                 <td class="text-right">
                     <a href="{{ path('team_invitation_show', { 'id': team.id, 'invitationId': entity.id }) }}"
                        class="btn btn-sm btn-default"
@@ -34,7 +34,7 @@
         {% endfor %}
         </tbody>
     </table>
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
     {{ knp_menu_render(['appbundle_team_menu', 'team'], {}, 'appbundle_sidebar_renderer') }}

@@ -21,18 +21,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class ProfileController extends Controller
 {
     /**
-     * @return array
-     *
-     * @Method("GET")
-     * @Route("/", name="profile_show")
-     * @Template()
-     */
-    public function showAction()
-    {
-        return ['entity' => $this->getUser()];
-    }
-
-    /**
      * @param Request $request
      *
      * @return array|RedirectResponse
@@ -63,7 +51,7 @@ class ProfileController extends Controller
 
             $this->get('session')->getFlashBag()->add('success', 'profile.flash.updated');
 
-            return $this->redirect($this->generateUrl('profile_show'));
+            return $this->redirect($this->generateUrl('dashboard_index'));
         }
 
         return ['entity' => $user, 'form' => $form->createView()];
@@ -102,7 +90,7 @@ class ProfileController extends Controller
 
             $this->get('session')->getFlashBag()->add('success', 'profile.flash.passwordChanged');
 
-            return $this->redirect($this->generateUrl('profile_show'));
+            return $this->redirect($this->generateUrl('dashboard_index'));
         }
 
         return ['form' => $form->createView()];
