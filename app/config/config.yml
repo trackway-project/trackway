@@ -90,8 +90,8 @@ knp_paginator:
         sort_direction_name: direction
         distinct: true
     template:
-        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig
-        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
+        pagination: AppBundle:Pagination:sliding.html.twig
+        sortable: AppBundle:Pagination:sortableLink.html.twig
 
 # OrnicarGravatarBundle Configuration
 ornicar_gravatar: ~

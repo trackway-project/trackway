@@ -7,33 +7,36 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>{{ 'membership.entity.team'|trans }}</th>
-            <th>{{ 'membership.entity.group'|trans }}</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
+    <div class="box-body">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ entity.team.name }}</td>
-                <td>{{ entity.group|trans }}</td>
-                <td class="text-right">
-                    <a href="{{ path('profile_membership_show', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-default"
-                       title="{{ 'membership.action.show'|trans }}"><i class="fa fa-eye"></i></a>
-                    {% if is_granted('EDIT', entity) %}
-                        <a href="{{ path('profile_membership_delete', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-danger"
-                           title="{{ 'membership.action.delete'|trans }}"><i class="fa fa-times"></i></a>
-                    {% endif %}
-                </td>
+                <th>{{ 'membership.entity.team'|trans }}</th>
+                <th>{{ 'membership.entity.group'|trans }}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for entity in pagination %}
+                <tr>
+                    <td>{{ entity.team.name }}</td>
+                    <td>{{ entity.group|trans }}</td>
+                    <td class="text-right">
+                        <a href="{{ path('profile_membership_show', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'membership.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                        {% if is_granted('EDIT', entity) %}
+                            <a href="{{ path('profile_membership_delete', { 'id': entity.id }) }}"
+                               class="btn btn-sm btn-danger"
+                               title="{{ 'membership.action.delete'|trans }}"><i class="fa fa-times"></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'AppBundle:Pagination:footer.html.twig' %}
 {% endblock %}
 
 {% block sidebarOffCanvas %}

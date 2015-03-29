@@ -35,7 +35,11 @@ class TeamMembershipController extends Controller
      */
     public function indexAction(Team $team)
     {
-        return ['team' => $team, 'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findByTeam($team)];
+        return ['pagination' => $this->get('knp_paginator')->paginate(
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Membership')->findByTeamQuery($team),
+            $this->get('request')->query->get('page', 1),
+            $this->get('request')->query->get('limit', 10)
+        )];
     }
 
     /**

@@ -30,7 +30,11 @@ class ProfileMembershipController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getUser()->getMemberships()];
+        return ['pagination' => $this->get('knp_paginator')->paginate(
+            $this->getUser()->getMemberships(),
+            $this->get('request')->query->get('page', 1),
+            $this->get('request')->query->get('limit', 10)
+        )];
     }
 
     /**

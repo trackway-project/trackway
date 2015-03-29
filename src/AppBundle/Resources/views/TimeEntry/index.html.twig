@@ -7,42 +7,45 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>{{ 'timeEntry.entity.date'|trans }}</th>
-            <th>{{ 'timeEntry.entity.startsAt'|trans }}</th>
-            <th>{{ 'timeEntry.entity.endsAt'|trans }}</th>
-            <th>{{ 'timeEntry.entity.project'|trans }}</th>
-            <th>{{ 'timeEntry.entity.task'|trans }}</th>
-            <th>{{ 'timeEntry.entity.note'|trans }}</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
+    <div class="box-body">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{% if entity.dateTimeRange.date %}{{ entity.dateTimeRange.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if entity.dateTimeRange.startsAt %}{{ entity.dateTimeRange.startsAt|date('H:i') }}{% endif %}</td>
-                <td>{% if entity.dateTimeRange.endsAt %}{{ entity.dateTimeRange.endsAt|date('H:i') }}{% endif %}</td>
-                <td>{{ entity.project }}</td>
-                <td>{{ entity.task }}</td>
-                <td>{{ entity.note }}</td>
-                <td class="text-right">
-                    <a href="{{ path('timeentry_show', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-default"
-                       title="{{ 'timeEntry.action.show'|trans }}"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-default"
-                       title="{{ 'timeEntry.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-danger"
-                       title="{{ 'timeEntry.action.delete'|trans }}"><i class="fa fa-times"></i></a>
-                </td>
+                <th>{{ 'timeEntry.entity.date'|trans }}</th>
+                <th>{{ 'timeEntry.entity.startsAt'|trans }}</th>
+                <th>{{ 'timeEntry.entity.endsAt'|trans }}</th>
+                <th>{{ 'timeEntry.entity.project'|trans }}</th>
+                <th>{{ 'timeEntry.entity.task'|trans }}</th>
+                <th>{{ 'timeEntry.entity.note'|trans }}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for entity in pagination %}
+                <tr>
+                    <td>{% if entity.dateTimeRange.date %}{{ entity.dateTimeRange.date|date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if entity.dateTimeRange.startsAt %}{{ entity.dateTimeRange.startsAt|date('H:i') }}{% endif %}</td>
+                    <td>{% if entity.dateTimeRange.endsAt %}{{ entity.dateTimeRange.endsAt|date('H:i') }}{% endif %}</td>
+                    <td>{{ entity.project }}</td>
+                    <td>{{ entity.task }}</td>
+                    <td>{{ entity.note }}</td>
+                    <td class="text-right">
+                        <a href="{{ path('timeentry_show', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'timeEntry.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'timeEntry.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-danger"
+                           title="{{ 'timeEntry.action.delete'|trans }}"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'AppBundle:Pagination:footer.html.twig' %}
 {% endblock %}
 
 {% block sidebarOffCanvas %}

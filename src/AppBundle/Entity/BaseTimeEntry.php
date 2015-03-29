@@ -48,7 +48,9 @@ class BaseTimeEntry
     protected $note;
 
     /**
-     * @ORM\Embedded(class = "DateTimeRange")
+     * @var DateTimeRange
+     *
+     * @ORM\Embedded(class = "DateTimeRange", columnPrefix=false)
      */
     protected $dateTimeRange;
 

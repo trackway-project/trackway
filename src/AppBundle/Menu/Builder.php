@@ -236,11 +236,6 @@ class Builder
                         $menu['action']['team']->addChild('membership', [
                             'listTemplate' => 'AppBundle:Menu/Sidebar:listInvisible.html.twig']);
 
-                        $menu['action']['team']['membership']->addChild('membership.index', [
-                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                            'icon' => 'fa fa-fw fa-arrow-circle-left',
-                            'route' => 'team_membership_index',
-                            'routeParameters' => ['id' => $id]]);
                         $menu['action']['team']['membership']->addChild('membership.show', [
                             'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
                             'icon' => 'fa fa-fw fa-eye',
@@ -263,11 +258,6 @@ class Builder
                         $menu['action']['team']->addChild('invitation', [
                             'listTemplate' => 'AppBundle:Menu/Sidebar:listInvisible.html.twig']);
 
-                        $menu['action']['team']['invitation']->addChild('invitation.index', [
-                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                            'icon' => 'fa fa-fw fa-arrow-circle-left',
-                            'route' => 'team_invitation_index',
-                            'routeParameters' => ['id' => $id]]);
                         $menu['action']['team']['invitation']->addChild('invitation.show', [
                             'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
                             'icon' => 'fa fa-fw fa-eye',
@@ -289,7 +279,7 @@ class Builder
                             'routeParameters' => ['id' => $id]]);
                         $menu['action']['team']->addChild('team.invite', [
                             'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                            'icon' => 'fa fa-fw fa-user-plus',
+                            'icon' => 'fa fa-fw fa-envelope-o',
                             'route' => 'team_invitation_invite',
                             'routeParameters' => ['id' => $id]]);
                         $menu['action']['team']->addChild('team.invitation', [

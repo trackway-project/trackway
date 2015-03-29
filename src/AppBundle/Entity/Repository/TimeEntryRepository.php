@@ -14,16 +14,17 @@ class TimeEntryRepository extends EntityRepository
     /**
      * @param Team $team
      *
-     * @return array
+     * @return mixed
      */
     public function removeByTeam(Team $team)
     {
-        $this->getEntityManager()
-            ->createQuery('UPDATE AppBundle\Entity\User u SET u.activeTeam = null WHERE u.activeTeam = ?1')
-            ->setParameter(1, $team->getId())
+        return $this
+            ->createQueryBuilder('t')
+            ->delete()
+            ->where('t.team = :team')
+            ->setParameter('team', $team->getId())
+            ->getQuery()
             ->execute();
-        $this->getEntityManager()->createQuery('DELETE FROM AppBundle\Entity\TimeEntry t WHERE t.team = ?1')->setParameter(1, $team->getId())->execute();
-        $this->getEntityManager()->flush();
     }
 
     /**
@@ -34,6 +35,25 @@ class TimeEntryRepository extends EntityRepository
      */
     public function findByTeamAndUser(Team $team, User $user)
     {
-        return $this->findBy(['team' => $team->getId(), 'user' => $user->getId()]);
+        return $this->findByTeamAndUserQuery($team, $user)->getResult();
+    }
+
+    /**
+     * Used for KnpPaginator.
+     *
+     * @param Team $team
+     * @param User $user
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function findByTeamAndUserQuery(Team $team, User $user)
+    {
+        return $this
+            ->createQueryBuilder('t')
+            ->where('t.team = :team')
+            ->andWhere('t.user = :user')
+            ->setParameter('team', $team->getId())
+            ->setParameter('user', $user->getId())
+            ->getQuery();
     }
 }

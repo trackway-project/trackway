@@ -7,34 +7,37 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>{{ 'user.entity.username'|trans }}</th>
-            <th>{{ 'user.entity.email'|trans }}</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
+    <div class="box-body">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ entity.username }}</td>
-                <td>{{ entity.email }}</td>
-                <td class="text-right">
-                    <a href="{{ path('admin_user_show', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-default"
-                       title="{{ 'user.action.show'|trans }}"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-default"
-                       title="{{ 'user.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('admin_user_delete', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-danger"
-                       title="{{ 'user.action.delete'|trans }}"><i class="fa fa-times"></i></a>
-                </td>
+                <th>{{ 'user.entity.username'|trans }}</th>
+                <th>{{ 'user.entity.email'|trans }}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.username }}</td>
+                    <td>{{ entity.email }}</td>
+                    <td class="text-right">
+                        <a href="{{ path('admin_user_show', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'user.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'user.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="{{ path('admin_user_delete', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-danger"
+                           title="{{ 'user.action.delete'|trans }}"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'AppBundle:Pagination:footer.html.twig' %}
 {% endblock %}
 
 {% block sidebarOffCanvas %}

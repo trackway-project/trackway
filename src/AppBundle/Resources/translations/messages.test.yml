@@ -113,6 +113,8 @@ task.template.new.title: task.template.new.title
 task.template.show.title: task.template.show.title
 team.action.delete: team.action.delete
 team.action.edit: team.action.edit
+team.action.invite: team.action.invite
+team.action.invitations: team.action.invitations
 team.action.memberships: team.action.memberships
 team.action.show: team.action.show
 team.entity.name: team.entity.name

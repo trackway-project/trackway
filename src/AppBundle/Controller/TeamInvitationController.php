@@ -37,7 +37,11 @@ class TeamInvitationController extends Controller
      */
     public function indexAction(Team $team)
     {
-        return ['team' => $team, 'entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Invitation')->findByTeam($team)];
+        return ['pagination' => $this->get('knp_paginator')->paginate(
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Invitation')->findByTeamQuery($team),
+            $this->get('request')->query->get('page', 1),
+            $this->get('request')->query->get('limit', 10)
+        )];
     }
 
     /**

@@ -36,7 +36,11 @@ class AbsenceController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeamAndUser($user->getActiveTeam(), $user)];
+        return ['pagination' => $this->get('knp_paginator')->paginate(
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeamAndUserQuery($user->getActiveTeam(), $user),
+            $this->get('request')->query->get('page', 1),
+            $this->get('request')->query->get('limit', 10)
+        )];
     }
 
     /**

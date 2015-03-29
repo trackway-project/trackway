@@ -20,7 +20,17 @@ class MembershipRepository extends EntityRepository
      */
     public function findByTeam(Team $team)
     {
-        return $this->findBy(['team' => $team->getId()]);
+        return $this->findByTeamQuery($team)->getResult();
+    }
+
+    /**
+     * @param Team $team
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function findByTeamQuery(Team $team)
+    {
+        return $this->createQueryBuilder('m')->where('m.team = :team')->setParameter('team', $team->getId())->getQuery();
     }
 
     /**

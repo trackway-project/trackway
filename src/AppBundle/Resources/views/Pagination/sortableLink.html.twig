@@ -1,0 +1,2 @@
+<a{% for attr, value in options %} {{ attr }}="{{ value }}"{% endfor %}>{{ title|trans }}</a>
+{% if sorted %}<i class="fa fa-sort-{{ direction }}"></i>{% endif %}

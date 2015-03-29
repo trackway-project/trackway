@@ -7,11 +7,11 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Class LocaleListener
+ * Class LocaleSubscriber
  *
  * @package AppBundle\EventListener
  */
-class LocaleListener implements EventSubscriberInterface
+class LocaleSubscriber implements EventSubscriberInterface
 {
     /**
      * @var string

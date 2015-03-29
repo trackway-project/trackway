@@ -7,45 +7,47 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>
-                {{ knp_pagination_sortable(pagination, 'team.entity.name'|trans, 't.name') }}
-                {% if pagination.isSorted('t.name') %}<i class="fa fa-sort-{{ pagination.direction }}"></i>{% endif %}
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in pagination %}
+    <div class="box-body">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{% if entity == app.user.activeTeam %}<i class="fa fa-star"
-                                                             title="{{ 'team.template.activeTeam'|trans }}"></i>&nbsp;{% endif %}{{ entity.name }}</td>
-                <td class="text-right">
-                    <a href="{{ path('team_show', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-default"
-                       title="{{ 'team.action.show'|trans }}"><i class="fa fa-eye"></i></a>
-                    {% if is_granted('EDIT', entity) %}
-                        <a href="{{ path('team_membership_index', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-default"
-                           title="{{ 'team.action.memberships'|trans }}"><i class="fa fa-users"></i></a>
-                        <a href="{{ path('team_edit', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-default"
-                           title="{{ 'team.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="{{ path('team_delete', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-danger"
-                           title="{{ 'team.action.delete'|trans }}"><i class="fa fa-times"></i></a>
-                    {% endif %}
-                </td>
+                <th>{{ 'team.entity.name'|trans }}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <div class="pagination">
-        {{ knp_pagination_render(pagination) }}
+            </thead>
+            <tbody>
+            {% for entity in pagination %}
+                <tr>
+                    <td>{% if entity == app.user.activeTeam %}<i class="fa fa-star"
+                                                                 title="{{ 'team.template.activeTeam'|trans }}"></i>&nbsp;{% endif %}{{ entity.name }}</td>
+                    <td class="text-right">
+                        <a href="{{ path('team_show', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'team.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                        {% if is_granted('EDIT', entity) %}
+                            <a href="{{ path('team_invitation_invite', { 'id': entity.id }) }}"
+                               class="btn btn-sm btn-default"
+                               title="{{ 'team.action.invite'|trans }}"><i class="fa fa-envelope-o"></i></a>
+                            <a href="{{ path('team_invitation_index', { 'id': entity.id }) }}"
+                               class="btn btn-sm btn-default"
+                               title="{{ 'team.action.invitations'|trans }}"><i class="fa fa-user-plus"></i></a>
+                            <a href="{{ path('team_membership_index', { 'id': entity.id }) }}"
+                               class="btn btn-sm btn-default"
+                               title="{{ 'team.action.memberships'|trans }}"><i class="fa fa-users"></i></a>
+                            <a href="{{ path('team_edit', { 'id': entity.id }) }}"
+                               class="btn btn-sm btn-default"
+                               title="{{ 'team.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                            <a href="{{ path('team_delete', { 'id': entity.id }) }}"
+                               class="btn btn-sm btn-danger"
+                               title="{{ 'team.action.delete'|trans }}"><i class="fa fa-times"></i></a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+    {% include 'AppBundle:Pagination:footer.html.twig' %}
 {% endblock %}
 
 {% block sidebarOffCanvas %}

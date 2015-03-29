@@ -16,7 +16,7 @@
             </call>
         </service>
 
-        <service id="app.event_listener.locale" class="AppBundle\EventListener\LocaleListener">
+        <service id="app.event_listener.locale" class="AppBundle\EventListener\LocaleSubscriber">
             <tag name="kernel.event_subscriber"/>
             <argument>%kernel.default_locale%</argument>
         </service>

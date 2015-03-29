@@ -113,6 +113,8 @@ task.template.new.title: 'Create task'
 task.template.show.title: Task
 team.action.delete: Delete
 team.action.edit: Edit
+team.action.invite: Invite
+team.action.invitations: Invitations
 team.action.memberships: Memberships
 team.action.show: Show
 team.entity.name: Name

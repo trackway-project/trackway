@@ -7,41 +7,44 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>{{ 'absence.entity.date'|trans }}</th>
-            <th>{{ 'absence.entity.startsAt'|trans }}</th>
-            <th>{{ 'absence.entity.endsAt'|trans }}</th>
-            <th>{{ 'absence.entity.reason'|trans }}</th>
-            <th>{{ 'absence.entity.note'|trans }}</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
+    <div class="box-body">
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{% if entity.dateTimeRange.date %}{{ entity.dateTimeRange.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if entity.dateTimeRange.startsAt %}{{ entity.dateTimeRange.startsAt|date('H:i') }}{% endif %}</td>
-                <td>{% if entity.dateTimeRange.endsAt %}{{ entity.dateTimeRange.endsAt|date('H:i') }}{% endif %}</td>
-                <td>{{ entity.reason|trans }}</td>
-                <td>{{ entity.note }}</td>
-                <td class="text-right">
-                    <a href="{{ path('absence_show', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-default"
-                       title="{{ 'absence.action.show'|trans }}"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('absence_edit', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-default"
-                       title="{{ 'absence.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
-                    <a href="{{ path('absence_delete', { 'id': entity.id }) }}"
-                       class="btn btn-sm btn-danger"
-                       title="{{ 'absence.action.delete'|trans }}"><i
-                                class="fa fa-times"></i></a>
-                </td>
+                <th>{{ 'absence.entity.date'|trans }}</th>
+                <th>{{ 'absence.entity.startsAt'|trans }}</th>
+                <th>{{ 'absence.entity.endsAt'|trans }}</th>
+                <th>{{ 'absence.entity.reason'|trans }}</th>
+                <th>{{ 'absence.entity.note'|trans }}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for entity in pagination %}
+                <tr>
+                    <td>{% if entity.dateTimeRange.date %}{{ entity.dateTimeRange.date|date('Y-m-d') }}{% endif %}</td>
+                    <td>{% if entity.dateTimeRange.startsAt %}{{ entity.dateTimeRange.startsAt|date('H:i') }}{% endif %}</td>
+                    <td>{% if entity.dateTimeRange.endsAt %}{{ entity.dateTimeRange.endsAt|date('H:i') }}{% endif %}</td>
+                    <td>{{ entity.reason|trans }}</td>
+                    <td>{{ entity.note }}</td>
+                    <td class="text-right">
+                        <a href="{{ path('absence_show', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'absence.action.show'|trans }}"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('absence_edit', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-default"
+                           title="{{ 'absence.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="{{ path('absence_delete', { 'id': entity.id }) }}"
+                           class="btn btn-sm btn-danger"
+                           title="{{ 'absence.action.delete'|trans }}"><i
+                                    class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'AppBundle:Pagination:footer.html.twig' %}
 {% endblock %}
 
 {% block sidebarOffCanvas %}

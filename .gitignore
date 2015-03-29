@@ -15,13 +15,14 @@
 /bower_components/
 /build/
 /node_modules/
+/src/AppBundle/Resources/views/favicons.html.twig
 /vendor/
 /composer.phar
 /trackway.key
 /trackway.crt
-/*.log
 .DS_Store
 .idea
 .vagrant
 *.d4e.io.rb
+*.log
 _build

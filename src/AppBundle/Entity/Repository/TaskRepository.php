@@ -16,11 +16,21 @@ class TaskRepository extends EntityRepository
     /**
      * @param Team $team
      *
-     * @return Task[]
+     * @return array
      */
     public function findByTeam(Team $team)
     {
-        return $this->findBy(['team' => $team->getId()]);
+        return $this->findByTeamQuery($team)->getResult();
+    }
+
+    /**
+     * @param Team $team
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function findByTeamQuery(Team $team)
+    {
+        return $this->createQueryBuilder('t')->where('t.team = :team')->setParameter('team', $team->getId())->getQuery();
     }
 
     /**

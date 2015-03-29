@@ -113,6 +113,8 @@ task.template.new.title: 'Eintrag erstellen'
 task.template.show.title: Eintrag
 team.action.delete: Löschen
 team.action.edit: Bearbeiten
+team.action.invite: __team.action.invite
+team.action.invitations: __team.action.invitations
 team.action.memberships: Mitgliedschaften
 team.action.show: Anzeigen
 team.entity.name: Name
