@@ -1,16 +1,16 @@
-{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
+{% form_theme form 'AppBundle:Form:adminLte.html.twig' %}
 
 {% block class %}task{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'task.template.edit.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     {{ form(form) }}
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'task'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['appbundle_main_menu', 'task'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

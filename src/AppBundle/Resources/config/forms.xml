@@ -136,5 +136,9 @@
         <service id="app.form.type.resetting_request" class="AppBundle\Form\Type\ResettingRequestFormType">
             <tag name="form.type" alias="appbundle_resetting_request_form_type"/>
         </service>
+
+        <service id="app.form.type.date_time_range" class="AppBundle\Form\Type\DateTimeRangeType">
+            <tag name="form.type" alias="appbundle_date_time_range_form_type"/>
+        </service>
     </services>
 </container>

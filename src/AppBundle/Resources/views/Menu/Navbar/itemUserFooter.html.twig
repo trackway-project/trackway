@@ -1,0 +1,3 @@
+<div class="{{ item.extras['itemClass'] is defined ? item.extras['itemClass'] : '' }}">
+    <a href="{{ item.uri }}" class="btn btn-default btn-flat">{{ item.label|trans({}, 'menu') }}</a>
+</div>

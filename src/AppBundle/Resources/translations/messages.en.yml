@@ -6,11 +6,13 @@ absence.entity.endsAt: 'Ends at'
 absence.entity.note: Note
 absence.entity.reason: Reason
 absence.entity.startsAt: 'Starts at'
-absence.flash.created: 'The absence has been created'
-absence.flash.deleted: 'The absence has been deleted'
-absence.flash.updated: 'The absence has been updated'
+absence.flash.created: 'The absence was created'
+absence.flash.deleted: 'The absence was deleted'
+absence.flash.updated: 'The absence was updated'
+absence.template.edit.submit: Save
 absence.template.edit.title: 'Edit absence'
 absence.template.index.title: Absences
+absence.template.new.submit: Create
 absence.template.new.title: 'Create absence'
 absence.template.show.title: Absence
 admin.team.template.activeTeam: 'Active team'
@@ -18,8 +20,10 @@ admin.team.template.edit.title: 'Edit team'
 admin.team.template.index.title: 'Teams'
 admin.team.template.new.title: 'Create team'
 admin.team.template.show.title: Team
+admin.user.template.edit.submit: Save
 admin.user.template.edit.title: 'Edit user'
 admin.user.template.index.title: Users
+admin.user.template.new.submit: Create
 admin.user.template.new.title: 'Create user'
 admin.user.template.show.title: User
 dashboard.template.index.title: Dashboard
@@ -30,12 +34,13 @@ invitation.entity.email: Email
 invitation.entity.status: Status
 invitation.entity.team: Team
 invitation.entity.user: User
-invitation.flash.accepted: 'The invitation has been accepted'
+invitation.flash.accepted: 'The invitation was accepted'
 invitation.flash.alreadyInvited: 'The user was already invitated'
-invitation.flash.rejected: 'The invitation has been rejected'
-invitation.flash.deleted: 'The invitation has been deleted'
-invitation.flash.invited: 'The invitation has been invited'
+invitation.flash.deleted: 'The invitation was deleted'
+invitation.flash.invited: 'The invitation was invited'
+invitation.flash.rejected: 'The invitation was rejected'
 invitation.template.index.title: Invitations
+invitation.template.invite.submit: Invite
 invitation.template.invite.title: Invite user
 invitation.template.show.title: Invitation
 membership.action.delete: Delete
@@ -44,11 +49,13 @@ membership.action.show: Show
 membership.entity.group: Group
 membership.entity.team: Team
 membership.entity.user: User
-membership.flash.deleted: 'The membership has been deleted'
-membership.flash.updated: 'The membership has been updated'
-profile.flash.passwordChanged: 'Your password has been changed'
-profile.flash.updated: 'Your profile has been updated'
+membership.flash.deleted: 'The membership was deleted'
+membership.flash.updated: 'The membership was updated'
+profile.flash.passwordChanged: 'Your password was changed'
+profile.flash.updated: 'Your profile was updated'
+profile.template.changePassword.submit: Save
 profile.template.changePassword.title: 'Change password'
+profile.template.edit.submit: Save
 profile.template.edit.title: 'Settings'
 profile.template.show.title: Profile
 profileMembership.template.index.title: Memberships
@@ -57,40 +64,51 @@ project.action.delete: Delete
 project.action.edit: Edit
 project.action.show: Show
 project.entity.name: Name
-project.flash.created: 'The project has been created'
-project.flash.deleted: 'The project has been deleted'
-project.flash.updated: 'The project has been updated'
+project.flash.created: 'The project was created'
+project.flash.deleted: 'The project was deleted'
+project.flash.updated: 'The project was updated'
+project.template.edit.submit: Save
 project.template.edit.title: 'Edit project'
 project.template.index.title: Projects
+project.template.new.submit: Create
 project.template.new.title: 'Create project'
 project.template.show.title: Project
-registration.flash.confirmed: 'Your registration has been confirmed'
-registration.flash.registered: 'Your account has been registered'
-registration.template.checkMail.text: 'A link to confirm your registration has been send to your email adresse. Please follow the link to finish the process.'
-registration.template.checkMail.title: 'Confirm registration'
-registration.template.register.title: Registration
-resetting.flash.confirmed: 'Your password reset has been confirmed'
-resetting.flash.resetted: 'Your password has been resetted'
-resetting.template.checkMail.text: 'A link to confirm your password reset has been send to your email adresse. Please follow the link to finish the process.'
-resetting.template.checkMail.title: 'Confirm password reset'
-resetting.template.confirm.title: 'Confirm password reset'
-resetting.template.request.title: 'Reset password'
+registration.flash.confirmed: 'Your registration was confirmed'
+registration.flash.registered: 'Your account was registered'
+registration.template.checkMail.message: 'A link to confirm your registration was send to your email adresse. Please follow the link to finish the process.'
+registration.template.checkMail.login: 'I already have an account'
+registration.template.register.submit: Register
+registration.template.register.message: 'Enter your details below to create a new account'
+registration.template.register.terms: 'I agree to the terms'
+registration.template.register.login: 'I already have an account'
+resetting.flash.confirmed: 'Your password reset was confirmed'
+resetting.flash.resetted: 'Your password was resetted'
+resetting.template.checkMail.message: 'A link to confirm your password reset was send to your email adresse. Please follow the link to finish the process.'
+resetting.template.checkMail.login: 'I already have an account'
+resetting.template.confirm.submit: Save
+resetting.template.confirm.message: 'Enter your new password'
+resetting.template.confirm.login: 'I already have an account'
+resetting.template.request.submit: Request
+resetting.template.request.message: 'Reset your password'
+resetting.template.request.login: 'I already have an account'
 security.login.action.registration: 'New to Trackway? Sign up now!'
 security.login.action.resetting: 'Forgot your password?'
 security.login.entity.password: Password
 security.login.entity.rememberMe: 'Remember me'
 security.login.entity.submit: 'Sign in'
 security.login.entity.username: Username
-security.template.login.title: 'Sign in'
+security.template.login.message: 'Sign in'
 task.action.delete: Delete
 task.action.edit: Edit
 task.action.show: Show
 task.entity.name: Name
-task.flash.created: 'The task has been created'
-task.flash.deleted: 'The task has been deleted'
-task.flash.updated: 'The task has been updated'
+task.flash.created: 'The task was created'
+task.flash.deleted: 'The task was deleted'
+task.flash.updated: 'The task was updated'
+task.template.edit.submit: Save
 task.template.edit.title: 'Edit task'
 task.template.index.title: Tasks
+task.template.new.submit: Create
 task.template.new.title: 'Create task'
 task.template.show.title: Task
 team.action.delete: Delete
@@ -100,23 +118,29 @@ team.action.show: Show
 team.entity.name: Name
 team.entity.projects: Projects
 team.entity.tasks: Tasks
-team.flash.created: 'The team has been created'
-team.flash.deleted: 'The team has been deleted'
-team.flash.updated: 'The team has been updated'
+team.flash.created: 'The team was created'
+team.flash.deleted: 'The team was deleted'
+team.flash.updated: 'The team was updated'
 team.template.activeTeam: 'Active team'
+team.template.edit.submit: Save
 team.template.edit.title: 'Edit team'
 team.template.index.title: Teams
+team.template.new.submit: Create
 team.template.new.title: 'Create team'
 team.template.show.title: Team
-teamMembership.flash.deleted: 'The membership has been deleted'
-teamMembership.flash.updated: 'The membership has been updated'
+teamMembership.flash.deleted: 'The membership was deleted'
+teamMembership.flash.updated: 'The membership was updated'
+teamMembership.template.edit.submit: Save
 teamMembership.template.edit.title: 'Edit membership'
 teamMembership.template.index.title: Memberships
 teamMembership.template.show.title: Membership
+template.alert: 'Alert!'
 template.closeSidebar: Close
 template.forkIt: 'Fork me on <a href="%link%">Github</a>'
+template.submit: Submit
 template.title: Trackway
 template.toggleNavigation: 'Toggle Navigation'
+template.version: Version
 timeEntry.action.delete: Delete
 timeEntry.action.edit: Edit
 timeEntry.action.show: Show
@@ -126,17 +150,21 @@ timeEntry.entity.note: Note
 timeEntry.entity.project: Project
 timeEntry.entity.startsAt: 'Starts at'
 timeEntry.entity.task: Task
-timeEntry.flash.created: 'The time entry has been created'
-timeEntry.flash.deleted: 'The time entry has been deleted'
-timeEntry.flash.updated: 'The time entry has been updated'
+timeEntry.flash.created: 'The time entry was created'
+timeEntry.flash.deleted: 'The time entry was deleted'
+timeEntry.flash.updated: 'The time entry was updated'
+timeEntry.template.edit.submit: Save
 timeEntry.template.edit.title: 'Edit time entry'
 timeEntry.template.index.title: 'Time entries'
+timeEntry.template.new.submit: Create
+timeEntry.template.new.submitAndNew: 'Create and new'
 timeEntry.template.new.title: 'Create time entry'
 timeEntry.template.show.title: 'Time entry'
 user.action.delete: Delete
 user.action.edit: Edit
 user.action.show: Show
 user.entity.activeTeam: 'Active team'
+user.entity.currentPassword: 'Current password'
 user.entity.email: Email
 user.entity.enabled: Enabled
 user.entity.locale: Locale
@@ -144,15 +172,18 @@ user.entity.password: Password
 user.entity.passwordCurrent: 'Current password'
 user.entity.passwordRepeat: 'Repeat password'
 user.entity.username: Username
-user.flash.created: 'The account has been created'
-user.flash.deleted: 'The account has been deleted'
-user.flash.updated: 'The user has been updated'
+user.flash.created: 'The account was created'
+user.flash.deleted: 'The account was deleted'
+user.flash.updated: 'The user was updated'
+value.absenceReason.holiday: Holiday
 value.absenceReason.illness: Illness
 value.absenceReason.vacation: Vacation
-value.absenceReason.holiday: Holiday
 value.group.admin: Admin
 value.group.owner: Owner
 value.group.user: User
+value.invitationStatus.open: Open
+value.invitationStatus.accepted: Accepted
+value.invitationStatus.rejected: Rejected
 value.locale.de: German
 value.locale.en: English
 value.locale.test: Debug

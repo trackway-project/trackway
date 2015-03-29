@@ -1,7 +1,5 @@
-{% extends "AppBundle::layout.html.twig" %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
 
-{% block class %}dashboard{% endblock class %}
+{% block class %}{{ parent() }} dashboard{% endblock %}
 
-{% block content %}
-    <h1>{{ 'dashboard.template.index.title'|trans }}</h1>
-{% endblock content %}
+{% block title %}<h1>{{ 'dashboard.template.index.title'|trans }}</h1>{% endblock %}

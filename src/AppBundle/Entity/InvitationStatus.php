@@ -38,7 +38,7 @@ class InvitationStatus
      */
     public function __toString()
     {
-        return $this->name;
+        return 'value.invitationStatus.' . $this->name;
     }
 
     /**

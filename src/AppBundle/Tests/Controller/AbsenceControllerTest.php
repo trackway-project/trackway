@@ -16,7 +16,12 @@ class AbsenceControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures, self::$absenceFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$projectFixtures,
+            self::$taskFixtures,
+            self::$absenceFixtures));
         $this->login();
 
         // Test view
@@ -47,9 +52,9 @@ class AbsenceControllerTest extends AbstractControllerTest
         // Test form
 
         $form = $crawler->selectButton('appbundle_absence_form[submit]')->form();
-        $form['appbundle_absence_form[date]'] = '2016-01-31';
-        $form['appbundle_absence_form[endsAt]'] = '13:37';
-        $form['appbundle_absence_form[startsAt]'] = '08:15';
+        $form['appbundle_absence_form[dateTimeRange][date]'] = '2016-01-31';
+        $form['appbundle_absence_form[dateTimeRange][endsAt]'] = '13:37';
+        $form['appbundle_absence_form[dateTimeRange][startsAt]'] = '08:15';
         $form['appbundle_absence_form[note]'] = 'test';
         $form['appbundle_absence_form[reason]'] = 3;
         $crawler = $this->client->submit($form);
@@ -66,7 +71,12 @@ class AbsenceControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures, self::$absenceFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$projectFixtures,
+            self::$taskFixtures,
+            self::$absenceFixtures));
         $this->login();
 
         // Test view
@@ -84,7 +94,12 @@ class AbsenceControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures, self::$absenceFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$projectFixtures,
+            self::$taskFixtures,
+            self::$absenceFixtures));
         $this->login();
 
         // Test view
@@ -111,7 +126,12 @@ class AbsenceControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures, self::$absenceFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures,
+            self::$userFixtures,
+            self::$teamFixtures,
+            self::$projectFixtures,
+            self::$taskFixtures,
+            self::$absenceFixtures));
         $this->login();
 
         // Test view

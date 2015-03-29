@@ -1,12 +1,12 @@
-{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
 
 {% block class %}project{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'project.template.show.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     <table class="table">
         <tbody>
         <tr>
@@ -15,8 +15,8 @@
         </tr>
         </tbody>
     </table>
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:mainMenu', 'project'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['appbundle_main_menu', 'project'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

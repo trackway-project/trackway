@@ -1,12 +1,12 @@
-{% extends "AppBundle::layoutOffCanvasUser.html.twig" %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
 
 {% block class %}profile_membership{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'profileMembership.template.index.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -34,8 +34,8 @@
         {% endfor %}
         </tbody>
     </table>
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:userMenu', 'profile'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['appbundle_user_menu', 'profile'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

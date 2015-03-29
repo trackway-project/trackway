@@ -1,21 +1,24 @@
-{% extends "AppBundle::layoutOffCanvasMain.html.twig" %}
+{% extends "AppBundle::layoutSidebar.html.twig" %}
 
 {% block class %}team{% endblock class %}
 
-{% block titleOffCanvas %}
-    <h1>{{ 'team.template.index.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% block title %}
+    <h1>{{ 'team.template.index.title'|trans }}<small>{{ pagination.getTotalItemCount }}</small></h1>
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>{{ 'team.entity.name'|trans }}</th>
+            <th>
+                {{ knp_pagination_sortable(pagination, 'team.entity.name'|trans, 't.name') }}
+                {% if pagination.isSorted('t.name') %}<i class="fa fa-sort-{{ pagination.direction }}"></i>{% endif %}
+            </th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% for entity in pagination %}
             <tr>
                 <td>{% if entity == app.user.activeTeam %}<i class="fa fa-star"
                                                              title="{{ 'team.template.activeTeam'|trans }}"></i>&nbsp;{% endif %}{{ entity.name }}</td>
@@ -39,8 +42,12 @@
         {% endfor %}
         </tbody>
     </table>
-{% endblock contentOffCanvas %}
+
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:teamMenu', 'team'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['appbundle_team_menu', 'team'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

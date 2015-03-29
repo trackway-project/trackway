@@ -67,7 +67,7 @@ class TaskController extends Controller
     {
         $task = new Task();
 
-        $form = $this->get('app.form.factory.task')->createForm(['submit' => ['label' => 'Create']])->setData($task)->handleRequest($request);
+        $form = $this->get('app.form.factory.task')->createForm(['submit' => ['label' => 'task.template.new.submit']])->setData($task)->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());
@@ -99,7 +99,8 @@ class TaskController extends Controller
      */
     public function editAction(Request $request, Task $task)
     {
-        $form = $this->get('app.form.factory.task')->createForm(['submit' => ['label' => 'Update']])->setData($task)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.task')->createForm(['submit' => ['label' => 'task.template.edit.submit']])->setData($task)->handleRequest($request);
 
         if ($form->isValid()) {
             $task->setTeam($this->getUser()->getActiveTeam());

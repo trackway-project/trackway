@@ -38,30 +38,6 @@ class BaseTimeEntry
     protected $user;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="date")
-     *
-     * @Assert\NotNull()
-     * @Assert\Type(type="\DateTime")
-     */
-    protected $date;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="endsAt", type="time")
-     */
-    protected $endsAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="startsAt", type="time")
-     */
-    protected $startsAt;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="note", type="string", length=255)
@@ -72,43 +48,16 @@ class BaseTimeEntry
     protected $note;
 
     /**
+     * @ORM\Embedded(class = "DateTimeRange")
+     */
+    protected $dateTimeRange;
+
+    /**
      * @return string
      */
     public function __toString()
     {
-        return $this->date->format('Y-m-d') . ' ' . $this->startsAt->format('H:i') . ' ' . $this->endsAt->format('H:i') . ' ' . $this->note;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param \DateTime $date
-     */
-    public function setDate(\DateTime $date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getEndsAt()
-    {
-        return $this->endsAt;
-    }
-
-    /**
-     * @param \DateTime $endsAt
-     */
-    public function setEndsAt(\DateTime $endsAt)
-    {
-        $this->endsAt = $endsAt;
+        return $this->dateTimeRange . ' ' . $this->note;
     }
 
     /**
@@ -144,22 +93,6 @@ class BaseTimeEntry
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getStartsAt()
-    {
-        return $this->startsAt;
-    }
-
-    /**
-     * @param \DateTime $startsAt
-     */
-    public function setStartsAt(\DateTime $startsAt)
-    {
-        $this->startsAt = $startsAt;
-    }
-
-    /**
      * @return Team
      */
     public function getTeam()
@@ -189,5 +122,21 @@ class BaseTimeEntry
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return DateTimeRange
+     */
+    public function getDateTimeRange()
+    {
+        return $this->dateTimeRange;
+    }
+
+    /**
+     * @param DateTimeRange $dateTimeRange
+     */
+    public function setDateTimeRange(DateTimeRange $dateTimeRange)
+    {
+        $this->dateTimeRange = $dateTimeRange;
     }
 }

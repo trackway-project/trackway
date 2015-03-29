@@ -27,7 +27,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form:
-        resources: ['bootstrap_3_layout.html.twig']
+        resources: ['AppBundle:Form:adminLte.html.twig']
 
 # Doctrine Configuration
 doctrine:
@@ -57,3 +57,41 @@ knp_menu:
         template: knp_menu.html.twig
     templating: false
     default_renderer: twig
+
+# ApiDoc Configuration
+nelmio_api_doc: ~
+
+# Disable the default view annotations and set up the FOSRest response listener
+sensio_framework_extra:
+    view:
+        annotations: false
+
+# FosRestBundle Configuration
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+          json: true
+          xml: true
+        templating_formats:
+          html: true
+    routing_loader:
+        default_format: json
+
+# KnpPaginatorBundle Configuration
+knp_paginator:
+    page_range: 5
+    default_options:
+        page_name: page
+        sort_field_name: name
+        sort_direction_name: direction
+        distinct: true
+    template:
+        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
+
+# OrnicarGravatarBundle Configuration
+ornicar_gravatar: ~

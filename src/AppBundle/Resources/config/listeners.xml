@@ -2,6 +2,20 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="app.event_listener.sluggable" class="Gedmo\Sluggable\SluggableListener">
+            <tag name="doctrine.event_subscriber" connection="default"/>
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotations.reader" />
+            </call>
+        </service>
+
+        <service id="app.event_listener.timestampable" class="Gedmo\Timestampable\TimestampableListener">
+            <tag name="doctrine.event_subscriber" connection="default"/>
+            <call method="setAnnotationReader">
+                <argument type="service" id="annotations.reader" />
+            </call>
+        </service>
+
         <service id="app.event_listener.locale" class="AppBundle\EventListener\LocaleListener">
             <tag name="kernel.event_subscriber"/>
             <argument>%kernel.default_locale%</argument>

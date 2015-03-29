@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\DateTimeRange;
 use AppBundle\Entity\TimeEntry;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -70,23 +71,29 @@ class TimeEntryController extends Controller
     public function newAction(Request $request)
     {
         $timeEntry = new TimeEntry();
-        $timeEntry->setDate(new \DateTime());
-        $timeEntry->setStartsAt(new \DateTime());
-        $timeEntry->setEndsAt(new \DateTime());
+
+        $dateTimeRange = new DateTimeRange();
+        $dateTimeRange->setDate(new \DateTime());
+        $dateTimeRange->setStartsAt(new \DateTime());
+        $dateTimeRange->setEndsAt(new \DateTime());
+
+        $timeEntry->setDateTimeRange($dateTimeRange);
 
         /** @var User $user */
         $user = $this->getUser();
         $activeTeam = $user->getActiveTeam();
 
-        $form = $this
-            ->get('app.form.factory.time_entry')
-            ->createForm([
-                'project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)],
-                'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
-                'submit' => ['label' => 'Create']])
-            ->add('submitNew', 'submit', ['label' => 'Create and new', 'attr' => ['value' => 1]])
-            ->setData($timeEntry)
-            ->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.time_entry')
+                ->createForm(['project' => ['choices' => $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('AppBundle:Project')
+                    ->findByTeam($activeTeam)],
+                    'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
+                    'submit' => ['label' => 'timeEntry.template.new.submit']])
+                ->add('submitNew', 'submit', ['label' => 'timeEntry.template.new.submitAndNew', 'attr' => ['value' => 1]])
+                ->setData($timeEntry)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             $timeEntry->setTeam($user->getActiveTeam());
@@ -125,7 +132,11 @@ class TimeEntryController extends Controller
      */
     public function editAction(Request $request, TimeEntry $timeEntry)
     {
-        $form = $this->get('app.form.factory.time_entry')->createForm(['submit' => ['label' => 'Update']])->setData($timeEntry)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.time_entry')
+                ->createForm(['submit' => ['label' => 'timeEntry.template.edit.submit']])
+                ->setData($timeEntry)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */

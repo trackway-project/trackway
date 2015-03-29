@@ -57,10 +57,24 @@ class TeamInvitationController extends Controller
     {
         $invitation = new Invitation();
 
-        $form = $this->get('app.form.factory.invitation')->createForm(['submit' => ['label' => 'Invite']])->remove('team')->remove('status')->setData($invitation)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.invitation')
+                ->createForm(['submit' => ['label' => 'invitation.template.invite.submit']])
+                ->remove('team')
+                ->remove('status')
+                ->setData($invitation)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
-            if ($this->getDoctrine()->getRepository('AppBundle:Invitation')->createQueryBuilder('i')->select('count(i.id)')->where('i.email = ?1')->andWhere('i.id != ?2')->setParameters([1 => $invitation->getEmail(), 2 => $invitation->getId()])->getQuery()->getFirstResult() > 0
+            if ($this->getDoctrine()
+                    ->getRepository('AppBundle:Invitation')
+                    ->createQueryBuilder('i')
+                    ->select('count(i.id)')
+                    ->where('i.email = ?1')
+                    ->andWhere('i.id != ?2')
+                    ->setParameters([1 => $invitation->getEmail(), 2 => $invitation->getId()])
+                    ->getQuery()
+                    ->getFirstResult() > 0
             ) {
                 $this->get('session')->getFlashBag()->add('success', 'invitation.flash.alreadyInvited');
 
@@ -77,7 +91,12 @@ class TeamInvitationController extends Controller
 
             // Send mail
             $mailer = $this->get('mailer');
-            $message = $mailer->createMessage()->setSubject('You were invited!')->setFrom('no-reply@trackway.org')->setTo($invitation->getEmail())->setBody($this->renderView('@App/TeamInvitation/email.html.twig', ['entity' => $invitation]), 'text/html');
+            $message =
+                $mailer->createMessage()
+                    ->setSubject('You were invited!')
+                    ->setFrom('no-reply@trackway.org')
+                    ->setTo($invitation->getEmail())
+                    ->setBody($this->renderView('@App/TeamInvitation/email.html.twig', ['entity' => $invitation]), 'text/html');
             $mailer->send($message);
 
             $this->get('session')->getFlashBag()->add('success', 'invitation.flash.invited');

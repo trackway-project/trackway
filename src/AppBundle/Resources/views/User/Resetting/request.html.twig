@@ -1,10 +1,44 @@
 {% extends "AppBundle::layout.html.twig" %}
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% form_theme form 'AppBundle:Form:adminLte.html.twig' %}
 
-{% block class %}resetting{% endblock class %}
+{% block body %}
+    <body class="register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <img src="{{ asset('images/logo_black.png') }}">
+            {{ 'template.title'|trans }}
+        </div>
+        <div class="register-box-body">
+            <p class="login-box-msg">{{ 'resetting.template.request.message'|trans }}</p>
+            <form action="" method="post">
+                {{ form_row(form._token) }}
+                <div class="form-group has-feedback">
+                    {{ form_errors(form.email) }}
+                    <input type="email" class="form-control" placeholder="{{ 'user.entity.email'|trans }}" name="appbundle_resetting_request_form[email]" required="required"/>
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat" name="appbundle_resetting_request_form[submit]">{{ 'resetting.template.request.submit'|trans }}</button>
+                    </div>
+                </div>
+            </form>
 
-{% block content %}
-    <h1>{{ 'resetting.template.request.title'|trans }}</h1>
+            <a href="{{ path('security_login') }}" class="text-center">{{ 'resetting.template.request.login'|trans }}</a>
+        </div>
+    </div>
 
-    {{ form(form) }}
-{% endblock content %}
+    <script src="{{ asset('js/combined.js') }}"></script>
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%'
+            });
+        });
+    </script>
+    </body>
+{% endblock %}

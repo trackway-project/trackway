@@ -33,7 +33,11 @@ class TeamController extends Controller
      */
     public function indexAction()
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUser($this->getUser())];
+        return ['pagination' => $this->get('knp_paginator')->paginate(
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUserQuery($this->getUser()),
+            $this->get('request')->query->get('page', 1),
+            $this->get('request')->query->get('limit', 10)
+        )];
     }
 
     /**
@@ -68,7 +72,12 @@ class TeamController extends Controller
     {
         $team = new Team();
 
-        $form = $this->get('app.form.factory.team')->createForm(['submit' => ['label' => 'Create']])->remove('memberships')->setData($team)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.team')
+                ->createForm(['submit' => ['label' => 'team.template.new.submit']])
+                ->remove('memberships')
+                ->setData($team)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var Group $group */
@@ -119,7 +128,12 @@ class TeamController extends Controller
      */
     public function editAction(Request $request, Team $team)
     {
-        $form = $this->get('app.form.factory.team')->createForm(['submit' => ['label' => 'Update']])->remove('memberships')->setData($team)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.team')
+                ->createForm(['submit' => ['label' => 'team.template.edit.submit']])
+                ->remove('memberships')
+                ->setData($team)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -150,5 +164,27 @@ class TeamController extends Controller
         $this->get('session')->getFlashBag()->add('success', 'team.flash.deleted');
 
         return $this->redirect($this->generateUrl('team_index'));
+    }
+
+    /**
+     * Deletes an existing Team entity.
+     *
+     * @param Team $team
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Method("GET")
+     * @Route("/{id}/activate", requirements={"id": "\d+"}, name="team_activate")
+     * @Security("is_granted('EDIT', team)")
+     */
+    public function activateAction(Request $request, Team $team)
+    {
+        $this->getUser()->setActiveTeam($team);
+
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'team.flash.activated');
+
+        return $this->redirect($request->headers->get('referer'));
     }
 }

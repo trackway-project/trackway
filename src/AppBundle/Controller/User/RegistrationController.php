@@ -32,7 +32,11 @@ class RegistrationController extends Controller
     {
         $user = new User();
 
-        $form = $this->get('app.form.factory.registration')->createForm(['submit' => ['label' => 'Register']])->setData($user)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.registration')
+                ->createForm(['submit' => ['label' => 'registration.template.register.submit']])
+                ->setData($user)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             $user->setConfirmationToken(md5(uniqid(mt_rand(), true)));
@@ -49,7 +53,12 @@ class RegistrationController extends Controller
 
             // Send mail
             $mailer = $this->get('mailer');
-            $message = $mailer->createMessage()->setSubject('You have Completed Registration!')->setFrom('no-reply@trackway.org')->setTo($user->getEmail())->setBody($this->renderView('@App/User/Registration/email.html.twig', ['entity' => $user]), 'text/html');
+            $message =
+                $mailer->createMessage()
+                    ->setSubject('You have Completed Registration!')
+                    ->setFrom('no-reply@trackway.org')
+                    ->setTo($user->getEmail())
+                    ->setBody($this->renderView('@App/User/Registration/email.html.twig', ['entity' => $user]), 'text/html');
             $mailer->send($message);
 
             $this->get('session')->getFlashBag()->add('success', 'registration.flash.registered');

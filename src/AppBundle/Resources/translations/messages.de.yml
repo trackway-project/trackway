@@ -9,8 +9,10 @@ absence.entity.startsAt: 'Startet am'
 absence.flash.created: 'Die Abwesenheit wurde angelegt'
 absence.flash.deleted: 'Die Abwesenheit wurde gelöscht'
 absence.flash.updated: 'Die Abwesenheit wurde aktualisiert'
+absence.template.edit.submit: __absence.template.edit.submit
 absence.template.edit.title: 'Abwesenheit bearbeiten'
 absence.template.index.title: Abwesenheiten
+absence.template.new.submit: __absence.template.new.submit
 absence.template.new.title: 'Abwesenheit anlegen'
 absence.template.show.title: Abwesenheit
 admin.team.template.activeTeam: 'Aktives Team'
@@ -18,8 +20,10 @@ admin.team.template.edit.title: 'Team bearbeiten'
 admin.team.template.index.title: 'Teams'
 admin.team.template.new.title: 'Team erstellen'
 admin.team.template.show.title: Team
+admin.user.template.edit.submit: __admin.user.template.edit.submit
 admin.user.template.edit.title: 'Benutzer bearbeiten'
 admin.user.template.index.title: Benutzer
+admin.user.template.new.submit: __admin.user.template.new.submit
 admin.user.template.new.title: 'Benutzer erstellen'
 admin.user.template.show.title: Benutzer
 dashboard.template.index.title: Dashboard
@@ -32,10 +36,11 @@ invitation.entity.team: Team
 invitation.entity.user: Benutzer
 invitation.flash.accepted: 'Die Einladung wurde akzeptiert'
 invitation.flash.alreadyInvited: 'Der Benutzer wurde bereits eingeladen'
-invitation.flash.rejected: 'Die Einladung wurde zujrückgewiesen'
 invitation.flash.deleted: 'Die Einladung wurde gelöscht'
 invitation.flash.invited: 'Der Benutzer wurde eingeladen'
+invitation.flash.rejected: 'Die Einladung wurde zujrückgewiesen'
 invitation.template.index.title: Einladungen
+invitation.template.invite.submit: __invitation.template.invite.submit
 invitation.template.invite.title: Benutzer einladen
 invitation.template.show.title: Einladung
 membership.action.delete: Löschen
@@ -48,7 +53,9 @@ membership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
 membership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
 profile.flash.passwordChanged: 'Ihr Passwort wurde geändert'
 profile.flash.updated: 'Ihr Profil wurde aktualisiert'
+profile.template.changePassword.submit: __profile.template.changePassword.submit
 profile.template.changePassword.title: 'Passwort ändern'
+profile.template.edit.submit: __profile.template.edit.submit
 profile.template.edit.title: 'Einstellungen'
 profile.template.show.title: Profil
 profileMembership.template.index.title: Mitgliedschaften
@@ -60,20 +67,29 @@ project.entity.name: Name
 project.flash.created: 'Das Projekt wurde geändert'
 project.flash.deleted: 'Das Projekt wurde gelöscht'
 project.flash.updated: 'Das Projekt wurde aktualisiert'
+project.template.edit.submit: __project.template.edit.submit
 project.template.edit.title: 'Projekt bearbeiten'
 project.template.index.title: Projekte
+project.template.new.submit: __project.template.new.submit
 project.template.new.title: 'Projekt anlegen'
 project.template.show.title: Projekt
 registration.flash.confirmed: 'Ihre Registrierung wurde bestätigt'
 registration.flash.registered: 'Ihr Account wurde registriert'
 registration.template.checkMail.text: 'Ein Link um Ihre Registrierung zu bestätigen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Registrierprozess.'
 registration.template.checkMail.title: 'Registrierung bestätigen'
+registration.template.register.submit: __registration.template.register.submit
+registration.template.register.message: __registration.template.register.message
+registration.template.register.terms: __registration.template.register.terms
 registration.template.register.title: Registrierung
 resetting.flash.confirmed: 'Das Zurücksetzen Ihres Passwortes wurde bestätigt'
 resetting.flash.resetted: 'Ihr Passwort wurde zurückgesetzt'
 resetting.template.checkMail.text: 'Ein Link um Ihr Passwort zurückzusetzen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Prozess.'
 resetting.template.checkMail.title: 'Passwortzurücksetzen bestätigen'
+resetting.template.confirm.submit: __resetting.template.confirm.submit
+resetting.template.confirm.message: __resetting.template.confirm.message
 resetting.template.confirm.title: 'Passwortzurücksetzen bestätigen'
+resetting.template.request.submit: __resetting.template.request.submit
+resetting.template.request.message: __resetting.template.request.message
 resetting.template.request.title: 'Passwort zurücksetzen'
 security.login.action.registration: 'Neu bei Trackway? Jetzt registrieren!'
 security.login.action.resetting: 'Passwort vergessen?'
@@ -89,8 +105,10 @@ task.entity.name: Name
 task.flash.created: 'Der Eintrag wurde erstellt'
 task.flash.deleted: 'Der Eintrag wurde gelöscht'
 task.flash.updated: 'Der Eintrag wurde aktualisiert'
+task.template.edit.submit: __task.template.edit.submit
 task.template.edit.title: 'Eintrag anzeigen'
 task.template.index.title: Einträge
+task.template.new.submit: __task.template.new.submit
 task.template.new.title: 'Eintrag erstellen'
 task.template.show.title: Eintrag
 team.action.delete: Löschen
@@ -104,19 +122,25 @@ team.flash.created: 'Das Team wurde erstellt'
 team.flash.deleted: 'Das Team wurde gelöscht'
 team.flash.updated: 'Das Team wurde aktualisiert'
 team.template.activeTeam: 'Aktives Team'
+team.template.edit.submit: __team.template.edit.submit
 team.template.edit.title: 'Team bearbeiten'
 team.template.index.title: Teams
+team.template.new.submit: __team.template.new.submit
 team.template.new.title: 'Team erstellen'
 team.template.show.title: Team
 teamMembership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
 teamMembership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
+teamMembership.template.edit.submit: __teamMembership.template.edit.submit
 teamMembership.template.edit.title: 'Mitgliedschaft bearbeiten'
 teamMembership.template.index.title: Mitgliedschaften
-teamMembership.template.show.title: Mitgliedschaft
+teamMembership.template.show.title: __teamMembership.template.show.title
+template.alert: __template.alert
 template.closeSidebar: Schließen
 template.forkIt: 'Fork me on <a href="%link%">Github</a>'
+template.submit: __template.submit
 template.title: Trackway
-template.toggleNavigation: 'Navigation umschalten'
+template.toggleNavigation: __template.toggleNavigation
+template.version: Version
 timeEntry.action.delete: Löschen
 timeEntry.action.edit: Bearbeiten
 timeEntry.action.show: Anzeigen
@@ -129,14 +153,18 @@ timeEntry.entity.task: Eintrag
 timeEntry.flash.created: 'Der Zeiteintrag wurde erstellt'
 timeEntry.flash.deleted: 'Der Zeiteintrag wurde gelöscht'
 timeEntry.flash.updated: 'Der Zeiteintrag wurde aktualisiert'
+timeEntry.template.edit.submit: __timeEntry.template.edit.submit
 timeEntry.template.edit.title: 'Zeiteintrag bearbeiten'
 timeEntry.template.index.title: 'Zeiteinträge'
+timeEntry.template.new.submit: __timeEntry.template.new.submit
+timeEntry.template.new.submitAndNew: __timeEntry.template.new.submitAndNew
 timeEntry.template.new.title: 'Zeiteintrag erstellen'
 timeEntry.template.show.title: 'Zeiteintrag'
 user.action.delete: Löschen
 user.action.edit: Bearbeiten
 user.action.show: Anzeigen
-user.entity.activeTeam: 'Aktives Team'
+user.entity.activeTeam: __user.entity.activeTeam
+user.entity.currentPassword: __user.entity.currentPassword
 user.entity.email: E-Mail
 user.entity.enabled: Aktiviert
 user.entity.locale: Sprache
@@ -147,12 +175,15 @@ user.entity.username: Benutzername
 user.flash.created: 'Account wurde erstellt'
 user.flash.deleted: 'Account wurde gelöscht'
 user.flash.updated: 'Account wurde aktualisiert'
+value.absenceReason.holiday: Feiertag
 value.absenceReason.illness: Krankheit
 value.absenceReason.vacation: Urlaub
-value.absenceReason.holiday: Feiertag
 value.group.admin: Admin
 value.group.owner: Eigentümer
-value.group.user: Benutzer
+value.group.user: __value.group.user
+value.invitationStatus.open: __value.invitationStatus.open
+value.invitationStatus.accepted: __value.invitationStatus.accepted
+value.invitationStatus.rejected: __value.invitationStatus.rejected
 value.locale.de: Deutsch
 value.locale.en: Englisch
 value.locale.test: Debug

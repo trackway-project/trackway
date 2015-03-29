@@ -21,18 +21,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class ProfileController extends Controller
 {
     /**
-     * @return array
-     *
-     * @Method("GET")
-     * @Route("/", name="profile_show")
-     * @Template()
-     */
-    public function showAction()
-    {
-        return ['entity' => $this->getUser()];
-    }
-
-    /**
      * @param Request $request
      *
      * @return array|RedirectResponse
@@ -46,7 +34,12 @@ class ProfileController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
-        $form = $this->get('app.form.factory.profile')->createForm(['activeTeam' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUser($user)], 'submit' => ['label' => 'Update']])->setData($user)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.profile')->createForm(['activeTeam' => ['choices' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Team')
+                ->findByUser($user)],
+                'submit' => ['label' => 'profile.template.edit.submit']])->setData($user)->handleRequest($request);
 
         if ($form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -58,7 +51,7 @@ class ProfileController extends Controller
 
             $this->get('session')->getFlashBag()->add('success', 'profile.flash.updated');
 
-            return $this->redirect($this->generateUrl('profile_show'));
+            return $this->redirect($this->generateUrl('dashboard_index'));
         }
 
         return ['entity' => $user, 'form' => $form->createView()];
@@ -78,7 +71,11 @@ class ProfileController extends Controller
         /** @var User */
         $user = $this->getUser();
 
-        $form = $this->get('app.form.factory.change_password')->createForm(['submit' => ['label' => 'Update']])->setData($user)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.change_password')
+                ->createForm(['submit' => ['label' => 'profile.template.changePassword.submit']])
+                ->setData($user)
+                ->handleRequest($request);
 
         if ($form->isValid()) {
             $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
@@ -86,13 +83,14 @@ class ProfileController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             // Login
-            $token = $this->get('security.authentication.manager')->authenticate(new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles()));
+            $token =
+                $this->get('security.authentication.manager')->authenticate(new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles()));
             $this->get('session')->set('_security_main', serialize($token));
             $this->get('security.token_storage')->setToken($token);
 
             $this->get('session')->getFlashBag()->add('success', 'profile.flash.passwordChanged');
 
-            return $this->redirect($this->generateUrl('profile_show'));
+            return $this->redirect($this->generateUrl('dashboard_index'));
         }
 
         return ['form' => $form->createView()];

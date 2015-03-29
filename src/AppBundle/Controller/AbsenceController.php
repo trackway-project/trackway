@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Absence;
+use AppBundle\Entity\DateTimeRange;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -70,11 +71,20 @@ class AbsenceController extends Controller
     public function newAction(Request $request)
     {
         $absence = new Absence();
-        $absence->setDate(new \DateTime());
-        $absence->setStartsAt(new \DateTime());
-        $absence->setEndsAt(new \DateTime());
 
-        $form = $this->get('app.form.factory.absence')->createForm(['reason' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:AbsenceReason')->findAll()], 'submit' => ['label' => 'Create']])->setData($absence)->handleRequest($request);
+        $dateTimeRange = new DateTimeRange();
+        $dateTimeRange->setDate(new \DateTime());
+        $dateTimeRange->setStartsAt(new \DateTime());
+        $dateTimeRange->setEndsAt(new \DateTime());
+
+        $absence->setDateTimeRange($dateTimeRange);
+
+        $form =
+            $this->get('app.form.factory.absence')->createForm(['reason' => ['choices' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:AbsenceReason')
+                ->findAll()],
+                'submit' => ['label' => 'absence.template.new.submit']])->setData($absence)->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -109,7 +119,12 @@ class AbsenceController extends Controller
      */
     public function editAction(Request $request, Absence $absence)
     {
-        $form = $this->get('app.form.factory.absence')->createForm(['reason' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:AbsenceReason')->findAll()], 'submit' => ['label' => 'Update']])->setData($absence)->handleRequest($request);
+        $form =
+            $this->get('app.form.factory.absence')->createForm(['reason' => ['choices' => $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:AbsenceReason')
+                ->findAll()],
+                'submit' => ['label' => 'absence.template.edit.submit']])->setData($absence)->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */

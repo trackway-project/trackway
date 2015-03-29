@@ -4,18 +4,15 @@ absence.index: Overview
 absence.new: Create
 absence.show: Show
 absence: Absences
+action: ACTIONS
 admin.team: Teams
 admin.user: Users
 admin: Admin
+dashboard: Dashboard
 login: Login
-profile.changePassword: 'Change password'
-profile.edit: Settings
-profile.logout: Logout
-profile.membership.delete: Delete
-profile.membership.index: Back
-profile.membership.show: Show
-profile.membership: Memberships
-profile.show: Profile
+main: NAVIGATION
+user.edit: Settings
+user.logout: Logout
 project.delete: Delete
 project.edit: Edit
 project.index: Overview
@@ -32,17 +29,19 @@ task: Tasks
 team.delete: Delete
 team.edit: Edit
 team.index: Overview
-team.invitation.delete: Delete
-team.invitation.index: Back
-team.invitation.show: Show
+invitation.delete: Delete
+invitation.index: Back
+invitation.show: Show
+invitation: Invitations
 team.invitation: Invitations
 team.invite: Invite
+team.manage: 'Manage teams'
 team.membership.delete: Delete
 team.membership.edit: Edit
 team.membership.index: Back
 team.membership.show: Show
 team.membership: Memberships
-team.new: Create
+team.new: 'Create team'
 team.show: Show
 team: Teams
 timeEntry.delete: Delete

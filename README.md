@@ -18,9 +18,10 @@ Enjoy!
 * `php app/console doctrine:database:create`
 * `php app/console doctrine:schema:create`
 * `php app/console doctrine:fixtures:load`
-* `sudo npm install`
+* `npm install`
 * `bower install`
 * `gulp`
+* `gulp favicons:build`
 
 ## Reset Database
 * `php app/console doctrine:database:drop --force`
@@ -32,7 +33,8 @@ Enjoy!
 * Changed composer.json? Run `composer update`
 * Changed package.json? Run `npm update`
 * Changed bower.json? Run `bower update`
-* Changed anything in src/AppBundle/Resources/private? Run `gulp`
+* Changed src/AppBundle/Resources/private/favicon.png? Run `gulp favicons:build`
+* Changed anything else in src/AppBundle/Resources/private? Run `gulp`
 * Changed anything in src/AppBundle/Entity? Run `php app/console doctrine:schema:update`
 
 ## Vagrant and Provisioning
@@ -42,9 +44,9 @@ Take a look at https://github.com/trackway-project/trackway-vagrant
 Take a look at https://github.com/trackway-project/trackway-deploy
 
 ## Thanks
-* http://bootswatch.com
 * http://bower.io/
 * http://getbootstrap.com/
+* http://github.com/almasaeed2010/AdminLTE
 * http://gulpjs.com/
 * http://nodejs.org/
 * http://symfony.com/

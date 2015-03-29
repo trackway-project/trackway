@@ -1,12 +1,12 @@
-{% extends 'AppBundle::layoutOffCanvasMain.html.twig' %}
+{% extends 'AppBundle::layoutSidebar.html.twig' %}
 
 {% block class %}invitation{% endblock class %}
 
-{% block titleOffCanvas %}
+{% block title %}
     <h1>{{ 'invitation.template.show.title'|trans }}</h1>
-{% endblock titleOffCanvas %}
+{% endblock %}
 
-{% block contentOffCanvas %}
+{% block content %}
     <table class="table">
         <tbody>
         <tr>
@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <th>{{ 'invitation.entity.status'|trans }}</th>
-            <td>{{ ('invitation.value.status.' ~ entity.status.name)|trans }}</td>
+            <td>{{ entity.status.name|trans }}</td>
         </tr>
         {% if entity.user %}
             <tr>
@@ -25,8 +25,8 @@
         {% endif %}
         </tbody>
     </table>
-{% endblock contentOffCanvas %}
+{% endblock %}
 
 {% block sidebarOffCanvas %}
-    {{ knp_menu_render(['AppBundle:Builder:teamMenu', 'team', 'team.invitation'], {}, 'appbundle_sidebar_renderer') }}
+    {{ knp_menu_render(['appbundle_team_menu', 'team', 'team.invitation'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}

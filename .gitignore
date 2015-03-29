@@ -1,9 +1,9 @@
-/web/bundles/
-/web/css/
-/web/fonts/
-/web/images/
-/web/js/
-/web/lib/
+/web/*
+!web/.htaccess
+!web/app.php
+!web/app_dev.php
+!web/config.php
+!web/robots.txt
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -19,6 +19,7 @@
 /composer.phar
 /trackway.key
 /trackway.crt
+/*.log
 .DS_Store
 .idea
 .vagrant

@@ -1,0 +1,14 @@
+{% extends "AppBundle::base.html.twig" %}
+
+{% block title %}An Error Occurred: {{ status_text }}{{ 'template.title'|trans }}{% endblock %}
+
+{% block body %}
+<h1>Oops! An Error Occurred</h1>
+
+<strong>The server returned a "{{ status_code }} {{ status_text }}".</strong>
+
+<div>
+    Something is broken. Please let us know what you were doing when this error occurred.
+    We will fix it as soon as possible. Sorry for any inconvenience caused.
+</div>
+{% endblock %}

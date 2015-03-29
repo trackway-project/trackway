@@ -1,0 +1,11 @@
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            {% for child in item.children %}
+                {% if child.extras['listTemplate'] is defined %}
+                    {% include child.extras['listTemplate'] with {'item': child} %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+</aside>
