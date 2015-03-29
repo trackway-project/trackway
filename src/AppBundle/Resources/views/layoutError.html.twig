@@ -1,0 +1,18 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+    <body class="skin-red sidebar-collapse">
+    <div class="wrapper">
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>{% block header %}{% endblock %}</h1>
+            </section>
+            <section class="content">
+                <div class="error-page">
+                    {% block content %}{% endblock %}
+                </div>
+            </section>
+        </div>
+    </div>
+    </body>
+{% endblock %}

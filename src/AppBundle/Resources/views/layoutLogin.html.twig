@@ -1,0 +1,29 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+    <body class="login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <img src="{{ asset('images/logo_black.png') }}">
+            {{ 'template.title'|trans }}
+        </div>
+        {% include 'AppBundle::flash.html.twig' %}
+        <div class="login-box-body">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <script src="{{ asset('js/combined.js') }}"></script>
+        <script>
+            $(function () {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%'
+                });
+            });
+        </script>
+    {% endblock %}
+    </body>
+{% endblock %}

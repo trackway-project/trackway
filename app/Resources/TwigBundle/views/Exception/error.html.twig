@@ -1,14 +1,15 @@
-{% extends "AppBundle::base.html.twig" %}
+{% extends "AppBundle::layoutError.html.twig" %}
 
-{% block title %}An Error Occurred: {{ status_text }}{{ 'template.title'|trans }}{% endblock %}
+{% block title %}An Error Occurred: {{ status_text }}{% endblock %}
 
-{% block body %}
-<h1>Oops! An Error Occurred</h1>
+{% block header %}{{ status_code }} {{ status_text }}{% endblock %}
 
-<strong>The server returned a "{{ status_code }} {{ status_text }}".</strong>
-
-<div>
-    Something is broken. Please let us know what you were doing when this error occurred.
-    We will fix it as soon as possible. Sorry for any inconvenience caused.
-</div>
+{% block content %}
+    <h2 class="headline text-red">{{ status_code }}</h2>
+    <div class="error-content" style="padding-top: 18px;">
+        <h3><i class="fa fa-warning text-red"></i> Oops! {{ status_text }}</h3>
+        <p>
+            Meanwhile, you may <a href="{{ path('dashboard_index') }}">return to dashboard</a> or try again later. Sorry for any inconvenience caused.
+        </p>
+    </div>
 {% endblock %}
