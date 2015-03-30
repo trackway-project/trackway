@@ -30,12 +30,14 @@ class TimeEntryRepository extends EntityRepository
     /**
      * @param Team $team
      * @param User $user
+     * @param \DateTime $startDate
+     * @param \DateTime $endDate
      *
      * @return array
      */
-    public function findByTeamAndUser(Team $team, User $user)
+    public function findByTeamAndUser(Team $team, User $user, \DateTime $startDate = null, \DateTime $endDate = null)
     {
-        return $this->findByTeamAndUserQuery($team, $user)->getResult();
+        return $this->findByTeamAndUserQuery($team, $user, $startDate, $endDate)->getResult();
     }
 
     /**
@@ -43,17 +45,32 @@ class TimeEntryRepository extends EntityRepository
      *
      * @param Team $team
      * @param User $user
+     * @param \DateTime $startDate
+     * @param \DateTime $endDate
      *
      * @return \Doctrine\ORM\Query
      */
-    public function findByTeamAndUserQuery(Team $team, User $user)
+    public function findByTeamAndUserQuery(Team $team, User $user, \DateTime $startDate = null, \DateTime $endDate = null)
     {
-        return $this
+        $queryBuilder =  $this
             ->createQueryBuilder('t')
             ->where('t.team = :team')
             ->andWhere('t.user = :user')
             ->setParameter('team', $team->getId())
-            ->setParameter('user', $user->getId())
-            ->getQuery();
+            ->setParameter('user', $user->getId());
+
+        if ($startDate) {
+            $queryBuilder
+                ->andWhere('t.dateTimeRange.date >= :startDate')
+                ->setParameter('startDate', $startDate);
+        }
+
+        if ($endDate) {
+            $queryBuilder
+                ->andWhere('t.dateTimeRange.date <= :endDate')
+                ->setParameter('endDate', $endDate);
+        }
+
+        return $queryBuilder->getQuery();
     }
 }

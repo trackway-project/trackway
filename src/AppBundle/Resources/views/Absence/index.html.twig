@@ -7,6 +7,18 @@
 {% endblock %}
 
 {% block content %}
+    <div class="box-header">
+        <div class="pull-left">
+            {% include 'AppBundle::dateRangePicker.html.twig' %}
+        </div>
+        <div class="pull-right">
+            <select class="form-control" id="items-select">
+                <option{% if pagination.itemNumberPerPage == 10 %} selected{% endif %}>10</option>
+                <option{% if pagination.itemNumberPerPage == 20 %} selected{% endif %}>20</option>
+                <option{% if pagination.itemNumberPerPage == 50 %} selected{% endif %}>50</option>
+            </select>
+        </div>
+    </div>
     <div class="box-body">
         <table class="table table-striped">
             <thead>
@@ -50,3 +62,10 @@
 {% block sidebarOffCanvas %}
     {{ knp_menu_render(['appbundle_main_menu', 'absence'], {}, 'appbundle_sidebar_renderer') }}
 {% endblock sidebarOffCanvas %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        {% include 'AppBundle::dateRangePicker.js.twig' %}
+    </script>
+{% endblock %}

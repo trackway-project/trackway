@@ -11,6 +11,7 @@ absence.flash.deleted: 'The absence was deleted'
 absence.flash.updated: 'The absence was updated'
 absence.template.edit.submit: Save
 absence.template.edit.title: 'Edit absence'
+absence.template.index.dateRange: 'Date range'
 absence.template.index.title: Absences
 absence.template.new.submit: Create
 absence.template.new.title: 'Create absence'
@@ -75,22 +76,22 @@ project.template.new.title: 'Create project'
 project.template.show.title: Project
 registration.flash.confirmed: 'Your registration was confirmed'
 registration.flash.registered: 'Your account was registered'
-registration.template.checkMail.message: 'A link to confirm your registration was send to your email adresse. Please follow the link to finish the process.'
 registration.template.checkMail.login: 'I already have an account'
-registration.template.register.submit: Register
-registration.template.register.message: 'Enter your details below to create a new account'
-registration.template.register.terms: 'I agree to the terms'
+registration.template.checkMail.message: 'A link to confirm your registration was send to your email adresse. Please follow the link to finish the process.'
 registration.template.register.login: 'I already have an account'
+registration.template.register.message: 'Enter your details below to create a new account'
+registration.template.register.submit: Register
+registration.template.register.terms: 'I agree to the terms'
 resetting.flash.confirmed: 'Your password reset was confirmed'
 resetting.flash.resetted: 'Your password was resetted'
-resetting.template.checkMail.message: 'A link to confirm your password reset was send to your email adresse. Please follow the link to finish the process.'
 resetting.template.checkMail.login: 'I already have an account'
-resetting.template.confirm.submit: Save
-resetting.template.confirm.message: 'Enter your new password'
+resetting.template.checkMail.message: 'A link to confirm your password reset was send to your email adresse. Please follow the link to finish the process.'
 resetting.template.confirm.login: 'I already have an account'
-resetting.template.request.submit: Request
-resetting.template.request.message: 'Reset your password'
+resetting.template.confirm.message: 'Enter your new password'
+resetting.template.confirm.submit: Save
 resetting.template.request.login: 'I already have an account'
+resetting.template.request.message: 'Reset your password'
+resetting.template.request.submit: Request
 security.login.action.registration: 'New to Trackway? Sign up now!'
 security.login.action.resetting: 'Forgot your password?'
 security.login.entity.password: Password
@@ -113,8 +114,8 @@ task.template.new.title: 'Create task'
 task.template.show.title: Task
 team.action.delete: Delete
 team.action.edit: Edit
-team.action.invite: Invite
 team.action.invitations: Invitations
+team.action.invite: Invite
 team.action.memberships: Memberships
 team.action.show: Show
 team.entity.name: Name
@@ -138,6 +139,18 @@ teamMembership.template.index.title: Memberships
 teamMembership.template.show.title: Membership
 template.alert: 'Alert!'
 template.closeSidebar: Close
+template.dateRange.applyLabel: Apply
+template.dateRange.cancelLabel: Cancel
+template.dateRange.customRangeLabel: Custom
+template.dateRange.fromLabel: FROM
+template.dateRange.lastMonth: 'Last month'
+template.dateRange.lastWeek: 'Last week'
+template.dateRange.thisMonth: 'This month'
+template.dateRange.thisWeek: 'This week'
+template.dateRange.today: Today
+template.dateRange.toLabel: TO
+template.dateRange.yesterday: Yesterday
+template.dateRange: 'Date range'
 template.forkIt: 'Fork me on <a href="%link%">Github</a>'
 template.submit: Submit
 template.title: Trackway
@@ -183,8 +196,8 @@ value.absenceReason.vacation: Vacation
 value.group.admin: Admin
 value.group.owner: Owner
 value.group.user: User
-value.invitationStatus.open: Open
 value.invitationStatus.accepted: Accepted
+value.invitationStatus.open: Open
 value.invitationStatus.rejected: Rejected
 value.locale.de: German
 value.locale.en: English
