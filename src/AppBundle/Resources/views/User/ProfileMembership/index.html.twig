@@ -22,11 +22,11 @@
                     <td>{{ entity.team.name }}</td>
                     <td>{{ entity.group|trans }}</td>
                     <td class="text-right">
-                        <a href="{{ path('profile_membership_show', { 'id': entity.id }) }}"
+                        <a href="{{ path('profile_membership_show', { 'membershipId': entity.id }) }}"
                            class="btn btn-sm btn-default"
                            title="{{ 'membership.action.show'|trans }}"><i class="fa fa-eye"></i></a>
                         {% if is_granted('EDIT', entity) %}
-                            <a href="{{ path('profile_membership_delete', { 'id': entity.id }) }}"
+                            <a href="{{ path('profile_membership_delete', { 'membershipId': entity.id }) }}"
                                class="btn btn-sm btn-danger"
                                title="{{ 'membership.action.delete'|trans }}"><i class="fa fa-times"></i></a>
                         {% endif %}

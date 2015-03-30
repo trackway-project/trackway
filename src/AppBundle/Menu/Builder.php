@@ -307,24 +307,45 @@ class Builder
 
                 // Profile contexts
                 elseif (strpos($route, 'profile_') === 0) {
+                    $membershipId = $request->get('membershipId');
+
                     $menu->addChild('action', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listHeader.html.twig']);
-                    $menu['action']->addChild('profile', [
+                    $menu['action']->addChild('user', [
                         'listTemplate' => 'AppBundle:Menu/Sidebar:listInvisible.html.twig']);
 
-                    $menu['action']['profile']->addChild('profile.membership', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-users',
-                        'route' => 'profile_membership_index',
-                        'routeParameters' => ['id' => $id]]);
-                    $menu['action']['profile']->addChild('profile.edit', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-pencil-square-o',
-                        'route' => 'profile_edit']);
-                    $menu['action']['profile']->addChild('profile.changePassword', [
-                        'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-key',
-                        'route' => 'profile_change_password']);
+                    // Membership context
+                    if ($membershipId && strpos($route, 'profile_membership_') === 0) {
+                        $menu['action']['user']->addChild('membership',
+                            ['listTemplate' => 'AppBundle:Menu/Sidebar:listInvisible.html.twig']);
+
+                        $menu['action']['user']['membership']->addChild('user.membership.show', [
+                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                            'icon' => 'fa fa-fw fa-eye',
+                            'route' => 'profile_membership_show',
+                            'routeParameters' => ['membershipId' => $membershipId]]);
+                        $menu['action']['user']['membership']->addChild('user.membership.delete', [
+                            'itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                            'icon' => 'fa fa-fw fa-times',
+                            'route' => 'profile_membership_delete',
+                            'routeParameters' => ['membershipId' => $membershipId]]);
+                    }
+
+                    // User context
+                    else {
+                        $menu['action']['user']->addChild('user.membership',
+                            ['itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                                'icon' => 'fa fa-fw fa-users',
+                                'route' => 'profile_membership_index']);
+                        $menu['action']['user']->addChild('user.edit',
+                            ['itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                                'icon' => 'fa fa-fw fa-pencil-square-o',
+                                'route' => 'profile_edit']);
+                        $menu['action']['user']->addChild('user.changePassword',
+                            ['itemTemplate' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                                'icon' => 'fa fa-fw fa-key',
+                                'route' => 'profile_change_password']);
+                    }
                 }
             } else {
                 $menu->addChild('team.newRoot', ['route' => 'team_new']);

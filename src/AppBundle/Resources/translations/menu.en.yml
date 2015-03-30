@@ -9,10 +9,12 @@ admin.team: Teams
 admin.user: Users
 admin: Admin
 dashboard: Dashboard
+invitation.delete: Delete
+invitation.show: Show
+invitation: Invitations
 login: Login
 main: NAVIGATION
-user.edit: Settings
-user.logout: Logout
+membership: Membership
 project.delete: Delete
 project.edit: Edit
 project.index: Overview
@@ -29,16 +31,11 @@ task: Tasks
 team.delete: Delete
 team.edit: Edit
 team.index: Overview
-invitation.delete: Delete
-invitation.index: Back
-invitation.show: Show
-invitation: Invitations
 team.invitation: Invitations
 team.invite: Invite
 team.manage: 'Manage teams'
 team.membership.delete: Delete
 team.membership.edit: Edit
-team.membership.index: Back
 team.membership.show: Show
 team.membership: Memberships
 team.new: 'Create team'
@@ -50,3 +47,10 @@ timeEntry.index: Overview
 timeEntry.new: Create
 timeEntry.show: Show
 timeEntry: 'Time entries'
+user.changePassword: 'Change password'
+user.edit: Settings
+user.logout: Logout
+user.membership.delete: Delete
+user.membership.show: Show
+user.membership: Memberships
+user: User

@@ -9,10 +9,10 @@ admin.team: __admin.team
 admin.user: __admin.user
 admin: admin
 dashboard: dashboard
+invitation: team.invitation
 login: __login
-profile.changePassword: __profile.changePassword
-profile.edit: __profile.edit
-profile.logout: __profile.logout
+main: __main
+membership: __membership
 project.delete: project.delete
 project.edit: __project.edit
 project.index: __project.index
@@ -32,7 +32,6 @@ team.index: __team.index
 team.invitation.delete: __team.invitation.delete
 team.invitation.index: __team.invitation.index
 team.invitation.show: __team.invitation.show
-invitation: team.invitation
 team.invitation: team.invitation
 team.invite: __team.invite
 team.manage: team.manage
@@ -50,3 +49,10 @@ timeEntry.index: __timeEntry.index
 timeEntry.new: __timeEntry.new
 timeEntry.show: __timeEntry.show
 timeEntry: __timeEntry
+user.changePassword: __user.changePassword
+user.edit: __user.edit
+user.logout: __user.logout
+user.membership.delete: __user.membership.delete
+user.membership.show: __user.membership.show
+user.membership: __user.membership
+user: __user

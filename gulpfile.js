@@ -209,8 +209,8 @@ gulp.task('favicons:build', ['favicons:clean'], function (cb) {
     }, function () {
         cb();
         return gulp.src(sourceDirectory + '/../views/favicons.html.twig')
-            .pipe(replace('../../../../web', ''))
-            .pipe(replace('..\..\..\../web', ''))
+            .pipe(replace(/\.\.\/\.\.\/\.\.\/\.\.\/web/gi, ''))
+            .pipe(replace(/\.\.\\\.\.\\\.\.\\\.\.\\web/gi, ''))
             .pipe(gulp.dest(sourceDirectory + '/../views/'));
 
     });
