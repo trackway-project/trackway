@@ -1,0 +1,35 @@
+$('#daterange-btn').daterangepicker({
+        ranges: {
+            '{{ 'template.dateRange.today'|trans }}': [moment(), moment()],
+            '{{ 'template.dateRange.yesterday'|trans }}': [moment().subtract('days', 1), moment().subtract('days', 1)],
+            '{{ 'template.dateRange.thisWeek'|trans }}': [moment().startOf('week'), moment().endOf('week')],
+            '{{ 'template.dateRange.lastWeek'|trans }}': [moment().subtract('week', 1).startOf('week'), moment().subtract('week', 1).endOf('week')],
+            '{{ 'template.dateRange.thisMonth'|trans }}': [moment().startOf('month'), moment().endOf('month')],
+            '{{ 'template.dateRange.lastMonth'|trans }}': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+        },
+        startDate: moment('{{ startDate|date('Ymd') }}', 'YYYYMMDD'),
+        endDate: moment('{{ endDate|date('Ymd') }}', 'YYYYMMDD'),
+        applyClass: 'btn-default pull-left',
+        cancelClass: 'btn-default pull-right',
+        locale: {
+            applyLabel: '{{ 'template.dateRange.applyLabel'|trans }}',
+            cancelLabel: '{{ 'template.dateRange.cancelLabel'|trans }}',
+            fromLabel: '{{ 'template.dateRange.fromLabel'|trans }}',
+            toLabel: '{{ 'template.dateRange.toLabel'|trans }}',
+            customRangeLabel: '{{ 'template.dateRange.customRangeLabel'|trans }}',
+            // TODO: add translations for all values
+            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        }
+    }, function (startDate, endDate) {
+        location.search = new URI().setSearch({
+            start: startDate.format('YYYYMMDD'),
+            end: endDate.format('YYYYMMDD')
+        }).query();
+    }
+);
+$('#items-select').change(function () {
+    location.search = new URI().setSearch({
+        limit: $('select option:selected').val()
+    }).query();
+});

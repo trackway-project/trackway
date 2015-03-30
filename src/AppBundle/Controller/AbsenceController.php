@@ -24,6 +24,8 @@ class AbsenceController extends Controller
     /**
      * Lists all existing Absence entities.
      *
+     * @param Request $request
+     *
      * @return array
      *
      * @Method("GET")
@@ -31,16 +33,27 @@ class AbsenceController extends Controller
      * @Security("is_granted('VIEW', user.getActiveTeam())")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         /** @var User $user */
         $user = $this->getUser();
+        $startDate = new \DateTime($request->query->get('start', 'now'));
+        $startDate->setTime(0, 0);
+        $endDate = new \DateTime($request->query->get('end', 'now'));
+        $endDate->setTime(0, 0);
 
-        return ['pagination' => $this->get('knp_paginator')->paginate(
-            $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeamAndUserQuery($user->getActiveTeam(), $user),
-            $this->get('request')->query->get('page', 1),
-            $this->get('request')->query->get('limit', 10)
-        )];
+        return [
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'pagination' => $this->get('knp_paginator')->paginate(
+                    $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeamAndUserQuery(
+                        $user->getActiveTeam(),
+                        $user,
+                        $startDate,
+                        $endDate),
+                    $request->query->get('page', 1),
+                    $request->query->get('limit', 10)
+                )];
     }
 
     /**

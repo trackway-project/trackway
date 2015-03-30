@@ -11,6 +11,7 @@ absence.flash.deleted: 'Die Abwesenheit wurde gelöscht'
 absence.flash.updated: 'Die Abwesenheit wurde aktualisiert'
 absence.template.edit.submit: __absence.template.edit.submit
 absence.template.edit.title: 'Abwesenheit bearbeiten'
+absence.template.index.dateRange: __absence.template.index.dateRange
 absence.template.index.title: Abwesenheiten
 absence.template.new.submit: __absence.template.new.submit
 absence.template.new.title: 'Abwesenheit anlegen'
@@ -77,19 +78,19 @@ registration.flash.confirmed: 'Ihre Registrierung wurde bestätigt'
 registration.flash.registered: 'Ihr Account wurde registriert'
 registration.template.checkMail.text: 'Ein Link um Ihre Registrierung zu bestätigen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Registrierprozess.'
 registration.template.checkMail.title: 'Registrierung bestätigen'
-registration.template.register.submit: __registration.template.register.submit
 registration.template.register.message: __registration.template.register.message
+registration.template.register.submit: __registration.template.register.submit
 registration.template.register.terms: __registration.template.register.terms
 registration.template.register.title: Registrierung
 resetting.flash.confirmed: 'Das Zurücksetzen Ihres Passwortes wurde bestätigt'
 resetting.flash.resetted: 'Ihr Passwort wurde zurückgesetzt'
 resetting.template.checkMail.text: 'Ein Link um Ihr Passwort zurückzusetzen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Prozess.'
 resetting.template.checkMail.title: 'Passwortzurücksetzen bestätigen'
-resetting.template.confirm.submit: __resetting.template.confirm.submit
 resetting.template.confirm.message: __resetting.template.confirm.message
+resetting.template.confirm.submit: __resetting.template.confirm.submit
 resetting.template.confirm.title: 'Passwortzurücksetzen bestätigen'
-resetting.template.request.submit: __resetting.template.request.submit
 resetting.template.request.message: __resetting.template.request.message
+resetting.template.request.submit: __resetting.template.request.submit
 resetting.template.request.title: 'Passwort zurücksetzen'
 security.login.action.registration: 'Neu bei Trackway? Jetzt registrieren!'
 security.login.action.resetting: 'Passwort vergessen?'
@@ -113,8 +114,8 @@ task.template.new.title: 'Eintrag erstellen'
 task.template.show.title: Eintrag
 team.action.delete: Löschen
 team.action.edit: Bearbeiten
-team.action.invite: __team.action.invite
 team.action.invitations: __team.action.invitations
+team.action.invite: __team.action.invite
 team.action.memberships: Mitgliedschaften
 team.action.show: Anzeigen
 team.entity.name: Name
@@ -138,6 +139,18 @@ teamMembership.template.index.title: Mitgliedschaften
 teamMembership.template.show.title: __teamMembership.template.show.title
 template.alert: __template.alert
 template.closeSidebar: Schließen
+template.dateRange.applyLabel: __template.dateRange.applyLabel
+template.dateRange.cancelLabel: __template.dateRange.cancelLabel
+template.dateRange.customRangeLabel: __template.dateRange.customRangeLabel
+template.dateRange.fromLabel: __template.dateRange.fromLabel
+template.dateRange.lastMonth: __template.dateRange.lastMonth
+template.dateRange.lastWeek: __template.dateRange.lastWeek
+template.dateRange.thisMonth: __template.dateRange.thisMonth
+template.dateRange.thisWeek: __template.dateRange.thisWeek
+template.dateRange.today: __template.dateRange.today
+template.dateRange.toLabel: __template.dateRange.toLabel
+template.dateRange.yesterday: __template.dateRange.yesterday
+template.dateRange: __timeEntry.template.index.dateRange
 template.forkIt: 'Fork me on <a href="%link%">Github</a>'
 template.submit: __template.submit
 template.title: Trackway
@@ -183,8 +196,8 @@ value.absenceReason.vacation: Urlaub
 value.group.admin: Admin
 value.group.owner: Eigentümer
 value.group.user: __value.group.user
-value.invitationStatus.open: __value.invitationStatus.open
 value.invitationStatus.accepted: __value.invitationStatus.accepted
+value.invitationStatus.open: __value.invitationStatus.open
 value.invitationStatus.rejected: __value.invitationStatus.rejected
 value.locale.de: Deutsch
 value.locale.en: Englisch

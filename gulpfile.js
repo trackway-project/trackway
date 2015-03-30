@@ -101,7 +101,8 @@ gulp.task('less:build', ['bootstrap:prepare'], function () {
 
 gulp.task('css:compress', ['less:build', 'admin-lte:prepare'], function () {
     return gulp.src([
-        buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css',
+            buildDirectory + '/lib/admin-lte/plugins/daterangepicker/daterangepicker-bs3.css',
+            buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css',
         buildDirectory + '/css/*.css'
     ])
         .pipe(minifyCSS())
@@ -145,7 +146,9 @@ gulp.task('js:copy', ['handlebars:build'], function () {
         buildDirectory + '/lib/jquery/dist/jquery.js',
         buildDirectory + '/lib/bootstrap/js/dropdown.js',
         buildDirectory + '/lib/bootstrap/js/tooltip.js',
+        buildDirectory + '/lib/uri.js/src/URI.js',
         buildDirectory + '/lib/admin-lte/dist/js/app.js',
+        buildDirectory + '/lib/admin-lte/plugins/daterangepicker/daterangepicker.js',
         buildDirectory + '/lib/admin-lte/plugins/fastclick/fastclick.js',
         buildDirectory + '/lib/admin-lte/plugins/iCheck/icheck.js',
         nodeDirectory + '/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js',
