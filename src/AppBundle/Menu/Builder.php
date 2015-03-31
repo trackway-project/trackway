@@ -386,7 +386,9 @@ class Builder
         $menu = $this->factory->createItem('root');
 
         if ($authorizationChecker->isGranted('ROLE_USER')) {
-            $username = $tokenStorage->getToken()->getUser()->getUsername();
+            /** @var User $user */
+            $user = $tokenStorage->getToken()->getUser();
+            $username = $user->getUsername();
 
             $menu->addChild('team', [
                 'itemTemplate' => 'AppBundle:Menu/Navbar:itemTeam.html.twig',
@@ -406,7 +408,7 @@ class Builder
                 'route' => 'team_index']);
 
             /** @var Team $team */
-            foreach ($entityManager->getRepository('AppBundle:Team')->findAll() as $team) {
+            foreach ($entityManager->getRepository('AppBundle:Team')->findByUser($user) as $team) {
                 $menu['team']['team.switch']->addChild($team->getName(), [
                     'itemTemplate' => 'AppBundle:Menu/Navbar:itemTeamSwitch.html.twig',
                     'route' => 'team_activate',
