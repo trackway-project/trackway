@@ -28,8 +28,8 @@ security:
                 key:      "%secret%"
 
     access_control:
-        - { path: ^(/[a-z]+)?/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^(/[a-z]+)?/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^(/[a-z]+)?/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^(/[a-z]+)?/admin/, role: ROLE_ADMIN }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/, role: ROLE_USER }

@@ -2,8 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Group;
 use AppBundle\Entity\Invitation;
+use AppBundle\Entity\Membership;
 use AppBundle\Entity\Team;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -122,14 +125,38 @@ class TeamInvitationController extends Controller
      */
     public function acceptAction($token)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Group $group */
+        $group = $em->getRepository('AppBundle:Group')->findOneByName('user');
+
+        if (!$group) {
+            throw $this->createNotFoundException('Unable to find Group entity.');
+        }
+
         /** @var Invitation $invitation */
-        $invitation = $this->getDoctrine()->getManager()->getRepository('AppBundle:Invitation')->findOneBy(['confirmationToken' => $token]);
+        $invitation = $em->getRepository('AppBundle:Invitation')->findOneBy(['confirmationToken' => $token]);
 
         $invitation->setConfirmationToken(null);
-        $invitation->setStatus($this->getDoctrine()->getManager()->getRepository('AppBundle:InvitationStatus')->findOneByName('accepted'));
+        $invitation->setStatus($em->getRepository('AppBundle:InvitationStatus')->findOneByName('accepted'));
         $invitation->setUser($this->getUser());
 
-        $this->getDoctrine()->getManager()->flush();
+        $membership = new Membership();
+        $membership->setGroup($group);
+        $membership->setTeam($invitation->getTeam());
+        $membership->setUser($this->getUser());
+
+        /** @var $user User */
+        $user = $this->getUser();
+        if (!$user->getActiveTeam()) {
+            $user->setActiveTeam($invitation->getTeam());
+            $em->persist($user);
+        }
+
+        $em->persist($invitation);
+        $em->persist($membership);
+
+        $em->flush();
 
         $this->get('session')->getFlashBag()->add('success', 'invitation.flash.accepted');
 
