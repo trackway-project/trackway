@@ -21,11 +21,8 @@ class TemplateExtension implements ExtensionInterface
      */
     public function buildOptions(array $options = [])
     {
-        if (!empty($options['listTemplate'])) {
-            $options['extras']['listTemplate'] = $options['listTemplate'];
-        }
-        if (!empty($options['itemTemplate'])) {
-            $options['extras']['itemTemplate'] = $options['itemTemplate'];
+        if (!empty($options['template'])) {
+            $options['extras']['template'] = $options['template'];
         }
         if (!empty($options['listClass'])) {
             $options['extras']['listClass'] = $options['listClass'];

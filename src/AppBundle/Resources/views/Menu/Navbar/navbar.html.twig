@@ -1,8 +1,8 @@
 <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
         {% for child in item.children %}
-            {% if child.extras['itemTemplate'] is defined %}
-                {% include child.extras['itemTemplate'] with {'item': child} %}
+            {% if child.extras['template'] is defined %}
+                {% include child.extras['template'] with {'item': child} %}
             {% endif %}
         {% endfor %}
     </ul>

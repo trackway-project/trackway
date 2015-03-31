@@ -3,7 +3,18 @@
         <img src="{{ gravatar(app.user.email, 25) }}" class="user-image" alt="User Image">
         <span class="hidden-xs">{{ item.label }}</span>
     </a>
-    {% if item.extras['listTemplate'] is defined %}
-        {% include item.extras['listTemplate'] with {'item': item} %}
-    {% endif %}
+    <ul class="dropdown-menu">
+        <li class="user-header">
+            <img src="{{ gravatar(app.user.email, 90) }}" class="img-circle" alt="User Image">
+            <p>
+                {{ app.user.username }}
+                <small>Lorem ipsum</small>
+            </p>
+        </li>
+        {% for child in item.children %}
+            {% if child.extras['template'] is defined %}
+                {% include child.extras['template'] with {'item': child} %}
+            {% endif %}
+        {% endfor %}
+    </ul>
 </li>

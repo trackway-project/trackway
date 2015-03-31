@@ -1,7 +1,0 @@
-{% for child in item.children %}
-    {% if child.extras['itemTemplate'] is defined %}
-        {% include child.extras['itemTemplate'] with {'item': child} %}
-    {% elseif child.extras['listTemplate'] is defined %}
-        {% include child.extras['listTemplate'] with {'item': child} %}
-    {% endif %}
-{% endfor %}

@@ -1,10 +1,5 @@
-{% set class = false %}
-{% if matcher.isCurrent(item) %}
-    {% set class = 'active' %}
-{% elseif matcher.isAncestor(item, options.matchingDepth) %}
-    {% set class = 'active' %}
-{% endif %}
-<li class="treeview{% if class %} {{ class }}{% endif %}">
+{% set isActive = matcher.isCurrent(item) or matcher.isAncestor(item, options.matchingDepth) %}
+<li class="treeview{{ isActive ? ' active' : '' }}">
     <a href="{{ item.uri }}">
         {% if item.extras['icon'] is defined %}
             <i class="{{ item.extras['icon'] }}"></i>
@@ -14,7 +9,13 @@
             <i class="fa fa-angle-left pull-right"></i>
         {% endif %}
     </a>
-    {% if item.extras['listTemplate'] is defined %}
-        {% include item.extras['listTemplate'] with {'item': item} %}
+    {% if item.hasChildren %}
+        <ul class="treeview-menu">
+            {% for child in item.children %}
+                {% if child.extras['template'] is defined %}
+                    {% include child.extras['template'] with {'item': child} %}
+                {% endif %}
+            {% endfor %}
+        </ul>
     {% endif %}
 </li>
