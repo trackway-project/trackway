@@ -1,3 +1,7 @@
-<div class="{{ item.extras['itemClass'] is defined ? item.extras['itemClass'] : '' }}">
-    <a href="{{ item.uri }}" class="btn btn-default btn-flat">{{ item.label|trans({}, 'menu') }}</a>
-</div>
+<li class="user-footer">
+    {% for child in item.children %}
+        {% if child.extras['template'] is defined %}
+            {% include child.extras['template'] with {'item': child} %}
+        {% endif %}
+    {% endfor %}
+</li>

@@ -3,32 +3,34 @@
 
 {% block content %}
     <p class="login-box-msg">{{ 'registration.template.register.message'|trans }}</p>
+    {{ form_errors(form) }}
     <form action="" method="post">
         {{ form_row(form._token) }}
         <div class="form-group has-feedback">
-            {{ form_errors(form.username) }}
-            <input type="text" class="form-control" placeholder="{{ 'user.entity.username'|trans }}" name="appbundle_registration_form[username]" required="required" maxlength="255" pattern=".{3,}"/>
+            <input type="text" class="form-control" placeholder="{{ 'user.entity.username'|trans }}" name="appbundle_registration_form[username]" required="required" value="{{ form.vars.value.username }}"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            {{ form_errors(form.username) }}
         </div>
         <div class="form-group has-feedback">
-            {{ form_errors(form.email) }}
-            <input type="email" class="form-control" placeholder="{{ 'user.entity.email'|trans }}" name="appbundle_registration_form[email]" required="required"/>
+            <input type="email" class="form-control" placeholder="{{ 'user.entity.email'|trans }}" name="appbundle_registration_form[email]" required="required" value="{{ form.vars.value.email }}"/>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            {{ form_errors(form.email) }}
         </div>
         <div class="form-group has-feedback">
-            {{ form_errors(form.password) }}
             <input type="password" class="form-control" placeholder="{{ 'user.entity.password'|trans }}" name="appbundle_registration_form[password][first]" required="required"/>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            {{ form_errors(form.password.first) }}
         </div>
         <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="{{ 'user.entity.passwordRepeat'|trans }}" name="appbundle_registration_form[password][second]" required="required"/>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+            {{ form_errors(form.password.second) }}
         </div>
         <div class="row">
             <div class="col-xs-8">
                 <div class="checkbox icheck">
                     <label>
-                        <input type="checkbox" required=""> {{ 'registration.template.register.terms'|trans }}
+                        <input type="checkbox" required="required"> {{ 'registration.template.register.terms'|trans }}
                     </label>
                 </div>
             </div>

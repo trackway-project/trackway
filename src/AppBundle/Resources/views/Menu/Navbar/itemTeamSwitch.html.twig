@@ -1,8 +1,9 @@
 <li>
-    <a href="{{ item.uri }}">
-        {% if item.extras['icon'] is defined %}
-            <i class="{{ item.extras['icon'] }}"></i>
-        {% endif %}
-        <span>{{ item.label }}</span>
-    </a>
+    <ul class="menu">
+        {% for child in item.children %}
+            {% if child.extras['template'] is defined %}
+                {% include child.extras['template'] with {'item': child} %}
+            {% endif %}
+        {% endfor %}
+    </ul>
 </li>

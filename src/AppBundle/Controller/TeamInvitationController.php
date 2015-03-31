@@ -127,6 +127,9 @@ class TeamInvitationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        /** @var $user User */
+        $user = $this->getUser();
+
         /** @var Group $group */
         $group = $em->getRepository('AppBundle:Group')->findOneByName('user');
 
@@ -136,7 +139,6 @@ class TeamInvitationController extends Controller
 
         /** @var Invitation $invitation */
         $invitation = $em->getRepository('AppBundle:Invitation')->findOneBy(['confirmationToken' => $token]);
-
         $invitation->setConfirmationToken(null);
         $invitation->setStatus($em->getRepository('AppBundle:InvitationStatus')->findOneByName('accepted'));
         $invitation->setUser($this->getUser());
@@ -144,10 +146,8 @@ class TeamInvitationController extends Controller
         $membership = new Membership();
         $membership->setGroup($group);
         $membership->setTeam($invitation->getTeam());
-        $membership->setUser($this->getUser());
+        $membership->setUser($user);
 
-        /** @var $user User */
-        $user = $this->getUser();
         if (!$user->getActiveTeam()) {
             $user->setActiveTeam($invitation->getTeam());
             $em->persist($user);

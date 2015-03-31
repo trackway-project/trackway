@@ -1,0 +1,6 @@
+<li class="header">{{ item.label|trans({}, 'menu') }}</li>
+{% for child in item.children %}
+    {% if child.extras['template'] is defined %}
+        {% include child.extras['template'] with {'item': child} %}
+    {% endif %}
+{% endfor %}

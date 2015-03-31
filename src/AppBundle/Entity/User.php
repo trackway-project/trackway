@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\UserRepository")
+ *
+ * @UniqueEntity(fields={"email"}, groups={"profile", "registration"})
+ * @UniqueEntity(fields={"username"}, groups={"profile", "registration"})
  */
 class User implements AdvancedUserInterface, \Serializable
 {

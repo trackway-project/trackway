@@ -1,11 +1,6 @@
 {% for child in item.children %}
-    {% set class = false %}
-    {% if matcher.isCurrent(child) %}
-        {% set class = 'active' %}
-    {% elseif matcher.isAncestor(child, options.matchingDepth) %}
-        {% set class = 'active' %}
-    {% endif %}
-    {% if class %}
+    {% set isActive = matcher.isCurrent(child) or matcher.isAncestor(child, options.matchingDepth) %}
+    {% if isActive %}
         <li>
             {% if child.uri %}
                 <a href="{{ child.uri }}">

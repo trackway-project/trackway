@@ -2,8 +2,8 @@
     <section class="sidebar">
         <ul class="sidebar-menu">
             {% for child in item.children %}
-                {% if child.extras['listTemplate'] is defined %}
-                    {% include child.extras['listTemplate'] with {'item': child} %}
+                {% if child.extras['template'] is defined %}
+                    {% include child.extras['template'] with {'item': child} %}
                 {% endif %}
             {% endfor %}
         </ul>
