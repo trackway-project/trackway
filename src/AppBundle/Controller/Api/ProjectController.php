@@ -15,10 +15,16 @@ use FOS\RestBundle\Util\Codes;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class ProjectController
+ *
+ * @package AppBundle\Controller\Api
+ */
 class ProjectController extends FOSRestController implements ClassResourceInterface
 {
-
-    /** @var EntityManager */
+    /**
+     * @var EntityManager
+     */
     private $manager;
 
     /**
@@ -26,21 +32,20 @@ class ProjectController extends FOSRestController implements ClassResourceInterf
      */
     private $repo;
 
-    function __construct()
+    public function __construct()
     {
         $this->manager = $this->getDoctrine()->getManager();
         $this->repo = $this->manager->getRepository('AppBundle:Project');
     }
 
-
     /**
      * @return array
+     *
      * @View()
      * @ApiDoc(
      *   section="Project",
      *   description="Get all Projects for the active Team"
      * )
-     *
      */
     public function cgetAction()
     {
@@ -48,11 +53,12 @@ class ProjectController extends FOSRestController implements ClassResourceInterf
         $user = $this->getUser();
         $projects = $this->repo->findByTeam($user->getActiveTeam());
 
-        return array('projects' => $projects);
+        return ['projects' => $projects];
     }
 
     /**
      * @param $projectId
+     *
      * @return array
      *
      * @View()
@@ -60,24 +66,24 @@ class ProjectController extends FOSRestController implements ClassResourceInterf
      *   section="Project",
      *   description="Get a Project for the active Team"
      * )
-     *
      */
     public function getAction($projectId)
     {
-        return array(
+        return [
             'project' => $this->repo->find($projectId),
-        );
+        ];
     }
 
     /**
      * @param Request $request
+     *
+     * @return array|\FOS\RestBundle\View\View
      *
      * @View()
      * @ApiDoc(
      *   section="Project",
      *   description="Add a new Project to the active Team"
      * )
-     * @return array|\FOS\RestBundle\View\View
      * @internal param Team $team
      */
     public function postAction(Request $request)
@@ -88,13 +94,14 @@ class ProjectController extends FOSRestController implements ClassResourceInterf
     /**
      * @param Request $request
      * @param $projectId
+     *
      * @return array|\FOS\RestBundle\View\View
+     *
      * @View()
      * @ApiDoc(
      *   section="Project",
      *   description="Edit a Project for the active Team by id"
      * )
-     *
      */
     public function putAction(Request $request, $projectId)
     {
@@ -103,6 +110,7 @@ class ProjectController extends FOSRestController implements ClassResourceInterf
 
     /**
      * @param $projectId
+     *
      * @return \FOS\RestBundle\View\View
      *
      * @View()
@@ -110,7 +118,6 @@ class ProjectController extends FOSRestController implements ClassResourceInterf
      *   section="Project",
      *   description="Delete a Project for the active Team by id"
      * )
-     *
      */
     public function deleteAction($projectId)
     {
