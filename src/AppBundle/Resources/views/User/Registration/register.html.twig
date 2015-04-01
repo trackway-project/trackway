@@ -3,16 +3,15 @@
 
 {% block content %}
     <p class="login-box-msg">{{ 'registration.template.register.message'|trans }}</p>
-    {{ form_errors(form) }}
     <form action="" method="post">
         {{ form_row(form._token) }}
         <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="{{ 'user.entity.username'|trans }}" name="appbundle_registration_form[username]" required="required" value="{{ form.vars.value.username }}"/>
+            <input type="text" class="form-control" placeholder="{{ 'user.entity.username'|trans }}" name="appbundle_registration_form[username]" value="{{ form.vars.value.username }}" required="required" autofocus="autofocus"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
             {{ form_errors(form.username) }}
         </div>
         <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="{{ 'user.entity.email'|trans }}" name="appbundle_registration_form[email]" required="required" value="{{ form.vars.value.email }}"/>
+            <input type="email" class="form-control" placeholder="{{ 'user.entity.email'|trans }}" name="appbundle_registration_form[email]" value="{{ form.vars.value.email }}" required="required"/>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             {{ form_errors(form.email) }}
         </div>
