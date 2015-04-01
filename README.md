@@ -9,19 +9,18 @@ Enjoy!
 
 ## Requirements
 * PHP 5.5+
-* Bower
 * Composer
-* gulp
+* npm
 
 ## Installation
 * `composer install`
+* `npm install`
 * `php app/console doctrine:database:create`
 * `php app/console doctrine:schema:create`
 * `php app/console doctrine:fixtures:load`
-* `npm install`
-* `bower install`
-* `gulp`
-* `gulp favicons:build`
+* `node_modules/.bin/bower install`
+* `node_modules/.bin/gulp`
+* `node_modules/.bin/gulp favicons:build`
 
 ## Reset Database
 * `php app/console doctrine:database:drop --force`
@@ -46,13 +45,16 @@ Take a look at https://github.com/trackway-project/trackway-deploy
 ## Thanks
 * http://bower.io/
 * http://getbootstrap.com/
+* http://getcomposer.org/
 * http://github.com/almasaeed2010/AdminLTE
 * http://gulpjs.com/
-* http://nodejs.org/
+* http://npmjs.com
 * http://symfony.com/
 
-## Contributors
+## Author
 * Mewes Kochheim
+
+## Contributors
 * Markus Wanjura
 * Felix Peters
 

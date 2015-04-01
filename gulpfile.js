@@ -4,22 +4,20 @@ var browserSync = require('browser-sync'),
     concat = require('gulp-concat'),
     declare = require('gulp-declare'),
     del = require('del'),
+    favicons = require('favicons'),
     gulp = require('gulp'),
-    filter = require('gulp-filter'),
     handlebars = require('gulp-handlebars'),
-    inject = require('gulp-inject'),
     insert = require('gulp-insert'),
     less = require('gulp-less'),
+    livereload = require('gulp-livereload'),
     mainBowerFiles = require('main-bower-files'),
     minifyCSS = require('gulp-minify-css'),
+    path = require('path'),
     rename = require('gulp-rename'),
     replace = require('gulp-replace'),
     uglify = require('gulp-uglify'),
     watch = require('gulp-watch'),
-    wrap = require('gulp-wrap'),
-    livereload = require('gulp-livereload'),
-    favicons = require('favicons'),
-    path = require('path');
+    wrap = require('gulp-wrap');
 
 // Configuration
 
@@ -31,20 +29,9 @@ var buildDirectory = 'web',
 
 // Default task
 
-gulp.task('default', [
-        'less:build',
-        'handlebars:build',
-        'fonts:copy',
-        'images:copy',
-        'js:copy',
-        'js:copyAsync',
-        'js:compress',
-        'js:compressAsync',
-        'css:compress'],
-    function () {
-        gulp.start('finish');
-    }
-);
+gulp.task('default', ['css', 'fonts', 'images', 'js', 'js:async'], function () { 
+    gulp.start('finish');
+});
 
 // Tasks
 
@@ -62,44 +49,37 @@ gulp.task('bower', ['clean'], function () {
         .pipe(gulp.dest(buildDirectory + '/lib/'));
 });
 
-gulp.task('admin-lte:prepare', ['bower'], function () {
+gulp.task('admin-lte', ['bower'], function () {
     // Fix image paths
     gulp.src(buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css')
         .pipe(replace('url(', 'url(../images/'))
         .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/plugins/iCheck/square/'));
+		
     // Remove imports of the integrated bootstrap files - we're going to use the real ones
     gulp.src(buildDirectory + '/lib/admin-lte/build/less/AdminLTE.less')
         .pipe(replace('@import "../bootstrap-less/mixins.less";', ''))
         .pipe(replace('@import "../bootstrap-less/variables.less";', ''))
         .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/build/less/'));
+		
     return gulp.src(buildDirectory + '/lib/admin-lte/build/less/skins/*.less')
         .pipe(replace('@import "../../bootstrap-less/mixins.less";', ''))
         .pipe(replace('@import "../../bootstrap-less/variables.less";', ''))
         .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/build/less/skins/'));
 });
 
-gulp.task('bootstrap:prepare', ['admin-lte:prepare'], function () {
-    // Append additional imports
+gulp.task('less', ['admin-lte'], function () {
     return gulp.src(buildDirectory + '/lib/bootstrap/less/bootstrap.less')
-        .pipe(insert.append('\n// Font Awesome'))
         .pipe(insert.append('\n@import "../../font-awesome/less/font-awesome.less";'))
-        .pipe(insert.append('\n\n// Admin-LTE'))
         .pipe(insert.append('\n@import "../../admin-lte/build/less/AdminLTE.less";'))
         .pipe(insert.append('\n@import "../../admin-lte/build/less/skins/skin-red.less";'))
-        .pipe(insert.append('\n\n// Custom'))
         .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/main.less";'))
         .pipe(insert.append('\n@import "../../../../'+sourceDirectory+'/less/variables.less";'))
-        .pipe(gulp.dest(buildDirectory + '/lib/bootstrap/less/'));
-});
-
-gulp.task('less:build', ['bootstrap:prepare'], function () {
-    return gulp.src(buildDirectory + '/lib/bootstrap/less/bootstrap.less')
         .pipe(less())
         .pipe(rename('boostrap.css'))
         .pipe(gulp.dest(buildDirectory + '/css/'));
 });
 
-gulp.task('css:compress', ['less:build', 'admin-lte:prepare'], function () {
+gulp.task('css', ['less'], function () {
     return gulp.src([
             buildDirectory + '/lib/admin-lte/plugins/daterangepicker/daterangepicker-bs3.css',
             buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css',
@@ -111,7 +91,7 @@ gulp.task('css:compress', ['less:build', 'admin-lte:prepare'], function () {
         .pipe(livereload());
 });
 
-gulp.task('fonts:copy', ['bower'], function () {
+gulp.task('fonts', ['bower'], function () {
     return gulp.src([
         buildDirectory + '/lib/bootstrap/fonts/*.{eot,svg,ttf,woff,woff2}',
         buildDirectory + '/lib/font-awesome/fonts/*.{eot,svg,ttf,woff,woff2}',
@@ -120,28 +100,28 @@ gulp.task('fonts:copy', ['bower'], function () {
         .pipe(gulp.dest(buildDirectory + '/fonts/'));
 });
 
-gulp.task('handlebars:build', ['bower'], function () {
+gulp.task('handlebars', ['bower'], function () {
     return gulp.src(sourceDirectory + '/js/templates/*.hbs')
         .pipe(handlebars())
         .pipe(wrap('Handlebars.template(<%= contents %>)'))
         .pipe(declare({
-            namespace: 'kui.templates',
+            namespace: 'trackway.templates',
             noRedeclare: true
         }))
         .pipe(concat('templates.js'))
         .pipe(gulp.dest(buildDirectory + '/js/'));
 });
 
-gulp.task('images:copy', ['bower'], function () {
+gulp.task('images', ['bower'], function () {
     return gulp.src([
-        buildDirectory + '/lib/admin-lte/dist/img/**/*',
+        buildDirectory + '/lib/admin-lte/dist/img/boxed-bg.jpg',
         buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue*',
         sourceDirectory + '/images/*'
     ])
         .pipe(gulp.dest(buildDirectory + '/images/'));
 });
 
-gulp.task('js:copy', ['handlebars:build'], function () {
+gulp.task('js', ['handlebars'], function () {
     return gulp.src([
         buildDirectory + '/lib/jquery/dist/jquery.js',
         buildDirectory + '/lib/bootstrap/js/dropdown.js',
@@ -155,36 +135,21 @@ gulp.task('js:copy', ['handlebars:build'], function () {
         buildDirectory + '/js/templates.js',
         sourceDirectory + '/js/*.js'
     ])
-        .pipe(gulp.dest(buildDirectory + '/js'));
-});
-
-gulp.task('js:copyAsync', ['bower'], function () {
-    return gulp.src([
-        sourceDirectory + '/js/' + asyncDirectory + '/*.js',
-        buildDirectory + '/lib/bootstrap/js/*.js'
-    ])
-        .pipe(gulp.dest(buildDirectory + '/js/' + asyncDirectory));
-});
-
-gulp.task('js:compress', ['js:copy'], function () {
-    return gulp.src([
-        buildDirectory + '/js/jquery.js',
-        buildDirectory + '/js/*.js',
-        buildDirectory + '/js/templates.js',
-        buildDirectory + '/js/application.js'
-    ])
         .pipe(uglify())
         .pipe(concat('combined.js'))
         .pipe(gulp.dest(buildDirectory + '/js/'));
 });
 
-gulp.task('js:compressAsync', ['js:copyAsync'], function () {
-    return gulp.src(buildDirectory + '/js/' + asyncDirectory + '/*.js')
+gulp.task('js:async', ['bower'], function () {
+    return gulp.src([
+        buildDirectory + '/lib/bootstrap/js/*.js',
+        sourceDirectory + '/js/' + asyncDirectory + '/*.js'
+    ])
         .pipe(uglify())
         .pipe(gulp.dest(buildDirectory + '/js/' + asyncDirectory));
 });
 
-gulp.task('favicons:clean', function (cb) {
+gulp.task('favicons', function (cb) {
     del([
         sourceDirectory + '/../views/favicons.html.twig',
         buildDirectory + '/*.png',
@@ -192,48 +157,38 @@ gulp.task('favicons:clean', function (cb) {
         buildDirectory + '/*.xml',
         buildDirectory + '/*.json',
         buildDirectory + '/*.webapp'
-    ], cb);
-});
+    ], function() {
+		favicons({
+			files: {
+				src: path.resolve(sourceDirectory + '/favicon.png'),
+				dest: path.resolve(buildDirectory),
+				html: path.resolve(sourceDirectory + '/../views/favicons.html.twig')
+			},
+			settings: {
+				appName: 'Trackway',
+				appDescription: 'The simple on-premise open source time tracker.',
+				developerURL: 'http://trackway.org/',
+				background: '#d73925',
+				silhouette: true
+			}
+		}, function () {
+			return gulp.src(sourceDirectory + '/../views/favicons.html.twig')
+				.pipe(replace(/\.\.\/\.\.\/\.\.\/\.\.\/web/gi, '')) // Unix
+				.pipe(replace(/\.\.\\\.\.\\\.\.\\\.\.\\web/gi, '')) // Windows
+				.pipe(gulp.dest(sourceDirectory + '/../views/'));
 
-gulp.task('favicons:build', ['favicons:clean'], function (cb) {
-    favicons({
-        files: {
-            src: path.resolve(sourceDirectory + '/favicon.png'),
-            dest: path.resolve(buildDirectory),
-            html: path.resolve(sourceDirectory + '/../views/favicons.html.twig')
-        },
-        settings: {
-            appName: 'Trackway',
-            appDescription: 'The simple on-premise open source time tracker.',
-            developerURL: 'http://trackway.org/',
-            background: '#d73925',
-            silhouette: true
-        }
-    }, function () {
-        cb();
-        return gulp.src(sourceDirectory + '/../views/favicons.html.twig')
-            .pipe(replace(/\.\.\/\.\.\/\.\.\/\.\.\/web/gi, ''))
-            .pipe(replace(/\.\.\\\.\.\\\.\.\\\.\.\\web/gi, ''))
-            .pipe(gulp.dest(sourceDirectory + '/../views/'));
-
-    });
+		});
+	});
 });
 
 gulp.task('finish', function () {
-    // remove all css files except combined.css
     del([
         buildDirectory + '/css/*.css',
-        '!' + buildDirectory + '/css/combined.css'
-    ]);
-
-    // remove all js files except combined.css
-    del([
+        '!' + buildDirectory + '/css/combined.css',
         buildDirectory + '/js/*.js',
-        '!' + buildDirectory + '/js/combined.js'
+        '!' + buildDirectory + '/js/combined.js',
+		buildDirectory + '/lib/'
     ]);
-
-    // remove lib folder
-    del(buildDirectory + '/lib/');
 });
 
 // Watchers
@@ -241,13 +196,7 @@ gulp.task('finish', function () {
 gulp.task('watch', function () {
     livereload.listen();
     gulp.watch([
-        sourceDirectory + '/fonts/*',
-        sourceDirectory + '/images/*',
-        sourceDirectory + '/js/*.js',
-        sourceDirectory + '/js/' + asyncDirectory + '/*.js',
-        sourceDirectory + '/js/templates/*.hbs',
-        sourceDirectory + '/less/*.less'
-    ], [
-        'default'
-    ]);
+        sourceDirectory + '/**/*',
+        '!' + sourceDirectory + '/favicon.png'
+    ], ['default']);
 });
