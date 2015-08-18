@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -192,5 +193,42 @@ class TimeEntryController extends Controller
         $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.deleted');
 
         return $this->redirect($this->generateUrl('timeentry_index'));
+    }
+
+    /**
+     * @Method("GET")
+     * @Route("/calendar", name="timeentry_calendar")
+     * @Security("is_granted('VIEW', user.getActiveTeam())")
+     */
+    public function calendarAction(Request $request){
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $startDate = new \DateTime($request->query->get('start', 'now'));
+        $startDate->setTime(0, 0);
+        $endDate = new \DateTime($request->query->get('end', 'now'));
+        $endDate->setTime(0, 0);
+
+        $timeEntryResult = $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findByTeamAndUserQuery(
+            $user->getActiveTeam(),
+            $user,
+            $startDate,
+            $endDate)->getResult();
+
+        $return = [];
+
+        /** @var TimeEntry $entry */
+        foreach($timeEntryResult as $entry){
+            $return[] = [
+                'id' => $entry->getId(),
+                'title' => $entry->getNote(),
+                'start' => $entry->getDateTimeRange()->getStartDateTime()->format(\DateTime::ISO8601),
+                'end' => $entry->getDateTimeRange()->getEndDateTime()->format(\DateTime::ISO8601),
+                'allDay' => false
+            ];
+        }
+
+        return new JsonResponse($return);
+
     }
 }

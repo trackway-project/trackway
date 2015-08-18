@@ -42,6 +42,18 @@ class DateTimeRange
         return $this->date->format('Y-m-d') . ' ' . $this->startsAt->format('H:i') . ' ' . $this->endsAt->format('H:i');
     }
 
+    public function getStartDateTime(){
+        $return = clone $this->getDate();
+        $return->setTime($this->getStartsAt()->format('H'), $this->getStartsAt()->format('i'), $this->getStartsAt()->format('s'));
+        return $return;
+    }
+
+    public function getEndDateTime(){
+        $return = clone $this->getDate();
+        $return->setTime($this->getEndsAt()->format('H'), $this->getEndsAt()->format('i'), $this->getEndsAt()->format('s'));
+        return $return;
+    }
+
     /**
      * @return \DateTime
      */
