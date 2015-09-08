@@ -54,6 +54,8 @@ class TimeEntryRepository extends EntityRepository
     {
         $queryBuilder =  $this
             ->createQueryBuilder('t')
+            ->orderBy('t.dateTimeRange.date')
+            ->orderBy('t.dateTimeRange.startsAt')
             ->where('t.team = :team')
             ->andWhere('t.user = :user')
             ->setParameter('team', $team->getId())

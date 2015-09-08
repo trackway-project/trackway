@@ -101,4 +101,13 @@ class DateTimeRange
     {
         $this->startsAt = $startsAt;
     }
+
+    /**
+     * @return bool|\DateInterval
+     */
+    public function getInterval()
+    {
+        $interval = date_diff($this->getEndDateTime(), $this->getStartDateTime());
+        return $interval;
+    }
 }
