@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new AppBundle\AppBundle(),
         );
 
