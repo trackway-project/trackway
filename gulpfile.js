@@ -124,13 +124,17 @@ gulp.task('images', ['bower'], function () {
 gulp.task('js', ['handlebars'], function () {
     return gulp.src([
         buildDirectory + '/lib/jquery/dist/jquery.js',
+        buildDirectory + '/lib/bootstrap/js/button.js',
         buildDirectory + '/lib/bootstrap/js/dropdown.js',
+        buildDirectory + '/lib/bootstrap/js/modal.js',
+        buildDirectory + '/lib/bootstrap/js/tab.js',
         buildDirectory + '/lib/bootstrap/js/tooltip.js',
         buildDirectory + '/lib/uri.js/src/URI.js',
         buildDirectory + '/lib/admin-lte/dist/js/app.js',
         buildDirectory + '/lib/admin-lte/plugins/daterangepicker/daterangepicker.js',
         buildDirectory + '/lib/admin-lte/plugins/fastclick/fastclick.js',
         buildDirectory + '/lib/admin-lte/plugins/iCheck/icheck.js',
+        buildDirectory + '/lib/keymaster/keymaster.js',
         nodeDirectory + '/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js',
         buildDirectory + '/js/templates.js',
         sourceDirectory + '/js/*.js'

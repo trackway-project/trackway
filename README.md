@@ -57,6 +57,7 @@ Take a look at https://github.com/trackway-project/trackway-deploy
 ## Contributors
 * Markus Wanjura
 * Felix Peters
+* Dominik Schmeiser
 
 ## Copyright and License
 Code released under the MIT License.

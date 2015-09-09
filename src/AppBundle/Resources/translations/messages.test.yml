@@ -27,7 +27,7 @@ admin.user.template.index.title: admin.user.template.index.title
 admin.user.template.new.submit: admin.user.template.new.submit
 admin.user.template.new.title: admin.user.template.new.title
 admin.user.template.show.title: admin.user.template.show.title
-dashboard.template.index.title: dashboard.template.index.title
+calendar.template.index.title: calendar.template.index.title
 invitation.action.delete: invitation.action.delete
 invitation.action.edit: invitation.action.edit
 invitation.action.show: invitation.action.show
@@ -82,6 +82,7 @@ registration.template.register.login: registration.template.register.login
 registration.template.register.message: registration.template.register.message
 registration.template.register.submit: registration.template.register.submit
 registration.template.register.terms: registration.template.register.terms
+reports.template.index.title: reports.template.index.title
 resetting.flash.confirmed: resetting.flash.confirmed
 resetting.flash.resetted: resetting.flash.resetted
 resetting.template.checkMail.login: resetting.template.checkMail.login
