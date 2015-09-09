@@ -103,7 +103,7 @@ class ResettingController extends Controller
 
             $this->get('session')->getFlashBag()->add('success', 'resetting.flash.confirmed');
 
-            return $this->redirect($this->generateUrl('dashboard_index'));
+            return $this->redirect($this->generateUrl('calendar_index'));
         }
 
         return ['entity' => $user, 'form' => $form->createView()];

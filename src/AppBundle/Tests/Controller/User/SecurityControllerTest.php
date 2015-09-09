@@ -35,7 +35,7 @@ class SecurityControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'dashboard.template.index.title');
+        static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 
     /**

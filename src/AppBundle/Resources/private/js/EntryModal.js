@@ -108,7 +108,7 @@
 
         _showTabs: function () {
             var self = this;
-            $(self.element).find('.nav-tabs-custom').hide();
+            $(self.element).find('.nav-tabs-custom').show();
         }
     };
 

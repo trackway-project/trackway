@@ -160,7 +160,7 @@ class TeamInvitationController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', 'invitation.flash.accepted');
 
-        return $this->redirect($this->generateUrl('dashboard_index'));
+        return $this->redirect($this->generateUrl('calendar_index'));
     }
 
     /**
@@ -183,7 +183,7 @@ class TeamInvitationController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', 'invitation.flash.rejected');
 
-        return $this->redirect($this->generateUrl('dashboard_index'));
+        return $this->redirect($this->generateUrl('calendar_index'));
     }
 
     /**

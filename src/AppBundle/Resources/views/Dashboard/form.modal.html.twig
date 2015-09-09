@@ -1,8 +1,0 @@
-{{ form(form) }}
-{% if deleteId is defined %}
-    <button type="button"
-            class="btn btn-danger margin-left-10"
-            onclick="$('#calendar').TrackwayCalendar('deleteEntry', '{{ type }}', {{ deleteId }});">
-        <i class="fa fa-trash-o"></i> Delete
-    </button>
-{% endif %}

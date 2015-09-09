@@ -26,7 +26,7 @@
                 height: self._getCalendarHeight(),
                 allDaySlot: false,
                 //TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
-                events: '/timeentry/calendar',
+                events: '/calendar',
                 editable: true,
                 minTime: '06:00:00',
                 maxTime: '21:00:00',
@@ -137,26 +137,6 @@
                     }
                 );
             }
-        },
-
-        deleteEntry: function (type, id) {
-            var self = this;
-
-            // TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
-            var path = type == 'absence'
-                ? '/absence/' + id + '/delete'
-                : '/timeentry/' + id + '/delete';
-
-            $('#entryModal').find('button[type="button"]').button('loading');
-            $.getJSON(
-                path,
-                {},
-                function (response) {
-                    if (response.status == 'success') {
-                        location.reload();
-                    }
-                }
-            );
         },
 
         _splitEventIdString: function (idString) {

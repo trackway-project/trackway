@@ -24,58 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
 class AbsenceController extends Controller
 {
     /**
-     * Lists all existing Absence entities.
-     *
-     * @param Request $request
-     *
-     * @return array
-     *
-     * @Method("GET")
-     * @Route("/", name="absence_index")
-     * @Security("is_granted('VIEW', user.getActiveTeam())")
-     * @Template()
-     */
-    public function indexAction(Request $request)
-    {
-        /** @var User $user */
-        $user = $this->getUser();
-        $startDate = new \DateTime($request->query->get('start', 'now'));
-        $startDate->setTime(0, 0);
-        $endDate = new \DateTime($request->query->get('end', 'now'));
-        $endDate->setTime(0, 0);
-
-        return [
-            'startDate' => $startDate,
-            'endDate' => $endDate,
-            'pagination' => $this->get('knp_paginator')->paginate(
-                $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeamAndUserQuery(
-                    $user->getActiveTeam(),
-                    $user,
-                    $startDate,
-                    $endDate),
-                $request->query->get('page', 1),
-                $request->query->get('limit', 10)
-            )];
-    }
-
-    /**
-     * Shows an existing Absence entity.
-     *
-     * @param Absence $absence
-     *
-     * @return array
-     *
-     * @Method("GET")
-     * @Route("/{id}", requirements={"id": "\d+"}, name="absence_show")
-     * @Security("is_granted('VIEW', absence)")
-     * @Template()
-     */
-    public function showAction(Absence $absence)
-    {
-        return ['entity' => $absence];
-    }
-
-    /**
      * Creates a new Absence entity.
      *
      * @param Request $request
@@ -85,7 +33,7 @@ class AbsenceController extends Controller
      * @Method("GET|POST")
      * @Route("/new", name="absence_new")
      * @Security("is_granted('VIEW', user.getActiveTeam())")
-     * @Template("AppBundle:Dashboard:form.modal.html.twig")
+     * @Template("AppBundle::modal.formcontent.html.twig")
      */
     public function newAction(Request $request)
     {
@@ -151,7 +99,7 @@ class AbsenceController extends Controller
      * @Method("GET|POST")
      * @Route("/{id}/edit", requirements={"id": "\d+"}, name="absence_edit")
      * @Security("is_granted('EDIT', absence)")
-     * @Template("AppBundle:Dashboard:form.modal.html.twig")
+     * @Template("AppBundle::modal.formcontent.html.twig")
      */
     public function editAction(Request $request, Absence $absence)
     {

@@ -40,16 +40,11 @@
                     <td>{{ entity.reason|trans }}</td>
                     <td>{{ entity.note }}</td>
                     <td class="text-right">
-                        <a href="{{ path('absence_show', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-default"
-                           title="{{ 'absence.action.show'|trans }}"><i class="fa fa-eye"></i></a>
-                        <a href="{{ path('absence_edit', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-default"
-                           title="{{ 'absence.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="{{ path('absence_delete', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-danger"
-                           title="{{ 'absence.action.delete'|trans }}"><i
-                                    class="fa fa-times"></i></a>
+                        <div class="btn btn-sm btn-default"
+                             title="{{ 'absence.action.edit'|trans }}"
+                             onclick="$('#entryModal').EntryModal('editAbsence', {{ entity.id }});">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
@@ -57,6 +52,7 @@
         </table>
     </div>
     {% include 'AppBundle:Pagination:footer.html.twig' %}
+    {% include 'AppBundle::/modal.container.html.twig' %}
 {% endblock %}
 
 {% block sidebarOffCanvas %}
@@ -67,5 +63,10 @@
     {{ parent() }}
     <script>
         {% include 'AppBundle::dateRangePicker.js.twig' %}
+
+        $('#entryModal').EntryModal({
+            entryUrl: '{{ path('timeentry_new') }}',
+            absenceUrl: '{{ path('absence_new') }}'
+        });
     </script>
 {% endblock %}

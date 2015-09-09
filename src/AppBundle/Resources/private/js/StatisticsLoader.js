@@ -1,7 +1,7 @@
 ; // semi-colon is a safety net against concatenated scripts and/or other modules which may not be closed properly.
 (function ($) {
     var _defaults = {
-        statisticsUrl: '/timeentry/statistics'
+        statisticsUrl: '/reports/statistics'
     };
 
     /**
