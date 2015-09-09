@@ -20,7 +20,7 @@ Enjoy!
 * `php app/console doctrine:fixtures:load`
 * `node_modules/.bin/bower install`
 * `node_modules/.bin/gulp`
-* `node_modules/.bin/gulp favicons:build`
+* `node_modules/.bin/gulp favicons`
 
 ## Reset Database
 * `php app/console doctrine:database:drop --force`
