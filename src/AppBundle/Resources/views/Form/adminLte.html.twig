@@ -20,7 +20,7 @@
 
 {%- block appbundle_date_time_range_form_type_widget -%}
     <div class="row">
-        <div class="col-md-4 form-group">
+        <div class="col-sm-12 form-group">
             {{ form_label(form.date) }}
             {{ form_errors(form.date) }}
             <div class="input-group">
@@ -28,7 +28,7 @@
                 {{ form_widget(form.date) }}
             </div>
         </div>
-        <div class="col-md-4 form-group">
+        <div class="col-sm-6 form-group">
             {{ form_label(form.startsAt) }}
             {{ form_errors(form.startsAt) }}
             <div class="input-group">
@@ -36,7 +36,7 @@
                 {{ form_widget(form.startsAt) }}
             </div>
         </div>
-        <div class="col-md-4 form-group">
+        <div class="col-sm-6 form-group">
             {{ form_label(form.endsAt) }}
             {{ form_errors(form.endsAt) }}
             <div class="input-group">

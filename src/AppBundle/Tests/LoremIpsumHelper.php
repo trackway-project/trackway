@@ -17,21 +17,21 @@ class LoremIpsumHelper
      */
     public static function loremIpsum($paragraphs = 0, $sentences = 0, $words = 0)
     {
-        $lorem = self::LOREM_IPSUM;
+        $lorem = str_replace("\r", "\n", str_replace("\r\n", "\n", self::LOREM_IPSUM));
         $text = '';
         if ($paragraphs > 0) {
             $parts = explode("\n", $lorem, $paragraphs + 1);
-            $text .= implode("\n", array_slice($parts, 0, $paragraphs));
+            $text .= implode("\n", array_slice($parts, 0, $paragraphs)) . "\n";
             $lorem = count($parts) > $paragraphs ? trim($parts[$paragraphs], " ,\n") : '';
         }
         if ($sentences > 0) {
             $parts = explode('.', $lorem, $sentences + 1);
-            $text .= implode('.', array_slice($parts, 0, $sentences)) . '.';
-            $lorem = ($text != '' ? "\n" : '') . count($parts) > $sentences ? trim($parts[$sentences], " ,\n") : '';
+            $text .= str_replace("\n", '', implode('.', array_slice($parts, 0, $sentences)) . '.');
+            $lorem = ($text !== '' && substr($text, -1) !== "\n" ? "\n" : '') . count($parts) > $sentences ? trim($parts[$sentences], " ,\n") : '';
         }
         if ($words > 0) {
-            $parts = explode(" ", $lorem, $words + 1);
-            $text .= ($text != '' ? ' ' : '') . implode(" ", array_slice($parts, 0, $words));
+            $parts = explode(' ', $lorem, $words + 1);
+            $text .= str_replace('.', '', ($text !== '' && substr($text, -1) !== "\n" ? ' ' : '') . implode(' ', array_slice($parts, 0, $words)));
         }
         return trim($text, " ,\n");
     }
@@ -44,15 +44,3 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
 At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.
 Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
 }
-/*echo '0, 0, 0: ' . LoremIpsumHelper::loremIpsum(0, 0, 0) . PHP_EOL;
-echo '0, 0, 1: ' . LoremIpsumHelper::loremIpsum(0, 0, 1) . PHP_EOL;
-echo '0, 0, 2: ' . LoremIpsumHelper::loremIpsum(0, 0, 2) . PHP_EOL;
-echo '0, 0, 5: ' . LoremIpsumHelper::loremIpsum(0, 0, 5) . PHP_EOL;
-echo '0, 1, 0: ' . LoremIpsumHelper::loremIpsum(0, 1, 0) . PHP_EOL;
-echo '0, 1, 1: ' . LoremIpsumHelper::loremIpsum(0, 1, 1) . PHP_EOL;
-echo '0, 2, 2: ' . LoremIpsumHelper::loremIpsum(0, 2, 2) . PHP_EOL;
-echo '0, 5, 0: ' . LoremIpsumHelper::loremIpsum(0, 5, 0) . PHP_EOL;
-echo '1, 1, 0: ' . LoremIpsumHelper::loremIpsum(1, 1, 0) . PHP_EOL;
-echo '4, 0, 1: ' . LoremIpsumHelper::loremIpsum(4, 0, 1) . PHP_EOL;
-echo '1, 2, 2: ' . LoremIpsumHelper::loremIpsum(1, 2, 2) . PHP_EOL;
-echo '1, 1, 5: ' . LoremIpsumHelper::loremIpsum(1, 1, 5) . PHP_EOL;*/

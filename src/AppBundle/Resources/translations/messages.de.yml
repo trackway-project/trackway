@@ -27,7 +27,7 @@ admin.user.template.index.title: Benutzer
 admin.user.template.new.submit: __admin.user.template.new.submit
 admin.user.template.new.title: 'Benutzer erstellen'
 admin.user.template.show.title: Benutzer
-dashboard.template.index.title: Dashboard
+calendar.template.index.title: Kalender
 invitation.action.delete: Löschen
 invitation.action.edit: Bearbeiten
 invitation.action.show: Anzeigen
@@ -76,12 +76,13 @@ project.template.new.title: 'Projekt anlegen'
 project.template.show.title: Projekt
 registration.flash.confirmed: 'Ihre Registrierung wurde bestätigt'
 registration.flash.registered: 'Ihr Account wurde registriert'
-registration.template.checkMail.text: 'Ein Link um Ihre Registrierung zu bestätigen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Registrierprozess.'
-registration.template.checkMail.title: 'Registrierung bestätigen'
+registration.template.checkMail.login: 'Ich habe bereits einen Account'
+registration.template.checkMail.message: 'Ein Link um Ihre Registrierung zu bestätigen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Registrierprozess.'
 registration.template.register.message: __registration.template.register.message
 registration.template.register.submit: __registration.template.register.submit
 registration.template.register.terms: __registration.template.register.terms
 registration.template.register.title: Registrierung
+reports.template.index.title: Berichte
 resetting.flash.confirmed: 'Das Zurücksetzen Ihres Passwortes wurde bestätigt'
 resetting.flash.resetted: 'Ihr Passwort wurde zurückgesetzt'
 resetting.template.checkMail.text: 'Ein Link um Ihr Passwort zurückzusetzen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Prozess.'

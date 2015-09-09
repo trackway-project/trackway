@@ -78,7 +78,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         static::assertStatusCode($this->client);
         static::assertFlashMessage($crawler, 'invitation.flash.accepted');
-        static::assertHeadline($crawler, 'dashboard.template.index.title');
+        static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 
     /**
@@ -104,7 +104,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
 
         static::assertStatusCode($this->client);
         static::assertFlashMessage($crawler, 'invitation.flash.rejected');
-        static::assertHeadline($crawler, 'dashboard.template.index.title');
+        static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 
     /**

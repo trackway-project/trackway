@@ -61,21 +61,18 @@ class Builder
                 $isTeamAdmin = $authorizationChecker->isGranted('EDIT', $activeTeam);
 
                 // Create entity group
-                $menu['main']->addChild('dashboard', [
+                $menu['main']->addChild('calendar', [
                     'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'route' => 'dashboard_index']);
+                    'route' => 'calendar_index']);
+                $menu['main']->addChild('reports', [
+                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                    'route' => 'timeentry_report']);
                 $menu['main']->addChild('project', [
                     'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
                     'route' => 'project_index']);
                 $menu['main']->addChild('task', [
                     'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
                     'route' => 'task_index']);
-                $menu['main']->addChild('timeEntry', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'route' => 'timeentry_index']);
-                $menu['main']->addChild('absence', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'route' => 'absence_index']);
 
                 // Create actions without context
                 $menu['main']['project']->addChild('project.index', [
@@ -86,22 +83,15 @@ class Builder
                     'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
                     'icon' => 'fa fa-fw fa-list',
                     'route' => 'task_index']);
-                $menu['main']['timeEntry']->addChild('timeEntry.index', [
+
+                $menu['main']['reports']->addChild('reports.timeentry', [
                     'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
                     'icon' => 'fa fa-fw fa-list',
-                    'route' => 'timeentry_index']);
-                $menu['main']['timeEntry']->addChild('timeEntry.new', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'icon' => 'fa fa-fw fa-plus',
-                    'route' => 'timeentry_new']);
-                $menu['main']['absence']->addChild('absence.index', [
+                    'route' => 'timeentry_report']);
+                $menu['main']['reports']->addChild('reports.absence', [
                     'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
                     'icon' => 'fa fa-fw fa-list',
-                    'route' => 'absence_index']);
-                $menu['main']['absence']->addChild('absence.new', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'icon' => 'fa fa-fw fa-plus',
-                    'route' => 'absence_new']);
+                    'route' => 'absence_report']);
 
                 if ($isTeamAdmin) {
                     $menu['main']['project']->addChild('project.new', [

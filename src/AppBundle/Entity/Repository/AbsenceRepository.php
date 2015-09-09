@@ -57,6 +57,8 @@ class AbsenceRepository extends EntityRepository
     {
         $queryBuilder =  $this
             ->createQueryBuilder('a')
+            ->orderBy('a.dateTimeRange.date')
+            ->orderBy('a.dateTimeRange.startsAt')
             ->where('a.team = :team')
             ->andWhere('a.user = :user')
             ->setParameter('team', $team->getId())

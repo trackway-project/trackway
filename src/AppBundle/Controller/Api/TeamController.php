@@ -13,27 +13,33 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class TeamController
+ *
+ * @package AppBundle\Controller\Api
+ *
  * @RouteResource("Team")
  */
 class TeamController extends FOSRestController implements ClassResourceInterface
 {
     /**
+     * @return array
+     *
      * @View()
      * @ApiDoc(
      *   section="Team",
      *   description="Get all Teams"
      * )
-     * @return mixed
      */
     public function cgetAction()
     {
-        return array(
+        return [
             'teams' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAll()
-        );
+        ];
     }
 
     /**
      * @param $teamId
+     *
+     * @return array
      *
      * @View()
      * @ApiDoc(
@@ -41,24 +47,22 @@ class TeamController extends FOSRestController implements ClassResourceInterface
      *   description="Get a Team by id"
      * )
      *
-     * @return array
-     *
      * @author Felix Peters <info@wichteldesign.de>
      */
     public function getAction($teamId)
     {
-        $team = $this->getTeam($teamId);
-
-        return array(
-            'team' => $team,
-        );
+        return [
+            'team' => $this->getTeam($teamId)
+        ];
     }
 
     /**
      * Get entity instance
-     * @var integer $id Id of the project
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @param integer $id Id of the project
+     *
      * @return Team
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     protected function getTeam($id)
     {
