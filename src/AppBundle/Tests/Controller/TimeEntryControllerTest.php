@@ -9,28 +9,6 @@ namespace AppBundle\Tests\Controller;
  */
 class TimeEntryControllerTest extends AbstractControllerTest
 {
-    /**
-     * @coversNothing
-     */
-    public function testIndexAction()
-    {
-        // Prepare environment
-
-        $this->loadFixtures(array_merge(self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$projectFixtures,
-            self::$taskFixtures,
-            self::$timeEntryFixtures));
-        $this->login();
-
-        // Test view
-
-        $crawler = $this->client->request('GET', '/timeentry/');
-
-        static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'timeEntry.template.index.title');
-    }
 
     /**
      * @coversNothing
@@ -47,7 +25,6 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/timeentry/new');
 
         static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'timeEntry.template.new.title');
 
         // Test form
 
@@ -61,31 +38,6 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'timeEntry.flash.created');
-        static::assertHeadline($crawler, 'timeEntry.template.show.title');
-    }
-
-    /**
-     * @coversNothing
-     */
-    public function testShowAction()
-    {
-        // Prepare environment
-
-        $this->loadFixtures(array_merge(self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$projectFixtures,
-            self::$taskFixtures,
-            self::$timeEntryFixtures));
-        $this->login();
-
-        // Test view
-
-        $crawler = $this->client->request('GET', '/timeentry/1');
-
-        static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'timeEntry.template.show.title');
     }
 
     /**
@@ -108,7 +60,6 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/timeentry/1/edit');
 
         static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'timeEntry.template.edit.title');
 
         // Test form
 
@@ -116,8 +67,6 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'timeEntry.flash.updated');
-        static::assertHeadline($crawler, 'timeEntry.template.show.title');
     }
 
     /**
@@ -140,7 +89,5 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/timeentry/1/delete');
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'timeEntry.flash.deleted');
-        static::assertHeadline($crawler, 'timeEntry.template.index.title');
     }
 }

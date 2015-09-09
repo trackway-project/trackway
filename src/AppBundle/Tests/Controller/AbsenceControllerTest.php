@@ -9,28 +9,6 @@ namespace AppBundle\Tests\Controller;
  */
 class AbsenceControllerTest extends AbstractControllerTest
 {
-    /**
-     * @coversNothing
-     */
-    public function testIndexAction()
-    {
-        // Prepare environment
-
-        $this->loadFixtures(array_merge(self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$projectFixtures,
-            self::$taskFixtures,
-            self::$absenceFixtures));
-        $this->login();
-
-        // Test view
-
-        $crawler = $this->client->request('GET', '/absence/');
-
-        static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'absence.template.index.title');
-    }
 
     /**
      * @coversNothing
@@ -47,7 +25,6 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/absence/new');
 
         static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'absence.template.new.title');
 
         // Test form
 
@@ -60,31 +37,6 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'absence.flash.created');
-        static::assertHeadline($crawler, 'absence.template.show.title');
-    }
-
-    /**
-     * @coversNothing
-     */
-    public function testShowAction()
-    {
-        // Prepare environment
-
-        $this->loadFixtures(array_merge(self::$defaultFixtures,
-            self::$userFixtures,
-            self::$teamFixtures,
-            self::$projectFixtures,
-            self::$taskFixtures,
-            self::$absenceFixtures));
-        $this->login();
-
-        // Test view
-
-        $crawler = $this->client->request('GET', '/absence/1');
-
-        static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'absence.template.show.title');
     }
 
     /**
@@ -107,7 +59,6 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/absence/1/edit');
 
         static::assertStatusCode($this->client);
-        static::assertHeadline($crawler, 'absence.template.edit.title');
 
         // Test form
 
@@ -115,8 +66,6 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'absence.flash.updated');
-        static::assertHeadline($crawler, 'absence.template.show.title');
     }
 
     /**
@@ -139,7 +88,5 @@ class AbsenceControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/absence/1/delete');
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'absence.flash.deleted');
-        static::assertHeadline($crawler, 'absence.template.index.title');
     }
 }
