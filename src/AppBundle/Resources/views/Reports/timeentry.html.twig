@@ -1,10 +1,8 @@
 {% extends "AppBundle::layoutSidebar.html.twig" %}
 
-{% block class %}timeentry{% endblock class %}
+{% block class %}{{ parent() }} reports{% endblock %}
 
-{% block header %}
-    <h1>{{ 'timeEntry.template.index.title'|trans }}</h1>
-{% endblock %}
+{% block header %}<h1>{{ 'reports.template.index.title'|trans }}</h1>{% endblock %}
 
 {% block content %}
     <div class="box-header">
@@ -42,15 +40,11 @@
                     <td>{{ entity.task }}</td>
                     <td>{{ entity.note }}</td>
                     <td class="text-right">
-                        <a href="{{ path('timeentry_show', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-default"
-                           title="{{ 'timeEntry.action.show'|trans }}"><i class="fa fa-eye"></i></a>
-                        <a href="{{ path('timeentry_edit', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-default"
-                           title="{{ 'timeEntry.action.edit'|trans }}"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="{{ path('timeentry_delete', { 'id': entity.id }) }}"
-                           class="btn btn-sm btn-danger"
-                           title="{{ 'timeEntry.action.delete'|trans }}"><i class="fa fa-times"></i></a>
+                        <div class="btn btn-sm btn-default"
+                             title="{{ 'timeEntry.action.edit'|trans }}"
+                             onclick="$('#entryModal').EntryModal('editEntry', {{ entity.id }});">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
@@ -58,15 +52,17 @@
         </table>
     </div>
     {% include 'AppBundle:Pagination:footer.html.twig' %}
+    {% include 'AppBundle::modal.container.html.twig' %}
 {% endblock %}
-
-{% block sidebarOffCanvas %}
-    {{ knp_menu_render(['appbundle_main_menu', 'timeEntry'], {}, 'appbundle_sidebar_renderer') }}
-{% endblock sidebarOffCanvas %}
 
 {% block javascripts %}
     {{ parent() }}
     <script>
         {% include 'AppBundle::dateRangePicker.js.twig' %}
+
+        $('#entryModal').EntryModal({
+            entryUrl: '{{ path('timeentry_new') }}',
+            absenceUrl: '{{ path('absence_new') }}'
+        });
     </script>
 {% endblock %}

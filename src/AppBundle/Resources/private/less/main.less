@@ -17,3 +17,42 @@
     border-color: @red;
   }
 }
+
+.time-sum-table {
+  border: 0 hidden transparent;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+
+  td {
+    text-align: right;
+    border: 1px solid #ddd;
+    padding: 0;
+    vertical-align: top;
+  }
+}
+
+.margin-left-10 {
+  margin-left: 10px;
+}
+
+//fullcalendar event classes & overwrites
+.fc-bg {
+  opacity: 0 !important;
+}
+
+.fc-event.absence {
+  background-color: @red;
+  border-color: darken(@red, 5%);
+}
+
+.fc-event.entry {
+  background-color: @blue;
+  border-color: darken(@blue, 5%);
+}
+
+.fc-event.fc-draggable.copy {
+  cursor: copy;
+}

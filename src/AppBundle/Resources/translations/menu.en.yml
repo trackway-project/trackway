@@ -8,7 +8,7 @@ action: ACTIONS
 admin.team: Teams
 admin.user: Users
 admin: Admin
-dashboard: Dashboard
+calendar: Calendar
 invitation.delete: Delete
 invitation.show: Show
 invitation: Invitations
@@ -22,6 +22,10 @@ project.new: Create
 project.show: Show
 project: Projects
 register: Register
+reports: Reports
+reports.timeentry: Time entries
+reports.absence: Absences
+reports: Reports
 task.delete: Delete
 task.edit: Edit
 task.index: Overview

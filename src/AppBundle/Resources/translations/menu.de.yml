@@ -8,7 +8,7 @@ action: action
 admin.team: __admin.team
 admin.user: __admin.user
 admin: admin
-dashboard: dashboard
+calendar: calendar
 invitation: team.invitation
 login: __login
 main: __main
@@ -20,6 +20,7 @@ project.new: __project.new
 project.show: __project.show
 project: __project
 register: __register
+reports: __reports
 task.delete: __task.delete
 task.edit: __task.edit
 task.index: __task.index

@@ -42,7 +42,7 @@ class Team
     private $memberships;
 
     /**
-     * @var Invitation
+     * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Invitation", mappedBy="team", cascade={"remove"})
      */

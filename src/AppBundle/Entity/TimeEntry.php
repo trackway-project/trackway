@@ -45,9 +45,9 @@ class TimeEntry extends BaseTimeEntry
     }
 
     /**
-     * @param Project $project
+     * @param Project|null $project
      */
-    public function setProject(Project $project)
+    public function setProject($project)
     {
         $this->project = $project;
     }
@@ -61,9 +61,9 @@ class TimeEntry extends BaseTimeEntry
     }
 
     /**
-     * @param Task $task
+     * @param Task|null $task
      */
-    public function setTask(Task $task)
+    public function setTask($task)
     {
         $this->task = $task;
     }

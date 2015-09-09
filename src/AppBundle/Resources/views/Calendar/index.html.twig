@@ -1,0 +1,37 @@
+{% extends "AppBundle::layoutSidebar.html.twig" %}
+
+{% block class %}{{ parent() }} calendar{% endblock %}
+
+{% block header %}<h1>{{ 'calendar.template.index.title'|trans }}</h1>{% endblock %}
+
+{% block content %}
+    <div id="calendar"></div>
+    <table class="table time-sum-table" id="statistics">
+        <tbody>
+        <tr>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+
+    {% include 'AppBundle::modal.container.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.css" rel="stylesheet">
+    <script>
+
+        $('#calendar').TrackwayCalendar({});
+
+        $('#entryModal').EntryModal({
+            entryUrl: '{{ path('timeentry_new') }}',
+            absenceUrl: '{{ path('absence_new') }}'
+        });
+
+    </script>
+
+{% endblock %}

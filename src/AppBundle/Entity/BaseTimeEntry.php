@@ -42,7 +42,7 @@ class BaseTimeEntry
      *
      * @ORM\Column(name="note", type="string", length=255)
      *
-     * @Assert\Type(type="string")
+     * @Assert\NotNull()
      * @Assert\Length(max = 255)
      */
     protected $note;

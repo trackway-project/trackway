@@ -55,10 +55,10 @@ class RoutingListener
             return;
         }
 
-        // Redirect the user to the dashboard if authenticated and visiting a forbidden route
+        // Redirect the user to the calendar if authenticated and visiting a forbidden route
 
         if ($this->authorizationChecker->isGranted('ROLE_USER') && in_array($event->getRequest()->get('_route'), self::$ROUTES, false)) {
-            $event->setResponse(RedirectResponse::create($this->router->generate('dashboard_index')));
+            $event->setResponse(RedirectResponse::create($this->router->generate('calendar_index')));
         }
     }
 }

@@ -8,7 +8,7 @@ action: action
 admin.team: admin.team
 admin.user: admin.user
 admin: admin
-dashboard: dashboard
+calendar: calendar
 invitation.delete: invitation.delete
 invitation.index: invitation.index
 invitation.show: invitation.show

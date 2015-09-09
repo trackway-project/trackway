@@ -27,7 +27,7 @@ admin.user.template.index.title: Users
 admin.user.template.new.submit: Create
 admin.user.template.new.title: 'Create user'
 admin.user.template.show.title: User
-dashboard.template.index.title: Dashboard
+calendar.template.index.title: Calendar
 invitation.action.delete: Delete
 invitation.action.edit: Edit
 invitation.action.show: Show
@@ -82,6 +82,7 @@ registration.template.register.login: 'I already have an account'
 registration.template.register.message: 'Enter your details below to create a new account'
 registration.template.register.submit: Register
 registration.template.register.terms: 'I agree to the terms'
+reports.template.index.title: Reports
 resetting.flash.confirmed: 'Your password reset was confirmed'
 resetting.flash.resetted: 'Your password was resetted'
 resetting.template.checkMail.login: 'I already have an account'

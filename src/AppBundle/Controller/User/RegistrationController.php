@@ -45,7 +45,6 @@ class RegistrationController extends Controller
             $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
             $user->setRegistrationRequestedAt(new \DateTime());
             $user->setRoles(['ROLE_USER']);
-            $user->setSalt(md5(uniqid(mt_rand(), true)));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -98,6 +97,6 @@ class RegistrationController extends Controller
 
         $this->get('session')->getFlashBag()->add('success', 'registration.flash.confirmed');
 
-        return $this->redirect($this->generateUrl('dashboard_index'));
+        return $this->redirect($this->generateUrl('calendar_index'));
     }
 }

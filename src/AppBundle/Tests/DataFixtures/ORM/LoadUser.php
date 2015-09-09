@@ -21,8 +21,7 @@ class LoadUser implements FixtureInterface
         $user = new User();
         $user->setUsername('test');
         $user->setEmail('test@trackway.org');
-        $user->setSalt('f0afecd49087e0971b807b3d5bb4d9f8');
-        $user->setPassword('$2y$12$5cvVIqGw.reNtu7EWzMKq.cSVO5R26L446nT0PSW8SOcodwfFRGoS');
+        $user->setPassword('$2y$12$0DEwmswbClJRpMtcjvXKaOWO8NHletqQd.8vWuSEm5OJ48Gg9wada');
         $user->setRoles(['ROLE_USER']);
         $user->setLocale($manager->getRepository('AppBundle:Locale')->findOneByName('test'));
         $user->setEnabled(true);
