@@ -57,13 +57,6 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255)
-     */
-    protected $salt;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="password", type="string", length=255)
      *
      * @Assert\NotBlank(groups={"change_password", "registration"})
@@ -183,7 +176,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function serialize()
     {
-        return serialize([$this->id, $this->username, $this->password, $this->salt, $this->locale]);
+        return serialize([$this->id, $this->username, $this->password, $this->locale]);
     }
 
     /**
@@ -191,7 +184,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list ($this->id, $this->username, $this->password, $this->salt, $this->locale) = unserialize($serialized);
+        list ($this->id, $this->username, $this->password, $this->locale) = unserialize($serialized);
     }
 
     /**
@@ -251,19 +244,11 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @return string
+     * @return null
      */
     public function getSalt()
     {
-        return $this->salt;
-    }
-
-    /**
-     * @param string $salt
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
+        return null;
     }
 
     /**

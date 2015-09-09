@@ -66,8 +66,6 @@ class ResettingControllerTest extends AbstractControllerTest
         $form['appbundle_resetting_confirm_form[password][second]'] = 'foobar';
         $crawler = $this->client->submit($form);
 
-        echo $crawler->html();
-
         static::assertStatusCode($this->client);
         static::assertFlashMessage($crawler, 'resetting.flash.confirmed');
         static::assertHeadline($crawler, 'calendar.template.index.title');

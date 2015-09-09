@@ -45,7 +45,6 @@ class RegistrationController extends Controller
             $user->setPassword($this->container->get('security.password_encoder')->encodePassword($user, $user->getPassword()));
             $user->setRegistrationRequestedAt(new \DateTime());
             $user->setRoles(['ROLE_USER']);
-            $user->setSalt(md5(uniqid(mt_rand(), true)));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
