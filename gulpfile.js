@@ -35,13 +35,13 @@ gulp.task('default', ['css', 'fonts', 'images', 'js', 'js:async'], function () {
 
 // Tasks
 
-gulp.task('clean', function (cb) {
-    del([
+gulp.task('clean', function () {
+    del.sync([
         buildDirectory + '/css/',
         buildDirectory + '/fonts/',
         buildDirectory + '/images/',
         buildDirectory + '/js/'
-    ], cb);
+    ]);
 });
 
 gulp.task('bower', ['clean'], function () {
@@ -57,10 +57,10 @@ gulp.task('admin-lte', ['bower'], function () {
 		
     // Remove imports of the integrated bootstrap files - we're going to use the real ones
     gulp.src(buildDirectory + '/lib/admin-lte/build/less/AdminLTE.less')
-        .pipe(replace('@import "../bootstrap-less/mixins.less";', ''))
-        .pipe(replace('@import "../bootstrap-less/variables.less";', ''))
+        .pipe(replace('@import (reference) "../bootstrap-less/mixins.less";', ''))
+        .pipe(replace('@import (reference) "../bootstrap-less/variables.less";', ''))
         .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/build/less/'));
-		
+
     return gulp.src(buildDirectory + '/lib/admin-lte/build/less/skins/*.less')
         .pipe(replace('@import "../../bootstrap-less/mixins.less";', ''))
         .pipe(replace('@import "../../bootstrap-less/variables.less";', ''))
@@ -153,7 +153,7 @@ gulp.task('js:async', ['bower'], function () {
         .pipe(gulp.dest(buildDirectory + '/js/' + asyncDirectory));
 });
 
-gulp.task('favicons', function (cb) {
+gulp.task('favicons', function () {
     del([
         sourceDirectory + '/../views/favicons.html.twig',
         buildDirectory + '/*.png',
@@ -161,7 +161,7 @@ gulp.task('favicons', function (cb) {
         buildDirectory + '/*.xml',
         buildDirectory + '/*.json',
         buildDirectory + '/*.webapp'
-    ], function() {
+    ]).then(function() {
 		favicons({
 			files: {
 				src: path.resolve(sourceDirectory + '/favicon.png'),
