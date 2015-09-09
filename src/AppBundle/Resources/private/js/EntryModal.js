@@ -58,14 +58,14 @@
 
         editEntry: function (id) {
             var self = this;
-            self._hideTabs();
+            self._showEntryTab();
             // TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
             self._form('/timeentry/' + id + '/edit', self.settings.entryId, false);
         },
 
         editAbsence: function (id) {
             var self = this;
-            self._hideTabs();
+            self._showAbsenceTab();
             // TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
             self._form('/absence/' + id + '/edit', self.settings.entryId, false);
         },
@@ -101,14 +101,26 @@
             });
         },
 
-        _hideTabs: function () {
-            var self = this;
-            $(self.element).find('.nav-tabs-custom').hide();
-        },
-
         _showTabs: function () {
             var self = this;
-            $(self.element).find('.nav-tabs-custom').show();
+            $(self.element).find('.nav-tabs-custom li').show();
+        },
+
+        _hideTabs: function () {
+            var self = this;
+            $(self.element).find('.nav-tabs-custom li').hide();
+        },
+
+        _showEntryTab: function () {
+            var self = this;
+            self._hideTabs();
+            $(self.element).find('.nav-tabs-custom li#entryModalNavTab').show();
+        },
+
+        _showAbsenceTab: function () {
+            var self = this;
+            self._hideTabs();
+            $(self.element).find('.nav-tabs-custom li#absenceModalNavTab').show();
         }
     };
 
