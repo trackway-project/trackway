@@ -49,7 +49,7 @@ class TimeEntryController extends Controller
             $startsAt->setTimestamp($startsAtTimestamp);
         }
         $endsAt = clone($startsAt);
-        $endsAt->add(new \DateInterval('PT4H'));
+        $endsAt->add(new \DateInterval('PT1H'));
 
         $dateTimeRange = new DateTimeRange();
         $dateTimeRange->setDate($startsAt);
@@ -65,12 +65,21 @@ class TimeEntryController extends Controller
         $form = $this->get('app.form.factory.time_entry')
             ->createForm(
                 [
-                    'project' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)],
-                    'task' => ['choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)],
+                    'project' => [
+                        'choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)
+                    ],
+                    'task' => [
+                        'choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)
+                    ],
                     'action' => $this->generateUrl('timeentry_new'),
-                    'submit' => ['label' => 'timeEntry.template.new.submit']
+                    'submit' => [
+                        'label' => 'timeEntry.template.new.submit'
+                    ]
                 ]
             )
+            ->add('submitNew', 'submit', [
+                'label' => 'timeEntry.template.new.submitAndNew', 'attr' => ['value' => 1]
+            ])
             ->setData($timeEntry)
             ->handleRequest($request);
 
@@ -83,6 +92,14 @@ class TimeEntryController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.created');
+
+            // Handle submitNew
+            $formValues = $request->get('appbundle_time_entry_form', []);
+            if (array_key_exists('submitNew', $formValues) && $formValues['submitNew']) {
+                return $this->redirect($this->get('router')->generate('timeentry_new', [
+                    'start' => $timeEntry->getDateTimeRange()->getEndDateTime()->getTimestamp()
+                ]));
+            }
 
             return new Response();
         }

@@ -55,20 +55,21 @@ class AbsenceController extends Controller
 
         $absence->setDateTimeRange($dateTimeRange);
 
-        $form =
-            $this->get('app.form.factory.absence')->createForm(
-                [
+        $form = $this->get('app.form.factory.absence')
+            ->createForm([
                     'reason' => [
-                        'choices' => $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('AppBundle:AbsenceReason')
-                            ->findAll()
+                        'choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:AbsenceReason')->findAll()
                     ],
                     'submit' => [
                         'label' => 'absence.template.new.submit'
                     ]
                 ]
-            )->setData($absence)->handleRequest($request);
+            )
+            ->add('submitNew', 'submit', [
+                'label' => 'timeEntry.template.new.submitAndNew', 'attr' => ['value' => 1]
+            ])
+            ->setData($absence)
+            ->handleRequest($request);
 
         if ($form->isValid()) {
             /** @var User $user */
@@ -81,6 +82,14 @@ class AbsenceController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'absence.flash.created');
+
+            // Handle submitNew
+            $formValues = $request->get('appbundle_absence_form', []);
+            if (array_key_exists('submitNew', $formValues) && $formValues['submitNew']) {
+                return $this->redirect($this->get('router')->generate('absence_new', [
+                    'start' => $absence->getDateTimeRange()->getEndDateTime()->getTimestamp()
+                ]));
+            }
 
             return new Response();
         }

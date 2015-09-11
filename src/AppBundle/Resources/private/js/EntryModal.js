@@ -47,30 +47,30 @@
         newEntry: function () {
             var self = this;
             self._showTabs();
-            self._form(self.settings.entryUrl, self.settings.entryId, true);
+            self._showModal(self.settings.entryUrl, self.settings.entryId, true);
         },
 
         newAbsence: function () {
             var self = this;
             self._showTabs();
-            self._form(self.settings.absenceUrl, self.settings.absenceId, true);
+            self._showModal(self.settings.absenceUrl, self.settings.absenceId, true);
         },
 
         editEntry: function (id) {
             var self = this;
             self._showEntryTab();
             // TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
-            self._form('/timeentry/' + id + '/edit', self.settings.entryId, false);
+            self._showModal('/timeentry/' + id + '/edit', self.settings.entryId, false);
         },
 
         editAbsence: function (id) {
             var self = this;
             self._showAbsenceTab();
             // TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
-            self._form('/absence/' + id + '/edit', self.settings.entryId, false);
+            self._showModal('/absence/' + id + '/edit', self.settings.entryId, false);
         },
 
-        _form: function (url, divId, useDate) {
+        _showModal: function (url, divId, useDate) {
             var self = this;
             $(self.element).find('#' + divId).html(self.settings.loader);
             $(self.element).modal('show');
@@ -80,24 +80,54 @@
                 data: data,
                 cache: false
             }).done(function (html) {
-                $(self.element).find('#' + divId).html(html);
-                $(self.element).find('#' + divId).find('form').submit(function (event) {
-                    var form = $(this);
-                    form.find('button[type="submit"]').button('loading');
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: form.serialize(),
-                        success: function (response) {
-                            if (response == '') {
-                                location.reload();
-                            } else {
-                                $(self.element).find('#' + divId).html(response);
-                            }
+                self._insertForm(url, divId, html);
+            });
+        },
+
+        _insertForm: function(url, divId, html) {
+            var self = this;
+            var container = $(self.element).find('#' + divId);
+
+            // Insert form into container
+            container.html(html);
+
+            var form = container.find('form');
+
+            // Insert submit button value as hidden element on click
+            form.find('button[type="submit"]').click(function(){
+                if($(this).attr('name')) {
+                    form.append($("<input type='hidden'>").attr({
+                            name: $(this).attr('name'),
+                            value: $(this).attr('value')
+                        })
+                    );
+                }
+            });
+
+            // Handle submit
+            form.submit(function (event) {
+                // Set loading animation for all submit buttons
+                form.find('button[type="submit"]').button('loading');
+
+                console.log(form.serialize());
+
+                // Submit serialized form with AJAX
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: form.serialize(),
+                    success: function (html) {
+                        //TODO: reload calendar in background
+                        if (html == '') {
+                            // Success
+                            location.reload();
+                        } else {
+                            // Error or new form
+                            self._insertForm(url, divId, html);
                         }
-                    });
-                    return false;
+                    }
                 });
+                return false;
             });
         },
 
