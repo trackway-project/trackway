@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -369,6 +370,27 @@ class Builder
     public function createNavbarMenu(RequestStack $requestStack, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, EntityManagerInterface $entityManager)
     {
         $menu = $this->factory->createItem('root');
+
+        // Create notification
+        $menu->addChild('notification', [
+            'template' => 'AppBundle:Menu/Navbar:itemNotification.html.twig',
+            'uri' => '#']);
+
+        if ($requestStack->getCurrentRequest()->hasSession()) {
+            /**
+             * @var Session $session
+             */
+            $session = $requestStack->getCurrentRequest()->getSession();
+
+            // Create messages
+            foreach($session->getFlashBag()->all() as $messages) {
+                foreach($messages as $message) {
+                    $menu['notification']->addChild($message, [
+                        'template' => 'AppBundle:Menu/Navbar:itemNotificationMessage.html.twig',
+                        'uri' => '#']);
+                }
+            }
+        }
 
         if ($authorizationChecker->isGranted('ROLE_USER')) {
             /** @var User $user */
