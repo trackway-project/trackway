@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -19,6 +20,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class Builder
 {
+    private static $notificationIcons = [
+        'success' => 'fa fa-check-square-o text-green',
+        'warning' => 'fa fa-exclamation text-yellow',
+        'error' => 'fa fa-exclamation-triangle text-red'
+    ];
+
     /**
      * @var FactoryInterface
      */
@@ -369,6 +376,28 @@ class Builder
     public function createNavbarMenu(RequestStack $requestStack, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, EntityManagerInterface $entityManager)
     {
         $menu = $this->factory->createItem('root');
+
+        // Create notification
+        $menu->addChild('notification', [
+            'template' => 'AppBundle:Menu/Navbar:itemNotification.html.twig',
+            'uri' => '#']);
+
+        if ($requestStack->getCurrentRequest()->hasSession()) {
+            /**
+             * @var Session $session
+             */
+            $session = $requestStack->getCurrentRequest()->getSession();
+
+            // Create messages
+            foreach($session->getFlashBag()->keys() as $key) {
+                foreach($session->getFlashBag()->get($key) as $message) {
+                    $menu['notification']->addChild($message, [
+                        'template' => 'AppBundle:Menu/Navbar:itemNotificationMessage.html.twig',
+                        'icon' => self::$notificationIcons[$key] . ' ' . $key,
+                        'uri' => '#']);
+                }
+            }
+        }
 
         if ($authorizationChecker->isGranted('ROLE_USER')) {
             /** @var User $user */

@@ -8,7 +8,7 @@
 
     /**
      *
-     * @type {{init: Function, foo: Function, _foo2: Function}}
+     * @type {{init: Function, setDate: Function, newEntry: Function, newAbsence: Function, editEntry: Function, editAbsence: Function, _showModal: Function, _insertForm: Function, _showTabs: Function, _hideTabs: Function, _showEntryTab: Function, _showAbsenceTab: Function}}
      */
     var EntryModal = {
         /**
@@ -80,11 +80,11 @@
                 data: data,
                 cache: false
             }).done(function (html) {
-                self._insertForm(url, divId, html);
+                self._insertForm(url, divId, html, $(self.element));
             });
         },
 
-        _insertForm: function(url, divId, html) {
+        _insertForm: function(url, divId, html, modal) {
             var self = this;
             var container = $(self.element).find('#' + divId);
 
@@ -109,21 +109,24 @@
                 // Set loading animation for all submit buttons
                 form.find('button[type="submit"]').button('loading');
 
-                console.log(form.serialize());
-
                 // Submit serialized form with AJAX
                 $.ajax({
                     url: url,
                     type: 'POST',
                     data: form.serialize(),
                     success: function (html) {
-                        //TODO: reload calendar in background
+                        // reload calendar in background
+                        $('#calendar').fullCalendar('refetchEvents');
+
+                        // refresh notifications in background
+                        $('.notifications-menu').Notifications('refresh');
+
                         if (html == '') {
-                            // Success
-                            location.reload();
+                            // Close on success
+                            modal.modal('hide');
                         } else {
-                            // Error or new form
-                            self._insertForm(url, divId, html);
+                            // Reload form on error or 'create and new'
+                            self._insertForm(url, divId, html, modal);
                         }
                     }
                 });

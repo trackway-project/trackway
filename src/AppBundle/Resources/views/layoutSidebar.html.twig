@@ -43,6 +43,15 @@
         </div>
         {% include 'AppBundle::footer.html.twig' %}
     </div>
-    {% block javascripts %}<script src="{{ asset('js/combined.js') }}"></script>{% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('js/combined.js') }}"></script>
+        <script>
+            $(function() {
+                $('.notifications-menu').Notifications({
+                    url: '{{ path('notification_index') }}'
+                });
+            });
+        </script>
+    {% endblock %}
     </body>
 {% endblock %}
