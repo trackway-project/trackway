@@ -1,5 +1,8 @@
 <li>
     <a href="{{ item.uri }}">
+        {% if item.extras['icon'] is defined %}
+            <i class="{{ item.extras['icon'] }}"></i>
+        {% endif %}
         {{ item.label|trans({}, 'notifications') }}
     </a>
 </li>

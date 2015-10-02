@@ -20,6 +20,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class Builder
 {
+    private static $notificationIcons = [
+        'success' => 'fa fa-check-square-o text-green',
+        'warning' => 'fa fa-exclamation text-yellow',
+        'error' => 'fa fa-exclamation-triangle text-red'
+    ];
+
     /**
      * @var FactoryInterface
      */
@@ -383,10 +389,11 @@ class Builder
             $session = $requestStack->getCurrentRequest()->getSession();
 
             // Create messages
-            foreach($session->getFlashBag()->all() as $messages) {
-                foreach($messages as $message) {
+            foreach($session->getFlashBag()->keys() as $key) {
+                foreach($session->getFlashBag()->get($key) as $message) {
                     $menu['notification']->addChild($message, [
                         'template' => 'AppBundle:Menu/Navbar:itemNotificationMessage.html.twig',
+                        'icon' => self::$notificationIcons[$key] . ' ' . $key,
                         'uri' => '#']);
                 }
             }

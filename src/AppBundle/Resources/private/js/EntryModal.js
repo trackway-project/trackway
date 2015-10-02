@@ -8,7 +8,7 @@
 
     /**
      *
-     * @type {{init: Function, foo: Function, _foo2: Function}}
+     * @type {{init: Function, setDate: Function, newEntry: Function, newAbsence: Function, editEntry: Function, editAbsence: Function, _showModal: Function, _insertForm: Function, _showTabs: Function, _hideTabs: Function, _showEntryTab: Function, _showAbsenceTab: Function}}
      */
     var EntryModal = {
         /**
@@ -118,9 +118,12 @@
                         // reload calendar in background
                         $('#calendar').fullCalendar('refetchEvents');
 
+                        // refresh notifications in background
+                        $('.notifications-menu').Notifications('refresh');
+
                         if (html == '') {
                             // Close on success
-                            modal.modal('close');
+                            modal.modal('hide');
                         } else {
                             // Reload form on error or 'create and new'
                             self._insertForm(url, divId, html, modal);

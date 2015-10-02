@@ -61,14 +61,26 @@
   opacity: 0 !important;
 }
 
+.fc-event, .fc-event:hover {
+  color: @black !important;
+}
+
 .fc-event.absence {
-  background-color: @red;
-  border-color: darken(@red, 5%);
+  background-color: @calendarAbsence;
+  border-color: darken(@calendarAbsence, 10%);
+
+  .fc-resizer, .fc-resizer:hover {
+    color: darken(@calendarAbsence, 20%);
+  }
 }
 
 .fc-event.entry {
-  background-color: @blue;
-  border-color: darken(@blue, 5%);
+  background-color: @calendarEntry;
+  border-color: darken(@calendarEntry, 10%);
+
+  .fc-resizer, .fc-resizer:hover {
+    color: darken(@calendarEntry, 20%);
+  }
 }
 
 .fc-event.fc-draggable.copy {
