@@ -35,7 +35,7 @@ class ProfileControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertFlashMessage($crawler, 'profile.flash.updated');
+        static::assertNotification($crawler, 'profile.flash.updated');
         static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 
@@ -65,7 +65,7 @@ class ProfileControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertEquals(200, $this->client->getResponse()->getStatusCode(), 'Unexpected HTTP status code for GET /team/');
-        static::assertFlashMessage($crawler, 'profile.flash.passwordChanged');
+        static::assertNotification($crawler, 'profile.flash.passwordChanged');
         static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 }

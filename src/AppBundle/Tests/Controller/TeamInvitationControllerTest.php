@@ -51,7 +51,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'invitation.flash.invited');
+        static::assertNotification($crawler, 'invitation.flash.invited');
         static::assertHeadline($crawler, 'invitation.template.show.title');
     }
 
@@ -77,7 +77,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/invitation/' . $invitation->getConfirmationToken() . '/accept');
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'invitation.flash.accepted');
+        static::assertNotification($crawler, 'invitation.flash.accepted');
         static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 
@@ -103,7 +103,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/invitation/' . $invitation->getConfirmationToken() . '/reject');
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'invitation.flash.rejected');
+        static::assertNotification($crawler, 'invitation.flash.rejected');
         static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 
@@ -140,7 +140,7 @@ class TeamInvitationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/1/invitation/1/delete');
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'invitation.flash.deleted');
+        static::assertNotification($crawler, 'invitation.flash.deleted');
         static::assertHeadline($crawler, 'invitation.template.index.title');
     }
 }

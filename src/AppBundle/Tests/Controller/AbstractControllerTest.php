@@ -82,6 +82,23 @@ abstract class AbstractControllerTest extends WebTestCase
     }
 
     /**
+     * @param Crawler $crawler
+     * @param string $text
+     * @param string $message
+     * @param float $delta
+     * @param int $maxDepth
+     * @param bool $canonicalize
+     * @param bool $ignoreCase
+     */
+    public static function assertNotification(Crawler $crawler, $text, $message = 'Unexpected flash message.', $delta = 0.0, $maxDepth = 10, $canonicalize = false, $ignoreCase = false)
+    {
+        if (getenv('OUTPUT_RESPONSE_ON_FAILURE')) {
+            $message .= ' Response:' . PHP_EOL . $crawler->html();
+        }
+        static::assertEquals(1, $crawler->filter('.notifications-menu .menu a:contains("' . $text . '")')->count(), $message, $delta, $maxDepth, $canonicalize, $ignoreCase);
+    }
+
+    /**
      * @param Client $client
      * @param string $message
      * @param float $delta

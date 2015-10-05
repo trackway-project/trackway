@@ -67,7 +67,7 @@ class ResettingControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'resetting.flash.confirmed');
+        static::assertNotification($crawler, 'resetting.flash.confirmed');
         static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 }
