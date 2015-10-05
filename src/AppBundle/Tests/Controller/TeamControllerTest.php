@@ -51,7 +51,7 @@ class TeamControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'team.flash.created');
+        static::assertNotification($crawler, 'team.flash.created');
         static::assertHeadline($crawler, 'team.template.show.title');
     }
 
@@ -96,7 +96,7 @@ class TeamControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'team.flash.updated');
+        static::assertNotification($crawler, 'team.flash.updated');
         static::assertHeadline($crawler, 'team.template.show.title');
     }
 
@@ -115,7 +115,7 @@ class TeamControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/team/1/delete');
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'team.flash.deleted');
+        static::assertNotification($crawler, 'team.flash.deleted');
         static::assertHeadline($crawler, 'team.template.index.title');
     }
 }

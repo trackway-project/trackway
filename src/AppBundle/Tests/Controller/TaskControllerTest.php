@@ -51,7 +51,7 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'task.flash.created');
+        static::assertNotification($crawler, 'task.flash.created');
         static::assertHeadline($crawler, 'task.template.show.title');
     }
 
@@ -96,7 +96,7 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->submit($form);
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'task.flash.updated');
+        static::assertNotification($crawler, 'task.flash.updated');
         static::assertHeadline($crawler, 'task.template.show.title');
     }
 
@@ -115,7 +115,7 @@ class TaskControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/task/1/delete');
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'task.flash.deleted');
+        static::assertNotification($crawler, 'task.flash.deleted');
         static::assertHeadline($crawler, 'task.template.index.title');
     }
 }

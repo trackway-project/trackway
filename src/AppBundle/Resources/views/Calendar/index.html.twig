@@ -24,12 +24,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.css" rel="stylesheet">
     <script>
+        $(function() {
+            $('#calendar').TrackwayCalendar({});
 
-        $('#calendar').TrackwayCalendar({});
-
-        $('#entryModal').EntryModal({
-            entryUrl: '{{ path('timeentry_new') }}',
-            absenceUrl: '{{ path('absence_new') }}'
+            $('#entryModal').EntryModal({
+                entryUrl: '{{ path('timeentry_new') }}',
+                absenceUrl: '{{ path('absence_new') }}'
+            });
         });
 
     </script>

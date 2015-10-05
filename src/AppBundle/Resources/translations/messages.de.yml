@@ -6,9 +6,6 @@ absence.entity.endsAt: 'Endet am'
 absence.entity.note: Note
 absence.entity.reason: Grund
 absence.entity.startsAt: 'Startet am'
-absence.flash.created: 'Die Abwesenheit wurde angelegt'
-absence.flash.deleted: 'Die Abwesenheit wurde gelöscht'
-absence.flash.updated: 'Die Abwesenheit wurde aktualisiert'
 absence.template.edit.submit: __absence.template.edit.submit
 absence.template.edit.title: 'Abwesenheit bearbeiten'
 absence.template.index.dateRange: __absence.template.index.dateRange
@@ -35,11 +32,6 @@ invitation.entity.email: Email
 invitation.entity.status: Status
 invitation.entity.team: Team
 invitation.entity.user: Benutzer
-invitation.flash.accepted: 'Die Einladung wurde akzeptiert'
-invitation.flash.alreadyInvited: 'Der Benutzer wurde bereits eingeladen'
-invitation.flash.deleted: 'Die Einladung wurde gelöscht'
-invitation.flash.invited: 'Der Benutzer wurde eingeladen'
-invitation.flash.rejected: 'Die Einladung wurde zujrückgewiesen'
 invitation.template.index.title: Einladungen
 invitation.template.invite.submit: __invitation.template.invite.submit
 invitation.template.invite.title: Benutzer einladen
@@ -50,10 +42,6 @@ membership.action.show: Anzeigen
 membership.entity.group: Gruppe
 membership.entity.team: Team
 membership.entity.user: Benutzer
-membership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
-membership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
-profile.flash.passwordChanged: 'Ihr Passwort wurde geändert'
-profile.flash.updated: 'Ihr Profil wurde aktualisiert'
 profile.template.changePassword.submit: __profile.template.changePassword.submit
 profile.template.changePassword.title: 'Passwort ändern'
 profile.template.edit.submit: __profile.template.edit.submit
@@ -65,17 +53,12 @@ project.action.delete: Löschen
 project.action.edit: Bearbeiten
 project.action.show: Anzeigen
 project.entity.name: Name
-project.flash.created: 'Das Projekt wurde geändert'
-project.flash.deleted: 'Das Projekt wurde gelöscht'
-project.flash.updated: 'Das Projekt wurde aktualisiert'
 project.template.edit.submit: __project.template.edit.submit
 project.template.edit.title: 'Projekt bearbeiten'
 project.template.index.title: Projekte
 project.template.new.submit: __project.template.new.submit
 project.template.new.title: 'Projekt anlegen'
 project.template.show.title: Projekt
-registration.flash.confirmed: 'Ihre Registrierung wurde bestätigt'
-registration.flash.registered: 'Ihr Account wurde registriert'
 registration.template.checkMail.login: 'Ich habe bereits einen Account'
 registration.template.checkMail.message: 'Ein Link um Ihre Registrierung zu bestätigen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Registrierprozess.'
 registration.template.register.message: __registration.template.register.message
@@ -83,8 +66,6 @@ registration.template.register.submit: __registration.template.register.submit
 registration.template.register.terms: __registration.template.register.terms
 registration.template.register.title: Registrierung
 reports.template.index.title: Berichte
-resetting.flash.confirmed: 'Das Zurücksetzen Ihres Passwortes wurde bestätigt'
-resetting.flash.resetted: 'Ihr Passwort wurde zurückgesetzt'
 resetting.template.checkMail.text: 'Ein Link um Ihr Passwort zurückzusetzen wurde an Ihre E-Mail-Adresse geschickt. Bitte folgen Sie dem Link und beenden den Prozess.'
 resetting.template.checkMail.title: 'Passwortzurücksetzen bestätigen'
 resetting.template.confirm.message: __resetting.template.confirm.message
@@ -104,9 +85,6 @@ task.action.delete: Löschen
 task.action.edit: Bearbeiten
 task.action.show: Anzeigen
 task.entity.name: Name
-task.flash.created: 'Der Eintrag wurde erstellt'
-task.flash.deleted: 'Der Eintrag wurde gelöscht'
-task.flash.updated: 'Der Eintrag wurde aktualisiert'
 task.template.edit.submit: __task.template.edit.submit
 task.template.edit.title: 'Eintrag anzeigen'
 task.template.index.title: Einträge
@@ -122,9 +100,6 @@ team.action.show: Anzeigen
 team.entity.name: Name
 team.entity.projects: Projekte
 team.entity.tasks: Einträge
-team.flash.created: 'Das Team wurde erstellt'
-team.flash.deleted: 'Das Team wurde gelöscht'
-team.flash.updated: 'Das Team wurde aktualisiert'
 team.template.activeTeam: 'Aktives Team'
 team.template.edit.submit: __team.template.edit.submit
 team.template.edit.title: 'Team bearbeiten'
@@ -132,8 +107,6 @@ team.template.index.title: Teams
 team.template.new.submit: __team.template.new.submit
 team.template.new.title: 'Team erstellen'
 team.template.show.title: Team
-teamMembership.flash.deleted: 'Die Mitgliedschaft wurde gelöscht'
-teamMembership.flash.updated: 'Die Mitgliedschaft wurde aktualisiert'
 teamMembership.template.edit.submit: __teamMembership.template.edit.submit
 teamMembership.template.edit.title: 'Mitgliedschaft bearbeiten'
 teamMembership.template.index.title: Mitgliedschaften
@@ -166,9 +139,6 @@ timeEntry.entity.note: Notiz
 timeEntry.entity.project: Projekt
 timeEntry.entity.startsAt: 'Starten am'
 timeEntry.entity.task: Eintrag
-timeEntry.flash.created: 'Der Zeiteintrag wurde erstellt'
-timeEntry.flash.deleted: 'Der Zeiteintrag wurde gelöscht'
-timeEntry.flash.updated: 'Der Zeiteintrag wurde aktualisiert'
 timeEntry.template.edit.submit: __timeEntry.template.edit.submit
 timeEntry.template.edit.title: 'Zeiteintrag bearbeiten'
 timeEntry.template.index.title: 'Zeiteinträge'
@@ -188,9 +158,6 @@ user.entity.password: Passwort
 user.entity.passwordCurrent: 'Aktuelles Password'
 user.entity.passwordRepeat: 'Wiederhole Password'
 user.entity.username: Benutzername
-user.flash.created: 'Account wurde erstellt'
-user.flash.deleted: 'Account wurde gelöscht'
-user.flash.updated: 'Account wurde aktualisiert'
 value.absenceReason.holiday: Feiertag
 value.absenceReason.illness: Krankheit
 value.absenceReason.vacation: Urlaub

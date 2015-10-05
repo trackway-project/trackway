@@ -1,7 +1,7 @@
 {{ form(form) }}
 {% if deleteId is defined %}
     <button type="button"
-            class="btn btn-danger margin-left-10"
+            class="btn btn-danger pull-right"
             onclick="sendDelete('{{ type }}', {{ deleteId }}, this);">
         <i class="fa fa-trash-o"></i> Delete
     </button>

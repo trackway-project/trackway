@@ -60,7 +60,7 @@ class RegistrationControllerTest extends AbstractControllerTest
         $crawler = $this->client->request('GET', '/register/' . $user->getConfirmationToken());
 
         static::assertStatusCode($this->client);
-        static::assertFlashMessage($crawler, 'registration.flash.confirmed');
+        static::assertNotification($crawler, 'registration.flash.confirmed');
         static::assertHeadline($crawler, 'calendar.template.index.title');
     }
 }
