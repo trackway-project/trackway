@@ -141,6 +141,72 @@ class AbsenceController extends Controller
     }
 
     /**
+     * Deletes a Absence entity.
+     *
+     * @param Absence $absence
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Method("GET")
+     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="absence_delete")
+     * @Security("is_granted('EDIT', absence)")
+     */
+    public function deleteAction(Absence $absence)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($absence);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'absence.flash.deleted');
+
+        $return = ['status' => 'success'];
+        return new JsonResponse($return);
+    }
+
+    /**
+     * Deletes a TimeEntry entity.
+     *
+     * @param Request $request
+     * @param Absence $absence
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Method("GET")
+     * @Route("/{id}/copy", requirements={"id": "\d+"}, name="absence_calendar_copy")
+     * @Security("is_granted('EDIT', absence)")
+     */
+    public function copyCalendarAction(Request $request, Absence $absence)
+    {
+        $return = ['status' => 'error'];
+
+        $start = \DateTime::createFromFormat('Y-m-d?H:i:s', $request->get('start'));
+        $end = \DateTime::createFromFormat('Y-m-d?H:i:s', $request->get('end'));
+
+        if ($start !== false && $end !== false) {
+            $dateTimeRange = new DateTimeRange();
+            $dateTimeRange->setDate($start);
+            $dateTimeRange->setStartsAt($start);
+            $dateTimeRange->setEndsAt($end);
+
+            $newAbsence = new Absence();
+            $newAbsence->setDateTimeRange($dateTimeRange);
+            $newAbsence->setNote($absence->getNote());
+            $newAbsence->setReason($absence->getReason());
+            $newAbsence->setTeam($absence->getTeam());
+            $newAbsence->setUser($absence->getUser());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newAbsence);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'absence.flash.copied');
+            $return = ['status' => 'success'];
+        }
+
+        return new JsonResponse($return);
+    }
+
+    /**
      * Edits an existing Absence entity.
      *
      * @param Request $request
@@ -176,79 +242,8 @@ class AbsenceController extends Controller
         $em->persist($absence);
         $em->flush();
 
+        $this->get('session')->getFlashBag()->add('success', 'absence.flash.moved');
         $return = ['status' => 'success'];
-
-        return new JsonResponse($return);
-    }
-
-    /**
-     * Deletes a Absence entity.
-     *
-     * @param Absence $absence
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Method("GET")
-     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="absence_delete")
-     * @Security("is_granted('EDIT', absence)")
-     */
-    public function deleteAction(Absence $absence)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($absence);
-        $em->flush();
-
-        $this->get('session')->getFlashBag()->add('success', 'absence.flash.deleted');
-
-        $return = ['status' => 'success'];
-        return new JsonResponse($return);
-    }
-
-    /**
-     * Deletes a TimeEntry entity.
-     *
-     * @param Request $request
-     * @param Absence $absence
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Method("GET")
-     * @Route("/{id}/copy", requirements={"id": "\d+"}, name="absence_copy")
-     * @Security("is_granted('EDIT', absence)")
-     */
-    public function copyAction(Request $request, Absence $absence)
-    {
-        $return = ['status' => 'error'];
-        $startTimestamp = $request->get('start', false);
-        $endTimestamp = $request->get('end', false);
-
-        if ($startTimestamp !== false && $endTimestamp !== false) {
-            $start = new \DateTime();
-            if ($startTimestamp != null) {
-                $start->setTimestamp($startTimestamp);
-            }
-            $newAbsence = new Absence();
-
-            $dateTimeRange = new DateTimeRange();
-            $dateTimeRange->setDate($start);
-            $dateTimeRange->setStartsAt($start);
-            $end = new \DateTime();
-            $end->setTimestamp($endTimestamp);
-            $dateTimeRange->setEndsAt($end);
-            $newAbsence->setDateTimeRange($dateTimeRange);
-
-            $newAbsence->setNote($absence->getNote());
-            $newAbsence->setReason($absence->getReason());
-            $newAbsence->setTeam($absence->getTeam());
-            $newAbsence->setUser($absence->getUser());
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($newAbsence);
-            $em->flush();
-
-            $this->get('session')->getFlashBag()->add('success', 'absence.flash.copied');
-            $return = ['status' => 'success'];
-        }
 
         return new JsonResponse($return);
     }

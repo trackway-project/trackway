@@ -99,14 +99,19 @@
                     path,
                     {
                         id: idObj.id,
-                        start: start.unix(),
-                        end: end.unix()
+                        start: start.format(),
+                        end: end.format()
                     },
                     function (response) {
                         event.title = oldTitle;
                         $(self.element).fullCalendar('updateEvent', event);
                         if (response.status != 'success') {
                             alert("Update failed! Reload the page and try again.");
+                        } else {
+                            $(self.element).fullCalendar('refetchEvents');
+
+                            // refresh notifications in background
+                            $('.notifications-menu').Notifications('refresh');
                         }
                     }
                 );
@@ -129,11 +134,14 @@
                 $.getJSON(
                     path,
                     {
-                        start: start.unix(),
-                        end: end.unix()
+                        start: start.format(),
+                        end: end.format()
                     },
                     function (response) {
-                        location.reload();
+                        $(self.element).fullCalendar('refetchEvents');
+
+                        // refresh notifications in background
+                        $('.notifications-menu').Notifications('refresh');
                     }
                 );
             }

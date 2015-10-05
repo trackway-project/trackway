@@ -17,10 +17,17 @@
                     {},
                     function (response) {
                         if (response.status == 'success') {
-                            location.reload();
+                            // reload calendar in background
+                            $('#calendar').fullCalendar('refetchEvents');
+
+                            // refresh notifications in background
+                            $('.notifications-menu').Notifications('refresh');
+
+                            $('#modal').modal('hide');
                         }
                     }
             );
+            return false;
         }
     </script>
 {% endif %}
