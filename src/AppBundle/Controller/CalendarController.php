@@ -64,8 +64,8 @@ class CalendarController extends Controller
             $return[] = [
                 'id' => 'entry_' . $entry->getId(),
                 'title' => $entry->getNote(),
-                'start' => $entry->getDateTimeRange()->getStartDateTime()->getTimestamp() * 1000,
-                'end' => $entry->getDateTimeRange()->getEndDateTime()->getTimestamp() * 1000,
+                'start' => $entry->getDateTimeRange()->getStartDateTime()->format('c'),
+                'end' => $entry->getDateTimeRange()->getEndDateTime()->format('c'),
                 'allDay' => false,
                 'className' => 'entry'
             ];
@@ -76,8 +76,8 @@ class CalendarController extends Controller
             $return[] = [
                 'id' => 'absence_' . $entry->getId(),
                 'title' => $entry->getNote(),
-                'start' => $entry->getDateTimeRange()->getStartDateTime()->getTimestamp() * 1000,
-                'end' => $entry->getDateTimeRange()->getEndDateTime()->getTimestamp() * 1000,
+                'start' => $entry->getDateTimeRange()->getStartDateTime()->format('c'),
+                'end' => $entry->getDateTimeRange()->getEndDateTime()->format('c'),
                 'allDay' => false,
                 'className' => 'absence'
             ];

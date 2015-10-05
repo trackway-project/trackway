@@ -150,45 +150,6 @@ class TimeEntryController extends Controller
     }
 
     /**
-     * Edits an existing TimeEntry entity.
-     *
-     * @param Request $request
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Method("GET")
-     * @Route("/{id}/calendar_edit", requirements={"id": "\d+"}, name="timeentry_calendar_edit")
-     * @Security("is_granted('EDIT', timeEntry)")
-     */
-    public function editCalendarAction(Request $request, TimeEntry $timeEntry)
-    {
-        $startTimestamp = $request->get('start');
-        $start = new \DateTime();
-        if ($startTimestamp != null) {
-            $start->setTimestamp($startTimestamp);
-        }
-        $endTimestamp = $request->get('end');
-        $end = new \DateTime();
-        if ($endTimestamp != null) {
-            $end->setTimestamp($endTimestamp);
-        }
-
-        $dateTimeRange = new DateTimeRange();
-        $dateTimeRange->setDate($start);
-        $dateTimeRange->setStartsAt($start);
-        $dateTimeRange->setEndsAt($end);
-
-        $timeEntry->setDateTimeRange($dateTimeRange);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($timeEntry);
-        $em->flush();
-
-        $return = ['status' => 'success'];
-        return new JsonResponse($return);
-    }
-
-    /**
      * Deletes a TimeEntry entity.
      *
      * @param TimeEntry $timeEntry
@@ -220,30 +181,24 @@ class TimeEntryController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/copy", requirements={"id": "\d+"}, name="timeentry_copy")
+     * @Route("/{id}/copy", requirements={"id": "\d+"}, name="timeentry_calendar_copy")
      * @Security("is_granted('EDIT', timeEntry)")
      */
-    public function copyAction(Request $request, TimeEntry $timeEntry)
+    public function copyCalendarAction(Request $request, TimeEntry $timeEntry)
     {
         $return = ['status' => 'error'];
-        $startTimestamp = $request->get('start', false);
-        $endTimestamp = $request->get('end', false);
 
-        if ($startTimestamp !== false && $endTimestamp !== false) {
-            $start = new \DateTime();
-            if ($startTimestamp != null) {
-                $start->setTimestamp($startTimestamp);
-            }
-            $newTimeEntry = new TimeEntry();
+        $start = \DateTime::createFromFormat('Y-m-d?H:i:s', $request->get('start'));
+        $end = \DateTime::createFromFormat('Y-m-d?H:i:s', $request->get('end'));
 
+        if ($start !== false && $end !== false) {
             $dateTimeRange = new DateTimeRange();
             $dateTimeRange->setDate($start);
             $dateTimeRange->setStartsAt($start);
-            $end = new \DateTime();
-            $end->setTimestamp($endTimestamp);
             $dateTimeRange->setEndsAt($end);
-            $newTimeEntry->setDateTimeRange($dateTimeRange);
 
+            $newTimeEntry = new TimeEntry();
+            $newTimeEntry->setDateTimeRange($dateTimeRange);
             $newTimeEntry->setNote($timeEntry->getNote());
             $newTimeEntry->setProject($timeEntry->getProject());
             $newTimeEntry->setTask($timeEntry->getTask());
@@ -255,6 +210,44 @@ class TimeEntryController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.copied');
+            $return = ['status' => 'success'];
+        }
+
+        return new JsonResponse($return);
+    }
+
+    /**
+     * Edits an existing TimeEntry entity.
+     *
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Method("GET")
+     * @Route("/{id}/calendar_edit", requirements={"id": "\d+"}, name="timeentry_calendar_edit")
+     * @Security("is_granted('EDIT', timeEntry)")
+     */
+    public function editCalendarAction(Request $request, TimeEntry $timeEntry)
+    {
+        $return = ['status' => 'error'];
+
+        $start = \DateTime::createFromFormat('Y-m-d?H:i:s', $request->get('start'));
+        $end = \DateTime::createFromFormat('Y-m-d?H:i:s', $request->get('end'));
+
+        if ($start !== false && $end !== false) {
+
+            $dateTimeRange = new DateTimeRange();
+            $dateTimeRange->setDate($start);
+            $dateTimeRange->setStartsAt($start);
+            $dateTimeRange->setEndsAt($end);
+
+            $timeEntry->setDateTimeRange($dateTimeRange);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($timeEntry);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'timeEntry.flash.moved');
             $return = ['status' => 'success'];
         }
 
