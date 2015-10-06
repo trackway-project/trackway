@@ -35,7 +35,7 @@ class TimeEntryController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/new", name="timeentry_new")
+     * @Route("/new", name="timeentry_create")
      * @Security("is_granted('VIEW', user.getActiveTeam())")
      * @Template("AppBundle::modal.formcontent.html.twig")
      */
@@ -71,7 +71,7 @@ class TimeEntryController extends Controller
                     'task' => [
                         'choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)
                     ],
-                    'action' => $this->generateUrl('timeentry_new'),
+                    'action' => $this->generateUrl('timeentry_create'),
                     'submit' => [
                         'label' => 'timeEntry.template.new.submit'
                     ]
@@ -96,7 +96,7 @@ class TimeEntryController extends Controller
             // Handle submitNew
             $formValues = $request->get('appbundle_time_entry_form', []);
             if (array_key_exists('submitNew', $formValues) && $formValues['submitNew']) {
-                return $this->redirect($this->get('router')->generate('timeentry_new', [
+                return $this->redirect($this->get('router')->generate('timeentry_create', [
                     'start' => $timeEntry->getDateTimeRange()->getEndDateTime()->getTimestamp()
                 ]));
             }
@@ -116,7 +116,7 @@ class TimeEntryController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="timeentry_edit")
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="timeentry_edit", options={"expose"=true})
      * @Security("is_granted('EDIT', timeEntry)")
      * @Template("AppBundle::modal.formcontent.html.twig")
      */
@@ -157,7 +157,7 @@ class TimeEntryController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="timeentry_delete")
+     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="timeentry_delete", options={"expose"=true})
      * @Security("is_granted('EDIT', timeEntry)")
      */
     public function deleteAction(TimeEntry $timeEntry)
@@ -181,7 +181,7 @@ class TimeEntryController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/copy", requirements={"id": "\d+"}, name="timeentry_calendar_copy")
+     * @Route("/{id}/copy", requirements={"id": "\d+"}, name="timeentry_calendar_copy", options={"expose"=true})
      * @Security("is_granted('EDIT', timeEntry)")
      */
     public function copyCalendarAction(Request $request, TimeEntry $timeEntry)
@@ -224,7 +224,7 @@ class TimeEntryController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/calendar_edit", requirements={"id": "\d+"}, name="timeentry_calendar_edit")
+     * @Route("/{id}/calendar_edit", requirements={"id": "\d+"}, name="timeentry_calendar_edit", options={"expose"=true})
      * @Security("is_granted('EDIT', timeEntry)")
      */
     public function editCalendarAction(Request $request, TimeEntry $timeEntry)

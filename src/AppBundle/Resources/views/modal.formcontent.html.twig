@@ -1,33 +1,9 @@
 {{ form(form) }}
 {% if deleteId is defined %}
     <button type="button"
-            class="btn btn-danger pull-right"
-            onclick="sendDelete('{{ type }}', {{ deleteId }}, this);">
+            class="btn btn-danger pull-right delete"
+            data-type="{{ type }}"
+            data-id="{{ deleteId }}">
         <i class="fa fa-trash-o"></i> Delete
     </button>
-    <script>
-        function sendDelete(type, id, button) {
-            {# TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})#}
-            var path = type == 'absence'
-                    ? '/absence/' + id + '/delete'
-                    : '/timeentry/' + id + '/delete';
-            $(button).button('loading');
-            $.getJSON(
-                    path,
-                    {},
-                    function (response) {
-                        if (response.status == 'success') {
-                            // reload calendar in background
-                            $('#calendar').fullCalendar('refetchEvents');
-
-                            // refresh notifications in background
-                            $('.notifications-menu').Notifications('refresh');
-
-                            $('#modal').modal('hide');
-                        }
-                    }
-            );
-            return false;
-        }
-    </script>
 {% endif %}

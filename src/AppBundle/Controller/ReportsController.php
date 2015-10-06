@@ -90,7 +90,7 @@ class ReportsController extends Controller
 
     /**
      * @Method("GET")
-     * @Route("/statistics", name="statistics")
+     * @Route("/statistics", name="statistics", options={"expose"=true})
      * @Security("is_granted('VIEW', user.getActiveTeam())")
      * @param Request $request
      * @return JsonResponse
