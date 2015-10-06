@@ -25,8 +25,7 @@
                 defaultView: 'agendaWeek',
                 height: self._getCalendarHeight(),
                 allDaySlot: false,
-                //TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
-                events: '/calendar',
+                events: Routing.generate('calendar_events'),
                 editable: true,
                 minTime: '06:00:00',
                 maxTime: '21:00:00',
@@ -86,10 +85,9 @@
             var self = this;
             var idObj = self._splitEventIdString(event.id);
             if (idObj.type != 'undefined') {
-                //TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
                 var path = idObj.type == 'entry'
-                    ? '/timeentry/' + idObj.id + '/calendar_edit'
-                    : '/absence/' + idObj.id + '/calendar_edit';
+                    ? Routing.generate('timeentry_calendar_edit', {id: idObj.id})
+                    : Routing.generate('absence_calendar_edit', {id: idObj.id});
                 var start = event.start;
                 var end = event.end;
                 var oldTitle = event.title;
@@ -122,10 +120,9 @@
             var self = this;
             var idObj = self._splitEventIdString(event.id);
             if (idObj.type != 'undefined') {
-                // TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
                 var path = idObj.type == 'entry'
-                    ? '/timeentry/' + idObj.id + '/copy'
-                    : '/absence/' + idObj.id + '/copy';
+                    ? Routing.generate('timeentry_calendar_copy', {id: idObj.id})
+                    : Routing.generate('absence_calendar_copy', {id: idObj.id});
                 var start = event.start;
                 var end = event.end;
                 var oldTitle = event.title;

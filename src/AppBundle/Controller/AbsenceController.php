@@ -31,7 +31,7 @@ class AbsenceController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/new", name="absence_new")
+     * @Route("/new", name="absence_create")
      * @Security("is_granted('VIEW', user.getActiveTeam())")
      * @Template("AppBundle::modal.formcontent.html.twig")
      */
@@ -106,7 +106,7 @@ class AbsenceController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="absence_edit")
+     * @Route("/{id}/edit", requirements={"id": "\d+"}, name="absence_edit", options={"expose"=true})
      * @Security("is_granted('EDIT', absence)")
      * @Template("AppBundle::modal.formcontent.html.twig")
      */
@@ -148,7 +148,7 @@ class AbsenceController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="absence_delete")
+     * @Route("/{id}/delete", requirements={"id": "\d+"}, name="absence_delete", options={"expose"=true})
      * @Security("is_granted('EDIT', absence)")
      */
     public function deleteAction(Absence $absence)
@@ -172,7 +172,7 @@ class AbsenceController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET")
-     * @Route("/{id}/copy", requirements={"id": "\d+"}, name="absence_calendar_copy")
+     * @Route("/{id}/copy", requirements={"id": "\d+"}, name="absence_calendar_copy", options={"expose"=true})
      * @Security("is_granted('EDIT', absence)")
      */
     public function copyCalendarAction(Request $request, Absence $absence)
@@ -215,7 +215,7 @@ class AbsenceController extends Controller
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Method("GET|POST")
-     * @Route("/{id}/calendar_edit", requirements={"id": "\d+"}, name="absence_calendar_edit")
+     * @Route("/{id}/calendar_edit", requirements={"id": "\d+"}, name="absence_calendar_edit", options={"expose"=true})
      * @Security("is_granted('EDIT', absence)")
      */
     public function editCalendarAction(Request $request, Absence $absence)

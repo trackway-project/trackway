@@ -59,15 +59,21 @@
         editEntry: function (id) {
             var self = this;
             self._showEntryTab();
-            // TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
-            self._showModal('/timeentry/' + id + '/edit', self.settings.entryId, false);
+            self._showModal(
+                Routing.generate('timeentry_edit', {id: id}),
+                self.settings.entryId,
+                false
+            );
         },
 
         editAbsence: function (id) {
             var self = this;
             self._showAbsenceTab();
-            // TODO: use generated path (fos js routing bundle. {{ path('timeentry_edit', { 'id': entity.id }) }})
-            self._showModal('/absence/' + id + '/edit', self.settings.entryId, false);
+            self._showModal(
+                Routing.generate('absence_edit', {id: id}),
+                self.settings.entryId,
+                false
+            );
         },
 
         _showModal: function (url, divId, useDate) {
@@ -81,6 +87,37 @@
                 cache: false
             }).done(function (html) {
                 self._insertForm(url, divId, html, $(self.element));
+                self._initDeleteBtn($(self.element));
+            });
+        },
+
+        _initDeleteBtn: function(modalElement) {
+            var deleteBtn = modalElement.find('.delete');
+            deleteBtn.click(function(event) {
+                var type = $(event.target).data('type');
+                var id = $(event.target).data('id');
+
+                var path = type == 'absence'
+                    ? Routing.generate('absence_delete', {id: id})
+                    : Routing.generate('timeentry_delete', {id: id});
+
+                deleteBtn.button('loading');
+                $.getJSON(
+                    path,
+                    {},
+                    function (response) {
+                        if (response.status == 'success') {
+                            // reload calendar in background
+                            $('#calendar').fullCalendar('refetchEvents');
+
+                            // refresh notifications in background
+                            $('.notifications-menu').Notifications('refresh');
+
+                            modalElement.modal('hide');
+                        }
+                    }
+                );
+                return false;
             });
         },
 

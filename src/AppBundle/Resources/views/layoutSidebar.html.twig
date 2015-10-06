@@ -44,7 +44,9 @@
         {% include 'AppBundle::footer.html.twig' %}
     </div>
     {% block javascripts %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
         <script src="{{ asset('js/combined.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
         <script>
             $(function() {
                 $('.notifications-menu').Notifications({

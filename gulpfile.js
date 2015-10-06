@@ -124,6 +124,7 @@ gulp.task('images', ['bower'], function () {
 gulp.task('js', ['handlebars'], function () {
     return gulp.src([
         buildDirectory + '/lib/jquery/dist/jquery.js',
+        'vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
         buildDirectory + '/lib/bootstrap/js/button.js',
         buildDirectory + '/lib/bootstrap/js/dropdown.js',
         buildDirectory + '/lib/bootstrap/js/modal.js',
@@ -137,9 +138,10 @@ gulp.task('js', ['handlebars'], function () {
         buildDirectory + '/lib/keymaster/keymaster.js',
         nodeDirectory + '/gulp-handlebars/node_modules/handlebars/dist/handlebars.runtime.js',
         buildDirectory + '/js/templates.js',
+        sourceDirectory + '/js/UIModuleWrapper.js',
         sourceDirectory + '/js/*.js'
     ])
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(concat('combined.js'))
         .pipe(gulp.dest(buildDirectory + '/js/'));
 });

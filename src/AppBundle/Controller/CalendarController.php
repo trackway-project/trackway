@@ -34,7 +34,7 @@ class CalendarController extends Controller
 
     /**
      * @Method("GET")
-     * @Route("/calendar", name="calendar_events")
+     * @Route("/calendar", name="calendar_events", options={"expose"=true})
      * @Security("is_granted('VIEW', user.getActiveTeam())")
      */
     public function calendarEventsAction(Request $request)

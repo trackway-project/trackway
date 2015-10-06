@@ -61,8 +61,8 @@
         {% include 'AppBundle::dateRangePicker.js.twig' %}
 
         $('#entryModal').EntryModal({
-            entryUrl: '{{ path('timeentry_new') }}',
-            absenceUrl: '{{ path('absence_new') }}'
+            entryUrl: '{{ path('timeentry_create') }}',
+            absenceUrl: '{{ path('absence_create') }}'
         });
     </script>
 {% endblock %}
