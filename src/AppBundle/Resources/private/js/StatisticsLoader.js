@@ -1,7 +1,7 @@
 ; // semi-colon is a safety net against concatenated scripts and/or other modules which may not be closed properly.
 (function ($) {
     var _defaults = {
-        statisticsUrl: Routing.generate('statistics')
+        statisticsUrl: ''
     };
 
     /**
@@ -15,6 +15,7 @@
          */
         init: function () {
             var self = this;
+            self.settings.statisticsUrl = Routing.generate('statistics');
 
             if (this.settings.startDate == null) {
                 jQuery.error('Required setting "startDate" can not be empty');
