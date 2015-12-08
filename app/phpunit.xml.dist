@@ -9,7 +9,7 @@
 >
 
     <php>
-        <env name="OUTPUT_RESPONSE_ON_FAILURE" value="true" />
+        <env name="OUTPUT_RESPONSE_ON_FAILURE" value="false" />
     </php>
 
     <testsuites>
