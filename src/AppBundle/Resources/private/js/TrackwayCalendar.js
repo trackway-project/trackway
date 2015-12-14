@@ -30,7 +30,7 @@
                 minTime: '06:00:00',
                 maxTime: '21:00:00',
                 weekends: false,
-                viewRender: function (view, element) {
+                loading: function (view, element) {
                     self._updateStatistics();
                 },
                 dayClick: function (date, jsEvent, view, resourceObj) {
