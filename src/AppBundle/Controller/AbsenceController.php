@@ -86,7 +86,7 @@ class AbsenceController extends Controller
             // Handle submitNew
             $formValues = $request->get('appbundle_absence_form', []);
             if (array_key_exists('submitNew', $formValues) && $formValues['submitNew']) {
-                return $this->redirect($this->get('router')->generate('absence_new', [
+                return $this->redirect($this->get('router')->generate('absence_create', [
                     'start' => $absence->getDateTimeRange()->getEndDateTime()->getTimestamp()
                 ]));
             }
@@ -220,30 +220,27 @@ class AbsenceController extends Controller
      */
     public function editCalendarAction(Request $request, Absence $absence)
     {
-        $startTimestamp = $request->get('start');
-        $start = new \DateTime();
-        if ($startTimestamp != null) {
-            $start->setTimestamp($startTimestamp);
+        $return = ['status' => 'error'];
+
+        $start = \DateTime::createFromFormat('Y-m-d?H:i:s', $request->get('start'));
+        $end = \DateTime::createFromFormat('Y-m-d?H:i:s', $request->get('end'));
+
+        if ($start !== false && $end !== false) {
+
+            $dateTimeRange = new DateTimeRange();
+            $dateTimeRange->setDate($start);
+            $dateTimeRange->setStartsAt($start);
+            $dateTimeRange->setEndsAt($end);
+
+            $absence->setDateTimeRange($dateTimeRange);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($absence);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'absence.flash.moved');
+            $return = ['status' => 'success'];
         }
-        $endTimestamp = $request->get('end');
-        $end = new \DateTime();
-        if ($endTimestamp != null) {
-            $end->setTimestamp($endTimestamp);
-        }
-
-        $dateTimeRange = new DateTimeRange();
-        $dateTimeRange->setDate($start);
-        $dateTimeRange->setStartsAt($start);
-        $dateTimeRange->setEndsAt($end);
-
-        $absence->setDateTimeRange($dateTimeRange);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($absence);
-        $em->flush();
-
-        $this->get('session')->getFlashBag()->add('success', 'absence.flash.moved');
-        $return = ['status' => 'success'];
 
         return new JsonResponse($return);
     }
