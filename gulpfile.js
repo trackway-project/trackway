@@ -25,7 +25,8 @@ var buildDirectory = 'web',
     sourceDirectory = 'src/AppBundle/Resources/private',
     bowerDirectory = 'bower_components',
     nodeDirectory = 'node_modules',
-    asyncDirectory = 'async';
+    asyncDirectory = 'async',
+    vendorDirectory = 'vendor';
 
 // Default task
 
@@ -124,7 +125,7 @@ gulp.task('images', ['bower'], function () {
 gulp.task('js', ['handlebars'], function () {
     return gulp.src([
         buildDirectory + '/lib/jquery/dist/jquery.js',
-        'vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
+        vendorDirectory + '/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
         buildDirectory + '/lib/bootstrap/js/button.js',
         buildDirectory + '/lib/bootstrap/js/dropdown.js',
         buildDirectory + '/lib/bootstrap/js/modal.js',

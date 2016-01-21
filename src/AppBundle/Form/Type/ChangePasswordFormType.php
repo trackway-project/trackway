@@ -2,8 +2,10 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 /**
@@ -14,15 +16,14 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 class ChangePasswordFormType extends AbstractOverridableFormType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('password',
-            'repeated',
+            RepeatedType::class,
             $this->overrideOptions('password',
-                ['type' => 'password',
+                ['type' => PasswordType::class,
                     'invalid_message' => 'The password fields must match.',
                     'options' => ['attr' => ['class' => 'password-field']],
                     'required' => true,
@@ -30,25 +31,17 @@ class ChangePasswordFormType extends AbstractOverridableFormType
                     'second_options' => ['label' => 'user.entity.passwordRepeat']],
                 $options))
             ->add('currentPassword',
-                'password',
+                PasswordType::class,
                 $this->overrideOptions('currentPassword',
                     ['label' => 'user.entity.passwordCurrent', 'mapped' => false, 'required' => true, 'constraints' => new UserPassword()],
                     $options));
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => 'AppBundle\Entity\User', 'override' => false, 'validation_groups' => ['change_password']]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'appbundle_change_password_form_type';
     }
 }

@@ -5,12 +5,11 @@
     "description": "The simple on-premise open source time tracker.",
     "autoload": {
         "psr-4": { "": "src/" },
-        "files": [ "app/AppKernel.php" ]
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
     },
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.0.*",
@@ -28,14 +27,14 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "friendsofsymfony/rest-bundle": "^1.7",
         "jms/serializer-bundle": "^1.1",
-        "nelmio/api-doc-bundle": "^2.10",
+        "nelmio/api-doc-bundle": "^2.11",
         "ornicar/gravatar-bundle": "^1.1",
-        "friendsofsymfony/jsrouting-bundle": "^1.5"
+        "friendsofsymfony/jsrouting-bundle": "^2.0-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^2.7",
-        "phpunit/phpunit": "^5.0",
+        "phpunit/phpunit": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "liip/functional-test-bundle": "^1.3"

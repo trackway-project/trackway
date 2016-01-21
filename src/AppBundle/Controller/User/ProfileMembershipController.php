@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProfileMembershipController
@@ -28,12 +29,12 @@ class ProfileMembershipController extends Controller
      * @Route("/", name="profile_membership_index")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return ['pagination' => $this->get('knp_paginator')->paginate(
             $this->getUser()->getMemberships(),
-            $this->get('request')->query->get('page', 1),
-            $this->get('request')->query->get('limit', 10)
+            $request->query->get('page', 1),
+            $request->query->get('limit', 10)
         )];
     }
 

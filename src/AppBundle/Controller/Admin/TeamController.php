@@ -6,6 +6,7 @@ use AppBundle\Controller\TeamController as BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class TeamController
@@ -25,7 +26,7 @@ class TeamController extends BaseController
      * @Route("/", name="admin_team_index")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAll()];
     }

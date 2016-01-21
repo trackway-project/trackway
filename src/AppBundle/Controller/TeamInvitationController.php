@@ -38,12 +38,12 @@ class TeamInvitationController extends Controller
      * @Security("is_granted('EDIT', team)")
      * @Template()
      */
-    public function indexAction(Team $team)
+    public function indexAction(Request $request, Team $team)
     {
         return ['pagination' => $this->get('knp_paginator')->paginate(
             $this->getDoctrine()->getManager()->getRepository('AppBundle:Invitation')->findByTeamQuery($team),
-            $this->get('request')->query->get('page', 1),
-            $this->get('request')->query->get('limit', 10)
+            $request->query->get('page', 1),
+            $request->query->get('limit', 10)
         )];
     }
 
