@@ -70,5 +70,11 @@
         "branch-alias": {
             "dev-master": "0.6-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/MewesK/GravatarBundle"
+        }
+    ]
 }
