@@ -3,8 +3,10 @@
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class DateTimeRangeType
@@ -14,33 +16,24 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class DateTimeRangeType extends AbstractOverridableFormType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', 'date', $this->overrideOptions('date', [
+            ->add('date', DateType::class, $this->overrideOptions('date', [
                 'label' => 'timeEntry.entity.date', 'required' => true, 'widget' => 'single_text'], $options))
-            ->add('endsAt', 'time', $this->overrideOptions('endsAt', [
+            ->add('endsAt', TimeType::class, $this->overrideOptions('endsAt', [
                 'label' => 'timeEntry.entity.endsAt', 'required' => false, 'widget' => 'single_text'], $options))
-            ->add('startsAt', 'time', $this->overrideOptions('startsAt', [
+            ->add('startsAt', TimeType::class, $this->overrideOptions('startsAt', [
                 'label' => 'timeEntry.entity.startsAt', 'required' => false, 'widget' => 'single_text'], $options));
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => 'AppBundle\Entity\DateTimeRange', 'override' => false]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'appbundle_date_time_range_form_type';
     }
 }

@@ -31,12 +31,12 @@ class TeamController extends Controller
      * @Route("/", name="team_index")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         return ['pagination' => $this->get('knp_paginator')->paginate(
             $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findByUserQuery($this->getUser()),
-            $this->get('request')->query->get('page', 1),
-            $this->get('request')->query->get('limit', 10)
+            $request->query->get('page', 1),
+            $request->query->get('limit', 10)
         )];
     }
 

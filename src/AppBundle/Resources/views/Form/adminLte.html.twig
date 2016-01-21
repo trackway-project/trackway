@@ -14,11 +14,11 @@
     {{- parent() -}}
 {%- endblock widget_container_attributes -%}
 
-{%- block appbundle_date_time_range_form_type_row -%}
+{%- block date_time_range_row -%}
     {{- form_widget(form) -}}
 {%- endblock -%}
 
-{%- block appbundle_date_time_range_form_type_widget -%}
+{%- block date_time_range_widget -%}
     <div class="row">
         <div class="col-sm-12 form-group">
             {{ form_label(form.date) }}

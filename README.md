@@ -8,33 +8,33 @@ The simple on-premise open source time tracker.
 Enjoy!
 
 ## Requirements
-* PHP 5.5+
+* PHP 5.6+
 * Composer
 * npm
 
 ## Installation
 * `composer install`
 * `npm install`
-* `php app/console doctrine:database:create`
-* `php app/console doctrine:schema:create`
-* `php app/console doctrine:fixtures:load`
+* `php bin/console doctrine:database:create`
+* `php bin/console doctrine:schema:create`
+* `php bin/console doctrine:fixtures:load`
 * `node_modules/.bin/bower install`
 * `node_modules/.bin/gulp`
 * `node_modules/.bin/gulp favicons`
 
 ## Reset Database
-* `php app/console doctrine:database:drop --force`
-* `php app/console doctrine:database:create`
-* `php app/console doctrine:schema:create`
-* `php app/console doctrine:fixtures:load -n`
+* `php bin/console doctrine:database:drop --force`
+* `php bin/console doctrine:database:create`
+* `php bin/console doctrine:schema:create`
+* `php bin/console doctrine:fixtures:load -n`
 
 ## Development
 * Changed composer.json? Run `composer update`
 * Changed package.json? Run `npm update`
 * Changed bower.json? Run `bower update`
-* Changed src/AppBundle/Resources/private/favicon.png? Run `gulp favicons:build`
+* Changed src/AppBundle/Resources/private/favicon.png? Run `gulp favicons`
 * Changed anything else in src/AppBundle/Resources/private? Run `gulp`
-* Changed anything in src/AppBundle/Entity? Run `php app/console doctrine:schema:update`
+* Changed anything in src/AppBundle/Entity? Run `php bin/console doctrine:schema:update`
 
 ## Vagrant and Provisioning
 Take a look at https://github.com/trackway-project/trackway-vagrant

@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,7 +66,7 @@ class AbsenceController extends Controller
                     ]
                 ]
             )
-            ->add('submitNew', 'submit', [
+            ->add('submitNew', SubmitType::class, [
                 'label' => 'timeEntry.template.new.submitAndNew', 'attr' => ['value' => 1]
             ])
             ->setData($absence)

@@ -2,8 +2,12 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class UserFormType
@@ -13,33 +17,24 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class UserFormType extends AbstractOverridableFormType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('username', null, $this->overrideOptions('username', ['label' => 'user.entity.username', 'required' => true], $options))
-            ->add('email', 'email', $this->overrideOptions('email', ['label' => 'user.entity.email', 'required' => true], $options))
-            ->add('locale', 'choice', $this->overrideOptions('locale', ['label' => 'user.entity.locale', 'class' => 'AppBundle\Entity\Locale'], $options))
+            ->add('email', EmailType::class, $this->overrideOptions('email', ['label' => 'user.entity.email', 'required' => true], $options))
+            ->add('locale', ChoiceType::class, $this->overrideOptions('locale', ['label' => 'user.entity.locale', 'class' => 'AppBundle\Entity\Locale'], $options))
             ->add('activeTeam',
-                'entity',
+                EntityType::class,
                 $this->overrideOptions('activeTeam', ['label' => 'user.entity.activeTeam', 'class' => 'AppBundle\Entity\Team'], $options))
-            ->add('enabled', 'checkbox', $this->overrideOptions('enabled', ['label' => 'user.entity.enabled'], $options));
+            ->add('enabled', CheckboxType::class, $this->overrideOptions('enabled', ['label' => 'user.entity.enabled'], $options));
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => 'AppBundle\Entity\User', 'override' => false]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'appbundle_user_form_type';
     }
 }

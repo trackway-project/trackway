@@ -5,40 +5,39 @@
     "description": "The simple on-premise open source time tracker.",
     "autoload": {
         "psr-4": { "": "src/" },
-        "files": [ "app/AppKernel.php" ]
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
     },
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
     },
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.9",
-        "symfony/symfony": "3.0.*",
-        "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
-        "symfony/swiftmailer-bundle": "^2.3",
-        "symfony/monolog-bundle": "^2.8",
-        "sensio/distribution-bundle": "^5.0",
-        "sensio/framework-extra-bundle": "^3.0.2",
-        "incenteev/composer-parameter-handler": "^2.0",
-        "twig/extensions": "^1.3",
+        "doctrine/orm": "^2.5",
+        "friendsofsymfony/jsrouting-bundle": "dev-master",
+        "friendsofsymfony/rest-bundle": "^1.7",
         "gedmo/doctrine-extensions": "^2.4",
+        "incenteev/composer-parameter-handler": "^2.0",
+        "jms/serializer-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "friendsofsymfony/rest-bundle": "^1.7",
-        "jms/serializer-bundle": "^1.1",
-        "nelmio/api-doc-bundle": "^2.10",
-        "ornicar/gravatar-bundle": "^1.1",
-        "friendsofsymfony/jsrouting-bundle": "^1.5"
+        "nelmio/api-doc-bundle": "^2.11",
+        "ornicar/gravatar-bundle": "dev-master",
+        "sensio/distribution-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "symfony/monolog-bundle": "^2.8",
+        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/symfony": "3.0.*",
+        "twig/extensions": "^1.3"
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^2.7",
-        "phpunit/phpunit": "^5.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
-        "liip/functional-test-bundle": "^1.3"
+        "liip/functional-test-bundle": "^1.3",
+        "matthiasnoback/symfony-dependency-injection-test": "^0.7",
+        "phpunit/phpunit": "^5.1",
+        "sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^2.7"
     },
     "scripts": {
         "post-install-cmd": [
@@ -69,7 +68,13 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "3.0-dev"
+            "dev-master": "0.6-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/MewesK/GravatarBundle"
+        }
+    ]
 }

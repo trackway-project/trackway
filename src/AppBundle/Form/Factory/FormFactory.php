@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Factory;
 
 use AppBundle\Form\Type\OverridableFormTypeInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
@@ -25,10 +26,10 @@ class FormFactory
 
     /**
      * @param FormFactoryInterface $formFactory
-     * @param $name
-     * @param $formType
+     * @param string $formType
+     * @param string $name
      */
-    public function __construct(FormFactoryInterface $formFactory, FormTypeInterface $formType, $name)
+    public function __construct(FormFactoryInterface $formFactory, $formType, $name)
     {
         $this->formFactory = $formFactory;
         $this->formType = $formType;
@@ -44,7 +45,7 @@ class FormFactory
     {
         $submitOptions = array_merge(['label' => 'template.submit'], array_key_exists('submit', $options) ? $options['submit'] : []);
 
-        return $this->createFormWithoutSubmit($options)->add('submit', 'submit', $submitOptions);
+        return $this->createFormWithoutSubmit($options)->add('submit', SubmitType::class, $submitOptions);
     }
 
     /**

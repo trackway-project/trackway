@@ -2,8 +2,10 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class InvitationFormType
@@ -13,35 +15,26 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class InvitationFormType extends AbstractOverridableFormType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('team',
-            'entity',
+            EntityType::class,
             $this->overrideOptions('team',
                 ['label' => 'invitation.entity.team', 'class' => 'AppBundle\Entity\Team', 'expanded' => true, 'required' => true],
                 $options))
-            ->add('email', 'email', $this->overrideOptions('email', ['label' => 'invitation.entity.email', 'trim' => true], $options))
+            ->add('email', EmailType::class, $this->overrideOptions('email', ['label' => 'invitation.entity.email', 'trim' => true], $options))
             ->add('status',
-                'entity',
+                EntityType::class,
                 $this->overrideOptions('status', ['label' => 'invitation.entity.status', 'class' => 'AppBundle\Entity\InvitationStatus'], $options));
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Invitation', 'override' => false]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'appbundle_invitation_form_type';
     }
 }

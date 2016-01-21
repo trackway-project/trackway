@@ -2,8 +2,9 @@
 
 namespace AppBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class AbsenceFormType
@@ -13,33 +14,24 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class AbsenceFormType extends AbstractOverridableFormType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateTimeRange', 'appbundle_date_time_range_form_type', $this->overrideOptions('dateTimeRange', [
+            ->add('dateTimeRange', DateTimeRangeType::class, $this->overrideOptions('dateTimeRange', [
                 'label' => '', 'required' => true], $options))
             ->add('note', null, $this->overrideOptions('note', [
                 'label' => 'absence.entity.note', 'required' => false, 'trim' => true], $options))
-            ->add('reason', 'entity', $this->overrideOptions('reason', [
+            ->add('reason', EntityType::class, $this->overrideOptions('reason', [
                 'label' => 'absence.entity.reason', 'class' => 'AppBundle\Entity\AbsenceReason', 'required' => true], $options));
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => 'AppBundle\Entity\Absence', 'override' => false]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'appbundle_absence_form_type';
     }
 }

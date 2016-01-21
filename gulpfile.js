@@ -2,6 +2,7 @@
 
 var browserSync = require('browser-sync'),
     concat = require('gulp-concat'),
+    cssNano = require('gulp-cssnano'),
     declare = require('gulp-declare'),
     del = require('del'),
     favicons = require('favicons'),
@@ -11,7 +12,6 @@ var browserSync = require('browser-sync'),
     less = require('gulp-less'),
     livereload = require('gulp-livereload'),
     mainBowerFiles = require('main-bower-files'),
-    minifyCSS = require('gulp-minify-css'),
     path = require('path'),
     rename = require('gulp-rename'),
     replace = require('gulp-replace'),
@@ -25,7 +25,8 @@ var buildDirectory = 'web',
     sourceDirectory = 'src/AppBundle/Resources/private',
     bowerDirectory = 'bower_components',
     nodeDirectory = 'node_modules',
-    asyncDirectory = 'async';
+    asyncDirectory = 'async',
+    vendorDirectory = 'vendor';
 
 // Default task
 
@@ -85,7 +86,7 @@ gulp.task('css', ['less'], function () {
             buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css',
         buildDirectory + '/css/*.css'
     ])
-        .pipe(minifyCSS())
+        .pipe(cssNano())
         .pipe(concat('combined.css'))
         .pipe(gulp.dest(buildDirectory + '/css/'))
         .pipe(livereload());
@@ -124,7 +125,7 @@ gulp.task('images', ['bower'], function () {
 gulp.task('js', ['handlebars'], function () {
     return gulp.src([
         buildDirectory + '/lib/jquery/dist/jquery.js',
-        'vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
+        vendorDirectory + '/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js',
         buildDirectory + '/lib/bootstrap/js/button.js',
         buildDirectory + '/lib/bootstrap/js/dropdown.js',
         buildDirectory + '/lib/bootstrap/js/modal.js',
