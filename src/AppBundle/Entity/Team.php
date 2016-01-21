@@ -127,7 +127,7 @@ class Team
     }
 
     /**
-     * @return Invitation
+     * @return ArrayCollection
      */
     public function getInvitations()
     {
@@ -135,9 +135,9 @@ class Team
     }
 
     /**
-     * @param Invitation $invitations
+     * @param ArrayCollection $invitations
      */
-    public function setInvitations($invitations)
+    public function setInvitations(ArrayCollection $invitations)
     {
         $this->invitations = $invitations;
     }
