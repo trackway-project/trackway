@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1acad52f12e06934df0dbf02d19bbe4c",
-    "content-hash": "13efde2b9b9a50f1739c789de023d56d",
+    "hash": "6129444b98ab7e755b60b0e0265c2a24",
+    "content-hash": "2819757dc3a2f818620d73b166237e18",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1832,28 +1832,26 @@
         },
         {
             "name": "ornicar/gravatar-bundle",
-            "version": "1.1.2",
+            "version": "dev-master",
             "target-dir": "Ornicar/GravatarBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/henrikbjorn/GravatarBundle.git",
-                "reference": "1a97823ad7ae24bcf4c85fa31d68c84ffc8c46fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/henrikbjorn/GravatarBundle/zipball/1a97823ad7ae24bcf4c85fa31d68c84ffc8c46fb",
-                "reference": "1a97823ad7ae24bcf4c85fa31d68c84ffc8c46fb",
-                "shasum": ""
+                "url": "https://github.com/MewesK/GravatarBundle",
+                "reference": "c0151a37e1411ae15e701c9d5398791b83d8a233"
             },
             "require": {
                 "php": ">=5.3.0",
-                "symfony/framework-bundle": ">=2.0"
+                "symfony/framework-bundle": "~2.0|~3.0"
+            },
+            "conflict": {
+                "twig/twig": "<1.12"
             },
             "require-dev": {
+                "symfony/phpunit-bridge": "~2.7",
                 "twig/extensions": "1.0.*"
             },
             "suggest": {
-                "twig/twig": ">=1.3.0"
+                "twig/twig": "For gravatar twig extension usage"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1866,7 +1864,6 @@
                     "Ornicar\\GravatarBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1882,12 +1879,12 @@
             ],
             "description": "This bundles provides a Gravatar API various utilities to work with it in templates",
             "keywords": [
-                "Symfony2",
                 "gravatar",
+                "symfony2",
                 "templating",
                 "twig"
             ],
-            "time": "2014-05-30 08:11:27"
+            "time": "2016-01-21 20:12:47"
         },
         {
             "name": "paragonie/random_compat",
@@ -4323,7 +4320,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "friendsofsymfony/jsrouting-bundle": 20
+        "friendsofsymfony/jsrouting-bundle": 20,
+        "ornicar/gravatar-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
