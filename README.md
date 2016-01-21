@@ -8,7 +8,7 @@ The simple on-premise open source time tracker.
 Enjoy!
 
 ## Requirements
-* PHP 5.5+
+* PHP 5.6+
 * Composer
 * npm
 
