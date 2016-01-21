@@ -27,8 +27,7 @@
                 allDaySlot: false,
                 events: Routing.generate('calendar_events'),
                 editable: true,
-                minTime: '06:00:00',
-                maxTime: '21:00:00',
+                scrollTime: '06:00:00',
                 weekends: false,
                 loading: function (view, element) {
                     self._updateStatistics();
