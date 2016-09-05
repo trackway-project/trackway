@@ -24,7 +24,7 @@ class TimeEntryFormType extends AbstractOverridableFormType
             ->add('note', null, $this->overrideOptions('note', [
                 'label' => 'timeEntry.entity.note', 'required' => false, 'trim' => true], $options))
             ->add('project', EntityType::class, $this->overrideOptions('project', [
-                'label' => 'timeEntry.entity.project', 'class' => 'AppBundle\Entity\Project', 'required' => false], $options))
+                'label' => 'timeEntry.entity.project', 'class' => 'AppBundle\Entity\Project', 'required' => true], $options))
             ->add('task', EntityType::class, $this->overrideOptions('task', [
                 'label' => 'timeEntry.entity.task', 'class' => 'AppBundle\Entity\Task', 'required' => false], $options));
     }
