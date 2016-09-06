@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new AppBundle\AppBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new MewesK\TwigExcelBundle\MewesKTwigExcelBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

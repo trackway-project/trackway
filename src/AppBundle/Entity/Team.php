@@ -55,19 +55,11 @@ class Team
      */
     private $projects;
 
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="team", cascade={"remove"})
-     */
-    private $tasks;
-
     public function __construct()
     {
         $this->memberships = new ArrayCollection();
         $this->invitations = new ArrayCollection();
         $this->projects = new ArrayCollection();
-        $this->tasks = new ArrayCollection();
     }
 
     /**
@@ -156,21 +148,5 @@ class Team
     public function setProjects(ArrayCollection $projects)
     {
         $this->projects = $projects;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getTasks()
-    {
-        return $this->tasks;
-    }
-
-    /**
-     * @param ArrayCollection $tasks
-     */
-    public function setTasks(ArrayCollection $tasks)
-    {
-        $this->tasks = $tasks;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Form\Type;
 
+use AppBundle\Entity\Project;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,9 +26,17 @@ class TimeEntryFormType extends AbstractOverridableFormType
             ->add('note', null, $this->overrideOptions('note', [
                 'label' => 'timeEntry.entity.note', 'required' => false, 'trim' => true], $options))
             ->add('project', EntityType::class, $this->overrideOptions('project', [
-                'label' => 'timeEntry.entity.project', 'class' => 'AppBundle\Entity\Project', 'required' => true], $options))
-            ->add('task', EntityType::class, $this->overrideOptions('task', [
-                'label' => 'timeEntry.entity.task', 'class' => 'AppBundle\Entity\Task', 'required' => false], $options));
+                'label' => 'timeEntry.entity.project',
+                'class' => 'AppBundle\Entity\Project',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->orderBy('p.name', 'ASC');
+                },
+                'choice_label' => function (Project $project) {
+                    return sprintf('%s (%s)', $project->getName(), $project->getCostCenter());
+                },
+                'required' => true
+            ], $options));
     }
 
     /**

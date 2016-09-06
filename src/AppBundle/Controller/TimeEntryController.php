@@ -69,9 +69,6 @@ class TimeEntryController extends Controller
                     'project' => [
                         'choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Project')->findByTeam($activeTeam)
                     ],
-                    'task' => [
-                        'choices' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Task')->findByTeam($activeTeam)
-                    ],
                     'action' => $this->generateUrl('timeentry_create'),
                     'submit' => [
                         'label' => 'timeEntry.template.new.submit'
@@ -202,7 +199,6 @@ class TimeEntryController extends Controller
             $newTimeEntry->setDateTimeRange($dateTimeRange);
             $newTimeEntry->setNote($timeEntry->getNote());
             $newTimeEntry->setProject($timeEntry->getProject());
-            $newTimeEntry->setTask($timeEntry->getTask());
             $newTimeEntry->setTeam($timeEntry->getTeam());
             $newTimeEntry->setUser($timeEntry->getUser());
 

@@ -17,11 +17,6 @@
             <tag name="security.voter"/>
         </service>
 
-        <service id="app.security.authorization.voter.task" class="AppBundle\Security\Authorization\Voter\TaskVoter"
-                 public="false">
-            <tag name="security.voter"/>
-        </service>
-
         <service id="app.security.authorization.voter.team" class="AppBundle\Security\Authorization\Voter\TeamVoter"
                  public="false">
             <tag name="security.voter"/>

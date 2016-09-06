@@ -24,7 +24,6 @@ abstract class AbstractControllerTest extends WebTestCase
         'Tests\AppBundle\DataFixtures\ORM\LoadMembershipOwner',
         'Tests\AppBundle\DataFixtures\ORM\LoadActiveTeam'];
     protected static $projectFixtures = ['Tests\AppBundle\DataFixtures\ORM\LoadProject'];
-    protected static $taskFixtures = ['Tests\AppBundle\DataFixtures\ORM\LoadTask'];
     protected static $timeEntryFixtures = ['Tests\AppBundle\DataFixtures\ORM\LoadTimeEntry'];
     protected static $absenceFixtures = ['Tests\AppBundle\DataFixtures\ORM\LoadAbsence'];
     protected static $membershipFixtures = ['Tests\AppBundle\DataFixtures\ORM\LoadMembership'];

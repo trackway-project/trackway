@@ -42,13 +42,21 @@ class DateTimeRange
         return $this->date->format('Y-m-d') . ' ' . $this->startsAt->format('H:i') . ' ' . $this->endsAt->format('H:i');
     }
 
-    public function getStartDateTime(){
+    /**
+     * @return \DateTime
+     */
+    public function getStartDateTime()
+    {
         $return = clone $this->getDate();
         $return->setTime($this->getStartsAt()->format('H'), $this->getStartsAt()->format('i'), $this->getStartsAt()->format('s'));
         return $return;
     }
 
-    public function getEndDateTime(){
+    /**
+     * @return \DateTime
+     */
+    public function getEndDateTime()
+    {
         $return = clone $this->getDate();
         $return->setTime($this->getEndsAt()->format('H'), $this->getEndsAt()->format('i'), $this->getEndsAt()->format('s'));
         return $return;
@@ -109,5 +117,13 @@ class DateTimeRange
     {
         $interval = date_diff($this->getEndDateTime(), $this->getStartDateTime());
         return $interval;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIntervalInSeconds()
+    {
+        return abs((new \DateTime('@0'))->add($this->getInterval())->getTimestamp());
     }
 }

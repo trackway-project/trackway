@@ -26,12 +26,6 @@ reports: Reports
 reports.timeentry: Time entries
 reports.absence: Absences
 reports: Reports
-task.delete: Delete
-task.edit: Edit
-task.index: Overview
-task.new: Create
-task.show: Show
-task: Tasks
 team.delete: Delete
 team.edit: Edit
 team.index: Overview

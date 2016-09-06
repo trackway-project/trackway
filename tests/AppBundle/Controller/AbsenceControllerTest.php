@@ -17,7 +17,7 @@ class AbsenceControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures));
         $this->login();
 
         // Test view
@@ -50,7 +50,6 @@ class AbsenceControllerTest extends AbstractControllerTest
             self::$userFixtures,
             self::$teamFixtures,
             self::$projectFixtures,
-            self::$taskFixtures,
             self::$absenceFixtures));
         $this->login();
 
@@ -79,7 +78,6 @@ class AbsenceControllerTest extends AbstractControllerTest
             self::$userFixtures,
             self::$teamFixtures,
             self::$projectFixtures,
-            self::$taskFixtures,
             self::$absenceFixtures));
         $this->login();
 

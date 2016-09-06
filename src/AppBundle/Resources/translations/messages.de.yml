@@ -81,16 +81,6 @@ security.login.entity.rememberMe: 'Login merken'
 security.login.entity.submit: 'Einloggen'
 security.login.entity.username: Benutzername
 security.template.login.title: 'Einloggen'
-task.action.delete: Löschen
-task.action.edit: Bearbeiten
-task.action.show: Anzeigen
-task.entity.name: Name
-task.template.edit.submit: __task.template.edit.submit
-task.template.edit.title: 'Eintrag anzeigen'
-task.template.index.title: Einträge
-task.template.new.submit: __task.template.new.submit
-task.template.new.title: 'Eintrag erstellen'
-task.template.show.title: Eintrag
 team.action.delete: Löschen
 team.action.edit: Bearbeiten
 team.action.invitations: __team.action.invitations
@@ -99,7 +89,6 @@ team.action.memberships: Mitgliedschaften
 team.action.show: Anzeigen
 team.entity.name: Name
 team.entity.projects: Projekte
-team.entity.tasks: Einträge
 team.template.activeTeam: 'Aktives Team'
 team.template.edit.submit: __team.template.edit.submit
 team.template.edit.title: 'Team bearbeiten'
@@ -124,7 +113,6 @@ template.dateRange.thisWeek: __template.dateRange.thisWeek
 template.dateRange.today: __template.dateRange.today
 template.dateRange.toLabel: __template.dateRange.toLabel
 template.dateRange.yesterday: __template.dateRange.yesterday
-template.dateRange: __timeEntry.template.index.dateRange
 template.forkIt: 'Fork me on <a href="%link%">Github</a>'
 template.submit: __template.submit
 template.title: Trackway
@@ -138,7 +126,6 @@ timeEntry.entity.endsAt: 'Endet am'
 timeEntry.entity.note: Notiz
 timeEntry.entity.project: Projekt
 timeEntry.entity.startsAt: 'Starten am'
-timeEntry.entity.task: Eintrag
 timeEntry.template.edit.submit: __timeEntry.template.edit.submit
 timeEntry.template.edit.title: 'Zeiteintrag bearbeiten'
 timeEntry.template.index.title: 'Zeiteinträge'

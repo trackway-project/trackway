@@ -82,7 +82,7 @@ gulp.task('less', ['admin-lte'], function () {
 
 gulp.task('css', ['less'], function () {
     return gulp.src([
-            buildDirectory + '/lib/admin-lte/plugins/daterangepicker/daterangepicker-bs3.css',
+            buildDirectory + '/lib/admin-lte/plugins/daterangepicker/daterangepicker.css',
             buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css',
         buildDirectory + '/css/*.css'
     ])
@@ -131,8 +131,8 @@ gulp.task('js', ['handlebars'], function () {
         buildDirectory + '/lib/bootstrap/js/modal.js',
         buildDirectory + '/lib/bootstrap/js/tab.js',
         buildDirectory + '/lib/bootstrap/js/tooltip.js',
-        buildDirectory + '/lib/uri.js/src/URI.js',
         buildDirectory + '/lib/admin-lte/dist/js/app.js',
+        buildDirectory + '/lib/admin-lte/plugins/daterangepicker/moment.js',
         buildDirectory + '/lib/admin-lte/plugins/daterangepicker/daterangepicker.js',
         buildDirectory + '/lib/admin-lte/plugins/fastclick/fastclick.js',
         buildDirectory + '/lib/admin-lte/plugins/iCheck/icheck.js',

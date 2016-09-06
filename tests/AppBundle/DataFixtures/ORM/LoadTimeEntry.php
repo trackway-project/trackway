@@ -28,7 +28,6 @@ class LoadTimeEntry implements FixtureInterface
         $timeEntry->setDateTimeRange($dateTimeRange);
         $timeEntry->setNote('test');
         $timeEntry->setProject($manager->getRepository('AppBundle:Project')->findOneByName('test'));
-        $timeEntry->setTask($manager->getRepository('AppBundle:Task')->findOneByName('test'));
         $timeEntry->setTeam($manager->getRepository('AppBundle:Team')->findOneByName('test'));
         $timeEntry->setUser($manager->getRepository('AppBundle:User')->findOneByEmail('test@trackway.org'));
         $manager->persist($timeEntry);

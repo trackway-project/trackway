@@ -71,44 +71,34 @@ class Builder
                 $menu['main']->addChild('calendar', [
                     'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
                     'route' => 'calendar_index']);
-                $menu['main']->addChild('reports', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'route' => 'timeentry_report']);
-                $menu['main']->addChild('project', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'route' => 'project_index']);
-                $menu['main']->addChild('task', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'route' => 'task_index']);
-
-                // Create actions without context
-                $menu['main']['project']->addChild('project.index', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'icon' => 'fa fa-fw fa-list',
-                    'route' => 'project_index']);
-                $menu['main']['task']->addChild('task.index', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'icon' => 'fa fa-fw fa-list',
-                    'route' => 'task_index']);
-
-                $menu['main']['reports']->addChild('reports.timeentry', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'icon' => 'fa fa-fw fa-list',
-                    'route' => 'timeentry_report']);
-                $menu['main']['reports']->addChild('reports.absence', [
-                    'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                    'icon' => 'fa fa-fw fa-list',
-                    'route' => 'absence_report']);
 
                 if ($isTeamAdmin) {
+                    $menu['main']->addChild('reports', [
+                        'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                        'route' => 'timeentry_report']);
+                    $menu['main']->addChild('project', [
+                        'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                        'route' => 'project_index']);
+
+                    // Create actions without context
+                    $menu['main']['project']->addChild('project.index', [
+                        'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                        'icon' => 'fa fa-fw fa-list',
+                        'route' => 'project_index']);
+
+                    $menu['main']['reports']->addChild('reports.timeentry', [
+                        'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                        'icon' => 'fa fa-fw fa-list',
+                        'route' => 'timeentry_report']);
+                    $menu['main']['reports']->addChild('reports.absence', [
+                        'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
+                        'icon' => 'fa fa-fw fa-list',
+                        'route' => 'absence_report']);
+
                     $menu['main']['project']->addChild('project.new', [
                         'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
                         'icon' => 'fa fa-fw fa-plus',
                         'route' => 'project_new']);
-                    $menu['main']['task']->addChild('task.new', [
-                        'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-plus',
-                        'route' => 'task_new']);
                 }
 
                 //
@@ -137,32 +127,6 @@ class Builder
                             'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
                             'icon' => 'fa fa-fw fa-times',
                             'route' => 'project_delete',
-                            'routeParameters' => ['id' => $id]]);
-                    }
-                }
-
-                // Task context
-                elseif ($id && strpos($route, 'task_') === 0) {
-                    $menu->addChild('action', [
-                        'template' => 'AppBundle:Menu/Sidebar:itemHeader.html.twig']);
-                    $menu['action']->addChild('task', [
-                        'template' => 'AppBundle:Menu/Sidebar:itemInvisible.html.twig']);
-
-                    $menu['action']['task']->addChild('task.show', [
-                        'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                        'icon' => 'fa fa-fw fa-eye',
-                        'route' => 'task_show',
-                        'routeParameters' => ['id' => $id]]);
-                    if ($isTeamAdmin) {
-                        $menu['action']['task']->addChild('task.edit', [
-                            'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                            'icon' => 'fa fa-fw fa-pencil-square-o',
-                            'route' => 'task_edit',
-                            'routeParameters' => ['id' => $id]]);
-                        $menu['action']['task']->addChild('task.delete', [
-                            'template' => 'AppBundle:Menu/Sidebar:item.html.twig',
-                            'icon' => 'fa fa-fw fa-times',
-                            'route' => 'task_delete',
                             'routeParameters' => ['id' => $id]]);
                     }
                 }

@@ -76,7 +76,9 @@ class ProjectVoter implements VoterInterface
             case self::EDIT:
                 /** @var Membership $membership */
                 foreach ($user->getMemberships() as $membership) {
-                    if ($project->getTeam() === $membership->getTeam() && in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)
+                    if (
+                        ($project->getTeam() === $membership->getTeam() && in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)) ||
+                        in_array('ROLE_ADMIN', $user->getRoles(), false)
                     ) {
                         return VoterInterface::ACCESS_GRANTED;
                     }

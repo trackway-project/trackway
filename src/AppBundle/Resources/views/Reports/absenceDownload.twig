@@ -1,0 +1,26 @@
+{% xlsdocument %}
+    {% xlssheet 'Report' %}
+        {% xlsrow 1 %}
+            {% xlscell { style: { font: { size: '18' } } } %}Absences ({{ startDate|date('m/d/Y') ~ ' - ' ~ endDate|date('m/d/Y') }}){% endxlscell %}
+        {% endxlsrow %}
+        {% xlsrow 3 %}
+            {% xlscell { style: { font: { bold: true } } } %}Task ID{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Task Note{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Task Date{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Task Length{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Task Length Seconds{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Username{% endxlscell %}
+        {% endxlsrow %}
+        {% for entry in entries %}
+            {% xlsrow %}
+                {% xlscell %}{{ entry.id }}{% endxlscell %}
+                {% xlscell %}{{ entry.note }}{% endxlscell %}
+                {% xlscell %}{{ entry.dateTimeRange.date|date('m/d/Y') }}{% endxlscell %}
+                {% xlscell %}{{ entry.dateTimeRange.interval|date('%H:%I:%S') }}{% endxlscell %}
+                {% xlscell %}{{ entry.dateTimeRange.intervalInSeconds }}{% endxlscell %}
+                {% xlscell %}{{ entry.user.username }}{% endxlscell %}
+            {% endxlsrow %}
+        {% endfor %}
+    {% endxlssheet %}
+{% endxlsdocument %}
+

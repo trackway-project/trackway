@@ -28,6 +28,10 @@ class TeamController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAll()];
+        return ['pagination' => $this->get('knp_paginator')->paginate(
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Team')->findAll(),
+            $request->query->get('page', 1),
+            $request->query->get('limit', 10)
+        )];
     }
 }

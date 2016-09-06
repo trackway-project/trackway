@@ -55,7 +55,6 @@ class LoadTimeEntries implements FixtureInterface
                 $timeEntry->setDateTimeRange($dateTimeRange);
                 $timeEntry->setNote(LoremIpsumHelper::loremIpsum(0, 0, rand(1, 8)));
                 $timeEntry->setProject($manager->getRepository('AppBundle:Project')->find(1));
-                $timeEntry->setTask($manager->getRepository('AppBundle:Task')->find(1));
                 $timeEntry->setTeam($manager->getRepository('AppBundle:Team')->find(1));
                 $timeEntry->setUser($manager->getRepository('AppBundle:User')->find(1));
 

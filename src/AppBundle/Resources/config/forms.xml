@@ -26,12 +26,6 @@
             <argument>appbundle_project_form</argument>
         </service>
 
-        <service id="app.form.factory.task" class="AppBundle\Form\Factory\FormFactory">
-            <argument type="service" id="form.factory"/>
-            <argument>AppBundle\Form\Type\TaskFormType</argument>
-            <argument>appbundle_task_form</argument>
-        </service>
-
         <service id="app.form.factory.team" class="AppBundle\Form\Factory\FormFactory">
             <argument type="service" id="form.factory"/>
             <argument>AppBundle\Form\Type\TeamFormType</argument>

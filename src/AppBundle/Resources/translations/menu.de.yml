@@ -21,12 +21,6 @@ project.show: __project.show
 project: __project
 register: __register
 reports: __reports
-task.delete: __task.delete
-task.edit: __task.edit
-task.index: __task.index
-task.new: __task.new
-task.show: __task.show
-task: __task
 team.delete: __team.delete
 team.edit: __team.edit
 team.index: __team.index

@@ -29,9 +29,13 @@ class UserController extends Controller
      * @Security("is_granted('ROLE_ADMIN')")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return ['entities' => $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findAll()];
+        return ['pagination' => $this->get('knp_paginator')->paginate(
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findAll(),
+            $request->query->get('page', 1),
+            $request->query->get('limit', 10)
+        )];
     }
 
     /**

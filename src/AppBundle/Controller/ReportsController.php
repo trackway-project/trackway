@@ -23,36 +23,16 @@ use Symfony\Component\HttpFoundation\Request;
 class ReportsController extends Controller
 {
     /**
-     * @param Request $request
-     *
      * @return array
      *
      * @Method("GET")
      * @Route("/timeentry", name="timeentry_report")
-     * @Security("is_granted('VIEW', user.getActiveTeam())")
+     * @Security("is_granted('EDIT', user.getActiveTeam())")
      * @Template()
      */
-    public function timeentryAction(Request $request)
+    public function timeentryAction()
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        $startDate = new \DateTime($request->query->get('start', 'now'));
-        $startDate->setTime(0, 0);
-        $endDate = new \DateTime($request->query->get('end', 'now'));
-        $endDate->setTime(0, 0);
-
-        return [
-            'startDate' => $startDate,
-            'endDate' => $endDate,
-            'pagination' => $this->get('knp_paginator')->paginate(
-                $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findByTeamAndUserQuery(
-                    $user->getActiveTeam(),
-                    $user,
-                    $startDate,
-                    $endDate),
-                $request->query->get('page', 1),
-                $request->query->get('limit', 10)
-            )];
+        return [];
     }
 
     /**
@@ -61,11 +41,11 @@ class ReportsController extends Controller
      * @return array
      *
      * @Method("GET")
-     * @Route("/absence", name="absence_report")
-     * @Security("is_granted('VIEW', user.getActiveTeam())")
-     * @Template()
+     * @Route("/timeentry.{_format}", requirements={"_format"="csv|xls"}, name="timeentry_report_download", options={"expose"=true})
+     * @Security("is_granted('EDIT', user.getActiveTeam())")
+     * @Template("@App/Reports/timeentryDownload.twig")
      */
-    public function absenceAction(Request $request)
+    public function timeentryDownloadAction(Request $request)
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -77,15 +57,53 @@ class ReportsController extends Controller
         return [
             'startDate' => $startDate,
             'endDate' => $endDate,
-            'pagination' => $this->get('knp_paginator')->paginate(
-                $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeamAndUserQuery(
-                    $user->getActiveTeam(),
-                    $user,
-                    $startDate,
-                    $endDate),
-                $request->query->get('page', 1),
-                $request->query->get('limit', 10)
-            )];
+            'entries' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findByTeam(
+                $user->getActiveTeam(),
+                $startDate,
+                $endDate)
+        ];
+    }
+
+    /**
+     * @return array
+     *
+     * @Method("GET")
+     * @Route("/absence", name="absence_report")
+     * @Security("is_granted('EDIT', user.getActiveTeam())")
+     * @Template()
+     */
+    public function absenceAction()
+    {
+        return [];
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return array
+     *
+     * @Method("GET")
+     * @Route("/absence.{_format}", requirements={"_format"="csv|xls"}, name="absence_report_download", options={"expose"=true})
+     * @Security("is_granted('EDIT', user.getActiveTeam())")
+     * @Template("@App/Reports/absenceDownload.twig")
+     */
+    public function absenceDownloadAction(Request $request)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        $startDate = new \DateTime($request->query->get('start', 'now'));
+        $startDate->setTime(0, 0);
+        $endDate = new \DateTime($request->query->get('end', 'now'));
+        $endDate->setTime(0, 0);
+
+        return [
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'entries' => $this->getDoctrine()->getManager()->getRepository('AppBundle:Absence')->findByTeam(
+                $user->getActiveTeam(),
+                $startDate,
+                $endDate)
+        ];
     }
 
     /**

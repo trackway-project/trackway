@@ -69,7 +69,9 @@ class MembershipVoter implements VoterInterface
             case self::DELETE:
                 /** @var Membership $_membership */
                 foreach ($user->getMemberships() as $_membership) {
-                    if ($membership === $_membership || in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)
+                    if (
+                        ($membership === $_membership && in_array('ROLE_ADMIN', $membership->getGroup()->getRoles(), false)) ||
+                        in_array('ROLE_ADMIN', $user->getRoles(), false)
                     ) {
                         return VoterInterface::ACCESS_GRANTED;
                     }

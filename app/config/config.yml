@@ -79,7 +79,10 @@ fos_rest:
           json: true
           xml: true
         templating_formats:
+          csv: true
           html: true
+          xls: true
+          xlsx: true
     routing_loader:
         default_format: json
 

@@ -5,64 +5,76 @@
 {% block header %}<h1>{{ 'reports.template.index.title'|trans }}</h1>{% endblock %}
 
 {% block content %}
-    <div class="box-header">
-        <div class="pull-left">
-            {% include 'AppBundle::dateRangePicker.html.twig' %}
-        </div>
-        <div class="pull-right">
-            <select class="form-control" id="items-select">
-                <option{% if pagination.itemNumberPerPage == 10 %} selected{% endif %}>10</option>
-                <option{% if pagination.itemNumberPerPage == 20 %} selected{% endif %}>20</option>
-                <option{% if pagination.itemNumberPerPage == 50 %} selected{% endif %}>50</option>
-            </select>
-        </div>
-    </div>
     <div class="box-body">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>{{ 'timeEntry.entity.date'|trans }}</th>
-                <th>{{ 'timeEntry.entity.startsAt'|trans }}</th>
-                <th>{{ 'timeEntry.entity.endsAt'|trans }}</th>
-                <th>{{ 'timeEntry.entity.project'|trans }}</th>
-                <th>{{ 'timeEntry.entity.task'|trans }}</th>
-                <th>{{ 'timeEntry.entity.note'|trans }}</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for entity in pagination %}
-                <tr>
-                    <td>{% if entity.dateTimeRange.date %}{{ entity.dateTimeRange.date|date('Y-m-d') }}{% endif %}</td>
-                    <td>{% if entity.dateTimeRange.startsAt %}{{ entity.dateTimeRange.startsAt|date('H:i') }}{% endif %}</td>
-                    <td>{% if entity.dateTimeRange.endsAt %}{{ entity.dateTimeRange.endsAt|date('H:i') }}{% endif %}</td>
-                    <td>{{ entity.project }}</td>
-                    <td>{{ entity.task }}</td>
-                    <td>{{ entity.note }}</td>
-                    <td class="text-right">
-                        <div class="btn btn-sm btn-default"
-                             title="{{ 'timeEntry.action.edit'|trans }}"
-                             onclick="$('#entryModal').EntryModal('editEntry', {{ entity.id }});">
-                            <i class="fa fa-pencil-square-o"></i>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <p>
+            Please select a date range and click the 'Download' button to load your report.
+        </p>
+
+        <button class="btn btn-default" id="daterange-btn">
+            <i class="fa fa-calendar"></i>&nbsp;
+            <span></span>
+            <i class="fa fa-caret-down"></i>
+        </button>
+
+        <a href="{{ path('timeentry_report_download', {_format: 'xls'}) }}" class="btn btn-primary" id="download-btn">
+            Download
+        </a>
     </div>
-    {% include 'AppBundle:Pagination:footer.html.twig' %}
-    {% include 'AppBundle::modal.container.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script>
-        {% include 'AppBundle::dateRangePicker.js.twig' %}
+        /**
+         * Called if date range changed.
+         *
+         * @param startDate
+         * @param endDate
+         */
+        function changeDateRange(startDate, endDate) {
+            $('#daterange-btn').find('span').html(startDate.format('MMMM D, YYYY') + ' - ' + endDate.format('MMMM D, YYYY'));
+            $('#download-btn').attr('href', Routing.generate('timeentry_report_download', {
+                _format: 'xls',
+                start: startDate.format('YYYYMMDD'),
+                end: endDate.format('YYYYMMDD')
+            }));
 
-        $('#entryModal').EntryModal({
-            entryUrl: '{{ path('timeentry_create') }}',
-            absenceUrl: '{{ path('absence_create') }}'
-        });
+            console.log(startDate, endDate);
+        }
+
+        // Define initial date range (last month)
+        var startDate = moment().subtract(1, 'month').startOf('month');
+        var endDate = moment().subtract(1, 'month').endOf('month');
+
+        // Init button
+        changeDateRange(startDate, endDate);
+
+        // Init date picker
+        $('#daterange-btn').daterangepicker({
+                    startDate: startDate,
+                    endDate: endDate,
+                    ranges: {
+                        '{{ 'template.dateRange.today'|trans }}': [moment(), moment()],
+                        '{{ 'template.dateRange.yesterday'|trans }}': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        '{{ 'template.dateRange.thisWeek'|trans }}': [moment().startOf('week'), moment().endOf('week')],
+                        '{{ 'template.dateRange.lastWeek'|trans }}': [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')],
+                        '{{ 'template.dateRange.thisMonth'|trans }}': [moment().startOf('month'), moment().endOf('month')],
+                        '{{ 'template.dateRange.lastMonth'|trans }}': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    applyClass: 'btn-default pull-left',
+                    cancelClass: 'btn-default pull-right',
+                    locale: {
+                        applyLabel: '{{ 'template.dateRange.applyLabel'|trans }}',
+                        cancelLabel: '{{ 'template.dateRange.cancelLabel'|trans }}',
+                        fromLabel: '{{ 'template.dateRange.fromLabel'|trans }}',
+                        toLabel: '{{ 'template.dateRange.toLabel'|trans }}',
+                        customRangeLabel: '{{ 'template.dateRange.customRangeLabel'|trans }}',
+                        // TODO: add translations for all values
+                        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+                        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                    }
+                },
+                changeDateRange
+        );
     </script>
 {% endblock %}

@@ -42,6 +42,16 @@ class Project
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="cost_center", type="string", length=255, nullable=true)
+     *
+     * @Assert\Type(type="string")
+     * @Assert\Length(max = 255)
+     */
+    private $costCenter;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -95,5 +105,21 @@ class Project
     public function setTeam(Team $team)
     {
         $this->team = $team;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCostCenter()
+    {
+        return $this->costCenter;
+    }
+
+    /**
+     * @param string $costCenter
+     */
+    public function setCostCenter($costCenter)
+    {
+        $this->costCenter = $costCenter;
     }
 }

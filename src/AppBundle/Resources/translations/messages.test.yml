@@ -81,16 +81,6 @@ security.login.entity.rememberMe: security.login.entity.rememberMe
 security.login.entity.submit: security.login.entity.submit
 security.login.entity.username: security.login.entity.username
 security.template.login.message: security.template.login.message
-task.action.delete: task.action.delete
-task.action.edit: task.action.edit
-task.action.show: task.action.show
-task.entity.name: task.entity.name
-task.template.edit.submit: task.template.edit.submit
-task.template.edit.title: task.template.edit.title
-task.template.index.title: task.template.index.title
-task.template.new.submit: task.template.new.submit
-task.template.new.title: task.template.new.title
-task.template.show.title: task.template.show.title
 team.action.delete: team.action.delete
 team.action.edit: team.action.edit
 team.action.invitations: team.action.invitations
@@ -99,7 +89,6 @@ team.action.memberships: team.action.memberships
 team.action.show: team.action.show
 team.entity.name: team.entity.name
 team.entity.projects: team.entity.projects
-team.entity.tasks: team.entity.tasks
 team.template.activeTeam: team.template.activeTeam
 team.template.edit.submit: team.template.edit.submit
 team.template.edit.title: team.template.edit.title
@@ -124,7 +113,6 @@ template.dateRange.thisWeek: template.dateRange.thisWeek
 template.dateRange.today: template.dateRange.today
 template.dateRange.toLabel: template.dateRange.toLabel
 template.dateRange.yesterday: template.dateRange.yesterday
-template.dateRange: timeEntry.template.index.dateRange
 template.forkIt: template.forkIt
 template.submit: template.submit
 template.title: template.title
@@ -138,7 +126,6 @@ timeEntry.entity.endsAt: timeEntry.entity.endsAt
 timeEntry.entity.note: timeEntry.entity.note
 timeEntry.entity.project: timeEntry.entity.project
 timeEntry.entity.startsAt: timeEntry.entity.startsAt
-timeEntry.entity.task: timeEntry.entity.task
 timeEntry.template.edit.submit: timeEntry.template.edit.submit
 timeEntry.template.edit.title: timeEntry.template.edit.title
 timeEntry.template.index.title: timeEntry.template.index.title

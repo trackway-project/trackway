@@ -1,5 +1,4 @@
 Master: [![Build Status](https://travis-ci.org/trackway-project/trackway.svg?branch=master)](https://travis-ci.org/trackway-project/trackway) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/trackway-project/trackway/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/trackway-project/trackway/?branch=master)
-Develop: [![Build Status](https://travis-ci.org/trackway-project/trackway.svg?branch=develop)](https://travis-ci.org/trackway-project/trackway) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/trackway-project/trackway/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/trackway-project/trackway/?branch=develop)
 
 Trackway
 ========================
@@ -35,12 +34,6 @@ Enjoy!
 * Changed src/AppBundle/Resources/private/favicon.png? Run `gulp favicons`
 * Changed anything else in src/AppBundle/Resources/private? Run `gulp`
 * Changed anything in src/AppBundle/Entity? Run `php bin/console doctrine:schema:update`
-
-## Vagrant and Provisioning
-Take a look at https://github.com/trackway-project/trackway-vagrant
-
-## Capistrano Deployment
-Take a look at https://github.com/trackway-project/trackway-deploy
 
 ## Thanks
 * http://bower.io/

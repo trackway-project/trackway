@@ -14,8 +14,7 @@
     "jquery": "~2.1.4",
     "bootstrap": "~3.3.5",
     "font-awesome": "~4.4.0",
-    "admin-lte": "~2.3.0",
-    "uri.js": "~1.16.0",
+    "admin-lte": "~2.3.6",
     "keymaster": "~1.6.3"
   },
   "overrides": {

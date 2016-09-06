@@ -23,12 +23,6 @@ project.new: project.new
 project.show: project.show
 project: project
 register: register
-task.delete: task.delete
-task.edit: task.edit
-task.index: task.index
-task.new: task.new
-task.show: task.show
-task: task
 team.delete: team.delete
 team.edit: team.edit
 team.index: team.index

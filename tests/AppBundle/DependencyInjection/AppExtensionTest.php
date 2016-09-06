@@ -36,7 +36,6 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.form.factory.invitation');
         $this->assertContainerBuilderHasService('app.form.factory.membership');
         $this->assertContainerBuilderHasService('app.form.factory.project');
-        $this->assertContainerBuilderHasService('app.form.factory.task');
         $this->assertContainerBuilderHasService('app.form.factory.team');
         $this->assertContainerBuilderHasService('app.form.factory.time_entry');
         $this->assertContainerBuilderHasService('app.form.factory.change_password');
@@ -62,7 +61,6 @@ class AppExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasService('app.security.authorization.voter.basetimeentry');
         $this->assertContainerBuilderHasService('app.security.authorization.voter.membership');
         $this->assertContainerBuilderHasService('app.security.authorization.voter.project');
-        $this->assertContainerBuilderHasService('app.security.authorization.voter.task');
         $this->assertContainerBuilderHasService('app.security.authorization.voter.team');
     }
 }

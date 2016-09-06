@@ -21,19 +21,11 @@ class TimeEntry extends BaseTimeEntry
     protected $project;
 
     /**
-     * @var Task
-     *
-     * @ORM\ManyToOne(targetEntity="Task")
-     * @ORM\JoinColumn(name="task_id", referencedColumnName="id")
-     */
-    protected $task;
-
-    /**
      * @return string
      */
     public function __toString()
     {
-        return $this->dateTimeRange . ' ' . $this->project . ' ' . $this->task . ' ' . $this->note;
+        return $this->dateTimeRange . ' ' . $this->project . ' ' . $this->note;
     }
 
     /**
@@ -50,21 +42,5 @@ class TimeEntry extends BaseTimeEntry
     public function setProject($project)
     {
         $this->project = $project;
-    }
-
-    /**
-     * @return Task
-     */
-    public function getTask()
-    {
-        return $this->task;
-    }
-
-    /**
-     * @param Task|null $task
-     */
-    public function setTask($task)
-    {
-        $this->task = $task;
     }
 }

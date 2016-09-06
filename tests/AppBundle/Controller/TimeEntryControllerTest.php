@@ -17,7 +17,7 @@ class TimeEntryControllerTest extends AbstractControllerTest
     {
         // Prepare environment
 
-        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures, self::$taskFixtures));
+        $this->loadFixtures(array_merge(self::$defaultFixtures, self::$userFixtures, self::$teamFixtures, self::$projectFixtures));
         $this->login();
 
         // Test view
@@ -34,7 +34,6 @@ class TimeEntryControllerTest extends AbstractControllerTest
         $form['appbundle_time_entry_form[dateTimeRange][startsAt]'] = '08:15';
         $form['appbundle_time_entry_form[note]'] = 'test';
         $form['appbundle_time_entry_form[project]'] = 1;
-        $form['appbundle_time_entry_form[task]'] = 1;
         $this->client->submit($form);
 
         static::assertStatusCodeCustom($this->client);
@@ -51,7 +50,6 @@ class TimeEntryControllerTest extends AbstractControllerTest
             self::$userFixtures,
             self::$teamFixtures,
             self::$projectFixtures,
-            self::$taskFixtures,
             self::$timeEntryFixtures));
         $this->login();
 
@@ -80,7 +78,6 @@ class TimeEntryControllerTest extends AbstractControllerTest
             self::$userFixtures,
             self::$teamFixtures,
             self::$projectFixtures,
-            self::$taskFixtures,
             self::$timeEntryFixtures));
         $this->login();
 
