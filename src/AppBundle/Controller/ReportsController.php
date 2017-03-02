@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Absence;
+use AppBundle\Entity\Project;
 use AppBundle\Entity\TimeEntry;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -54,13 +55,31 @@ class ReportsController extends Controller
         $endDate = new \DateTime($request->query->get('end', 'now'));
         $endDate->setTime(0, 0);
 
+        /**
+         * @var TimeEntry[]$timeEntries
+         */
+        $timeEntries = $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findByTeam(
+            $user->getActiveTeam(),
+            $startDate,
+            $endDate);
+
+        /**
+         * @var Project[] $projects
+         */
+        $projects = [];
+
+        foreach ($timeEntries as $timeEntry) {
+            $project = $timeEntry->getProject();
+            if ($project !== null && !array_key_exists($project->getId(), $projects)) {
+                $projects[$project->getId()] = $project;
+            }
+        }
+
         return [
             'startDate' => $startDate,
             'endDate' => $endDate,
-            'entries' => $this->getDoctrine()->getManager()->getRepository('AppBundle:TimeEntry')->findByTeam(
-                $user->getActiveTeam(),
-                $startDate,
-                $endDate)
+            'timeEntries' => $timeEntries,
+            'projects' => $projects
         ];
     }
 

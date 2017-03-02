@@ -1,5 +1,5 @@
 {% xlsdocument %}
-    {% xlssheet 'Report' %}
+    {% xlssheet 'Time Entries' %}
         {% xlsrow 1 %}
             {% xlscell { style: { font: { size: '18' } } } %}Time Entries ({{ startDate|date('m/d/Y') ~ ' - ' ~ endDate|date('m/d/Y') }}){% endxlscell %}
         {% endxlsrow %}
@@ -13,7 +13,7 @@
             {% xlscell { style: { font: { bold: true } } } %}Cost Centre{% endxlscell %}
             {% xlscell { style: { font: { bold: true } } } %}Username{% endxlscell %}
         {% endxlsrow %}
-        {% for entry in entries %}
+        {% for entry in timeEntries %}
             {% xlsrow %}
                 {% xlscell %}{{ entry.id }}{% endxlscell %}
                 {% xlscell %}{{ entry.note }}{% endxlscell %}
@@ -23,6 +23,36 @@
                 {% xlscell %}{{ entry.project is not null ? entry.project.name : '' }}{% endxlscell %}
                 {% xlscell %}{{ entry.project is not null ? entry.project.costCenter : '' }}{% endxlscell %}
                 {% xlscell %}{{ entry.user.username }}{% endxlscell %}
+            {% endxlsrow %}
+        {% endfor %}
+    {% endxlssheet %}
+    {% xlssheet 'Projects' %}
+        {% xlsrow 1 %}
+            {% xlscell { style: { font: { size: '18' } } } %}Projects ({{ startDate|date('m/d/Y') ~ ' - ' ~ endDate|date('m/d/Y') }}){% endxlscell %}
+        {% endxlsrow %}
+        {% xlsrow 3 %}
+            {% xlscell { style: { font: { bold: true } } } %}ID{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Name{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Cost Centre{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Total Seconds{% endxlscell %}
+            {% xlscell { style: { font: { bold: true } } } %}Total PT{% endxlscell %}
+        {% endxlsrow %}
+        {% for project in projects %}
+            {# Calculate totals #}
+            {% set projectTotalSeconds = 0 %}
+            {% for entry in timeEntries %}
+                {% if entry.project is not null and entry.project.id == project.id %}
+                    {% set projectTotalSeconds = projectTotalSeconds + entry.dateTimeRange.intervalInSeconds %}
+                {% endif %}
+            {% endfor %}
+            {% set projectTotalPT = projectTotalSeconds / 60 / 60 / 8 %}
+
+            {% xlsrow %}
+            {% xlscell %}{{ project.id }}{% endxlscell %}
+            {% xlscell %}{{ project.name }}{% endxlscell %}
+            {% xlscell %}{{ project.costCenter }}{% endxlscell %}
+            {% xlscell %}{{ projectTotalSeconds }}{% endxlscell %}
+            {% xlscell %}{{ projectTotalPT }}{% endxlscell %}
             {% endxlsrow %}
         {% endfor %}
     {% endxlssheet %}

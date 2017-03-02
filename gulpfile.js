@@ -55,11 +55,22 @@ gulp.task('admin-lte', ['bower'], function () {
     gulp.src(buildDirectory + '/lib/admin-lte/plugins/iCheck/square/blue.css')
         .pipe(replace('url(', 'url(../images/'))
         .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/plugins/iCheck/square/'));
-		
+
     // Remove imports of the integrated bootstrap files - we're going to use the real ones
-    gulp.src(buildDirectory + '/lib/admin-lte/build/less/AdminLTE.less')
+    gulp.src([
+        buildDirectory + '/lib/admin-lte/build/less/AdminLTE.less'
+    ])
         .pipe(replace('@import (reference) "../bootstrap-less/mixins.less";', ''))
         .pipe(replace('@import (reference) "../bootstrap-less/variables.less";', ''))
+        .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/build/less/'));
+
+    gulp.src([
+        buildDirectory + '/lib/admin-lte/build/less/bootstrap-social.less',
+        buildDirectory + '/lib/admin-lte/build/less/fullcalendar.less',
+        buildDirectory + '/lib/admin-lte/build/less/select2.less'
+    ])
+        .pipe(replace('@import (reference) "../bootstrap-less/mixins";', ''))
+        .pipe(replace('@import (reference) "../bootstrap-less/variables";', ''))
         .pipe(gulp.dest(buildDirectory + '/lib/admin-lte/build/less/'));
 
     return gulp.src(buildDirectory + '/lib/admin-lte/build/less/skins/*.less')
