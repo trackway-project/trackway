@@ -1,0 +1,56 @@
+version: '3.5'
+
+volumes:
+  trackway-logs-frontend:
+  trackway-logs-backend:
+  trackway-db:
+
+networks:
+  frontend:
+    external:
+      name: frontend
+  trackway:
+    name: trackway
+  trackway-backend:
+    name: trackway-backend
+
+services:
+  trackway-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
+    restart: unless-stopped
+    volumes:
+      - trackway-logs-frontend:/var/log/nginx
+    environment:
+      PHP_FPM_BACKEND: trackway-backend
+      VIRTUAL_HOST: trackway.docker.d4e
+      VIRTUAL_PROTO: http
+      VIRTUAL_PORT: 80
+    networks:
+      - frontend
+      - trackway
+    labels:
+      - "traefik.frontend.rule=Host:trackway.docker.d4e"
+
+  trackway-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    restart: unless-stopped
+    volumes:
+      - trackway-logs-backend:/var/log/php
+    networks:
+      - trackway
+      - trackway-backend
+
+  trackway-db:
+    image: mariadb
+    restart: unless-stopped
+    volumes:
+      - trackway-db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: trackway
+      MYSQL_ROOT_PASSWORD: trackway
+    networks:
+      - trackway-backend
