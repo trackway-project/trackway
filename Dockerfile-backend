@@ -1,0 +1,22 @@
+FROM amd64/php:7.0-fpm-alpine
+
+WORKDIR /code
+
+COPY . .
+COPY docker/backend/memory.ini /usr/local/etc/php/conf.d/memory.ini
+COPY docker/backend/parameters.yml app/config/parameters.yml
+
+RUN apk add --update build-base git \
+    && apk add --virtual autoconf \
+    && pecl install apcu \
+    && docker-php-ext-enable apcu \
+    && docker-php-ext-install mysqli pdo_mysql
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --filename=composer && rm composer-setup.php \
+    && php composer global require hirak/prestissimo \
+    && php composer install \
+    && rm composer && rm -rf /root/.composer
+
+RUN chown -R www-data:www-data var
+VOLUME [ "/code/var/logs" ]

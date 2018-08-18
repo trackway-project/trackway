@@ -1,0 +1,18 @@
+FROM nginx:alpine
+
+EXPOSE 80
+VOLUME [ "/var/log/nginx" ]
+
+WORKDIR /code
+COPY ./docker/frontend/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./src ./src
+COPY ./*.json ./
+COPY ./*.js ./
+
+RUN apk add --update build-base git nodejs
+RUN echo '{ "allow_root": true }' > ~/.bowerrc
+RUN npm install
+RUN node node_modules/.bin/bower install; \
+    node node_modules/.bin/gulp; \
+    node node_modules/.bin/gulp favicons
+RUN apk del nodejs git build-base

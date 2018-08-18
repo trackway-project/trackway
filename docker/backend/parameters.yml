@@ -1,0 +1,16 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     trackway-db
+    database_port:     ~
+    database_name:     trackway
+    database_user:     root
+    database_password: trackway
+
+    mailer_transport:  smtp
+    mailer_host:       smtp
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+    secret:            MyFancySecret
+    session_name:      trackway_session
