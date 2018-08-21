@@ -43,6 +43,8 @@ services:
     networks:
       - trackway
       - trackway-backend
+    labels:
+      - "traefik.enable=false"
 
   trackway-db:
     image: mariadb
@@ -54,3 +56,5 @@ services:
       MYSQL_ROOT_PASSWORD: trackway
     networks:
       - trackway-backend
+    labels:
+      - "traefik.enable=false"
